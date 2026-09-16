@@ -1,651 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rahul Chowdary Vajja — AI/ML Engineer</title>
-<meta name="description" content="Rahul Chowdary Vajja — AI/ML Engineer. I build and ship LLM, RAG, agentic, and computer-vision systems that hold up in production. NSF NRT 4th Place. M.S. CS (AI), UMKC.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101820">
+<title>Rahul Chowdary Vajja — AI / ML Engineer</title>
+<meta name="description" content="AI/ML engineer building useful systems across financial services and healthcare. Explore production experience at TIFIN, a deployed medication-label review app, ClinIQ, and computer vision research.">
+<link rel="canonical" href="https://vajja1405.github.io/">
+<meta property="og:title" content="Rahul Chowdary Vajja — AI / ML Engineer">
+<meta property="og:description" content="From data pipelines to deployed AI. Selected work, engineering decisions, and the evidence behind the results.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vajja1405.github.io/">
 <style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#070A16;
-    --bg-2:#0A0E20;
-    --surface:#0F1430;
-    --surface-2:#161C3D;
-    --line:rgba(255,255,255,.09);
-    --line-2:rgba(255,255,255,.05);
-    --text:#EBEDF7;
-    --muted:#9096B6;
-    --faint:#5A6088;
-    --amber:#38BDF8;
-    --amber-2:#7DD3FC;
-    --mint:#FB7185;
-    --mint-2:#FDA4B4;
-    --coral:#FF7A8A;
-    --maxw:1120px;
-    --ease:cubic-bezier(.22,.61,.36,1);
-  }
-  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-  body{
-    background:var(--bg);color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.6;overflow-x:hidden;position:relative;
-  }
-  .mono{font-family:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace}
-  a{color:inherit;text-decoration:none}
-  ::selection{background:var(--amber);color:#04121A}
-  img{max-width:100%}
-
-  /* ambient background glows */
-  .aura{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-  .aura::before,.aura::after{content:"";position:absolute;border-radius:50%;filter:blur(120px);opacity:.5}
-  .aura::before{width:60vw;height:60vw;top:-20vw;right:-10vw;background:radial-gradient(circle,rgba(56,189,248,.18),transparent 70%)}
-  .aura::after{width:55vw;height:55vw;bottom:-20vw;left:-15vw;background:radial-gradient(circle,rgba(251,113,133,.14),transparent 70%)}
-
-  /* scroll progress */
-  #progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:120;
-    background:linear-gradient(90deg,var(--amber),var(--mint));box-shadow:0 0 12px rgba(56,189,248,.6)}
-
-  /* custom cursor */
-  #cur-dot,#cur-ring{position:fixed;top:0;left:0;z-index:200;pointer-events:none;border-radius:50%;
-    transform:translate(-50%,-50%);mix-blend-mode:screen}
-  #cur-dot{width:6px;height:6px;background:var(--amber)}
-  #cur-ring{width:34px;height:34px;border:1.5px solid rgba(56,189,248,.5);
-    transition:width .2s var(--ease),height .2s var(--ease),background .2s,border-color .2s}
-  #cur-ring.hot{width:56px;height:56px;border-color:var(--mint);background:rgba(251,113,133,.08)}
-  @media (hover:hover) and (pointer:fine){body.cursor-on{cursor:none}}
-  @media (hover:none),(pointer:coarse){#cur-dot,#cur-ring{display:none}}
-
-  /* nav */
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
-    padding:16px clamp(18px,5vw,48px);transition:background .3s,border-color .3s,padding .3s;
-    border-bottom:1px solid transparent}
-  nav.scrolled{background:rgba(7,10,22,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-2);padding-top:12px;padding-bottom:12px}
-  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.02em}
-  .mono-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;
-    background:linear-gradient(135deg,var(--amber),#0EA5E9);color:#04121A;font-weight:800;font-size:15px;
-    box-shadow:0 6px 20px rgba(14,165,233,.3)}
-  .brand small{display:block;font-weight:500;font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
-  .navlinks{display:flex;gap:6px;align-items:center}
-  .navlinks a{font-size:13.5px;color:var(--muted);padding:8px 13px;border-radius:8px;transition:color .2s,background .2s;position:relative}
-  .navlinks a:hover{color:var(--text);background:var(--surface)}
-  .navlinks a.active{color:var(--amber)}
-  .nav-cta{font-family:ui-monospace,monospace;font-size:12.5px;color:var(--text)!important;border:1px solid var(--line);
-    background:var(--surface)!important}
-  .nav-cta:hover{border-color:var(--amber);color:var(--amber)!important}
-  @media(max-width:760px){.navlinks .hide-sm{display:none}}
-
-  main{position:relative;z-index:2}
-  section{padding:clamp(70px,11vh,130px) clamp(18px,5vw,48px);max-width:var(--maxw);margin:0 auto}
-  .eyebrow{font-family:ui-monospace,monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--amber);display:inline-flex;align-items:center;gap:9px;margin-bottom:18px}
-  .eyebrow::before{content:"";width:26px;height:1px;background:var(--amber);opacity:.6}
-  h2.sec-title{font-size:clamp(28px,4.6vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.08;text-wrap:balance}
-  .sec-intro{color:var(--muted);max-width:60ch;margin-top:14px;font-size:16.5px}
-
-  /* HERO */
-  #hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative;
-    max-width:none;width:100%;padding-top:120px;overflow:hidden}
-  #net{position:absolute;inset:0;z-index:0;width:100%;height:100%}
-  .hero-inner{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;width:100%;padding:0 clamp(18px,5vw,48px)}
-  .hero-tag{font-family:ui-monospace,monospace;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);
-    display:inline-flex;align-items:center;gap:10px;margin-bottom:22px}
-  .status-dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(251,113,133,.6);animation:pulse 2.4s infinite}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(251,113,133,.5)}70%{box-shadow:0 0 0 10px rgba(251,113,133,0)}100%{box-shadow:0 0 0 0 rgba(251,113,133,0)}}
-  #hero h1{font-size:clamp(40px,8.5vw,92px);line-height:.98;font-weight:800;letter-spacing:-.035em}
-  #hero h1 .grad{background:linear-gradient(115deg,var(--amber) 10%,var(--amber-2) 40%,var(--mint) 92%);
-    -webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero-sub{margin-top:26px;font-size:clamp(17px,2.4vw,22px);color:var(--muted);max-width:44ch;line-height:1.5}
-  .hero-sub b{color:var(--text);font-weight:600}
-  .role-strip{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
-  .role-strip span{font-family:ui-monospace,monospace;font-size:12.5px;color:var(--muted);
-    border:1px solid var(--line);border-radius:100px;padding:6px 14px;background:rgba(255,255,255,.02)}
-  .cta-row{display:flex;flex-wrap:wrap;gap:13px;margin-top:38px}
-  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:11px;font-size:14.5px;font-weight:600;
-    transition:transform .2s var(--ease),box-shadow .2s,background .2s,border-color .2s,color .2s;border:1px solid transparent}
-  .btn:hover{transform:translateY(-2px)}
-  .btn-primary{background:linear-gradient(135deg,var(--amber),#0EA5E9);color:#04121A;box-shadow:0 10px 30px rgba(14,165,233,.28)}
-  .btn-primary:hover{box-shadow:0 14px 38px rgba(14,165,233,.42)}
-  .btn-ghost{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.02)}
-  .btn-ghost:hover{border-color:var(--mint);color:var(--mint)}
-  .scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;
-    font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.2em;color:var(--faint);text-transform:uppercase;
-    display:flex;flex-direction:column;align-items:center;gap:8px}
-  .scroll-cue i{width:1px;height:40px;background:linear-gradient(var(--faint),transparent);display:block;animation:cue 2s var(--ease) infinite}
-  @keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-
-  /* metrics band */
-  #metrics{padding-top:0}
-  .metric-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line-2);
-    border:1px solid var(--line-2);border-radius:18px;overflow:hidden}
-  .metric{background:var(--bg-2);padding:26px 20px;text-align:center}
-  .metric .num{font-size:clamp(26px,3.6vw,40px);font-weight:800;letter-spacing:-.02em;
-    background:linear-gradient(120deg,var(--amber),var(--mint));-webkit-background-clip:text;background-clip:text;color:transparent;
-    font-variant-numeric:tabular-nums}
-  .metric .lbl{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.4}
-  @media(max-width:860px){.metric-grid{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:480px){.metric-grid{grid-template-columns:repeat(2,1fr)}}
-
-  /* projects */
-  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:46px}
-  @media(max-width:820px){.proj-grid{grid-template-columns:1fr}}
-  .card{position:relative;background:linear-gradient(180deg,var(--surface),var(--bg-2));border:1px solid var(--line);
-    border-radius:20px;padding:28px;overflow:hidden;transition:transform .35s var(--ease),border-color .35s,box-shadow .35s}
-  .card::before{content:"";position:absolute;inset:0;border-radius:20px;opacity:0;transition:opacity .35s;
-    background:radial-gradient(500px circle at var(--mx,50%) var(--my,0%),rgba(56,189,248,.10),transparent 45%);pointer-events:none}
-  .card:hover{transform:translateY(-5px);border-color:rgba(56,189,248,.4);box-shadow:0 22px 50px rgba(0,0,0,.45)}
-  .card:hover::before{opacity:1}
-  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
-  .badge{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;padding:5px 11px;border-radius:100px;
-    white-space:nowrap;border:1px solid}
-  .badge.award{color:var(--amber);border-color:rgba(56,189,248,.4);background:rgba(56,189,248,.08)}
-  .badge.solo{color:var(--mint);border-color:rgba(251,113,133,.35);background:rgba(251,113,133,.06)}
-  .card h3{font-size:21px;font-weight:750;letter-spacing:-.01em;margin-top:6px;line-height:1.2}
-  .card .kicker{font-family:ui-monospace,monospace;font-size:12px;color:var(--mint);margin-top:12px;letter-spacing:.03em}
-  .card p{color:var(--muted);font-size:14.7px;margin-top:12px}
-  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-  .chip{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--muted);background:rgba(255,255,255,.03);
-    border:1px solid var(--line-2);border-radius:7px;padding:4px 9px}
-  .stat-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;padding-top:18px;border-top:1px solid var(--line-2)}
-  .stat-row .s{display:flex;flex-direction:column}
-  .stat-row .s b{font-size:19px;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
-  .stat-row .s span{font-size:11.5px;color:var(--faint);margin-top:2px}
-  .card-links{display:flex;gap:16px;margin-top:20px}
-  .card-links a{font-family:ui-monospace,monospace;font-size:12.5px;color:var(--amber);display:inline-flex;align-items:center;gap:6px}
-  .card-links a:hover{color:var(--amber-2);text-decoration:underline}
-  .card-links a.disabled{color:var(--faint);pointer-events:none}
-
-  /* svg bar chart inside cliniq card */
-  .bars{margin-top:18px;display:flex;flex-direction:column;gap:11px}
-  .bar-row{display:grid;grid-template-columns:118px 1fr 46px;align-items:center;gap:10px}
-  .bar-row .n{font-family:ui-monospace,monospace;font-size:11px;color:var(--muted)}
-  .bar-track{height:8px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
-  .bar-fill{height:100%;width:0;border-radius:100px;background:linear-gradient(90deg,var(--amber),var(--mint));transition:width 1.1s var(--ease)}
-  .bar-row .v{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--text);text-align:right;font-variant-numeric:tabular-nums}
-  .bars-cap{font-size:11px;color:var(--faint);margin-top:12px;line-height:1.4}
-
-  /* experience timeline */
-  .timeline{margin-top:46px;position:relative;padding-left:28px}
-  .timeline::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;
-    background:linear-gradient(var(--amber),var(--mint),transparent)}
-  .tl-item{position:relative;padding-bottom:40px}
-  .tl-item:last-child{padding-bottom:0}
-  .tl-item::before{content:"";position:absolute;left:-27px;top:6px;width:12px;height:12px;border-radius:50%;
-    background:var(--bg);border:2px solid var(--amber);box-shadow:0 0 0 4px rgba(56,189,248,.12)}
-  .tl-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;align-items:baseline}
-  .tl-role{font-size:19px;font-weight:750;letter-spacing:-.01em}
-  .tl-co{color:var(--mint);font-weight:600}
-  .tl-date{font-family:ui-monospace,monospace;font-size:12.5px;color:var(--faint);white-space:nowrap}
-  .tl-item ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px}
-  .tl-item li{position:relative;padding-left:20px;color:var(--muted);font-size:14.7px}
-  .tl-item li::before{content:"▹";position:absolute;left:0;color:var(--amber)}
-  .tl-item li b{color:var(--text);font-weight:650}
-
-  /* skills */
-  .skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:46px}
-  @media(max-width:720px){.skill-grid{grid-template-columns:1fr}}
-  .skill-cat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 24px;transition:border-color .3s}
-  .skill-cat:hover{border-color:rgba(251,113,133,.35)}
-  .skill-cat h4{font-family:ui-monospace,monospace;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mint);margin-bottom:14px}
-  .skill-cat .tags{display:flex;flex-wrap:wrap;gap:8px}
-  .skill-cat .tags span{font-size:13px;color:var(--text);background:rgba(255,255,255,.035);border:1px solid var(--line-2);
-    border-radius:8px;padding:6px 11px;transition:transform .18s var(--ease),background .18s,color .18s,border-color .18s}
-  .skill-cat .tags span:hover{transform:translateY(-2px);color:var(--amber);border-color:rgba(56,189,248,.4);background:rgba(56,189,248,.06)}
-
-  /* two-col credentials */
-  .cred-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:46px}
-  @media(max-width:820px){.cred-grid{grid-template-columns:1fr}}
-  .panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px}
-  .panel h4{font-family:ui-monospace,monospace;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:18px}
-  .cert{display:flex;gap:13px;padding:11px 0;border-top:1px solid var(--line-2)}
-  .cert:first-of-type{border-top:0;padding-top:0}
-  .cert .ic{flex:0 0 34px;height:34px;border-radius:9px;display:grid;place-items:center;background:rgba(251,113,133,.08);
-    border:1px solid rgba(251,113,133,.25);color:var(--mint);font-family:ui-monospace,monospace;font-size:13px;font-weight:700}
-  .cert .t{font-size:14px;font-weight:600;line-height:1.3}
-  .cert .t small{display:block;font-weight:400;color:var(--faint);font-size:12px;margin-top:2px}
-  .cert .prog{color:var(--amber);font-style:italic;font-size:11px}
-  .award{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid var(--line-2)}
-  .award:first-of-type{border-top:0;padding-top:0}
-  .award .medal{font-size:26px;line-height:1}
-  .award .t b{font-size:15px}
-  .award .t span{display:block;color:var(--muted);font-size:13px;margin-top:2px}
-  .edu{margin-top:20px;padding-top:20px;border-top:1px solid var(--line-2)}
-  .edu .row{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px}
-  .edu .row:last-child{margin-bottom:0}
-  .edu b{font-size:14.5px}
-  .edu small{color:var(--muted);display:block;font-size:13px}
-  .edu .yr{font-family:ui-monospace,monospace;font-size:12px;color:var(--faint);white-space:nowrap}
-
-  /* about */
-  #about .about-wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start;margin-top:46px}
-  @media(max-width:820px){#about .about-wrap{grid-template-columns:1fr}}
-  .about-card{background:linear-gradient(160deg,var(--surface),var(--bg-2));border:1px solid var(--line);border-radius:20px;padding:30px;position:sticky;top:96px}
-  .about-mono{width:74px;height:74px;border-radius:18px;background:linear-gradient(135deg,var(--amber),#0EA5E9);
-    color:#04121A;display:grid;place-items:center;font-weight:800;font-size:28px;margin-bottom:18px;box-shadow:0 10px 30px rgba(14,165,233,.3)}
-  .about-card .who{font-size:20px;font-weight:750}
-  .about-card .what{color:var(--mint);font-family:ui-monospace,monospace;font-size:13px;margin-top:4px}
-  .about-card .links{display:flex;flex-direction:column;gap:11px;margin-top:22px}
-  .about-card .links a{display:flex;align-items:center;gap:11px;color:var(--muted);font-size:14px;transition:color .2s}
-  .about-card .links a:hover{color:var(--amber)}
-  .about-card .links .k{font-family:ui-monospace,monospace;font-size:11px;color:var(--faint);width:64px;flex:0 0 64px;text-transform:uppercase;letter-spacing:.08em}
-  .about-body p{color:var(--muted);font-size:16.5px;margin-bottom:18px}
-  .about-body p b{color:var(--text);font-weight:600}
-  .about-body .lead{font-size:19px;color:var(--text);line-height:1.5}
-
-  /* contact / footer */
-  #contact{text-align:center}
-  #contact h2{font-size:clamp(30px,6vw,58px);font-weight:800;letter-spacing:-.03em;line-height:1.05;text-wrap:balance}
-  #contact h2 .grad{background:linear-gradient(115deg,var(--amber),var(--mint));-webkit-background-clip:text;background-clip:text;color:transparent}
-  #contact p{color:var(--muted);max-width:48ch;margin:18px auto 0;font-size:17px}
-  .contact-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px}
-  footer{border-top:1px solid var(--line-2);padding:30px clamp(18px,5vw,48px);display:flex;flex-wrap:wrap;gap:12px;
-    justify-content:space-between;align-items:center;max-width:var(--maxw);margin:0 auto;color:var(--faint);font-size:13px}
-  footer .mono{font-size:12px}
-  footer a{color:var(--muted)}footer a:hover{color:var(--amber)}
-
-  /* reveal */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
-  .reveal[data-d="1"]{transition-delay:.08s}.reveal[data-d="2"]{transition-delay:.16s}
-  .reveal[data-d="3"]{transition-delay:.24s}.reveal[data-d="4"]{transition-delay:.32s}
-
-  @media (prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-    .reveal{opacity:1;transform:none}
-    .bar-fill{transition:none}
-  }
+:root{color-scheme:dark;--bg:#101820;--panel:#16222c;--ink:#f3f5f6;--muted:#b2c1cc;--line:#344550;--accent:#a9e9d2;--blue:#9acbf5;--mono:ui-monospace,SFMono-Regular,Consolas,monospace;--sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:2rem}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1rem;line-height:1.65;-webkit-font-smoothing:antialiased}::selection{background:var(--accent);color:var(--bg)}a{color:inherit;text-underline-offset:.25em}a:hover{color:var(--accent)}a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:5px}p{margin:0 0 1.1rem}h1,h2,h3,h4{line-height:1.12;letter-spacing:-.035em;margin:0;font-weight:600}h2{font-size:clamp(2rem,4.3vw,3.35rem)}h3{font-size:clamp(1.7rem,3vw,2.4rem)}h4{font-size:1.15rem;letter-spacing:-.015em}b,strong{font-weight:600}small{font-size:.875rem}button,a,summary{-webkit-tap-highlight-color:transparent}.wrap{max-width:1200px;padding-inline:clamp(1.25rem,5vw,4rem);margin:auto}.skip{position:absolute;top:-100px;left:1rem;z-index:10;padding:.6rem 1rem;background:var(--accent);color:var(--bg)}.skip:focus{top:1rem}.nav{display:flex;justify-content:space-between;align-items:center;gap:2rem;min-height:105px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:.8rem;text-decoration:none;font-size:.95rem;font-weight:600;line-height:1.35}.brand-mark{border:1px solid var(--line);font-family:var(--mono);font-size:1rem;letter-spacing:-.1em;padding:.6rem .65rem;color:var(--accent)}.brand small{display:block;font-weight:400;color:var(--muted);font-size:.75rem;letter-spacing:.07em;margin-top:.25rem}.navlinks{display:flex;gap:1.6rem;align-items:center;font-size:.875rem}.navlinks a{text-decoration:none}.navlinks .contact-link{padding:.5rem .85rem;border:1px solid var(--line);border-radius:4px}.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:1.3rem}.hero{padding:clamp(3.5rem,8vw,6.8rem) 0 3.5rem;display:grid;grid-template-columns:1.45fr .8fr;gap:3rem;align-items:center}.hero h1{font-size:clamp(3rem,6.7vw,5.55rem);line-height:1.04;letter-spacing:-.058em}.hero h1 span{color:var(--accent)}.hero-copy{max-width:590px;color:var(--muted);font-size:1.1rem;margin-top:1.6rem}.actions{display:flex;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:1.8rem}.button{display:inline-flex;justify-content:center;align-items:center;gap:.8rem;border:1px solid var(--line);border-radius:4px;padding:.8rem 1.1rem;text-decoration:none;font-size:.875rem;font-weight:600;min-height:46px}.button.primary{background:var(--accent);color:#10231d;border-color:var(--accent)}.button.primary:hover{background:#c5f5e3}.text-link{font-size:.875rem;display:inline-block;padding:.4rem 0}.index{border-left:1px solid var(--line);padding-left:1.8rem}.index-label{font: .75rem var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.index a{display:block;text-decoration:none;padding:1.15rem 0;border-bottom:1px solid var(--line)}.index a:last-child{border:0}.index .index-top{display:flex;justify-content:space-between;gap:1rem;font-size:.875rem;margin-bottom:.2rem;color:var(--accent)}.index strong{font-size:1.15rem;font-weight:500}.index span:last-child{color:var(--muted)}.proof{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.5rem 0}.proof div{padding-inline:1.8rem;border-left:1px solid var(--line)}.proof div:first-child{padding-left:0;border:0}.proof strong{display:block;font-size:2rem;line-height:1.3;letter-spacing:-.035em}.proof span{font-size:.875rem;color:var(--muted)}section.block{padding-top:5.7rem}.section-head{display:grid;grid-template-columns:1.25fr 1fr;gap:3rem;align-items:end;margin-bottom:2.4rem}.section-head p{color:var(--muted);margin:0;max-width:440px}.section-head .eyebrow{margin-bottom:1rem}.project{border-top:1px solid var(--line);padding:2.2rem 0 3rem;display:grid;grid-template-columns:80px 1fr;gap:1.1rem}.project-number{font:1rem var(--mono);color:var(--muted);padding-top:.3rem}.project-head{display:flex;justify-content:space-between;align-items:start;gap:1.2rem;margin-bottom:1.4rem}.project-head .eyebrow{margin-bottom:.65rem;color:var(--muted);font-size:.75rem}.badge{border:1px solid #48675f;color:var(--accent);font: .75rem var(--mono);padding:.35rem .6rem;border-radius:3px;white-space:nowrap}.badge.blue{color:var(--blue);border-color:#435f73}.project-body{display:grid;grid-template-columns:1fr 1fr;gap:2.3rem}.lead{color:var(--muted);font-size:1.05rem}.lead strong{color:var(--ink)}.mini-heading{font:.75rem var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin:1.6rem 0 .65rem}.caption{font-size:.875rem;color:var(--muted);line-height:1.55}.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:1.5rem}.panel h4{margin-bottom:1rem}.pair-stats{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);margin-bottom:1.2rem;padding-bottom:1.2rem;gap:1rem}.pair-stats strong{font-size:2.2rem;display:block;line-height:1.3;letter-spacing:-.03em;color:var(--accent)}.pair-stats span{font-size:.875rem;color:var(--muted)}.flow{list-style:none;margin:1.2rem 0;padding:0;display:grid;gap:.8rem;counter-reset:flow}.flow li{counter-increment:flow;display:grid;grid-template-columns:25px 1fr;gap:.7rem;font-size:.875rem;line-height:1.5}.flow li:before{content:counter(flow,decimal-leading-zero);font:.75rem var(--mono);padding-top:.25rem;color:var(--accent)}.flow strong{display:block;color:var(--ink)}.flow span{color:var(--muted)}.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.1rem 0}.tags span{font-size:.75rem;padding:.2rem .5rem;background:#20303d;color:#c8d5de;border-radius:3px}.project-links{display:flex;gap:1.1rem;flex-wrap:wrap;align-items:center;margin-top:1.3rem}.project-links a:not(.button){font-size:.875rem}.note{border-left:2px solid var(--accent);padding-left:1rem;margin-top:1.2rem;font-size:.875rem;color:var(--muted)}details{border-top:1px solid var(--line);margin-top:1.2rem;padding-top:.7rem}summary{cursor:pointer;list-style-position:outside;margin-left:1rem;font-weight:500;font-size:.9rem;padding:.35rem 0}details .detail-copy{padding-top:1rem;color:var(--muted);font-size:.95rem}details p:last-child{margin-bottom:0}.metric-table{width:100%;border-collapse:collapse;font-size:.875rem;font-variant-numeric:tabular-nums;margin:.5rem 0 1rem}.metric-table caption{text-align:left;font-size:.75rem;color:var(--muted);padding-bottom:.6rem}.metric-table th,.metric-table td{text-align:right;padding:.7rem .3rem;border-bottom:1px solid var(--line)}.metric-table th:first-child,.metric-table td:first-child{text-align:left}.metric-table th{font-weight:500;color:var(--muted)}.metric-table .best{color:var(--accent)}.research{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem;border-top:1px solid var(--line);padding-top:2.2rem}.research article+article{border-left:1px solid var(--line);padding-left:2.2rem}.research h3{font-size:1.6rem;margin-bottom:1rem}.research p{color:var(--muted)}.research .eyebrow{color:var(--blue);font-size:.75rem}.experience-main{border-top:1px solid var(--line);padding-top:2rem}.role-head{display:flex;justify-content:space-between;gap:1rem;align-items:start}.role-head h3{font-size:1.7rem}.role-head .caption{margin-top:.5rem}.role-date{font:.8rem var(--mono);color:var(--muted);white-space:nowrap;padding-top:.5rem}.experience-intro{max-width:800px;color:var(--muted);margin:1.5rem 0}.work-models{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:1.5rem}.model{padding:1.3rem;background:var(--panel)}.model .ordinal{font:.75rem var(--mono);color:var(--accent);margin-bottom:.8rem}.model h4{margin-bottom:.7rem}.model p{color:var(--muted);font-size:.95rem;margin:0}.workflow-list{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.4rem}.workflow-list span{border:1px solid var(--line);padding:.4rem .75rem;font-size:.875rem;border-radius:3px}.impact-list{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem;margin:1.5rem 0}.impact-list p{margin:0;color:var(--muted);font-size:.95rem}.impact-list strong{color:var(--ink)}.secondary-role{padding:1.7rem 0;border-top:1px solid var(--line)}.secondary-role:first-of-type{margin-top:2rem}.secondary-role p{color:var(--muted);margin-top:.85rem;max-width:870px}.secondary-role h3{font-size:1.2rem}.skills-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);gap:0 3rem}.skill{padding:1.5rem 0;border-bottom:1px solid var(--line)}.skill p{color:var(--muted);margin:.8rem 0 0;font-size:.95rem}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}.about-grid p{color:var(--muted)}.principle{display:grid;grid-template-columns:2rem 1fr;gap:.8rem;margin:1.5rem 0}.principle>span{font:.8rem var(--mono);color:var(--accent);padding-top:.3rem}.principle h4{font-size:1rem;line-height:1.5}.principle p{font-size:.95rem;margin:.25rem 0 0}.education{border-top:1px solid var(--line);padding:1.2rem 0}.education strong{display:block}.education p{font-size:.875rem;margin:.2rem 0}.award-row{font-size:.95rem;padding:.9rem 0;border-bottom:1px solid var(--line)}.award-row strong{color:var(--accent)}.cert-list{list-style:none;padding:0;margin:.6rem 0}.cert-list li{padding:.7rem 0;border-bottom:1px solid var(--line);font-size:.875rem}.cert-list span{display:block;color:var(--muted);font-size:.8rem}.contact{margin-top:5.7rem;border-top:1px solid var(--line);padding:3.6rem 0;display:flex;justify-content:space-between;align-items:center;gap:2rem}.contact h2{font-size:clamp(2rem,4vw,3rem);max-width:650px}.contact p{color:var(--muted);margin:1rem 0 0}.footer{padding:1.5rem 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;color:var(--muted);font-size:.8rem}.footer-links{display:flex;gap:1rem}.footer a{text-decoration:none}
+@media(min-width:1500px){.wrap{max-width:1330px}.hero{padding-top:7rem;padding-bottom:5rem}}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:2rem}.hero h1{max-width:750px}.index{padding-left:0;border-left:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}.index-label{grid-column:1/-1}.index a{border-top:1px solid var(--line);border-bottom:0;padding:.8rem 0}.index a:last-child{border-top:1px solid var(--line)}.index strong{font-size:1rem}.section-head{grid-template-columns:1fr;gap:1.2rem}.section-head p{max-width:620px}.project{grid-template-columns:40px 1fr}.project-body{gap:1.5rem}.project-head{flex-direction:column}.work-models{grid-template-columns:1fr}.impact-list{gap:1rem}.about-grid{gap:1.8rem}.contact{align-items:start;flex-direction:column}.contact .actions{margin-top:0}}
+@media(max-width:650px){.nav{flex-wrap:wrap;gap:1rem;padding:1.2rem 0;min-height:auto}.navlinks{width:100%;justify-content:space-between;gap:.5rem}.navlinks .contact-link{border:0;padding:.4rem 0}.hero{padding-top:3rem}.hero h1{font-size:clamp(2.65rem,11vw,4rem)}.hero-copy{font-size:1rem}.index{display:none}.proof{grid-template-columns:1fr;padding:.5rem 0}.proof div{border:0;border-top:1px solid var(--line);padding:1rem 0;display:flex;align-items:center;gap:1rem}.proof div:first-child{border:0}.proof strong{font-size:1.7rem;min-width:100px}.proof span{max-width:210px}.block{padding-top:3.8rem!important}.project{grid-template-columns:1fr;padding-top:1.5rem;gap:.75rem}.project-number{font-size:.75rem}.project-body,.research,.skills-grid,.about-grid,.impact-list{grid-template-columns:1fr}.project-body{gap:1.5rem}.project-head{gap:.9rem}.research article+article{border-left:0;border-top:1px solid var(--line);padding:1.8rem 0 0}.panel{padding:1.1rem}.role-head{flex-direction:column;gap:.3rem}.role-date{padding-top:0}.footer{flex-direction:column}.contact{margin-top:3.8rem}.metric-table{font-size:.8rem}.about-grid{gap:2rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{body{background:white;color:#111}.wrap{max-width:none;padding:0}.navlinks,.actions,.project-links,.footer,.index,.contact{display:none}.hero{padding:1rem 0}.hero h1{font-size:2rem}.hero h1 span,.eyebrow,.lead,.caption,.note,.model p,.about-grid p,.research p,.skill p,.experience-intro,.impact-list p{color:#333}.panel,.model{background:white}.block{padding-top:2rem!important}.project{break-inside:avoid}.tags span{background:#eee;color:#111}}
 </style>
 </head>
 <body>
-<div class="aura" aria-hidden="true"></div>
-<div id="progress"></div>
-<div id="cur-ring" aria-hidden="true"></div>
-<div id="cur-dot" aria-hidden="true"></div>
-
-<nav id="nav">
-  <a class="brand" href="#hero" aria-label="Home" data-hot>
-    <span class="mono-mark">RV</span>
-    <span>Rahul Chowdary Vajja<small>AI / ML Engineer</small></span>
-  </a>
-  <div class="navlinks">
-    <a href="#work" class="hide-sm" data-hot>Work</a>
-    <a href="#experience" class="hide-sm" data-hot>Experience</a>
-    <a href="#skills" class="hide-sm" data-hot>Skills</a>
-    <a href="#about" class="hide-sm" data-hot>About</a>
-    <a href="#contact" class="nav-cta" data-hot>Get in touch</a>
-  </div>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<nav class="nav" aria-label="Main navigation">
+<a class="brand" href="#hero"><span class="brand-mark" aria-hidden="true">RV</span><span>Rahul Chowdary Vajja<small>AI / ML ENGINEER</small></span></a>
+<div class="navlinks"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a><a class="contact-link" href="#contact">Get in touch ↗</a></div>
 </nav>
-
-<main>
-  <!-- HERO -->
-  <header id="hero">
-    <canvas id="net" aria-hidden="true"></canvas>
-    <div class="hero-inner">
-      <div class="hero-tag"><span class="status-dot"></span>Open to AI / ML Engineer roles · 2026</div>
-      <h1>I build <span class="grad">intelligent systems</span><br>that ship to production.</h1>
-      <p class="hero-sub">AI/ML Engineer working across <b>LLMs &amp; agents</b>, <b>machine learning</b>, and <b>computer vision</b> — from RAG copilots serving 40,000+ users to an NSF-recognized clinical-AI system. Every model ships behind a real evaluation.</p>
-      <div class="role-strip">
-        <span>LLMs &amp; Agents</span><span>RAG</span><span>Machine Learning</span><span>Computer Vision</span><span>MLOps</span>
-      </div>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#work" data-hot>View selected work</a>
-        <a class="btn btn-ghost" href="https://github.com/vajja1405" target="_blank" rel="noopener" data-hot>GitHub ↗</a>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/rahul-chowdary-vajja-1b37b2319/" target="_blank" rel="noopener" data-hot>LinkedIn ↗</a>
-      </div>
-    </div>
-    <div class="scroll-cue">scroll<i></i></div>
-  </header>
-
-  <!-- METRICS -->
-  <section id="metrics">
-    <div class="metric-grid reveal">
-      <div class="metric"><div class="num" data-to="40000" data-suffix="+">0</div><div class="lbl">users served in production</div></div>
-      <div class="metric"><div class="num" data-to="52184">0</div><div class="lbl">patient records analyzed</div></div>
-      <div class="metric"><div class="num" data-to="5" data-suffix="M+">0</div><div class="lbl">daily data points piped</div></div>
-      <div class="metric"><div class="num" data-to="95" data-suffix="%+">0</div><div class="lbl">inference latency cut</div></div>
-      <div class="metric"><div class="num" data-to="24" data-suffix="%">0</div><div class="lbl">model F1 improvement</div></div>
-      <div class="metric"><div class="num" data-prefix="#" data-to="4">0</div><div class="lbl">NSF NRT Research-A-Thon</div></div>
-    </div>
-  </section>
-
-  <!-- WORK -->
-  <section id="work">
-    <div class="reveal"><div class="eyebrow">// selected work</div>
-    <h2 class="sec-title">Systems I've designed, built, and evaluated.</h2>
-    <p class="sec-intro">Four projects across healthcare AI, generative computer vision, and applied ML — each with a public repo or paper and metrics I can defend.</p></div>
-
-    <div class="proj-grid">
-      <!-- ClinIQ -->
-      <article class="card reveal" data-tilt data-hot>
-        <div class="card-top">
-          <div><div class="kicker">clinical NLP · RAG · analytics</div>
-          <h3>ClinIQ — Clinical AI for Chart Accuracy &amp; Revenue Cycle</h3></div>
-          <span class="badge award">★ NSF NRT · 4th</span>
-        </div>
-        <p>A multi-method clinical-NLP pipeline over <b>52,184 patient records</b> that flags documentation and coding gaps, then traces them to missed ICD-10 codes and DRG downgrades — <b>$27.5M–$60M</b> in recoverable revenue at a mid-sized hospital.</p>
-        <div class="bars" data-bars>
-          <div class="bar-row"><span class="n">Rule-based</span><span class="bar-track"><span class="bar-fill" data-w="86"></span></span><span class="v">F1 .859</span></div>
-          <div class="bar-row"><span class="n">Embedding</span><span class="bar-track"><span class="bar-fill" data-w="100"></span></span><span class="v">Rec 1.00</span></div>
-          <div class="bar-row"><span class="n">LLM + RAG</span><span class="bar-track"><span class="bar-fill" data-w="88"></span></span><span class="v">Pre .883</span></div>
-        </div>
-        <div class="bars-cap">Each bar shows that method's headline metric on a 600-record stratified hold-out.</div>
-        <div class="chips"><span>Claude API</span><span>pgvector</span><span>sentence-transformers</span><span>UMAP</span><span>HDBSCAN</span><span>Streamlit</span><span>Docker</span><span>CI/CD</span></div>
-        <div class="card-links"><a href="https://vajja1405.github.io" data-hot>Case study</a><a class="disabled">Private dataset</a></div>
-      </article>
-
-      <!-- Drug interaction -->
-      <article class="card reveal" data-d="1" data-tilt data-hot>
-        <div class="card-top">
-          <div><div class="kicker">agentic LLM · full-stack · deployment</div>
-          <h3>Drug Interaction Agent — RAG Chatbot over SQL + Vector Data</h3></div>
-          <span class="badge solo">deployed</span>
-        </div>
-        <p>An AI chatbot that answers drug-safety questions without hallucinating. A <b>4-tier agent</b> (structured lookup → keyword → Random-Forest classifier → LLM+RAG fallback) escalates only when it must — reliable and cheap to run.</p>
-        <div class="stat-row">
-          <div class="s"><b>100%</b><span>severity accuracy</span></div>
-          <div class="s"><b>97.9%</b><span>mgmt coverage</span></div>
-          <div class="s"><b>&gt;20s → &lt;0.1s</b><span>latency (Redis cache)</span></div>
-        </div>
-        <div class="chips"><span>FastAPI</span><span>LangChain</span><span>FAISS</span><span>GPT-4o</span><span>React/TS</span><span>Redis</span><span>PySpark ETL</span><span>RAGAS</span></div>
-        <div class="card-links"><a href="https://github.com/vajja1405/drug-interaction-rag-chatbot" target="_blank" rel="noopener" data-hot>GitHub repo ↗</a></div>
-      </article>
-
-      <!-- Surgical video -->
-      <article class="card reveal" data-d="2" data-tilt data-hot>
-        <div class="card-top">
-          <div><div class="kicker">generative CV · diffusion · research</div>
-          <h3>Surgical Video Synthesis via Stable Diffusion</h3></div>
-          <span class="badge solo">CV / DL</span>
-        </div>
-        <p>A <b>KinematicEncoder</b> maps 76-dim motion/kinematic features into a LoRA-fine-tuned Stable Diffusion U-Net (~1% trainable params) to generate gesture-accurate surgical video from the <b>JIGSAWS robotics</b> dataset.</p>
-        <div class="stat-row">
-          <div class="s"><b>19–22 dB</b><span>PSNR</span></div>
-          <div class="s"><b>0.61–0.74</b><span>SSIM</span></div>
-          <div class="s"><b>A100</b><span>DDIM + FID pipeline</span></div>
-        </div>
-        <div class="chips"><span>PyTorch</span><span>Stable Diffusion</span><span>U-Net</span><span>LoRA</span><span>DDIM</span><span>FID/PSNR/SSIM</span></div>
-        <div class="card-links"><a href="https://vajja1405.github.io" data-hot>Overview</a></div>
-      </article>
-
-      <!-- Quantum -->
-      <article class="card reveal" data-d="3" data-tilt data-hot>
-        <div class="card-top">
-          <div><div class="kicker">computer vision · explainability · research</div>
-          <h3>Explainable AI for Medical Imaging — Classical vs Quantum ML</h3></div>
-          <span class="badge award">📄 paper</span>
-        </div>
-        <p>Benchmarked <b>CNN, QCNN, SVM, and QSVM</b> on chest X-ray classification, with SHAP and Grad-CAM validating every prediction for clinician trust and failure analysis.</p>
-        <div class="stat-row">
-          <div class="s"><b>0.76</b><span>AUROC (CNN)</span></div>
-          <div class="s"><b>5×</b><span>QCNN train speedup</span></div>
-          <div class="s"><b>SHAP</b><span>+ Grad-CAM</span></div>
-        </div>
-        <div class="chips"><span>PennyLane</span><span>Qiskit</span><span>CNN</span><span>PCA</span><span>SHAP</span><span>Grad-CAM</span></div>
-        <div class="card-links"><a href="https://drive.google.com/file/d/1ZL2x0kbnx-VQnojByAn5yibv0oKIShI2/view" target="_blank" rel="noopener" data-hot>Read paper ↗</a></div>
-      </article>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="reveal"><div class="eyebrow">// experience</div>
-    <h2 class="sec-title">Where I've shipped.</h2></div>
-    <div class="timeline">
-      <div class="tl-item reveal">
-        <div class="tl-head"><div class="tl-role">AI/ML Engineer Intern · <span class="tl-co">TIFIN</span></div><div class="tl-date">Mar 2025 – May 2026</div></div>
-        <ul>
-          <li>Shipped <b>3 production ML models</b> (PyTorch, TensorFlow, Scikit-learn) end-to-end through <b>AWS SageMaker</b> &amp; <b>GCP Vertex AI</b> — lifting recommendation accuracy <b>19%</b> for <b>40,000+ users</b>; domain fine-tuning improved F1 <b>24%</b>.</li>
-          <li>Built production <b>LLM copilots and agentic RAG pipelines</b> (LangChain, LangGraph) with tool invocation and structured outputs, over Snowflake pipelines processing <b>5M+ daily data points</b>.</li>
-          <li>Ran data-quality checks across <b>2M+ records</b> and automated 3 client-facing workflows — cutting manual processing <b>65%</b> for <b>150+ advisors</b>.</li>
-        </ul>
-      </div>
-      <div class="tl-item reveal">
-        <div class="tl-head"><div class="tl-role">Data Analyst Intern · <span class="tl-co">Smartinternz</span></div><div class="tl-date">May – Jul 2023</div></div>
-        <ul>
-          <li>Forecast rental demand from <b>735K+ NYC Citi Bike trips</b> across 51 stations — EDA + inferential statistics, benchmarked 4 regression models by RMSLE, and shipped a tuned Random Forest via a Tableau dashboard and Flask app.</li>
-        </ul>
-      </div>
-      <div class="tl-item reveal">
-        <div class="tl-head"><div class="tl-role">Vice President · <span class="tl-co">Data Analytics Club, UMKC</span></div><div class="tl-date">Aug 2024 – May 2026</div></div>
-        <ul>
-          <li>Led a <b>30+ member</b> organization — ran hands-on workshops (Python, SQL, ML, LLM tooling), organized industry speaker sessions, mentored juniors, and guided a team to <b>3rd Place in Quantum Computing</b> at UMKC Hack-A-Roo 2025.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="reveal"><div class="eyebrow">// toolkit</div>
-    <h2 class="sec-title">The stack behind the work.</h2>
-    <p class="sec-intro">Everything listed here shows up in a project or a shipped system above — no résumé padding.</p></div>
-    <div class="skill-grid">
-      <div class="skill-cat reveal"><h4>LLMs &amp; Agents</h4><div class="tags"><span>LangChain</span><span>LangGraph</span><span>Multi-agent orchestration</span><span>Prompt engineering</span><span>Tool invocation</span><span>Structured outputs</span><span>Claude API</span><span>OpenAI GPT-4o</span><span>RAGAS</span></div></div>
-      <div class="skill-cat reveal" data-d="1"><h4>RAG &amp; Retrieval</h4><div class="tags"><span>RAG pipelines</span><span>pgvector</span><span>FAISS</span><span>sentence-transformers</span><span>Semantic search</span><span>Embeddings</span></div></div>
-      <div class="skill-cat reveal"><h4>Machine Learning &amp; Deep Learning</h4><div class="tags"><span>PyTorch</span><span>TensorFlow</span><span>Scikit-learn</span><span>CNNs</span><span>U-Net / Stable Diffusion</span><span>LoRA fine-tuning</span><span>Classification</span><span>Clustering</span><span>SHAP / Grad-CAM</span></div></div>
-      <div class="skill-cat reveal" data-d="1"><h4>Data &amp; MLOps</h4><div class="tags"><span>Python</span><span>SQL</span><span>Snowflake</span><span>PySpark</span><span>PostgreSQL</span><span>Docker</span><span>FastAPI</span><span>GitHub Actions CI/CD</span><span>AWS SageMaker</span><span>GCP Vertex AI</span><span>Tableau</span></div></div>
-    </div>
-  </section>
-
-  <!-- CREDENTIALS -->
-  <section id="credentials">
-    <div class="reveal"><div class="eyebrow">// credentials</div>
-    <h2 class="sec-title">Certifications, awards &amp; education.</h2></div>
-    <div class="cred-grid">
-      <div class="panel reveal">
-        <h4>Certifications</h4>
-        <div class="cert"><span class="ic">H</span><span class="t">AI in Healthcare <small>Stanford University School of Medicine</small></span></div>
-        <div class="cert"><span class="ic">ML</span><span class="t">Supervised ML: Regression &amp; Classification <small>Stanford Online</small></span></div>
-        <div class="cert"><span class="ic">CV</span><span class="t">Facial Expression Recognition with PyTorch <small>Coursera</small></span></div>
-        <div class="cert"><span class="ic">RL</span><span class="t">Deep Learning &amp; Reinforcement Learning <small>IBM ML Professional Certificate · <span class="prog">in progress</span></small></span></div>
-        <div class="cert"><span class="ic">MW</span><span class="t">Predictive Modeling &amp; ML with MATLAB <small>MathWorks</small></span></div>
-        <div class="cert"><span class="ic">GC</span><span class="t">Fraud Detection with ML · GCP Vertex AI (certified) <small>Google Cloud</small></span></div>
-      </div>
-      <div class="panel reveal" data-d="1">
-        <h4>Awards</h4>
-        <div class="award"><span class="medal">🥇</span><span class="t"><b>4th Place — NSF NRT Research-A-Thon 2026</b><span>National Science Foundation · ClinIQ clinical-AI system</span></span></div>
-        <div class="award"><span class="medal">🏅</span><span class="t"><b>3rd Place — Quantum Computing</b><span>UMKC Hack-A-Roo 2025</span></span></div>
-        <div class="edu">
-          <h4 style="margin-bottom:16px">Education</h4>
-          <div class="row"><div><b>M.S. Computer Science</b><small>University of Missouri–Kansas City · AI Emphasis</small></div><span class="yr">May 2026</span></div>
-          <div class="row"><div><b>B.S. Computer Science</b><small>University of Missouri–Kansas City</small></div><span class="yr">May 2025</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="reveal"><div class="eyebrow">// about</div>
-    <h2 class="sec-title">A builder who cares what happens after the model ships.</h2></div>
-    <div class="about-wrap">
-      <div class="about-card reveal">
-        <div class="about-mono">RV</div>
-        <div class="who">Rahul Chowdary Vajja</div>
-        <div class="what">AI / ML Engineer</div>
-        <div class="links">
-          <a href="mailto:rahulchowdaryvajja@gmail.com" data-hot><span class="k">email</span> rahulchowdaryvajja@gmail.com</a>
-          <a href="https://github.com/vajja1405" target="_blank" rel="noopener" data-hot><span class="k">github</span> /vajja1405</a>
-          <a href="https://www.linkedin.com/in/rahul-chowdary-vajja-1b37b2319/" target="_blank" rel="noopener" data-hot><span class="k">linkedin</span> /rahul-chowdary-vajja</a>
-        </div>
-      </div>
-      <div class="about-body reveal" data-d="1">
-        <p class="lead">I'm an AI/ML engineer who likes the unglamorous half of the job — the evaluation, the deployment, the monitoring — as much as the modeling.</p>
-        <p>Over the past year at <b>TIFIN</b>, I took machine-learning and LLM systems from feature engineering all the way to production, where real users and real data broke them in ways no notebook predicts. My research and side projects run on the same principle: <b>a model only counts once there's a real evaluation behind it.</b> That's how <b>ClinIQ</b> went from an F1 score to a $27.5M–$60M revenue-cycle finding, and how my drug-interaction agent went from a demo to a deployed app answering in under 100&nbsp;ms.</p>
-        <p>My work spans <b>LLMs and agents, applied ML, and computer vision</b> — most of it in healthcare, where the difference between "the model is accurate" and "here's what it changes for a patient or a hospital" actually matters. I completed my <b>M.S. in Computer Science (AI emphasis)</b> at UMKC in May 2026, and I'm looking for a team building things that reach real people.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="reveal">
-    <div class="eyebrow" style="justify-content:center">// let's talk</div>
-    <h2>Have a hard problem?<br><span class="grad">Let's build something that ships.</span></h2>
-    <p>I'm open to AI/ML Engineer roles and always happy to talk shop about agents, evaluation, or getting models into production.</p>
-    <div class="contact-cta">
-      <a class="btn btn-primary" href="mailto:rahulchowdaryvajja@gmail.com" data-hot>Email me</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/rahul-chowdary-vajja-1b37b2319/" target="_blank" rel="noopener" data-hot>Connect on LinkedIn ↗</a>
-      <a class="btn btn-ghost" href="https://github.com/vajja1405" target="_blank" rel="noopener" data-hot>See my GitHub ↗</a>
-    </div>
-    </div>
-  </section>
-
-  <footer>
-    <span class="mono">© 2026 Rahul Chowdary Vajja</span>
-    <span class="mono">Built from scratch · no templates</span>
-  </footer>
-</main>
-
-<script>
-(function(){
-  "use strict";
-  var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-  var fine = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
-
-  /* ---------- scroll progress + nav ---------- */
-  var nav=document.getElementById("nav"), progress=document.getElementById("progress");
-  function onScroll(){
-    var st=window.scrollY||document.documentElement.scrollTop;
-    var h=document.documentElement.scrollHeight-window.innerHeight;
-    progress.style.width=(h>0?(st/h*100):0)+"%";
-    nav.classList.toggle("scrolled", st>40);
-  }
-  window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
-
-  /* ---------- active nav link ---------- */
-  var links=[].slice.call(document.querySelectorAll('.navlinks a[href^="#"]'));
-  var map={};
-  links.forEach(function(a){var id=a.getAttribute("href").slice(1);var el=document.getElementById(id);if(el)map[id]=a;});
-  var spy=new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ links.forEach(function(l){l.classList.remove("active");});
-      var a=map[e.target.id]; if(a)a.classList.add("active"); } });
-  },{rootMargin:"-45% 0px -50% 0px"});
-  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)spy.observe(el);});
-
-  /* ---------- reveal on scroll ---------- */
-  var revs=[].slice.call(document.querySelectorAll(".reveal"));
-  if(reduce){revs.forEach(function(r){r.classList.add("in");});}
-  else{
-    var ro=new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in");
-        if(e.target.hasAttribute("data-bars"))fillBars(e.target);
-        ro.unobserve(e.target); } });
-    },{threshold:.14});
-    revs.forEach(function(r){ro.observe(r);});
-    // bars may sit inside a card that is itself the reveal target
-    document.querySelectorAll("[data-bars]").forEach(function(b){ro.observe(b);});
-  }
-  function fillBars(scope){
-    (scope.querySelectorAll?scope.querySelectorAll(".bar-fill"):[]).forEach(function(f){
-      f.style.width=(f.getAttribute("data-w")||0)+"%";
-    });
-  }
-
-  /* ---------- animated counters ---------- */
-  function fmt(n){return n.toLocaleString("en-US");}
-  function runCount(el){
-    var to=parseFloat(el.getAttribute("data-to"))||0;
-    var pre=el.getAttribute("data-prefix")||"", suf=el.getAttribute("data-suffix")||"";
-    if(reduce){el.textContent=pre+fmt(to)+suf;return;}
-    var dur=1400, t0=null, dec=(to%1!==0)?1:0;
-    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1);
-      var e=1-Math.pow(1-p,3); var val=to*e;
-      el.textContent=pre+(dec?val.toFixed(1):fmt(Math.round(val)))+suf;
-      if(p<1)requestAnimationFrame(step); else el.textContent=pre+fmt(to)+suf; }
-    requestAnimationFrame(step);
-  }
-  var co=new IntersectionObserver(function(es){
-    es.forEach(function(e){if(e.isIntersecting){runCount(e.target);co.unobserve(e.target);}});
-  },{threshold:.5});
-  document.querySelectorAll(".num[data-to]").forEach(function(n){co.observe(n);});
-
-  /* ---------- card cursor glow + tilt ---------- */
-  document.querySelectorAll("[data-tilt]").forEach(function(card){
-    card.addEventListener("mousemove",function(ev){
-      var r=card.getBoundingClientRect();
-      var x=ev.clientX-r.left, y=ev.clientY-r.top;
-      card.style.setProperty("--mx",x+"px"); card.style.setProperty("--my",y+"px");
-      if(!reduce){var rx=((y/r.height)-.5)*-4, ry=((x/r.width)-.5)*4;
-        card.style.transform="translateY(-5px) perspective(900px) rotateX("+rx+"deg) rotateY("+ry+"deg)";}
-    });
-    card.addEventListener("mouseleave",function(){card.style.transform="";});
-  });
-
-  /* ---------- custom cursor ---------- */
-  if(fine && !reduce){
-    document.body.classList.add("cursor-on");
-    var dot=document.getElementById("cur-dot"), ring=document.getElementById("cur-ring");
-    var mx=innerWidth/2,my=innerHeight/2, rx=mx,ry=my;
-    document.addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;
-      dot.style.left=mx+"px";dot.style.top=my+"px";});
-    (function loop(){rx+=(mx-rx)*.18; ry+=(my-ry)*.18;
-      ring.style.left=rx+"px";ring.style.top=ry+"px";requestAnimationFrame(loop);})();
-    document.querySelectorAll("a,button,[data-hot],[data-tilt]").forEach(function(el){
-      el.addEventListener("mouseenter",function(){ring.classList.add("hot");});
-      el.addEventListener("mouseleave",function(){ring.classList.remove("hot");});
-    });
-    document.addEventListener("mouseleave",function(){dot.style.opacity=ring.style.opacity=0;});
-    document.addEventListener("mouseenter",function(){dot.style.opacity=ring.style.opacity=1;});
-  }
-
-  /* ---------- hero neural constellation ---------- */
-  var canvas=document.getElementById("net");
-  if(canvas && canvas.getContext){
-    var ctx=canvas.getContext("2d"), W,H,DPR,pts=[],mouse={x:-999,y:-999};
-    var hero=document.getElementById("hero");
-    function size(){ DPR=Math.min(window.devicePixelRatio||1,2);
-      W=hero.offsetWidth; H=hero.offsetHeight;
-      canvas.width=W*DPR; canvas.height=H*DPR; canvas.style.width=W+"px"; canvas.style.height=H+"px";
-      ctx.setTransform(DPR,0,0,DPR,0,0);
-      var count=Math.min(Math.floor(W*H/13000),90);
-      pts=[]; for(var i=0;i<count;i++){pts.push({x:Math.random()*W,y:Math.random()*H,
-        vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.6+.8});}
-    }
-    function tick(){
-      ctx.clearRect(0,0,W,H);
-      for(var i=0;i<pts.length;i++){var p=pts[i];
-        p.x+=p.vx;p.y+=p.vy;
-        if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
-        // subtle mouse attraction
-        var dxm=mouse.x-p.x, dym=mouse.y-p.y, dm=Math.hypot(dxm,dym);
-        if(dm<160){p.x+=dxm/dm*.5;p.y+=dym/dm*.5;}
-      }
-      for(var a=0;a<pts.length;a++){
-        for(var b=a+1;b<pts.length;b++){
-          var dx=pts[a].x-pts[b].x, dy=pts[a].y-pts[b].y, d=Math.hypot(dx,dy);
-          if(d<125){
-            var mid_x=(pts[a].x+pts[b].x)/2, mid_y=(pts[a].y+pts[b].y)/2;
-            var near=Math.hypot(mouse.x-mid_x,mouse.y-mid_y);
-            var base=(1-d/125);
-            var glow=near<170?(1-near/170):0;
-            var alpha=base*(0.10+glow*0.55);
-            ctx.strokeStyle="rgba("+(56+glow*195)+","+(189-glow*76)+","+(248-glow*115)+","+alpha+")";
-            ctx.lineWidth=0.6+glow*0.9;
-            ctx.beginPath();ctx.moveTo(pts[a].x,pts[a].y);ctx.lineTo(pts[b].x,pts[b].y);ctx.stroke();
-          }
-        }
-      }
-      for(var k=0;k<pts.length;k++){var q=pts[k];
-        var nn=Math.hypot(mouse.x-q.x,mouse.y-q.y); var hot=nn<170?(1-nn/170):0;
-        ctx.beginPath();ctx.arc(q.x,q.y,q.r+hot*1.6,0,6.2832);
-        ctx.fillStyle="rgba("+(56+hot*100)+","+(189+hot*40)+",248,"+(0.35+hot*0.5)+")";ctx.fill();
-      }
-      raf=requestAnimationFrame(tick);
-    }
-    var raf;
-    hero.addEventListener("mousemove",function(e){var r=hero.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
-    hero.addEventListener("mouseleave",function(){mouse.x=mouse.y=-999;});
-    window.addEventListener("resize",function(){size();});
-    size();
-    if(!reduce){tick();}
-    else{ // static single frame
-      ctx.clearRect(0,0,W,H);
-      for(var s=0;s<pts.length;s++){ctx.beginPath();ctx.arc(pts[s].x,pts[s].y,pts[s].r,0,6.2832);
-        ctx.fillStyle="rgba(255,190,120,.35)";ctx.fill();}
-    }
-  }
-})();
-</script>
+<main id="main">
+<header class="hero" id="hero">
+<div><div class="eyebrow">Applied AI · Financial services · Healthcare</div><h1>From messy data<br>to <span>useful AI.</span></h1>
+<p class="hero-copy">I’m Rahul, an AI/ML engineer. I build the pipelines, models, and applications that turn a question into something people can actually use.</p>
+<p class="hero-copy">Production AI at TIFIN. A deployed medication-review app. Healthcare research grounded in evaluation.</p>
+<div class="actions"><a class="button primary" href="#work">Explore my work <span aria-hidden="true">↓</span></a><a class="text-link" href="https://github.com/vajja1405">GitHub ↗</a><a class="text-link" href="https://www.linkedin.com/in/rahul-chowdary-vajja-1b37b2319/">LinkedIn ↗</a></div></div>
+<aside class="index" aria-label="Selected highlights"><div class="index-label">A closer look</div><a href="#drug-agent"><div class="index-top"><span>01 / Deployed app</span><span aria-hidden="true">↗</span></div><strong>Drug Interaction Agent</strong></a><a href="#cliniq"><div class="index-top"><span>02 / Healthcare research</span><span aria-hidden="true">↗</span></div><strong>ClinIQ</strong></a><a href="#tifin"><div class="index-top"><span>03 / Production experience</span><span aria-hidden="true">↗</span></div><strong>TIFIN portfolio copilot</strong></a></aside>
+</header>
+<div class="proof" aria-label="Experience highlights"><div><strong>40,000+</strong><span>users reached by AI capabilities at TIFIN</span></div><div><strong>3 models</strong><span>supporting the portfolio copilot</span></div><div><strong>4th place</strong><span>ClinIQ · NSF NRT Research-A-Thon</span></div></div>
+<section class="block" id="work" aria-labelledby="work-title">
+<div class="section-head"><div><div class="eyebrow">01 / Selected work</div><h2 id="work-title">Build it. Measure it.<br>Understand its limits.</h2></div><p>Explore the application, the engineering choices, and what the evaluation actually demonstrates.</p></div>
+<article class="project" id="drug-agent"><div class="project-number">01 —</div><div>
+<div class="project-head"><div><div class="eyebrow">Medication evidence · Full-stack AI</div><h3>Drug Interaction Agent</h3></div><span class="badge">Public demo</span></div>
+<div class="project-body"><div><p class="lead">A medication-label review app that brings <strong>source passages and coverage gaps</strong> into one view, with a separate RAG chatbot for research.</p><p class="lead">Choose medications, inspect every pair, and follow the evidence back to its label. The interface distinguishes direct label mentions, shared ingredients, and incomplete source coverage.</p>
+<div class="mini-heading">Engineering decision</div><p class="caption">Keep deterministic label review separate from generated explanations. A missing mention is displayed as a coverage result, never as proof that a combination is safe.</p>
+<div class="tags"><span>React / TypeScript</span><span>FastAPI</span><span>RxNorm</span><span>DailyMed</span><span>FAISS</span><span>Hugging Face Spaces</span></div>
+<div class="project-links"><a class="button primary" href="https://astra6-drug-interaction-ai.hf.space/">Open live app ↗</a><a href="https://github.com/vajja1405/drug-interaction-rag-chatbot">Source code ↗</a><a href="https://vajja1405.github.io/drug-interaction-rag-chatbot/">Static demo ↗</a></div>
+</div><div class="panel"><h4>From medication list to source evidence</h4><div class="pair-stats"><div><strong>20</strong><span>selected medications per review</span></div><div><strong>190</strong><span>pairs at the 20-medication limit</span></div></div>
+<ol class="flow"><li><div><strong>Normalize the names</strong><span>RxNorm terminology connects names with medication concepts.</span></div></li><li><div><strong>Retrieve matching labels</strong><span>DailyMed label sampling checks active ingredients and retains source references.</span></div></li><li><div><strong>Inspect each pair</strong><span>Show label mentions, ingredient overlap, and missing coverage in a review matrix.</span></div></li></ol>
+<p class="caption">23,651 searchable terminology entries include brands and ingredient concepts; they are not 23,651 clinically validated medications. Pairwise review does not model higher-order interactions.</p></div></div>
+<p class="note">Research and source-review tool, not a clinically validated interaction checker. It does not establish patient-specific safety or recommend changes to medication.</p>
+<details><summary>Architecture, evaluation, and scope</summary><div class="detail-copy"><p>The public label-review path uses terminology matching and label text without an LLM or a generated severity score. Label sampling can miss relevant evidence, and a direct name mention may include a negated statement. Users must read the source passage.</p><p>The separate research chatbot combines retrieval and classification stages with an LLM explanation on the ordinary uncached API path. The classifier module uses isotonic calibration with three-fold cross-validation. Caching reduces repeated work; it does not establish an equivalent reduction in overall operating cost.</p><p>The authored 24-pair regression set achieved 24/24 severity matches on its evaluated path. It excludes the final LLM explanation and is not a full RAGAS evaluation or clinical validation. The expanded app also has 41 integration tests and six static-demo tests; those check software behavior, not medical accuracy.</p></div></details>
+</div></article>
+<article class="project" id="cliniq"><div class="project-number">02 —</div><div>
+<div class="project-head"><div><div class="eyebrow">Clinical NLP · Retrieval · Evaluation</div><h3>ClinIQ</h3></div><span class="badge blue">NSF NRT · 4th place</span></div>
+<div class="project-body"><div><p class="lead">An exploration of <strong>substance-use relevance detection</strong> and documentation-review workflows, comparing rules, embeddings, and LLM-assisted retrieval.</p><p class="lead">The corpus contains 52,184 public patient-written drug reviews. A 600-review comparison made the tradeoff concrete: the embedding method recovered every proxy-positive case but flagged almost the entire sample.</p>
+<div class="mini-heading">What the comparison taught me</div><p class="caption">More sophisticated models do not automatically produce a better workflow. Rules had the strongest F1 here; LLM + RAG was more precise but missed many proxy-positive examples.</p>
+<div class="tags"><span>Claude API</span><span>pgvector</span><span>sentence-transformers</span><span>UMAP / HDBSCAN</span><span>Streamlit</span></div><div class="project-links"><a class="button" href="https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection">Explore the repository ↗</a></div></div>
+<div class="panel"><h4>Same dataset. Same metrics.</h4><table class="metric-table"><caption>600 reviews · 300 proxy positives / 300 proxy negatives</caption><thead><tr><th scope="col">Method</th><th scope="col">Precision</th><th scope="col">Recall</th><th scope="col">F1</th></tr></thead><tbody><tr><th scope="row">Rules</th><td>.861</td><td>.847</td><td class="best">.854</td></tr><tr><th scope="row">Embedding</th><td>.504</td><td>1.000</td><td>.670</td></tr><tr><th scope="row">LLM + RAG</th><td>.938</td><td>.400</td><td>.561</td></tr></tbody></table><p class="caption">Labels were derived from keywords in condition and drug-name fields. These results measure agreement with those proxy labels, not clinician-adjudicated diagnoses or validated coding accuracy.</p></div></div>
+<details><summary>Documentation gaps and the revenue opportunity</summary><div class="detail-copy"><p>The business exploration asked whether documentation review could surface potentially missing ICD-10 information for a qualified reviewer. A separate synthetic claims workflow explored how CC/MCC classification could affect hospital MS-DRG reimbursement.</p><p>The $27.5M–$60M figure is a rough scenario: 10,000 admissions × an assumed $2,750–$6,000 payment difference. It is not measured revenue, verified recoverable revenue, or a forecast. Real impact requires chart review, valid coding, a demonstrated change in DRG assignment, and payment verification.</p><p>Hospital MS-DRG economics are different from Medicare Advantage risk adjustment. A hospital payment increase also does not automatically create savings for a health insurer.</p></div></details>
+</div></article>
+<div class="research"><article><div class="eyebrow">03 / Generative vision research</div><h3>Surgical Video Synthesis</h3><p>Explored conditioning Stable Diffusion on surgical kinematics from JIGSAWS. A 76-dimensional motion encoder and LoRA adaptation connect robot motion features with image generation.</p><p class="caption">The research uses reconstruction and image-quality metrics to study generated outputs; these do not establish surgical accuracy or clinical usefulness.</p><div class="tags"><span>PyTorch</span><span>Stable Diffusion</span><span>LoRA</span><span>PSNR / SSIM</span></div><div class="project-links"><a href="https://github.com/vajja1405/SS-SD">Research &amp; source ↗</a></div></article>
+<article><div class="eyebrow">04 / Explainable ML research</div><h3>Medical Imaging:<br>Classical &amp; Quantum ML</h3><p>Compared CNN, QCNN, SVM, and QSVM approaches to chest X-ray classification, using SHAP and Grad-CAM to inspect model behavior and investigate errors.</p><p class="caption">The project reports CNN AUROC of 0.76. Attribution maps help investigate predictions; they do not verify clinical correctness or establish a general quantum advantage.</p><div class="tags"><span>PennyLane</span><span>Qiskit</span><span>CNN</span><span>SHAP / Grad-CAM</span></div><div class="project-links"><a href="https://github.com/vajja1405/quantum-explainable-medical-imaging">Source code ↗</a><a href="https://drive.google.com/file/d/1ZL2x0kbnx-VQnojByAn5yibv0oKIShI2/view">Read paper ↗</a></div></article></div>
+</section>
+<section class="block" id="experience" aria-labelledby="experience-title"><div class="section-head"><div><div class="eyebrow">02 / Experience</div><h2 id="experience-title">The work behind<br>the model.</h2></div><p>Data quality, useful workflows, and production feedback matter as much as the prediction itself.</p></div>
+<article class="experience-main" id="tifin"><div class="role-head"><div><h3>TIFIN</h3><p class="caption">AI/ML Engineer Intern · AI portfolio copilot</p></div><span class="role-date">Mar 2025 — May 2026</span></div>
+<p class="experience-intro">Worked on an AI portfolio copilot for investment questions and advisor preparation. My ownership covered supporting Snowflake pipelines, agentic RAG workflows, model deployment, and monitoring using SageMaker and Vertex AI.</p>
+<div class="work-models"><div class="model"><div class="ordinal">MODEL / 01</div><h4>Query-intent classification</h4><p>Identify the request and route it to the appropriate tools and workflow, from portfolio analysis to meeting preparation.</p></div><div class="model"><div class="ordinal">MODEL / 02</div><h4>Financial entity extraction</h4><p>Turn statements, research, and notes into structured security names, tickers, amounts, and reporting dates.</p></div><div class="model"><div class="ordinal">MODEL / 03</div><h4>Retrieval relevance ranking</h4><p>Prioritize the passages that match the question, the investment, and the reporting period before generation.</p></div></div>
+<div class="mini-heading">Three advisor workflows</div><div class="workflow-list"><span>Meeting preparation</span><span>Portfolio questions &amp; research</span><span>Post-meeting summaries &amp; follow-ups</span></div><p class="caption">LangChain connected retrieval and analytical tools; LangGraph coordinated steps, shared state, validation, and retries. Outputs were sourced briefings, answers, and drafts for advisor review.</p>
+<div class="impact-list"><p><strong>40,000+ users reached</strong><br>Across deployed AI capabilities, with 150+ users in the automated-workflow group.</p><p><strong>65% less manual effort</strong><br>Reported across the three workflows, including the review work that remained.</p><p><strong>5M+ daily data points</strong><br>Supporting pipelines for portfolio, account, transaction, and usage data.</p><p><strong>2M+ records audited</strong><br>Checks for data-quality issues; 15% of identified reliability gaps resolved.</p></div>
+<details><summary>Model improvements and how to read the numbers</summary><div class="detail-copy"><p>Reported improvements were 19% in query-intent classification accuracy and 24% in financial entity-extraction F1. Retrieval ranking was the third supporting model; no separate numerical gain is claimed for it.</p><p>These are experience outcomes, not public reproducible benchmarks. Baseline scores and the relative-versus-percentage-point definitions are not published here. Product reach is distinct from workflow adoption and does not describe concurrent load.</p></div></details>
+</article>
+<article class="secondary-role"><div class="role-head"><h3>Smartinternz <span class="caption">/ Data Analyst Intern</span></h3><span class="role-date">May — Jul 2023</span></div><p>Analyzed 735K+ NYC Citi Bike trips across 51 stations, compared four regression models using RMSLE, and delivered demand forecasts through a Flask app and Tableau dashboard.</p></article>
+<article class="secondary-role"><div class="role-head"><h3>Data Analytics Club, UMKC <span class="caption">/ Vice President</span></h3><span class="role-date">Aug 2024 — May 2026</span></div><p>Led a 30+ member organization, ran practical Python, SQL, and ML workshops, organized industry speaker sessions, and mentored students. Guided a team to third place in Quantum Computing at UMKC Hack-A-Roo.</p></article>
+</section>
+<section class="block" id="skills" aria-labelledby="skills-title"><div class="section-head"><div><div class="eyebrow">03 / Toolkit</div><h2 id="skills-title">Across the whole system.</h2></div></div><div class="skills-grid"><div class="skill"><h4>Agents &amp; retrieval</h4><p>LangChain · LangGraph · Tool invocation · Structured outputs · FAISS · pgvector · Sentence embeddings · RAG evaluation</p></div><div class="skill"><h4>Models &amp; evaluation</h4><p>PyTorch · TensorFlow · Scikit-learn · Classification · Clustering · Precision / recall / F1 · Calibration · Error analysis</p></div><div class="skill"><h4>Data &amp; deployment</h4><p>Python · SQL · Snowflake · PySpark · PostgreSQL · FastAPI · Docker · GitHub Actions · SageMaker · Vertex AI</p></div><div class="skill"><h4>Vision &amp; interfaces</h4><p>CNNs · Stable Diffusion · LoRA · SHAP · Grad-CAM · React / TypeScript · Streamlit · Tableau</p></div></div></section>
+<section class="block" id="about" aria-labelledby="about-title"><div class="section-head"><div><div class="eyebrow">04 / About</div><h2 id="about-title">Curious about the model.<br>Accountable for the result.</h2></div></div><div class="about-grid"><div><p>I recently completed my master’s in Computer Science with an AI emphasis at UMKC. I enjoy taking an ambiguous problem through the full cycle: understanding the data, building the system, evaluating failures, and making it usable.</p><p>Healthcare interests me because usefulness depends on more than a model score. Evidence, workflow, and the cost of being wrong all shape the engineering.</p><div class="principle"><span>01</span><div><h4>Start with the work someone needs done.</h4><p>Define the user, the bottleneck, and the decision the system should support.</p></div></div><div class="principle"><span>02</span><div><h4>Compare against a simple baseline.</h4><p>Measure the errors and the review burden before adding complexity.</p></div></div><div class="principle"><span>03</span><div><h4>Keep the evidence visible.</h4><p>Preserve sources, expose uncertainty, and use feedback to improve the next version.</p></div></div></div>
+<div id="credentials"><div class="education"><strong>M.S. Computer Science · AI Emphasis</strong><p>University of Missouri–Kansas City · May 2026</p></div><div class="education"><strong>B.S. Computer Science</strong><p>University of Missouri–Kansas City · May 2025</p></div><div class="award-row"><strong>4th place</strong> · NSF NRT Research-A-Thon 2026<br><span class="caption">ClinIQ</span></div><div class="award-row"><strong>3rd place</strong> · Quantum Computing<br><span class="caption">UMKC Hack-A-Roo 2025</span></div>
+<details><summary>Courses &amp; certifications</summary><ul class="cert-list"><li>AI in Healthcare<span>Stanford University School of Medicine</span></li><li>Supervised ML: Regression &amp; Classification<span>Stanford Online</span></li><li>Facial Expression Recognition with PyTorch<span>Coursera</span></li><li>Deep Learning &amp; Reinforcement Learning<span>IBM ML Professional Certificate · In progress</span></li><li>Predictive Modeling &amp; ML with MATLAB<span>MathWorks</span></li><li>Fraud Detection with ML · GCP Vertex AI<span>Google Cloud</span></li></ul></details></div></div></section>
+<section class="contact" id="contact" aria-labelledby="contact-title"><div><div class="eyebrow">Let’s build something useful.</div><h2 id="contact-title">A real problem is a good<br>place to start.</h2><p>Open to AI / ML engineering opportunities.</p></div><div class="actions"><a class="button primary" href="mailto:rahulchowdaryvajja@gmail.com">Email Rahul ↗</a><a class="text-link" href="https://www.linkedin.com/in/rahul-chowdary-vajja-1b37b2319/">Connect on LinkedIn ↗</a></div></section>
+</main><footer class="footer"><span>© 2026 Rahul Chowdary Vajja</span><div class="footer-links"><a href="https://github.com/vajja1405/vajja1405.github.io">Site source ↗</a><a href="#hero">Back to top ↑</a></div></footer>
+</div>
 </body>
 </html>
