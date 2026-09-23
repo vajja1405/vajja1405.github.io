@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-09-23T21:58:56Z",
+  "suites": [
+    {
+      "name": "Engine: evidence integrity",
+      "passed": 2,
+      "total": 2,
+      "source": "imw/tests/engine.test.ts"
+    },
+    {
+      "name": "Engine: evidence retrieval",
+      "passed": 8,
+      "total": 8,
+      "source": "imw/tests/engine.test.ts"
+    },
+    {
+      "name": "Engine: unsupported skills and false premises",
+      "passed": 8,
+      "total": 8,
+      "source": "imw/tests/engine.test.ts"
+    },
+    {
+      "name": "Engine: safety and tone",
+      "passed": 8,
+      "total": 8,
+      "source": "imw/tests/engine.test.ts"
+    },
+    {
+      "name": "Engine: roles and job descriptions",
+      "passed": 6,
+      "total": 6,
+      "source": "imw/tests/engine.test.ts"
+    },
+    {
+      "name": "Engine: link correctness",
+      "passed": 4,
+      "total": 4,
+      "source": "imw/tests/engine.test.ts"
+    },
+    {
+      "name": "API: answers must cite verified evidence and grounded numbers",
+      "passed": 8,
+      "total": 8,
+      "source": "api/tests/test_api.py"
+    },
+    {
+      "name": "API: tone and hypothetical separation",
+      "passed": 4,
+      "total": 4,
+      "source": "api/tests/test_api.py"
+    },
+    {
+      "name": "API: prompt injection, CORS and privacy",
+      "passed": 4,
+      "total": 4,
+      "source": "api/tests/test_api.py"
+    },
+    {
+      "name": "API: failure handling and rate limits",
+      "passed": 7,
+      "total": 7,
+      "source": "api/tests/test_api.py"
+    }
+  ]
+}

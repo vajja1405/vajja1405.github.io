@@ -1,0 +1,10 @@
+imw/node_modules/
+api/.venv/
+__pycache__/
+*.pyc
+.DS_Store
+evidence/dist/.engine-eval.json
+evidence/dist/.api-eval.xml
+api/eval/.results.json
+api/.pytest_cache/
+.pytest_cache/

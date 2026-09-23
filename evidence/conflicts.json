@@ -1,0 +1,120 @@
+[
+  {
+    "id": "cf.tifin_gains",
+    "topic": "TIFIN model improvements (19% / 24%)",
+    "site": "Source résumés report 19% accuracy and 24% F1 improvements; baselines and task mapping need confirmation. The site ties the models to intent classification, entity extraction and retrieval ranking.",
+    "resume": "'Improved recommendation accuracy 19% and F1 24%'.",
+    "decision": "verification_required: the assistant will not state these numbers.",
+    "claims": [
+      "tifin.gains"
+    ],
+    "label": "TIFIN model-improvement percentages"
+  },
+  {
+    "id": "cf.citizen_metrics",
+    "topic": "Citizen Health scale metrics",
+    "site": "No metrics.",
+    "resume": "5,000+ patients, 10,000+ records, 6 provider sources, 300+ case evaluation suite.",
+    "decision": "deprecated: withdrawn as unverified in the target-roles analysis.",
+    "claims": [
+      "citizen.metrics"
+    ],
+    "label": "Citizen Health scale and team metrics"
+  },
+  {
+    "id": "cf.athena_gain",
+    "topic": "Athena instruction-quality improvement",
+    "site": "No numbers.",
+    "resume": "Improved LLM instruction quality 15% across 20+ delegation workflows.",
+    "decision": "unsupported: no confirmed numerical improvement.",
+    "claims": [
+      "athena.gain"
+    ],
+    "label": "Athena instruction-quality improvement"
+  },
+  {
+    "id": "cf.dia_gpt4o",
+    "topic": "Drug Interaction Agent: 'GPT-4o fallback' tier",
+    "site": "LLM used for explanations in the research mode only.",
+    "resume": "4-tier severity classifier (structured lookup, rules, TF-IDF Random Forest, GPT-4o fallback).",
+    "repo": "The fourth tier is 'Unknown'. The hosted model is Qwen3-4B via Hugging Face Inference Providers, and the config default is gpt-4o-mini.",
+    "decision": "unsupported: the assistant describes the tiers as implemented in the repository.",
+    "claims": [
+      "dia.gpt4o",
+      "dia.four_tier"
+    ],
+    "label": "Drug Interaction Agent classifier fallback model"
+  },
+  {
+    "id": "cf.dia_latency",
+    "topic": "Drug Interaction Agent: '20+ s → <100 ms with Redis'",
+    "site": "Caching reduces repeated work; it does not establish an equivalent reduction in operating cost.",
+    "resume": "Cut repeat-query latency from 20+ seconds to under 100 ms with content-keyed Redis caching.",
+    "repo": "One hosted smoke check: 5.8 s uncached vs 0.25 ms cached (n=1). Redis is optional, with an in-process LRU fallback.",
+    "decision": "verification_required for the résumé wording; the smoke-check numbers are stated with their sample size.",
+    "claims": [
+      "dia.latency_20s",
+      "dia.cache_smoke"
+    ],
+    "label": "Drug Interaction Agent repeat-query latency baseline"
+  },
+  {
+    "id": "cf.sssd_metrics",
+    "topic": "Surgical synthesis PSNR / SSIM values",
+    "site": "Uses reconstruction and image-quality metrics; no values.",
+    "resume": "PSNR 19–22 dB and SSIM 0.61–0.74.",
+    "repo": "Values not present.",
+    "decision": "verification_required.",
+    "claims": [
+      "sssd.metric_values"
+    ],
+    "label": "Surgical synthesis image-quality values"
+  },
+  {
+    "id": "cf.qml_speed",
+    "topic": "QCNN '5× faster' training",
+    "site": "Not stated.",
+    "resume": "The QCNN trained 5× faster.",
+    "repo": "README: lacks local run metadata; should not be advertised as a general quantum advantage.",
+    "decision": "verification_required.",
+    "claims": [
+      "qml.speedup"
+    ],
+    "label": "QCNN training-speed comparison"
+  },
+  {
+    "id": "cf.hackaroo",
+    "topic": "Hack-A-Roo 2025 3rd place",
+    "site": "Removed from the current site.",
+    "resume": "3rd place, Quantum Computing, UMKC Hack-A-Roo 2025.",
+    "decision": "verification_required.",
+    "claims": [
+      "award.hackaroo"
+    ],
+    "label": "Hack-A-Roo placement"
+  },
+  {
+    "id": "cf.ibm",
+    "topic": "IBM ML Professional Certificate",
+    "site": "Listed as in progress.",
+    "resume": "Not listed.",
+    "decision": "verification_required.",
+    "claims": [
+      "edu.ibm"
+    ],
+    "label": "IBM certificate status"
+  },
+  {
+    "id": "cf.cliniq_patients",
+    "topic": "ClinIQ '52,184 patient records' (flagged in outside review)",
+    "site": "Current site says 52,184 public patient-written drug reviews and labels the $27.5M–$60M figure as a rough scenario.",
+    "resume": "52,184 public drug reviews.",
+    "repo": "Same as the site.",
+    "decision": "No conflict in the current sources. The earlier wording was already corrected; the assistant uses the corrected framing.",
+    "claims": [
+      "cliniq.corpus",
+      "cliniq.financial_corrected"
+    ],
+    "label": "ClinIQ corpus description"
+  }
+]

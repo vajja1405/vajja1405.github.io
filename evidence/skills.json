@@ -1,0 +1,1659 @@
+{
+  "groups": [
+    {
+      "id": "genai",
+      "label": "GenAI & agents"
+    },
+    {
+      "id": "retrieval",
+      "label": "Retrieval & NLP"
+    },
+    {
+      "id": "evaluation",
+      "label": "Evaluation & safety"
+    },
+    {
+      "id": "ml",
+      "label": "Machine learning"
+    },
+    {
+      "id": "vision",
+      "label": "Vision & research"
+    },
+    {
+      "id": "backend",
+      "label": "Backend & product"
+    },
+    {
+      "id": "data",
+      "label": "Data engineering"
+    },
+    {
+      "id": "mlops",
+      "label": "MLOps & cloud"
+    },
+    {
+      "id": "voice",
+      "label": "Voice AI"
+    },
+    {
+      "id": "domain",
+      "label": "Domain & collaboration"
+    }
+  ],
+  "skills": [
+    {
+      "id": "llm",
+      "name": "LLM applications",
+      "group": "genai",
+      "aliases": [
+        "llm",
+        "llms",
+        "large language model",
+        "large language models",
+        "genai",
+        "gen ai",
+        "generative ai",
+        "llm applications",
+        "llm-powered",
+        "llm based",
+        "llm-based"
+      ],
+      "related": [
+        "rag",
+        "prompt_engineering"
+      ]
+    },
+    {
+      "id": "rag",
+      "name": "Retrieval-augmented generation",
+      "group": "genai",
+      "aliases": [
+        "rag",
+        "retrieval augmented generation",
+        "retrieval-augmented generation",
+        "retrieval-augmented",
+        "grounded generation"
+      ],
+      "related": [
+        "semantic_search",
+        "vector_db",
+        "embeddings",
+        "llm"
+      ]
+    },
+    {
+      "id": "agents",
+      "name": "AI agents & multi-step workflows",
+      "group": "genai",
+      "aliases": [
+        "agent",
+        "agents",
+        "agentic",
+        "ai agents",
+        "multi-agent",
+        "autonomous agents",
+        "agent workflows",
+        "agentic workflows"
+      ],
+      "related": [
+        "tool_calling",
+        "langgraph",
+        "workflow_automation"
+      ]
+    },
+    {
+      "id": "langchain",
+      "name": "LangChain",
+      "group": "genai",
+      "aliases": [
+        "langchain"
+      ],
+      "near": [
+        "llamaindex",
+        "llama index",
+        "haystack",
+        "semantic kernel"
+      ],
+      "related": [
+        "langgraph",
+        "llm"
+      ]
+    },
+    {
+      "id": "langgraph",
+      "name": "LangGraph",
+      "group": "genai",
+      "aliases": [
+        "langgraph"
+      ],
+      "near": [
+        "autogen",
+        "crewai",
+        "crew ai"
+      ],
+      "related": [
+        "langchain",
+        "agents"
+      ]
+    },
+    {
+      "id": "tool_calling",
+      "name": "Tool / function calling",
+      "group": "genai",
+      "aliases": [
+        "tool calling",
+        "tool use",
+        "function calling",
+        "tool invocation",
+        "tool-calling",
+        "mcp",
+        "model context protocol"
+      ],
+      "related": [
+        "agents"
+      ]
+    },
+    {
+      "id": "structured_outputs",
+      "name": "Structured outputs",
+      "group": "genai",
+      "aliases": [
+        "structured output",
+        "structured outputs",
+        "json schema",
+        "json mode",
+        "pydantic",
+        "schema-constrained"
+      ],
+      "related": [
+        "llm"
+      ]
+    },
+    {
+      "id": "prompt_engineering",
+      "name": "Prompt engineering",
+      "group": "genai",
+      "aliases": [
+        "prompt engineering",
+        "prompting",
+        "prompt design",
+        "prompt orchestration",
+        "prompt optimization"
+      ],
+      "related": [
+        "llm"
+      ]
+    },
+    {
+      "id": "llm_apis",
+      "name": "LLM provider APIs",
+      "group": "genai",
+      "aliases": [
+        "openai api",
+        "claude api",
+        "anthropic",
+        "openai",
+        "claude",
+        "gpt-4",
+        "gpt-4o",
+        "hugging face",
+        "huggingface",
+        "llm apis"
+      ],
+      "near": [
+        "gemini",
+        "bedrock",
+        "azure openai",
+        "cohere",
+        "mistral",
+        "llama"
+      ],
+      "related": [
+        "llm"
+      ]
+    },
+    {
+      "id": "embeddings",
+      "name": "Embeddings",
+      "group": "retrieval",
+      "aliases": [
+        "embeddings",
+        "embedding",
+        "sentence transformers",
+        "sentence-transformers",
+        "vector embeddings",
+        "text embeddings"
+      ],
+      "related": [
+        "semantic_search",
+        "vector_db"
+      ]
+    },
+    {
+      "id": "vector_db",
+      "name": "Vector databases",
+      "group": "retrieval",
+      "aliases": [
+        "vector database",
+        "vector databases",
+        "vector db",
+        "vector store",
+        "vector stores",
+        "vector search",
+        "pgvector",
+        "faiss"
+      ],
+      "near": [
+        "pinecone",
+        "weaviate",
+        "chroma",
+        "chromadb",
+        "milvus",
+        "qdrant",
+        "elasticsearch",
+        "opensearch"
+      ],
+      "related": [
+        "embeddings",
+        "semantic_search"
+      ]
+    },
+    {
+      "id": "semantic_search",
+      "name": "Semantic search & retrieval",
+      "group": "retrieval",
+      "aliases": [
+        "semantic search",
+        "information retrieval",
+        "search relevance",
+        "retrieval",
+        "reranking",
+        "re-ranking",
+        "hybrid search",
+        "relevance ranking"
+      ],
+      "near": [
+        "bm25",
+        "search engine"
+      ],
+      "related": [
+        "embeddings",
+        "vector_db",
+        "rag"
+      ]
+    },
+    {
+      "id": "nlp",
+      "name": "NLP & text classification",
+      "group": "retrieval",
+      "aliases": [
+        "nlp",
+        "natural language processing",
+        "text classification",
+        "text mining",
+        "tf-idf",
+        "tfidf",
+        "entity extraction",
+        "named entity recognition",
+        "ner",
+        "transformers"
+      ],
+      "related": [
+        "embeddings",
+        "classical_ml"
+      ]
+    },
+    {
+      "id": "llm_eval",
+      "name": "LLM evaluation",
+      "group": "evaluation",
+      "aliases": [
+        "llm evaluation",
+        "llm-as-judge",
+        "llm as judge",
+        "llm-as-a-judge",
+        "llm judge",
+        "evals",
+        "ai evaluation",
+        "model grading",
+        "rag evaluation",
+        "ragas",
+        "evaluation of llms",
+        "llm evals"
+      ],
+      "related": [
+        "eval_design",
+        "regression_testing"
+      ]
+    },
+    {
+      "id": "eval_design",
+      "name": "Test & evaluation design",
+      "group": "evaluation",
+      "aliases": [
+        "evaluation",
+        "evaluations",
+        "test design",
+        "evaluation datasets",
+        "golden set",
+        "golden dataset",
+        "benchmark",
+        "benchmarking",
+        "test cases",
+        "evaluation framework",
+        "offline evaluation",
+        "eval harness"
+      ],
+      "related": [
+        "llm_eval",
+        "metrics"
+      ]
+    },
+    {
+      "id": "regression_testing",
+      "name": "Regression testing & release gates",
+      "group": "evaluation",
+      "aliases": [
+        "regression testing",
+        "regression tests",
+        "release gate",
+        "quality gate",
+        "regression suite",
+        "regression gates"
+      ],
+      "related": [
+        "testing",
+        "ci_cd"
+      ]
+    },
+    {
+      "id": "safety_testing",
+      "name": "AI safety testing & guardrails",
+      "group": "evaluation",
+      "aliases": [
+        "safety testing",
+        "red teaming",
+        "red-teaming",
+        "prompt injection",
+        "guardrails",
+        "jailbreak",
+        "adversarial testing",
+        "ai safety",
+        "responsible ai",
+        "trust and safety"
+      ],
+      "related": [
+        "llm_eval"
+      ]
+    },
+    {
+      "id": "error_analysis",
+      "name": "Error & failure analysis",
+      "group": "evaluation",
+      "aliases": [
+        "error analysis",
+        "failure analysis",
+        "root cause",
+        "root-cause",
+        "debugging",
+        "troubleshooting"
+      ],
+      "related": [
+        "eval_design"
+      ]
+    },
+    {
+      "id": "metrics",
+      "name": "Model metrics",
+      "group": "evaluation",
+      "aliases": [
+        "precision",
+        "recall",
+        "f1",
+        "auroc",
+        "auc",
+        "rmsle",
+        "psnr",
+        "ssim",
+        "fid",
+        "model evaluation",
+        "evaluation metrics"
+      ],
+      "related": [
+        "eval_design"
+      ]
+    },
+    {
+      "id": "classical_ml",
+      "name": "Classical ML (scikit-learn)",
+      "group": "ml",
+      "aliases": [
+        "scikit-learn",
+        "sklearn",
+        "random forest",
+        "svm",
+        "machine learning",
+        "ml models",
+        "supervised learning",
+        "classification",
+        "regression models",
+        "predictive modeling"
+      ],
+      "near": [
+        "xgboost",
+        "lightgbm",
+        "catboost"
+      ],
+      "related": [
+        "feature_engineering",
+        "cross_validation"
+      ]
+    },
+    {
+      "id": "deep_learning",
+      "name": "Deep learning (PyTorch / TensorFlow)",
+      "group": "ml",
+      "aliases": [
+        "pytorch",
+        "tensorflow",
+        "deep learning",
+        "neural networks",
+        "neural network",
+        "keras",
+        "torch"
+      ],
+      "near": [
+        "jax"
+      ],
+      "related": [
+        "classical_ml"
+      ]
+    },
+    {
+      "id": "calibration",
+      "name": "Probability calibration",
+      "group": "ml",
+      "aliases": [
+        "calibration",
+        "calibrated",
+        "isotonic"
+      ],
+      "related": [
+        "classical_ml"
+      ]
+    },
+    {
+      "id": "clustering",
+      "name": "Clustering & unsupervised learning",
+      "group": "ml",
+      "aliases": [
+        "clustering",
+        "umap",
+        "hdbscan",
+        "unsupervised",
+        "k-means",
+        "kmeans",
+        "dimensionality reduction"
+      ],
+      "related": [
+        "classical_ml"
+      ]
+    },
+    {
+      "id": "feature_engineering",
+      "name": "Feature engineering",
+      "group": "ml",
+      "aliases": [
+        "feature engineering",
+        "feature extraction"
+      ],
+      "related": [
+        "classical_ml"
+      ]
+    },
+    {
+      "id": "cross_validation",
+      "name": "Cross-validation",
+      "group": "ml",
+      "aliases": [
+        "cross-validation",
+        "cross validation",
+        "k-fold"
+      ],
+      "related": [
+        "classical_ml"
+      ]
+    },
+    {
+      "id": "model_comparison",
+      "name": "Baselines & model comparison",
+      "group": "ml",
+      "aliases": [
+        "baseline",
+        "baselines",
+        "model comparison",
+        "ablation",
+        "ablations",
+        "comparative evaluation",
+        "model selection"
+      ],
+      "related": [
+        "metrics",
+        "research_methods"
+      ]
+    },
+    {
+      "id": "forecasting",
+      "name": "Forecasting",
+      "group": "ml",
+      "aliases": [
+        "forecasting",
+        "time series",
+        "time-series",
+        "demand forecasting"
+      ],
+      "related": [
+        "classical_ml"
+      ]
+    },
+    {
+      "id": "computer_vision",
+      "name": "Computer vision",
+      "group": "vision",
+      "aliases": [
+        "computer vision",
+        "image classification",
+        "medical imaging",
+        "image generation",
+        "image processing",
+        "vision models"
+      ],
+      "related": [
+        "deep_learning",
+        "cnn"
+      ]
+    },
+    {
+      "id": "diffusion",
+      "name": "Diffusion models",
+      "group": "vision",
+      "aliases": [
+        "diffusion",
+        "stable diffusion",
+        "diffusion models",
+        "latent diffusion",
+        "ddim",
+        "u-net",
+        "unet",
+        "generative models",
+        "controlnet"
+      ],
+      "related": [
+        "computer_vision",
+        "fine_tuning"
+      ]
+    },
+    {
+      "id": "fine_tuning",
+      "name": "Parameter-efficient fine-tuning (LoRA)",
+      "group": "vision",
+      "aliases": [
+        "lora",
+        "fine-tuning",
+        "fine tuning",
+        "finetuning",
+        "peft",
+        "parameter-efficient",
+        "qlora",
+        "fine-tuned",
+        "fine tuned",
+        "finetuned"
+      ],
+      "related": [
+        "deep_learning"
+      ]
+    },
+    {
+      "id": "cnn",
+      "name": "CNNs",
+      "group": "vision",
+      "aliases": [
+        "cnn",
+        "cnns",
+        "convolutional neural network",
+        "convolutional neural networks",
+        "convolutional"
+      ],
+      "related": [
+        "computer_vision"
+      ]
+    },
+    {
+      "id": "xai",
+      "name": "Explainability (SHAP, Grad-CAM)",
+      "group": "vision",
+      "aliases": [
+        "explainability",
+        "explainable ai",
+        "xai",
+        "shap",
+        "grad-cam",
+        "gradcam",
+        "interpretability"
+      ],
+      "related": [
+        "error_analysis"
+      ]
+    },
+    {
+      "id": "quantum_ml",
+      "name": "Quantum ML",
+      "group": "vision",
+      "aliases": [
+        "quantum",
+        "qiskit",
+        "pennylane",
+        "qcnn",
+        "qsvm",
+        "quantum machine learning"
+      ],
+      "related": [
+        "model_comparison"
+      ]
+    },
+    {
+      "id": "research_methods",
+      "name": "Research methodology & reproducibility",
+      "group": "vision",
+      "aliases": [
+        "experiments",
+        "experiment design",
+        "experimental design",
+        "reproducibility",
+        "reproducible",
+        "negative results",
+        "publications",
+        "research paper",
+        "scientific method"
+      ],
+      "related": [
+        "model_comparison",
+        "metrics"
+      ]
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "group": "backend",
+      "aliases": [
+        "python"
+      ],
+      "related": []
+    },
+    {
+      "id": "sql",
+      "name": "SQL",
+      "group": "data",
+      "aliases": [
+        "sql"
+      ],
+      "related": [
+        "postgresql"
+      ]
+    },
+    {
+      "id": "fastapi",
+      "name": "FastAPI",
+      "group": "backend",
+      "aliases": [
+        "fastapi"
+      ],
+      "near": [
+        "flask",
+        "django",
+        "express",
+        "node.js",
+        "nodejs"
+      ],
+      "related": [
+        "rest_api"
+      ]
+    },
+    {
+      "id": "rest_api",
+      "name": "REST APIs & backend services",
+      "group": "backend",
+      "aliases": [
+        "rest",
+        "rest api",
+        "rest apis",
+        "restful",
+        "api",
+        "apis",
+        "backend",
+        "back-end",
+        "microservices",
+        "web services",
+        "api design",
+        "backend services",
+        "service design"
+      ],
+      "near": [
+        "graphql",
+        "grpc"
+      ],
+      "related": [
+        "fastapi"
+      ]
+    },
+    {
+      "id": "frontend",
+      "name": "React / TypeScript frontend",
+      "group": "backend",
+      "aliases": [
+        "react",
+        "typescript",
+        "javascript",
+        "frontend",
+        "front-end",
+        "vite",
+        "user interface",
+        "full-stack",
+        "full stack",
+        "fullstack"
+      ],
+      "near": [
+        "next.js",
+        "nextjs",
+        "vue",
+        "angular"
+      ],
+      "related": []
+    },
+    {
+      "id": "caching",
+      "name": "Caching (Redis)",
+      "group": "backend",
+      "aliases": [
+        "redis",
+        "caching",
+        "cache"
+      ],
+      "near": [
+        "memcached"
+      ],
+      "related": [
+        "rest_api"
+      ]
+    },
+    {
+      "id": "postgresql",
+      "name": "PostgreSQL",
+      "group": "data",
+      "aliases": [
+        "postgresql",
+        "postgres",
+        "relational database",
+        "relational databases"
+      ],
+      "near": [
+        "mysql",
+        "sql server"
+      ],
+      "related": [
+        "sql"
+      ]
+    },
+    {
+      "id": "testing",
+      "name": "Automated testing (pytest)",
+      "group": "backend",
+      "aliases": [
+        "pytest",
+        "unit tests",
+        "unit testing",
+        "integration tests",
+        "integration testing",
+        "testing",
+        "test automation",
+        "tdd"
+      ],
+      "related": [
+        "regression_testing",
+        "ci_cd"
+      ]
+    },
+    {
+      "id": "rate_limiting",
+      "name": "Rate limiting & cost controls",
+      "group": "backend",
+      "aliases": [
+        "rate limiting",
+        "rate limits",
+        "quotas",
+        "cost control",
+        "cost controls",
+        "admission control",
+        "throttling"
+      ],
+      "related": [
+        "rest_api"
+      ]
+    },
+    {
+      "id": "websockets",
+      "name": "WebSockets & realtime streaming",
+      "group": "backend",
+      "aliases": [
+        "websocket",
+        "websockets",
+        "real-time",
+        "realtime",
+        "streaming audio",
+        "bidirectional streaming"
+      ],
+      "near": [
+        "server-sent events",
+        "sse",
+        "webrtc"
+      ],
+      "related": [
+        "realtime_audio"
+      ]
+    },
+    {
+      "id": "product_judgment",
+      "name": "Product & user-impact thinking",
+      "group": "backend",
+      "aliases": [
+        "product sense",
+        "user experience",
+        "decision support",
+        "user needs",
+        "product thinking",
+        "end users"
+      ],
+      "related": [
+        "stakeholder"
+      ]
+    },
+    {
+      "id": "snowflake",
+      "name": "Snowflake",
+      "group": "data",
+      "aliases": [
+        "snowflake"
+      ],
+      "near": [
+        "bigquery",
+        "redshift",
+        "databricks",
+        "synapse"
+      ],
+      "related": [
+        "sql",
+        "etl"
+      ]
+    },
+    {
+      "id": "pyspark",
+      "name": "PySpark",
+      "group": "data",
+      "aliases": [
+        "pyspark",
+        "spark",
+        "apache spark"
+      ],
+      "related": [
+        "etl"
+      ]
+    },
+    {
+      "id": "etl",
+      "name": "ETL / data pipelines",
+      "group": "data",
+      "aliases": [
+        "etl",
+        "elt",
+        "data pipelines",
+        "data pipeline",
+        "pipelines",
+        "ingestion",
+        "data ingestion",
+        "data processing"
+      ],
+      "related": [
+        "data_quality",
+        "sql"
+      ]
+    },
+    {
+      "id": "data_quality",
+      "name": "Data quality & validation",
+      "group": "data",
+      "aliases": [
+        "data quality",
+        "data validation",
+        "schema validation",
+        "data audits",
+        "deduplication",
+        "entity resolution",
+        "data integrity"
+      ],
+      "related": [
+        "etl"
+      ]
+    },
+    {
+      "id": "data_modeling",
+      "name": "Data modeling & schema design",
+      "group": "data",
+      "aliases": [
+        "data modeling",
+        "data modelling",
+        "schema design",
+        "dimensional modeling",
+        "database design"
+      ],
+      "related": [
+        "postgresql",
+        "sql"
+      ]
+    },
+    {
+      "id": "dashboards",
+      "name": "Dashboards (Tableau / Streamlit)",
+      "group": "data",
+      "aliases": [
+        "tableau",
+        "streamlit",
+        "dashboard",
+        "dashboards",
+        "data visualization",
+        "visualization",
+        "visualisation"
+      ],
+      "near": [
+        "power bi",
+        "looker"
+      ],
+      "related": []
+    },
+    {
+      "id": "deployment",
+      "name": "Deploying AI applications & models",
+      "group": "mlops",
+      "aliases": [
+        "deployment",
+        "deploy",
+        "deploying",
+        "production",
+        "model deployment",
+        "model serving",
+        "serving",
+        "inference api",
+        "ship",
+        "shipped"
+      ],
+      "related": [
+        "docker",
+        "mlops"
+      ]
+    },
+    {
+      "id": "docker",
+      "name": "Docker & containers",
+      "group": "mlops",
+      "aliases": [
+        "docker",
+        "containers",
+        "containerization",
+        "containerized",
+        "dockerfile",
+        "docker compose"
+      ],
+      "related": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "ci_cd",
+      "name": "CI/CD (GitHub Actions)",
+      "group": "mlops",
+      "aliases": [
+        "ci/cd",
+        "ci",
+        "continuous integration",
+        "github actions",
+        "ci pipelines"
+      ],
+      "near": [
+        "jenkins",
+        "gitlab ci",
+        "circleci"
+      ],
+      "related": [
+        "testing"
+      ]
+    },
+    {
+      "id": "monitoring",
+      "name": "Model monitoring",
+      "group": "mlops",
+      "aliases": [
+        "monitoring",
+        "observability",
+        "model monitoring",
+        "drift",
+        "logging"
+      ],
+      "related": [
+        "mlops"
+      ]
+    },
+    {
+      "id": "mlops",
+      "name": "MLOps",
+      "group": "mlops",
+      "aliases": [
+        "mlops",
+        "ml ops",
+        "ml pipelines",
+        "model lifecycle",
+        "ml infrastructure"
+      ],
+      "near": [
+        "mlflow",
+        "kubeflow",
+        "weights & biases",
+        "wandb"
+      ],
+      "related": [
+        "deployment",
+        "monitoring"
+      ]
+    },
+    {
+      "id": "sagemaker",
+      "name": "AWS SageMaker",
+      "group": "mlops",
+      "aliases": [
+        "sagemaker",
+        "aws sagemaker"
+      ],
+      "related": [
+        "aws",
+        "deployment"
+      ]
+    },
+    {
+      "id": "vertex_ai",
+      "name": "GCP Vertex AI",
+      "group": "mlops",
+      "aliases": [
+        "vertex ai",
+        "vertex",
+        "gcp vertex"
+      ],
+      "related": [
+        "gcp",
+        "deployment"
+      ]
+    },
+    {
+      "id": "aws",
+      "name": "AWS",
+      "group": "mlops",
+      "aliases": [
+        "aws",
+        "amazon web services"
+      ],
+      "near": [
+        "lambda",
+        "ec2",
+        "s3",
+        "azure"
+      ],
+      "related": [
+        "sagemaker"
+      ]
+    },
+    {
+      "id": "gcp",
+      "name": "Google Cloud",
+      "group": "mlops",
+      "aliases": [
+        "gcp",
+        "google cloud"
+      ],
+      "related": [
+        "vertex_ai"
+      ]
+    },
+    {
+      "id": "voice_ai",
+      "name": "Voice AI & conversational agents",
+      "group": "voice",
+      "aliases": [
+        "voice ai",
+        "voice agents",
+        "voice agent",
+        "conversational ai",
+        "telephony",
+        "ivr",
+        "phone agent",
+        "dialogue systems",
+        "speech"
+      ],
+      "related": [
+        "realtime_audio",
+        "twilio"
+      ]
+    },
+    {
+      "id": "twilio",
+      "name": "Twilio",
+      "group": "voice",
+      "aliases": [
+        "twilio"
+      ],
+      "near": [
+        "vonage",
+        "plivo",
+        "livekit"
+      ],
+      "related": [
+        "voice_ai"
+      ]
+    },
+    {
+      "id": "realtime_audio",
+      "name": "Realtime speech models & interruption handling",
+      "group": "voice",
+      "aliases": [
+        "openai realtime",
+        "realtime api",
+        "speech-to-speech",
+        "barge-in",
+        "interruption handling",
+        "turn-taking",
+        "audio streaming",
+        "voice activity detection"
+      ],
+      "near": [
+        "asr",
+        "tts",
+        "speech recognition",
+        "text-to-speech",
+        "whisper"
+      ],
+      "related": [
+        "voice_ai",
+        "websockets"
+      ]
+    },
+    {
+      "id": "healthcare",
+      "name": "Healthcare & clinical data",
+      "group": "domain",
+      "aliases": [
+        "healthcare",
+        "health care",
+        "clinical",
+        "medical",
+        "ehr",
+        "hipaa",
+        "patient",
+        "patients",
+        "pharma",
+        "life sciences",
+        "health tech",
+        "healthtech"
+      ],
+      "related": []
+    },
+    {
+      "id": "fintech",
+      "name": "Financial services",
+      "group": "domain",
+      "aliases": [
+        "fintech",
+        "financial services",
+        "wealth management",
+        "banking",
+        "financial advisors",
+        "asset management",
+        "capital markets"
+      ],
+      "related": []
+    },
+    {
+      "id": "stakeholder",
+      "name": "Cross-functional collaboration",
+      "group": "domain",
+      "aliases": [
+        "stakeholder",
+        "stakeholders",
+        "cross-functional",
+        "collaborate",
+        "collaboration",
+        "product managers",
+        "customer-facing",
+        "communicate"
+      ],
+      "related": [
+        "product_judgment"
+      ]
+    },
+    {
+      "id": "workflow_automation",
+      "name": "Workflow automation",
+      "group": "domain",
+      "aliases": [
+        "workflow automation",
+        "automation",
+        "automate",
+        "automating",
+        "process automation",
+        "intelligent automation"
+      ],
+      "related": [
+        "agents"
+      ]
+    },
+    {
+      "id": "provenance",
+      "name": "Source grounding & provenance",
+      "group": "domain",
+      "aliases": [
+        "citations",
+        "source grounding",
+        "grounding",
+        "grounded",
+        "provenance",
+        "traceability",
+        "hallucination",
+        "hallucinations",
+        "faithfulness",
+        "factuality"
+      ],
+      "related": [
+        "rag",
+        "llm_eval"
+      ]
+    },
+    {
+      "id": "cost_modeling",
+      "name": "Cost & impact modeling",
+      "group": "domain",
+      "aliases": [
+        "cost model",
+        "cost modeling",
+        "roi",
+        "business impact",
+        "unit economics"
+      ],
+      "related": [
+        "product_judgment"
+      ]
+    },
+    {
+      "id": "leadership",
+      "name": "Mentoring & leadership",
+      "group": "domain",
+      "aliases": [
+        "mentoring",
+        "mentor",
+        "leadership",
+        "teaching",
+        "workshops"
+      ],
+      "related": [
+        "stakeholder"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "id": "kubernetes",
+      "name": "Kubernetes / container orchestration",
+      "aliases": [
+        "kubernetes",
+        "k8s",
+        "helm",
+        "eks",
+        "gke",
+        "aks",
+        "container orchestration"
+      ],
+      "related": [
+        "docker",
+        "deployment"
+      ],
+      "statement": "The portfolio does not show verified Kubernetes or cluster-orchestration ownership. The closest evidence is Docker containers, Hugging Face Space deployments, and SageMaker / Vertex AI model deployment at TIFIN."
+    },
+    {
+      "id": "iac",
+      "name": "Infrastructure as code",
+      "aliases": [
+        "terraform",
+        "infrastructure as code",
+        "iac",
+        "cloudformation",
+        "pulumi",
+        "aws cdk"
+      ],
+      "related": [
+        "deployment",
+        "ci_cd"
+      ],
+      "statement": "Infrastructure-as-code (Terraform, CloudFormation, Pulumi) is not demonstrated."
+    },
+    {
+      "id": "orchestration",
+      "name": "Workflow orchestration (Airflow etc.)",
+      "aliases": [
+        "airflow",
+        "dagster",
+        "prefect",
+        "kubeflow pipelines",
+        "orchestration",
+        "luigi"
+      ],
+      "related": [
+        "etl"
+      ],
+      "statement": "Airflow-style orchestration ownership is not verified. The closest evidence is Snowflake pipelines at TIFIN and a PySpark preprocessing job."
+    },
+    {
+      "id": "streaming_data",
+      "name": "Event streaming (Kafka etc.)",
+      "aliases": [
+        "kafka",
+        "kinesis",
+        "pub/sub",
+        "pubsub",
+        "flink",
+        "event streaming",
+        "stream processing"
+      ],
+      "related": [
+        "etl"
+      ],
+      "statement": "Kafka or stream-processing ownership is not demonstrated."
+    },
+    {
+      "id": "dbt",
+      "name": "dbt",
+      "aliases": [
+        "dbt",
+        "data build tool"
+      ],
+      "related": [
+        "sql",
+        "data_modeling"
+      ],
+      "statement": "Production dbt experience is not demonstrated. SQL transformations and schema design are the closest evidence."
+    },
+    {
+      "id": "distributed_inference",
+      "name": "Distributed training / inference optimisation",
+      "aliases": [
+        "distributed inference",
+        "inference optimization",
+        "inference optimisation",
+        "vllm",
+        "tensorrt",
+        "triton",
+        "gpu serving",
+        "model parallelism",
+        "quantization",
+        "distributed training",
+        "multi-gpu",
+        "multi-node"
+      ],
+      "related": [
+        "deployment",
+        "deep_learning"
+      ],
+      "statement": "Ownership of distributed inference or training infrastructure is not demonstrated. Current evidence stops at bounded single-service deployments and managed model deployment."
+    },
+    {
+      "id": "pretraining",
+      "name": "Foundation-model pretraining / RLHF",
+      "aliases": [
+        "pretraining",
+        "pre-training",
+        "foundation model training",
+        "train llms",
+        "training llms",
+        "llm training",
+        "rlhf",
+        "dpo",
+        "reinforcement learning from human feedback",
+        "instruction tuning"
+      ],
+      "related": [
+        "fine_tuning"
+      ],
+      "statement": "Foundation-model pretraining and production fine-tuning at scale are not demonstrated. The closest evidence is LoRA adaptation of Stable Diffusion in graduate research."
+    },
+    {
+      "id": "human_annotation",
+      "name": "Human annotation operations / judge agreement",
+      "aliases": [
+        "annotation",
+        "data labeling",
+        "labeling operations",
+        "inter-annotator",
+        "inter-rater",
+        "judge agreement",
+        "human evaluation program"
+      ],
+      "related": [
+        "llm_eval"
+      ],
+      "statement": "No large human-annotation operation or calibrated judge-agreement study is demonstrated. The voice harness uses an LLM judge plus manual transcript review."
+    },
+    {
+      "id": "online_experiments",
+      "name": "Online experiments / causal inference",
+      "aliases": [
+        "a/b testing",
+        "a/b tests",
+        "ab testing",
+        "online experiments",
+        "experimentation platform",
+        "causal inference",
+        "randomized experiments",
+        "uplift modeling"
+      ],
+      "related": [
+        "research_methods"
+      ],
+      "statement": "Online A/B experiments and causal inference are not demonstrated."
+    },
+    {
+      "id": "edge_cv",
+      "name": "Real-time / edge vision, object detection",
+      "aliases": [
+        "edge deployment",
+        "on-device",
+        "object detection",
+        "yolo",
+        "real-time video",
+        "coreml",
+        "tflite",
+        "embedded vision"
+      ],
+      "related": [
+        "computer_vision"
+      ],
+      "statement": "Real-time edge deployment and object-detection ownership are not demonstrated."
+    },
+    {
+      "id": "distributed_systems",
+      "name": "Distributed systems, on-call, auth design",
+      "aliases": [
+        "distributed systems",
+        "high availability",
+        "on-call",
+        "sre",
+        "site reliability",
+        "load balancing",
+        "authentication",
+        "oauth",
+        "authorization design"
+      ],
+      "related": [
+        "rest_api"
+      ],
+      "statement": "Distributed-systems scale, on-call responsibility and authentication design are not evidenced. Backend evidence consists of bounded FastAPI services with rate limits and tests."
+    },
+    {
+      "id": "other_languages",
+      "name": "Languages beyond Python / SQL / TypeScript",
+      "aliases": [
+        "java",
+        "golang",
+        "c++",
+        "scala",
+        "rust",
+        "c#",
+        "kotlin"
+      ],
+      "related": [
+        "python"
+      ],
+      "statement": "The portfolio does not show production work in this language. Demonstrated languages are Python, SQL and TypeScript."
+    },
+    {
+      "id": "low_code",
+      "name": "Low-code automation platforms",
+      "aliases": [
+        "n8n",
+        "zapier",
+        "uipath",
+        "power automate",
+        "make.com"
+      ],
+      "related": [
+        "workflow_automation"
+      ],
+      "statement": "n8n, Zapier and UiPath are not established. Automation evidence is code-based (LangChain / LangGraph workflows)."
+    },
+    {
+      "id": "customer_deployments",
+      "name": "Independently owned external customer deployments",
+      "aliases": [
+        "customer deployments",
+        "client-facing delivery",
+        "external customers",
+        "implementation projects",
+        "solutions engineering",
+        "pre-sales",
+        "customer implementations"
+      ],
+      "related": [
+        "stakeholder",
+        "deployment"
+      ],
+      "statement": "Independently owned external customer deployments are not established. The closest evidence is advisor workflows at TIFIN and cross-functional delivery at Citizen Health."
+    },
+    {
+      "id": "speech_training",
+      "name": "Speech / acoustic model training",
+      "aliases": [
+        "asr training",
+        "acoustic model",
+        "acoustic models",
+        "speech model training",
+        "tts training"
+      ],
+      "related": [
+        "voice_ai"
+      ],
+      "statement": "Speech or acoustic-model training is not established. Voice evidence covers integrating and evaluating a realtime speech model."
+    },
+    {
+      "id": "voice_prod_ops",
+      "name": "High-volume voice production operations",
+      "aliases": [
+        "contact center",
+        "call center",
+        "high-volume voice",
+        "production voice operations"
+      ],
+      "related": [
+        "voice_ai"
+      ],
+      "statement": "The project evidence does not establish high-volume voice production operations. The voice harness is a test system run over 12 recorded calls."
+    },
+    {
+      "id": "embedded",
+      "name": "Hardware / embedded validation",
+      "aliases": [
+        "embedded",
+        "firmware",
+        "hardware validation",
+        "hardware-in-the-loop"
+      ],
+      "related": [
+        "testing"
+      ],
+      "statement": "Hardware and embedded validation experience is absent."
+    },
+    {
+      "id": "ranking_scale",
+      "name": "Large-scale ranking evaluation",
+      "aliases": [
+        "learning to rank",
+        "ndcg",
+        "mrr",
+        "click models",
+        "online search experiments",
+        "large-scale ranking"
+      ],
+      "related": [
+        "semantic_search"
+      ],
+      "statement": "Large-scale ranking evaluation and online search experiments are not demonstrated."
+    },
+    {
+      "id": "sota_scale",
+      "name": "State-of-the-art results at scale",
+      "aliases": [
+        "state-of-the-art",
+        "sota",
+        "large-scale training",
+        "gpu clusters",
+        "top-tier publications",
+        "neurips",
+        "icml",
+        "cvpr"
+      ],
+      "related": [
+        "research_methods"
+      ],
+      "statement": "Independently reproduced state-of-the-art results at larger scale are not demonstrated."
+    },
+    {
+      "id": "recommender",
+      "name": "Recommender systems",
+      "aliases": [
+        "recommender",
+        "recommender systems",
+        "recommendation systems",
+        "recommendation system",
+        "recsys",
+        "personalization"
+      ],
+      "related": [
+        "classical_ml"
+      ],
+      "statement": "Needs verification. The résumé reports '+19% recommendation accuracy' at TIFIN, but the portfolio describes those models as intent classification, entity extraction and retrieval ranking.",
+      "verify": true
+    }
+  ]
+}

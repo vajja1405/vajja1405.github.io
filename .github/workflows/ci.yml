@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "feature/**"]
+  pull_request:
+
+jobs:
+  evidence:
+    name: Evidence integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Validate evidence and check bundles are current
+        run: python scripts/build_evidence.py --check
+      - name: Site figures are backed by evidence (drift check)
+        run: python scripts/check_site_claims.py
+      - name: Every "show me the code" link resolves at its pinned commit
+        run: python scripts/verify_code_refs.py --repos-dir "$RUNNER_TEMP/repos" --clone
+
+  workspace:
+    name: Workspace (lint, typecheck, tests, build)
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: imw } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm, cache-dependency-path: imw/package-lock.json }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - name: Build and confirm committed assets match
+        run: |
+          npm run build
+          git diff --exit-code -- ../assets/imw ../index.html ../evidence/dist/evidence.json
+
+  api:
+    name: API tests
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: api } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip, cache-dependency-path: api/requirements.txt }
+      - run: pip install -r requirements.txt pytest httpx
+      - run: python -m pytest -q

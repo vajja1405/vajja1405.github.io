@@ -1,0 +1,368 @@
+[
+  {
+    "id": "dia",
+    "kind": "project",
+    "name": "Drug Interaction Agent",
+    "short": "Drug Interaction Agent",
+    "tagline": "Medication-label review app plus a separate RAG research assistant",
+    "dates": "Feb–Mar 2026 · maintained Sep 2026",
+    "anchor": "#drug-agent",
+    "domains": [
+      "healthcare"
+    ],
+    "repo": "dia",
+    "links": [
+      {
+        "label": "Open live app",
+        "url": "https://astra6-drug-interaction-ai.hf.space/",
+        "kind": "live"
+      },
+      {
+        "label": "Repository",
+        "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot",
+        "kind": "repo"
+      },
+      {
+        "label": "Static demo",
+        "url": "https://vajja1405.github.io/drug-interaction-rag-chatbot/",
+        "kind": "demo"
+      }
+    ],
+    "summaries": {
+      "recruiter": "A deployed full-stack AI application (React/TypeScript + FastAPI, Docker, Hugging Face Spaces). One path reviews medication labels without an LLM; a separate research path uses retrieval, a classifier and an LLM explanation.",
+      "engineer": "Two paths behind one FastAPI service: a deterministic RxNorm/DailyMed label-review pipeline with bounded retrieval and admission control, and a RAG research path (exact-pair lookup → FAISS semantic fallback → entity filter → 4-tier severity → LLM explanation → content-addressed cache). 41 pytest tests; CI on GitHub Actions.",
+      "manager": "Built and deployed end to end as a personal project, then revisited in September 2026 to tighten scope statements, add hosting limits and repair cache identity. Public claims are scoped to what the tests and records measure.",
+      "founder": "Helps a user prepare a pharmacist conversation by showing label passages and coverage gaps for up to 190 medication pairs. It deliberately never presents 'no mention' as 'safe', and the public path needs no LLM spend.",
+      "researcher": "The only quantitative record is a 24-pair component regression (24/24 severity agreement, LLM excluded) and a single-request hosting smoke check. Neither is a clinical or generated-answer evaluation."
+    },
+    "questions": [
+      "The 24-pair regression resolves 22 pairs through structured metadata. What does it actually tell you about the Random Forest tier?",
+      "Why keep the public label-review path free of an LLM when the research path already has one?",
+      "How would you evaluate the faithfulness of the generated explanation, which the current regression excludes?",
+      "What changes if the cache key omitted the evidence hash?"
+    ],
+    "ownership": "Published as a personal project under Rahul's GitHub account."
+  },
+  {
+    "id": "voice",
+    "kind": "project",
+    "name": "Voice-Agent QA Harness",
+    "short": "Voice QA Harness",
+    "tagline": "Synthetic-patient phone calls, LLM-judge grading and a fail-closed regression gate",
+    "dates": "Aug–Sep 2026",
+    "anchor": "#voice-harness",
+    "domains": [
+      "healthcare",
+      "voice"
+    ],
+    "repo": "voice",
+    "links": [
+      {
+        "label": "Repository",
+        "url": "https://github.com/vajja1405/voice-agent-qa-harness",
+        "kind": "repo"
+      },
+      {
+        "label": "Findings",
+        "url": "https://github.com/vajja1405/voice-agent-qa-harness/blob/69835927d20c5c52f0a0b0a57c7ab5ad6f90d163/FINDINGS.md",
+        "kind": "doc"
+      }
+    ],
+    "summaries": {
+      "recruiter": "A testing tool that phones a healthcare AI agent as a simulated patient, records the calls and grades them. Built for the Pretty Good AI engineering challenge (Python, FastAPI, Twilio, OpenAI Realtime, WebSockets).",
+      "engineer": "A FastAPI WebSocket bridge relays μ-law audio between Twilio Media Streams and the OpenAI Realtime API. It handles barge-in by clearing queued audio and truncating the model item to what was heard. A separate Claude judge produces schema-validated grades, and compare_runs.py fails closed on missing, malformed or unsafe results. 26 offline tests run in CI.",
+      "manager": "Rahul took an open-ended challenge to a working harness, then reviewed every auto-graded call by hand, downgraded test-setup artifacts, and documented that the release suite is still incomplete (12 of 15 scenarios) rather than shrinking it.",
+      "founder": "It answers 'is this phone-agent change safe to pilot?' with replayable evidence: transcripts, audio, grades and a gate. The findings include measurable dead air (43.9% mid-call silence) and a PHI-authorization flow question, plus a transparent cost model for failures.",
+      "researcher": "12 recorded calls graded by an LLM judge that is a different model from the speaker, then hand-calibrated. Audio metrics come from energy-based VAD on dual-channel recordings, so gap timings are indicative. There are no repeated runs or judge-agreement statistics."
+    },
+    "questions": [
+      "The auto-grader marks refill_basic as a safety failure while the hand review says the safety core held. How do you decide which to trust?",
+      "Why did you choose speech-to-speech Realtime over a cascaded STT → LLM → TTS pipeline, and what did you give up?",
+      "How would you measure whether the barge-in fix improved real conversations, given that only offline tests exist?",
+      "What would a judge-agreement study for this rubric look like?"
+    ],
+    "ownership": "Rahul's submission to the Pretty Good AI engineering challenge."
+  },
+  {
+    "id": "cliniq",
+    "kind": "project",
+    "name": "ClinIQ",
+    "short": "ClinIQ",
+    "tagline": "Rules vs embeddings vs LLM+RAG for substance-use signal detection",
+    "dates": "Feb–Apr 2026 · NSF NRT Research-A-Thon",
+    "anchor": "#cliniq",
+    "domains": [
+      "healthcare",
+      "research"
+    ],
+    "repo": "cliniq",
+    "links": [
+      {
+        "label": "Open live demo",
+        "url": "https://huggingface.co/spaces/astra6/cliniq",
+        "kind": "live"
+      },
+      {
+        "label": "Repository",
+        "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection",
+        "kind": "repo"
+      }
+    ],
+    "summaries": {
+      "recruiter": "A research prototype that placed 4th at the NSF NRT Research-A-Thon 2026. It compares three ways of detecting substance-use signals in 52,184 public drug reviews: keyword rules, embeddings and LLM+RAG.",
+      "engineer": "An 11-table PostgreSQL schema with a pgvector IVFFlat index over 384-dim MiniLM embeddings, Claude Haiku for the LLM+RAG detector, UMAP + HDBSCAN clustering, and a Streamlit dashboard. Metrics are recomputed from saved confusion counts, and there are 9 offline tests.",
+      "manager": "The simple rules baseline won on F1 (0.854), and the project reports that openly instead of promoting the most sophisticated method. An earlier revenue figure was later corrected into an explicit hypothetical funnel.",
+      "founder": "The practical output is a review-workload planner. Given an alert method, prevalence and review time, it estimates alerts, missed signals and reviewer hours, which is the decision an analyst actually faces.",
+      "researcher": "600-review balanced comparison against keyword-derived proxy labels (not clinician-adjudicated). Rules: P .861 / R .847 / F1 .854. Embedding: R 1.000 but 295 false positives. LLM+RAG: P .938 / R .400. The 600-case run was not repeated."
+    },
+    "questions": [
+      "Your labels are keyword proxies and your best method is keyword rules. How much of the F1 gap is label leakage?",
+      "The embedding detector flagged 595 of 600 reviews. What threshold analysis would you run before discarding it?",
+      "How would you get clinician-adjudicated labels, and how many would you need?",
+      "Why keep embeddings in PostgreSQL/pgvector rather than a separate vector store?"
+    ],
+    "ownership": "Competition project (NSF NRT Research-A-Thon, UMKC). The portfolio does not itemize individual versus team contributions."
+  },
+  {
+    "id": "sssd",
+    "kind": "research",
+    "name": "Kinematics-Conditioned Surgical Video Synthesis",
+    "short": "Surgical Video Synthesis",
+    "tagline": "Stable Diffusion conditioned on robot kinematics instead of text",
+    "dates": "Jan–May 2026 · graduate research",
+    "anchor": "#surgical-synthesis",
+    "domains": [
+      "vision",
+      "research",
+      "healthcare"
+    ],
+    "repo": "sssd",
+    "links": [
+      {
+        "label": "Research & source",
+        "url": "https://github.com/vajja1405/SS-SD",
+        "kind": "repo"
+      }
+    ],
+    "summaries": {
+      "recruiter": "Graduate research in generative computer vision: generating surgical video frames from robot motion data using Stable Diffusion and LoRA (PyTorch).",
+      "engineer": "Replaces SD 1.5's CLIP text conditioning with a custom KinematicEncoder (76-dim JIGSAWS kinematics + gesture id → [B, 77, 768] cross-attention tokens) and applies LoRA to the U-Net cross-attention projections (~1% trainable). The VAE is frozen, and DDIM sampling is used in diagnostics.",
+      "manager": "Built diagnostics before spending GPU hours: a VAE reconstruction ceiling and single-frame overfit tests to tell pipeline bugs apart from undertraining.",
+      "founder": "A research exploration, not a product. It asks whether motion data can drive realistic surgical imagery, with an explicit caveat that image metrics do not establish clinical usefulness.",
+      "researcher": "Evaluation uses PSNR/SSIM/histogram/edge-IoU with cross-pair baselines (does the output track its own conditioning rather than a scene average?), plus FID and optical-flow flicker detection. Headline metric values are not published in the repository."
+    },
+    "questions": [
+      "How do cross-pair baselines tell you the model follows conditioning rather than memorising a mean frame?",
+      "What does the VAE reconstruction ceiling imply about the maximum achievable PSNR?",
+      "Why LoRA on cross-attention projections specifically?"
+    ],
+    "ownership": "Graduate research at UMKC."
+  },
+  {
+    "id": "qml",
+    "kind": "research",
+    "name": "Classical vs. Quantum ML for Medical Imaging",
+    "short": "Classical vs Quantum ML",
+    "tagline": "CNN, QCNN, SVM and QSVM compared, with SHAP and Grad-CAM",
+    "dates": "Aug–Dec 2025 · graduate research",
+    "anchor": "#quantum-imaging",
+    "domains": [
+      "vision",
+      "research",
+      "healthcare"
+    ],
+    "repo": "qml",
+    "links": [
+      {
+        "label": "Repository",
+        "url": "https://github.com/vajja1405/quantum-explainable-medical-imaging",
+        "kind": "repo"
+      },
+      {
+        "label": "Read paper",
+        "url": "https://drive.google.com/file/d/1ZL2x0kbnx-VQnojByAn5yibv0oKIShI2/view",
+        "kind": "paper"
+      }
+    ],
+    "summaries": {
+      "recruiter": "Graduate research comparing classical and quantum machine-learning models on chest X-ray classification, with explainability tools. It was published as a paper and poster.",
+      "engineer": "CNN vs QCNN (PennyLane) vs SVM vs QSVM (Qiskit), evaluated with AUROC, AUCPR and F1, with SHAP and Grad-CAM for inspection. A later benchmark_audit.py requires paired run metadata before computing any runtime ratio.",
+      "manager": "When the reported 5× QCNN training-time result turned out to lack run metadata, the repository stopped advertising it and added an audit check instead.",
+      "founder": "Supports a model-selection decision (performance vs compute cost). It is explicitly not a diagnostic product.",
+      "researcher": "The classical CNN led at AUROC 0.76. The runtime-speed comparison is unverified (missing seeds, hardware and wall-time metadata), and the repo lists the repeated-seed study it would take to settle it."
+    },
+    "questions": [
+      "What would you need to record to make the runtime comparison defensible?",
+      "How did SHAP and Grad-CAM change your view of the CNN's errors?"
+    ],
+    "ownership": "Graduate research at UMKC (advisor listed in the repository: Prof. Luke Miller)."
+  },
+  {
+    "id": "tifin",
+    "kind": "experience",
+    "name": "TIFIN",
+    "short": "TIFIN",
+    "role": "AI/ML Engineer Intern (contract) · Remote USA",
+    "tagline": "AI portfolio copilot for financial advisors",
+    "dates": "Mar 2025 – May 2026",
+    "anchor": "#tifin",
+    "domains": [
+      "fintech"
+    ],
+    "links": [],
+    "summaries": {
+      "recruiter": "Production AI work at a fintech company: an AI portfolio copilot for financial advisors, supporting data pipelines, LangChain/LangGraph workflows and model deployment on AWS SageMaker and GCP Vertex AI.",
+      "engineer": "Three supporting models (query-intent classification, financial entity extraction, retrieval relevance ranking). LangChain connected retrieval and analytical tools; LangGraph coordinated steps, shared state, validation and retries. Snowflake pipelines handled 5M+ daily data points.",
+      "manager": "Owned supporting pipelines, agentic RAG workflows, model deployment and monitoring on a production product. Reported outcomes: 40,000+ users reached and 65% less manual effort across three advisor workflows for 150+ users.",
+      "founder": "Advisors got sourced briefings, answers and drafts for meeting preparation, portfolio questions and post-meeting follow-ups. The reported manual-effort reduction is 65%, including the review work that remained.",
+      "researcher": "These are self-reported employment outcomes. Baselines, task mapping and relative-vs-absolute definitions for the reported 19% / 24% model gains are not published."
+    },
+    "questions": [
+      "How did LangGraph's shared state and retries change failure behaviour compared with a single chain?",
+      "How was the 65% manual-effort reduction measured?",
+      "What did monitoring on SageMaker and Vertex AI actually alert on?"
+    ],
+    "ownership": "Ownership as described on the portfolio: supporting Snowflake pipelines, agentic RAG workflows, model deployment and monitoring."
+  },
+  {
+    "id": "citizen",
+    "kind": "experience",
+    "name": "Citizen Health",
+    "short": "Citizen Health",
+    "role": "AI Engineer · Remote USA",
+    "tagline": "Retrieval and source-linked summarization for a patient-advocacy product",
+    "dates": "May 2026 – present",
+    "anchor": "#citizen-health",
+    "domains": [
+      "healthcare"
+    ],
+    "links": [],
+    "summaries": {
+      "recruiter": "Current role: AI Engineer at Citizen Health, building retrieval and source-linked summarization for a patient-advocacy product serving people with rare and complex conditions.",
+      "engineer": "Work spans medical-record ingestion, normalization, entity resolution, schema checks and evaluation cases. The portfolio does not publish scale metrics for this role.",
+      "manager": "Cross-functional work with clinicians, patient-community leads and engineers.",
+      "founder": "Source-linked summaries let a patient advocate verify each statement against its record.",
+      "researcher": "No public metrics. Earlier numeric statements were withdrawn as unverified."
+    },
+    "questions": [
+      "How do you handle entity resolution across provider sources with inconsistent schemas?"
+    ],
+    "ownership": "Current role; scope as described on the portfolio."
+  },
+  {
+    "id": "athena",
+    "kind": "experience",
+    "name": "Athena",
+    "short": "Athena",
+    "role": "AI Engineering Intern · Remote USA",
+    "tagline": "Task planning and prompt orchestration for delegation workflows",
+    "dates": "Jan – May 2024",
+    "anchor": "#athena",
+    "domains": [],
+    "links": [],
+    "summaries": {
+      "recruiter": "AI engineering internship prototyping agent-style task planning and tool use for executive-assistant workflows.",
+      "engineer": "Prototyped task planning, tool use and prompt orchestration. Wrote evaluation tests for instruction quality and agent behaviour, and iterated prompts with product and software engineers.",
+      "manager": "Worked with product and software engineers, using reviewer feedback to refine prompts.",
+      "founder": "Aimed at turning open-ended client requests into structured steps for assistants.",
+      "researcher": "No confirmed numerical improvement is claimed for this role."
+    },
+    "questions": [],
+    "ownership": "Internship; scope as described on the portfolio."
+  },
+  {
+    "id": "nyc",
+    "kind": "experience",
+    "name": "Smartinternz — NYC Citi Bike demand",
+    "short": "Smartinternz",
+    "role": "Data Analyst Intern",
+    "tagline": "Station-level demand forecasting (team capstone)",
+    "dates": "May – Jul 2023",
+    "anchor": "#smartinternz",
+    "domains": [
+      "data"
+    ],
+    "repo": "nyc",
+    "links": [
+      {
+        "label": "Repository",
+        "url": "https://github.com/vajja1405/NYC-Bike-Share-Analysis",
+        "kind": "repo"
+      }
+    ],
+    "summaries": {
+      "recruiter": "Data-analytics internship: forecasting bike-share demand from 735K+ trips, delivered through a Flask app and Tableau dashboard.",
+      "engineer": "SQL demand features, four regression models compared on RMSLE (a tuned Random Forest performed best), and a Tableau workbook.",
+      "manager": "Delivered as part of a team capstone (SmartBridge, Team-165).",
+      "founder": "Supports station redistribution planning.",
+      "researcher": "Numeric RMSLE scores were not preserved in the repository; only the ranking is documented."
+    },
+    "questions": [],
+    "ownership": "Team capstone (SmartBridge, Team-165)."
+  },
+  {
+    "id": "dac",
+    "kind": "leadership",
+    "name": "Data Analytics Club, UMKC",
+    "short": "Data Analytics Club",
+    "role": "Vice President",
+    "tagline": "Workshops, speaker sessions and mentoring",
+    "dates": "Aug 2024 – May 2026",
+    "anchor": "#dac",
+    "domains": [],
+    "links": [],
+    "summaries": {
+      "recruiter": "Vice President of a 30+ member student organization.",
+      "engineer": "Ran practical Python, SQL and ML workshops.",
+      "manager": "Led the organization, organized industry speakers and mentored students.",
+      "founder": "Community building and teaching.",
+      "researcher": "—"
+    },
+    "questions": [],
+    "ownership": "Elected student leadership role."
+  },
+  {
+    "id": "education",
+    "kind": "education",
+    "name": "University of Missouri–Kansas City",
+    "short": "UMKC",
+    "role": "M.S. Computer Science (AI emphasis), May 2026 · B.S. Computer Science, May 2025",
+    "tagline": "",
+    "dates": "2025–2026",
+    "anchor": "#credentials",
+    "domains": [],
+    "links": [],
+    "summaries": {},
+    "questions": [],
+    "ownership": ""
+  },
+  {
+    "id": "imw",
+    "kind": "project",
+    "name": "Interview My Work",
+    "short": "Interview My Work",
+    "tagline": "This workspace: an evidence-gated AI layer over the portfolio",
+    "dates": "Sep 2026",
+    "anchor": "#work",
+    "domains": [],
+    "repo": "site",
+    "links": [
+      {
+        "label": "Source",
+        "url": "https://github.com/vajja1405/vajja1405.github.io",
+        "kind": "repo"
+      }
+    ],
+    "summaries": {
+      "recruiter": "The tool you are using now. It answers questions about Rahul's work only from a curated, verified evidence database and links every claim to its source.",
+      "engineer": "A lazy-loaded TypeScript module on a static site plus a FastAPI service on Hugging Face Spaces. Retrieval runs over status-gated claims; Claude returns structured output citing claim ids; a validator rejects unknown or unverified citations, ungrounded numbers and hype language before display. Without the API, a deterministic in-browser evidence engine answers instead.",
+      "manager": "Scoped as one feature added to an existing site, not a rebuild. Conflicting résumé and site statements were logged and excluded rather than repeated.",
+      "founder": "Lets a hiring team check a claim against its architecture, code, tests and results in a few clicks.",
+      "researcher": "Ships with an evaluation suite (unsupported skills, false premises, prompt injection, hype language, conflicts, role mapping) whose latest results are shown in the workspace."
+    },
+    "questions": [
+      "How does the validator decide a number in the model's answer is grounded?"
+    ],
+    "ownership": "Built for this portfolio."
+  }
+]

@@ -1,0 +1,249 @@
+{
+  "version": "2026-09-23",
+  "subject": {
+    "name": "Rahul Vajja",
+    "first": "Rahul",
+    "headline": "AI / ML Engineer",
+    "email": "rahulvajja.ai@gmail.com",
+    "links": {
+      "site": "https://vajja1405.github.io/",
+      "github": "https://github.com/vajja1405",
+      "linkedin": "https://www.linkedin.com/in/rahulvajja/"
+    },
+    "level_note": "Early-career individual contributor. Industry experience includes contract internships (TIFIN, Athena, Smartinternz) and a current AI Engineer role at Citizen Health; it does not include several years of senior engineering ownership."
+  },
+  "repos": {
+    "dia": {
+      "name": "drug-interaction-rag-chatbot",
+      "sha": "8f69c6bf993870c500fbceaa5e4e423792feb576"
+    },
+    "voice": {
+      "name": "voice-agent-qa-harness",
+      "sha": "69835927d20c5c52f0a0b0a57c7ab5ad6f90d163"
+    },
+    "cliniq": {
+      "name": "ClinIQ-AI-for-Substance-Abuse-Risk-Detection",
+      "sha": "3c5a186d2125fd0b40c8541f7a0af6b6eeb81098"
+    },
+    "sssd": {
+      "name": "SS-SD",
+      "sha": "e8cb873b3e47c1f7d7681922a40697df05f42c74"
+    },
+    "qml": {
+      "name": "quantum-explainable-medical-imaging",
+      "sha": "5ab93b209a39777103b8338f0feb062dbeba5b9d"
+    },
+    "nyc": {
+      "name": "NYC-Bike-Share-Analysis",
+      "sha": "28d00d8eec1d769323b30c2089553f65c3bf11bf"
+    },
+    "site": {
+      "name": "vajja1405.github.io",
+      "sha": "main"
+    }
+  },
+  "sources": [
+    {
+      "id": "site",
+      "type": "portfolio",
+      "title": "Live portfolio (vajja1405.github.io)",
+      "url": "https://vajja1405.github.io/",
+      "public": true
+    },
+    {
+      "id": "resume_v2",
+      "type": "resume",
+      "title": "Résumé v2 (AI/ML)",
+      "public": false,
+      "note": "Used for cross-checking only. Résumé-only statements that are not supported elsewhere are marked verification_required."
+    },
+    {
+      "id": "target_roles",
+      "type": "internal",
+      "title": "Target roles analysis (20 roles, 2026-09-22)",
+      "public": false,
+      "note": "Internal. Records withdrawn Citizen Health metrics and the absence of confirmed Athena numbers."
+    },
+    {
+      "id": "dia_repo",
+      "type": "repository",
+      "title": "drug-interaction-rag-chatbot repository",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot",
+      "public": true
+    },
+    {
+      "id": "dia_readme",
+      "type": "repository",
+      "title": "Drug Interaction AI — README",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/8f69c6bf993870c500fbceaa5e4e423792feb576/README.md",
+      "public": true
+    },
+    {
+      "id": "dia_arch",
+      "type": "repository",
+      "title": "Drug Interaction AI — ARCHITECTURE.md",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/8f69c6bf993870c500fbceaa5e4e423792feb576/ARCHITECTURE.md",
+      "public": true
+    },
+    {
+      "id": "dia_validation",
+      "type": "evaluation",
+      "title": "24-pair component regression record (2026-09-11)",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/8f69c6bf993870c500fbceaa5e4e423792feb576/docs/validation-2026-09-11.json",
+      "public": true
+    },
+    {
+      "id": "dia_smoke",
+      "type": "evaluation",
+      "title": "Hosted deployment smoke check (2026-09-11)",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/8f69c6bf993870c500fbceaa5e4e423792feb576/docs/hosting-smoke-2026-09-11.json",
+      "public": true
+    },
+    {
+      "id": "dia_live",
+      "type": "demo",
+      "title": "Live app on Hugging Face Spaces",
+      "url": "https://astra6-drug-interaction-ai.hf.space/",
+      "public": true
+    },
+    {
+      "id": "voice_repo",
+      "type": "repository",
+      "title": "voice-agent-qa-harness repository",
+      "url": "https://github.com/vajja1405/voice-agent-qa-harness",
+      "public": true
+    },
+    {
+      "id": "voice_findings",
+      "type": "evaluation",
+      "title": "FINDINGS.md — hand-reviewed findings",
+      "url": "https://github.com/vajja1405/voice-agent-qa-harness/blob/69835927d20c5c52f0a0b0a57c7ab5ad6f90d163/FINDINGS.md",
+      "public": true
+    },
+    {
+      "id": "voice_quality",
+      "type": "evaluation",
+      "title": "VOICE_QUALITY.md — audio metrics for 12 calls",
+      "url": "https://github.com/vajja1405/voice-agent-qa-harness/blob/69835927d20c5c52f0a0b0a57c7ab5ad6f90d163/VOICE_QUALITY.md",
+      "public": true
+    },
+    {
+      "id": "voice_arch",
+      "type": "repository",
+      "title": "docs/ARCHITECTURE.md — design decisions",
+      "url": "https://github.com/vajja1405/voice-agent-qa-harness/blob/69835927d20c5c52f0a0b0a57c7ab5ad6f90d163/docs/ARCHITECTURE.md",
+      "public": true
+    },
+    {
+      "id": "voice_readme",
+      "type": "repository",
+      "title": "Voice harness README (maintenance verification)",
+      "url": "https://github.com/vajja1405/voice-agent-qa-harness/blob/69835927d20c5c52f0a0b0a57c7ab5ad6f90d163/README.md",
+      "public": true
+    },
+    {
+      "id": "voice_bargein_commit",
+      "type": "commit",
+      "title": "Commit c6dd531 — truncate model state to what the caller heard",
+      "url": "https://github.com/vajja1405/voice-agent-qa-harness/commit/c6dd53124493a171dee4b3fc13be9010a2956507",
+      "public": true
+    },
+    {
+      "id": "voice_scorecard",
+      "type": "evaluation",
+      "title": "scorecard.json — automated judge grades",
+      "url": "https://github.com/vajja1405/voice-agent-qa-harness/blob/69835927d20c5c52f0a0b0a57c7ab5ad6f90d163/scorecard.json",
+      "public": true
+    },
+    {
+      "id": "cliniq_repo",
+      "type": "repository",
+      "title": "ClinIQ repository",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection",
+      "public": true
+    },
+    {
+      "id": "cliniq_results",
+      "type": "evaluation",
+      "title": "method_comparison_results.csv — saved confusion counts",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/3c5a186d2125fd0b40c8541f7a0af6b6eeb81098/outputs/method_comparison_results.csv",
+      "public": true
+    },
+    {
+      "id": "cliniq_readme",
+      "type": "repository",
+      "title": "ClinIQ README",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/3c5a186d2125fd0b40c8541f7a0af6b6eeb81098/README.md",
+      "public": true
+    },
+    {
+      "id": "cliniq_demo",
+      "type": "demo",
+      "title": "ClinIQ live demo (Hugging Face Space)",
+      "url": "https://huggingface.co/spaces/astra6/cliniq",
+      "public": true
+    },
+    {
+      "id": "sssd_repo",
+      "type": "repository",
+      "title": "SS-SD repository (kinematic-conditioned Stable Diffusion)",
+      "url": "https://github.com/vajja1405/SS-SD",
+      "public": true
+    },
+    {
+      "id": "qml_repo",
+      "type": "repository",
+      "title": "Classical vs quantum ML repository",
+      "url": "https://github.com/vajja1405/quantum-explainable-medical-imaging",
+      "public": true
+    },
+    {
+      "id": "qml_paper",
+      "type": "paper",
+      "title": "Research paper (Google Drive)",
+      "url": "https://drive.google.com/file/d/1ZL2x0kbnx-VQnojByAn5yibv0oKIShI2/view",
+      "public": true
+    },
+    {
+      "id": "nyc_repo",
+      "type": "repository",
+      "title": "NYC Bike Share analysis repository",
+      "url": "https://github.com/vajja1405/NYC-Bike-Share-Analysis",
+      "public": true
+    },
+    {
+      "id": "imw_repo",
+      "type": "repository",
+      "title": "This portfolio's source (Interview My Work)",
+      "url": "https://github.com/vajja1405/vajja1405.github.io",
+      "public": true
+    }
+  ],
+  "personas": [
+    {
+      "id": "recruiter",
+      "label": "Recruiter",
+      "focus": "Short, plain-language answers tied to the role."
+    },
+    {
+      "id": "engineer",
+      "label": "Engineer",
+      "focus": "Architecture, APIs, algorithms, evaluation, failures and tradeoffs."
+    },
+    {
+      "id": "manager",
+      "label": "Hiring manager",
+      "focus": "Ownership, ambiguity, collaboration, outcomes and reliability."
+    },
+    {
+      "id": "founder",
+      "label": "Founder / Product",
+      "focus": "Problem, user value, operational impact and engineering tradeoffs."
+    },
+    {
+      "id": "researcher",
+      "label": "Researcher",
+      "focus": "Methodology, baselines, metrics, limitations and reproducibility."
+    }
+  ]
+}
