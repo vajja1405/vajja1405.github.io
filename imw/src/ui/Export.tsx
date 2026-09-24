@@ -3,7 +3,7 @@ import type { PersonaId } from '../engine/types';
 import { useWs } from '../context';
 import { track } from '../analytics';
 import { entityName } from '../engine/kb';
-import { buildDossier, filename, LENSES, projectsFor, SECTION_LABEL, type SectionId } from '../dossier/model';
+import { buildDossier, filename, footerFor, LENSES, projectsFor, SECTION_LABEL, type SectionId } from '../dossier/model';
 import { renderPdf, saveBlob } from '../dossier/pdf';
 
 type Status = { kind: 'idle' } | { kind: 'busy' } | { kind: 'done'; file: string } | { kind: 'error' };
@@ -46,10 +46,7 @@ export function ExportView() {
     setStatus({ kind: 'busy' });
     try {
       const doc = buildDossier(kb, session, { persona: lens, sections });
-      const pdf = await renderPdf(doc.nodes, {
-        title: doc.title, author: kb.subject.name,
-        footer: `${kb.subject.name} · Evidence dossier · ${LENSES[lens].label} perspective · ${(kb.subject.links.site ?? '').replace(/^https?:\/\/|\/$/g, '')}`,
-      });
+      const pdf = await renderPdf(doc.nodes, { title: doc.title, author: kb.subject.name, footer: footerFor(kb, lens) });
       saveBlob(pdf.output('blob'), doc.filename);
       track('dossier_downloaded', { persona: lens, questions: answered.length, analyses: session.analyses.length });
       setStatus({ kind: 'done', file: doc.filename });

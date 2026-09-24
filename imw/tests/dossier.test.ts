@@ -7,7 +7,7 @@ import { buildKB, isStatable } from '../src/engine/kb';
 import { answer } from '../src/engine/answer';
 import { analyzeJD } from '../src/engine/jd';
 import { roleAnalysis } from '../src/engine/coverage';
-import { buildDossier, dossierText, projectsFor, recency, type Options, type Session } from '../src/dossier/model';
+import { buildDossier, dossierText, footerFor, projectsFor, recency, type Options, type Session } from '../src/dossier/model';
 import { pdfText, renderPdf } from '../src/dossier/pdf';
 import type { Bundle, PersonaId } from '../src/engine/types';
 
@@ -93,7 +93,7 @@ describe('pdf rendering', () => {
 
   it.each(['recruiter', 'engineer'] as PersonaId[])('renders a multi-page PDF (%s)', async (persona) => {
     const d = build(persona);
-    const doc = await renderPdf(d.nodes, { title: d.title, author: kb.subject.name, footer: 'test' });
+    const doc = await renderPdf(d.nodes, { title: d.title, author: kb.subject.name, footer: footerFor(kb, persona) });
     const bytes = new Uint8Array(doc.output('arraybuffer'));
     expect(new TextDecoder().decode(bytes.slice(0, 5))).toBe('%PDF-');
     expect(doc.getNumberOfPages()).toBeGreaterThan(2);

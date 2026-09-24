@@ -104,6 +104,9 @@ export function filename(kb: KB, persona: PersonaId, d = new Date()) {
   return `${slug}-evidence-dossier-${persona}-${iso}.pdf`;
 }
 
+export const footerFor = (kb: KB, persona: PersonaId) =>
+  `${kb.subject.name} · Evidence dossier · ${LENSES[persona].label} perspective · ${(kb.subject.links.site ?? '').replace(/^https?:\/\/|\/$/g, '')}`;
+
 /** Projects worth detailing: what the visitor opened or asked about, then what their role analyses ranked highest. */
 export function exploredEntities(kb: KB, s: Session): string[] {
   const fromAnswers = s.turns.flatMap((t) => t.a?.entities.slice(0, 3) ?? []);

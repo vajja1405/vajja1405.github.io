@@ -101,7 +101,7 @@
 <button class="imw-fab" type="button" data-imw="ask" aria-label="Interview My Work" hidden><b aria-hidden="true">✦</b><span>Interview My Work</span></button>
 <script>
 (function(){
-  var V='a4c83a095e', mod=null;
+  var V='f73707d281', mod=null;
   function css(){if(document.getElementById('imw-css'))return;var l=document.createElement('link');l.id='imw-css';l.rel='stylesheet';l.href='assets/imw/imw.css?v='+V;document.head.appendChild(l)}
   function load(){css();return mod||(mod=import('./assets/imw/imw.js?v='+V).catch(function(e){mod=null;throw e}))}
   function toast(msg){var t=document.createElement('div');t.className='imw-toast';t.setAttribute('role','status');t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove()},4000)}
