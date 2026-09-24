@@ -1776,7 +1776,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "AI/ML Engineer Intern at TIFIN (contract, remote), Mar 2025 – May 2026, working on an AI portfolio copilot for investment questions and advisor preparation.",
+    "text": "AI/ML Engineer Intern at TIFIN (remote), Mar 2025 – May 2026, working on an AI portfolio copilot for investment questions and advisor preparation.",
     "tags": [
       "fintech",
       "llm"
@@ -2006,7 +2006,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "AI Engineer at Citizen Health (May 2026 – present), building retrieval and source-linked summarization for a patient-advocacy product serving people with rare and complex conditions.",
+    "text": "AI Engineer at Citizen Health (May 2026 – present), building source-grounded retrieval and summarization for a patient-advocacy product serving people with rare and complex conditions.",
     "tags": [
       "rag",
       "provenance",
@@ -2018,22 +2018,79 @@
     ]
   },
   {
-    "id": "citizen.scope",
+    "id": "citizen.source_linked",
     "entity": "citizen",
     "kind": "fact",
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "The work includes medical-record ingestion, normalization, entity resolution, schema checks and evaluation cases, in collaboration with clinicians, patient-community leads and engineers.",
+    "text": "Builds source-grounded retrieval and summarization in which each statement links to the medical record it came from, so a patient advocate can verify it.",
     "tags": [
-      "etl",
-      "data_quality",
-      "eval_design",
-      "stakeholder",
+      "rag",
+      "provenance",
+      "llm",
+      "semantic_search",
       "healthcare"
     ],
     "sources": [
-      "site"
+      "site",
+      "resume_v2"
+    ]
+  },
+  {
+    "id": "citizen.ingestion",
+    "entity": "citizen",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Normalizes medical records from multiple provider sources, resolves duplicate patient records across sources, and validates schemas that adapt as provider formats change.",
+    "tags": [
+      "etl",
+      "data_quality",
+      "data_modeling",
+      "healthcare"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ]
+  },
+  {
+    "id": "citizen.release_eval",
+    "entity": "citizen",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Maintains the evaluation suite that gates each release, catching regressions in LLM answer quality before changes reach patients.",
+    "tags": [
+      "llm_eval",
+      "regression_testing",
+      "eval_design",
+      "healthcare"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ]
+  },
+  {
+    "id": "citizen.collab",
+    "entity": "citizen",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Works with clinicians, patient-community leads and engineers in iterative releases, translating patient needs into specifications and reviewing grounded outputs with clinical input.",
+    "tags": [
+      "stakeholder",
+      "product_judgment",
+      "healthcare"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
     ]
   },
   {
@@ -2058,17 +2115,35 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "AI Engineering Intern at Athena (Jan – May 2024). Prototyped task planning, tool use and prompt orchestration for executive-assistant delegation workflows, wrote evaluation tests for agent behaviour, and refined prompts using reviewer feedback with product and software engineers.",
+    "text": "AI Engineering Intern at Athena (Jan – May 2024). Prototyped the task-planning, tool-use and prompt-orchestration components that turn an open-ended client request into structured steps an executive assistant can act on.",
     "tags": [
       "agents",
       "tool_calling",
       "prompt_engineering",
-      "eval_design",
       "llm",
-      "stakeholder"
+      "workflow_automation"
     ],
     "sources": [
       "site"
+    ]
+  },
+  {
+    "id": "athena.eval",
+    "entity": "athena",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Wrote evaluation tests for agent behavior and workflow reliability, scored instruction quality against a reviewer rubric, and iterated prompts with product and software engineers.",
+    "tags": [
+      "llm_eval",
+      "eval_design",
+      "prompt_engineering",
+      "stakeholder"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
     ]
   },
   {
@@ -2093,14 +2168,15 @@
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "Analyzed 735,502 NYC Citi Bike trips across 51 start stations and compared four regression models on RMSLE; a tuned Random Forest performed best. Delivered through a Flask app and a Tableau dashboard as part of a team capstone.",
+    "text": "Forecast station-level demand from 735,502 NYC Citi Bike trips across 51 start stations: engineered SQL demand features and compared four regression models on RMSLE, where a tuned Random Forest performed best. Delivered through a Flask app and a Tableau dashboard as part of a team capstone, with the pipeline documented so it can be rerun.",
     "tags": [
       "forecasting",
       "classical_ml",
       "sql",
       "dashboards",
       "feature_engineering",
-      "model_comparison"
+      "model_comparison",
+      "etl"
     ],
     "sources": [
       "nyc_repo",

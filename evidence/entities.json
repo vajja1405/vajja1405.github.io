@@ -202,7 +202,7 @@
     "kind": "experience",
     "name": "TIFIN",
     "short": "TIFIN",
-    "role": "AI/ML Engineer Intern (contract) · Remote USA",
+    "role": "AI/ML Engineer Intern · Remote USA",
     "tagline": "AI portfolio copilot for financial advisors",
     "dates": "Mar 2025 – May 2026",
     "anchor": "#tifin",
@@ -230,7 +230,7 @@
     "name": "Citizen Health",
     "short": "Citizen Health",
     "role": "AI Engineer · Remote USA",
-    "tagline": "Retrieval and source-linked summarization for a patient-advocacy product",
+    "tagline": "Source-grounded retrieval and summarization for a patient-advocacy product",
     "dates": "May 2026 – present",
     "anchor": "#citizen-health",
     "domains": [
@@ -238,14 +238,16 @@
     ],
     "links": [],
     "summaries": {
-      "recruiter": "Current role: AI Engineer at Citizen Health, building retrieval and source-linked summarization for a patient-advocacy product serving people with rare and complex conditions.",
-      "engineer": "Work spans medical-record ingestion, normalization, entity resolution, schema checks and evaluation cases. The portfolio does not publish scale metrics for this role.",
-      "manager": "Cross-functional work with clinicians, patient-community leads and engineers.",
-      "founder": "Source-linked summaries let a patient advocate verify each statement against its record.",
-      "researcher": "No public metrics. Earlier numeric statements were withdrawn as unverified."
+      "recruiter": "Current role: AI Engineer at Citizen Health, building source-grounded retrieval and summarization for a patient-advocacy product. Each summary links back to the medical record it came from.",
+      "engineer": "Three areas: source-linked summaries over patient records; ingestion from multiple provider sources with normalization, cross-source entity resolution for duplicate patient records and adaptive schema validation; and the evaluation suite that gates each release. Scale metrics are not published.",
+      "manager": "Works in iterative releases with clinicians, patient-community leads and engineers, translating patient needs into specifications and reviewing grounded outputs with clinical input.",
+      "founder": "Source-linked summaries let a patient advocate verify every statement against its record, and release gating keeps quality regressions away from patients.",
+      "researcher": "Self-reported employment work with no public artifact or published metrics. Release quality is checked by an evaluation suite before each release."
     },
     "questions": [
-      "How do you handle entity resolution across provider sources with inconsistent schemas?"
+      "How do you resolve the same patient across provider sources with inconsistent schemas?",
+      "What does the release evaluation suite check, and how do you add a case when a regression slips through?",
+      "How do you make every summary sentence traceable to a record?"
     ],
     "ownership": "Current role; scope as described on the portfolio."
   },
@@ -262,7 +264,7 @@
     "links": [],
     "summaries": {
       "recruiter": "AI engineering internship prototyping agent-style task planning and tool use for executive-assistant workflows.",
-      "engineer": "Prototyped task planning, tool use and prompt orchestration. Wrote evaluation tests for instruction quality and agent behaviour, and iterated prompts with product and software engineers.",
+      "engineer": "Prototyped task-planning, tool-use and prompt-orchestration components that turn open-ended requests into structured steps; wrote evaluation tests for agent behavior and workflow reliability and scored instruction quality against a reviewer rubric.",
       "manager": "Worked with product and software engineers, using reviewer feedback to refine prompts.",
       "founder": "Aimed at turning open-ended client requests into structured steps for assistants.",
       "researcher": "No confirmed numerical improvement is claimed for this role."

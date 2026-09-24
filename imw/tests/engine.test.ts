@@ -37,6 +37,10 @@ describe('evidence integrity', () => {
     for (const figure of ['19%', '24%', '5,000+', '10,000+', 'GPT-4o fallback', '20+ seconds', '19–22 dB', '5×', '5x faster'])
       expect(text, figure).not.toContain(figure);
   });
+  it("never describes Rahul's roles as contract work", () => {
+    const text = JSON.stringify([kb.subject, kb.entities, kb.roles, kb.claims.filter(isStatable)]);
+    expect(text).not.toMatch(/\bcontract(s|ed|or)?\b/i);
+  });
   it('withdrawn and conflicting statements are not statable', () => {
     for (const id of ['tifin.gains', 'dia.gpt4o', 'dia.latency_20s', 'citizen.metrics', 'athena.gain', 'sssd.metric_values', 'qml.speedup'])
       expect(isStatable(kb.claim.get(id))).toBe(false);
