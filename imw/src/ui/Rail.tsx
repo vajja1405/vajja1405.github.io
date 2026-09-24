@@ -55,6 +55,7 @@ export function Rail() {
           {' '}{kb.claims.filter((c) => c.status !== 'verified').length} statements from other sources are held back until verified.
         </p>
         <button class="imw-mini-link" onClick={() => go('xray', 'imw')}>X-Ray this system →</button>
+        <button class="imw-mini-link" onClick={() => go('connect')}>Connect your own AI (MCP) →</button>
       </section>
     </div>
   );

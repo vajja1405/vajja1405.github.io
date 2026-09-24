@@ -3,6 +3,7 @@
 POST /api/ask  question -> validated, evidence-cited answer (or an error the browser falls back from)
 POST /api/jd   job description -> requirement phrases (mapped to evidence in the browser)
 GET  /api/health
+     /mcp      public, read-only MCP server over the same evidence (see app/mcp_server.py)
 
 The Anthropic key lives only in this service's environment. Request bodies (questions, job
 descriptions) are never logged or stored.
@@ -12,6 +13,7 @@ from __future__ import annotations
 import logging
 import os
 import time
+from contextlib import asynccontextmanager
 from typing import Literal
 
 from fastapi import Depends, FastAPI, HTTPException, Request
@@ -19,7 +21,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
+from mcp.server.transport_security import TransportSecuritySettings
+
 from .kb import KB, find_entities, load_kb, statable
+from .mcp_server import mcp as mcp_server
 from .llm import ANSWER_SCHEMA, JD_SCHEMA, JD_SYSTEM, SYSTEM, ClaudeClient, ModelClient, ModelError
 from .ratelimit import DailyBudget, SlidingWindow
 from .validate import INJECTION, validate_answer, validate_requirements
@@ -32,8 +37,38 @@ ALLOWED_ORIGINS = [o.strip() for o in os.environ.get(
 ASK_LIMIT = SlidingWindow(int(os.environ.get("IMW_ASK_PER_10MIN", "12")), 600)
 JD_LIMIT = SlidingWindow(int(os.environ.get("IMW_JD_PER_10MIN", "6")), 600)
 BUDGET = DailyBudget(int(os.environ.get("IMW_DAILY_MODEL_CALLS", "250")))
+MCP_LIMIT = SlidingWindow(int(os.environ.get("IMW_MCP_PER_10MIN", "120")), 600)
+MCP_HOSTS = [h.strip() for h in os.environ.get(
+    "IMW_MCP_ALLOWED_HOSTS", "astra6-interview-my-work.hf.space,localhost:*,127.0.0.1:*").split(",") if h.strip()]
 
-app = FastAPI(title="Interview My Work API", docs_url=None, redoc_url=None, openapi_url=None)
+# Stateless, JSON-response Streamable HTTP: every request is independent, which suits a sleeping
+# single-replica Space and needs no session affinity. The SDK's session manager can start only once,
+# so a fresh MCP app is built at each startup and requests are routed to the current one.
+def _build_mcp_app():
+    return mcp_server.streamable_http_app(
+        streamable_http_path="/mcp", stateless_http=True, json_response=True, host="0.0.0.0",
+        transport_security=TransportSecuritySettings(
+            enable_dns_rebinding_protection=True, allowed_hosts=MCP_HOSTS,
+            allowed_origins=ALLOWED_ORIGINS + ["http://localhost:*", "http://127.0.0.1:*"]),
+    )
+
+
+_mcp_app = _build_mcp_app()
+
+
+async def mcp_asgi(scope, receive, send):
+    await _mcp_app(scope, receive, send)
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    global _mcp_app
+    _mcp_app = _build_mcp_app()
+    async with mcp_server.session_manager.run():
+        yield
+
+
+app = FastAPI(title="Interview My Work API", docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
 app.add_middleware(CORSMiddleware, allow_origins=ALLOWED_ORIGINS, allow_methods=["GET", "POST"], allow_headers=["Content-Type"], max_age=600)
 
 _client: ModelClient | None = None
@@ -53,6 +88,9 @@ def get_kb() -> KB:
 @app.middleware("http")
 async def access_log(request: Request, call_next):
     t0 = time.perf_counter()
+    if request.url.path.startswith("/mcp") and request.method == "POST" and not MCP_LIMIT.allow(client_key(request)):
+        log.info("%s %s 429", request.method, request.url.path)
+        return JSONResponse(status_code=429, content={"detail": "Too many requests. Try again in a few minutes."})
     response = await call_next(request)
     # Method, path, status and latency only. Never bodies, never query text.
     log.info("%s %s %s %.0fms", request.method, request.url.path, response.status_code, (time.perf_counter() - t0) * 1000)
@@ -105,7 +143,7 @@ def build_pack(kb: KB, req: AskRequest) -> tuple[str, set[str]]:
             if c and statable(c):
                 picked.setdefault(cid, c)
     concepts = kb.concepts(req.question)
-    gap_ids = [cid for cid, kind in concepts if kind == "gap"]
+    gap_ids = [cid for cid, kind, _ in concepts if kind == "gap"]
     role = next((r for r in kb.raw["roles"] if r["id"] == req.role), None)
     if role:
         gap_ids += [g for g in role["gaps"] if g not in gap_ids]
@@ -205,3 +243,7 @@ def parse_jd(req: JDRequest, request: Request):
 def _json(obj: object) -> str:
     import json
     return json.dumps(obj, ensure_ascii=False)
+
+
+# Mounted last so /api routes match first; the MCP app serves /mcp.
+app.mount("/", mcp_asgi)

@@ -4,7 +4,7 @@ import type { KB } from './engine/kb';
 import type { CoverageAnalysis, PersonaId, RequirementCoverage } from './engine/types';
 import type { ApiStatus } from './api';
 
-export type Mode = 'ask' | 'role' | 'xray' | 'map' | 'lab' | 'brief';
+export type Mode = 'ask' | 'role' | 'xray' | 'map' | 'lab' | 'brief' | 'connect';
 
 export type Inspect =
   | { kind: 'claim'; id: string }

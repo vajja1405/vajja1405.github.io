@@ -187,7 +187,7 @@
     "summaries": {
       "recruiter": "Graduate research comparing classical and quantum machine-learning models on chest X-ray classification, with explainability tools. It was published as a paper and poster.",
       "engineer": "CNN vs QCNN (PennyLane) vs SVM vs QSVM (Qiskit), evaluated with AUROC, AUCPR and F1, with SHAP and Grad-CAM for inspection. A later benchmark_audit.py requires paired run metadata before computing any runtime ratio.",
-      "manager": "When the reported 5× QCNN training-time result turned out to lack run metadata, the repository stopped advertising it and added an audit check instead.",
+      "manager": "When the reported QCNN training-speed advantage turned out to lack run metadata, the repository stopped advertising it and added an audit check instead.",
       "founder": "Supports a model-selection decision (performance vs compute cost). It is explicitly not a diagnostic product.",
       "researcher": "The classical CNN led at AUROC 0.76. The runtime-speed comparison is unverified (missing seeds, hardware and wall-time metadata), and the repo lists the repeated-seed study it would take to settle it."
     },
@@ -215,7 +215,7 @@
       "engineer": "Three supporting models (query-intent classification, financial entity extraction, retrieval relevance ranking). LangChain connected retrieval and analytical tools; LangGraph coordinated steps, shared state, validation and retries. Snowflake pipelines handled 5M+ daily data points.",
       "manager": "Owned supporting pipelines, agentic RAG workflows, model deployment and monitoring on a production product. Reported outcomes: 40,000+ users reached and 65% less manual effort across three advisor workflows for 150+ users.",
       "founder": "Advisors got sourced briefings, answers and drafts for meeting preparation, portfolio questions and post-meeting follow-ups. The reported manual-effort reduction is 65%, including the review work that remained.",
-      "researcher": "These are self-reported employment outcomes. Baselines, task mapping and relative-vs-absolute definitions for the reported 19% / 24% model gains are not published."
+      "researcher": "These are self-reported employment outcomes. Baselines, task mapping and definitions for the reported model-accuracy gains are not published, so those figures are held back pending verification."
     },
     "questions": [
       "How did LangGraph's shared state and retries change failure behaviour compared with a single chain?",
@@ -355,13 +355,14 @@
     ],
     "summaries": {
       "recruiter": "The tool you are using now. It answers questions about Rahul's work only from a curated, verified evidence database and links every claim to its source.",
-      "engineer": "A lazy-loaded TypeScript module on a static site plus a FastAPI service on Hugging Face Spaces. Retrieval runs over status-gated claims; Claude returns structured output citing claim ids; a validator rejects unknown or unverified citations, ungrounded numbers and hype language before display. Without the API, a deterministic in-browser evidence engine answers instead.",
+      "engineer": "A lazy-loaded TypeScript module on a static site plus a FastAPI service on Hugging Face Spaces. Retrieval runs over status-gated claims; Claude returns structured output citing claim ids; a validator rejects unknown or unverified citations, ungrounded numbers and hype language before display. Without the API, a deterministic in-browser evidence engine answers instead. A public, read-only MCP server exposes the same evidence to external AI clients.",
       "manager": "Scoped as one feature added to an existing site, not a rebuild. Conflicting résumé and site statements were logged and excluded rather than repeated.",
       "founder": "Lets a hiring team check a claim against its architecture, code, tests and results in a few clicks.",
       "researcher": "Ships with an evaluation suite (unsupported skills, false premises, prompt injection, hype language, conflicts, role mapping) whose latest results are shown in the workspace."
     },
     "questions": [
-      "How does the validator decide a number in the model's answer is grounded?"
+      "How does the validator decide a number in the model's answer is grounded?",
+      "Why expose the evidence over MCP instead of only a chat interface?"
     ],
     "ownership": "Built for this portfolio."
   }

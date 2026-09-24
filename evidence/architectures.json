@@ -1,126 +1,959 @@
 [
   {
-    "id": "arch.dia", "entity": "dia", "title": "Drug Interaction Agent",
+    "id": "arch.dia",
+    "entity": "dia",
+    "title": "Drug Interaction Agent",
     "note": "Two paths behind one FastAPI service. Only components present in the repository are shown.",
-    "lanes": [ { "row": 0, "label": "Label review (public, no LLM)" }, { "row": 2, "label": "RAG research mode" } ],
-    "nodes": [
-      { "id": "ui", "label": "React + TypeScript", "sub": "Vite SPA", "col": 0, "row": 1,
-        "detail": { "purpose": "Medication search, pair matrix, filters, quoted label context and a downloadable report.", "input": "User-selected RxNorm concepts", "output": "Review requests to /api/v2/review", "why": "Makes coverage gaps and source passages inspectable instead of producing one verdict.", "claims": ["dia.frontend"] } },
-      { "id": "api", "label": "FastAPI", "sub": "one Docker container", "col": 1, "row": 1,
-        "detail": { "purpose": "Serves the React build and both API paths from one origin on a Hugging Face Space.", "input": "HTTP requests", "output": "Review results or research reports", "why": "Same-origin serving keeps deployment to a single non-root container.", "claims": ["dia.shipped", "dia.admission"] } },
-      { "id": "rxnorm", "label": "RxNorm catalog", "sub": "23,651 terms", "col": 2, "row": 0,
-        "detail": { "purpose": "Normalises names to RxCUI concepts (ingredients, combinations, brands).", "input": "Search text", "output": "RxCUI concept", "why": "Explicit concept selection avoids fuzzy name matching later.", "claims": ["dia.catalog"] } },
-      { "id": "dailymed", "label": "DailyMed lookup", "sub": "bounded, 4 workers", "col": 3, "row": 0,
-        "detail": { "purpose": "Retrieves a bounded sample of human prescription/OTC labels per concept.", "input": "RxCUI", "output": "Label XML with versions", "why": "Fixed origins, deadlines and size bounds keep a public endpoint predictable.", "observed": "HTTP failures are not cached as 'no label'.", "claims": ["dia.bounded_retrieval"] } },
-      { "id": "ingredient", "label": "Ingredient-set check", "sub": "identity + negation", "col": 4, "row": 0,
-        "detail": { "purpose": "Keeps only labels whose active ingredients exactly match the concept.", "input": "Label + selected concept", "output": "Accepted label sections", "why": "Stops a combination product from standing in for a single ingredient.", "claims": ["dia.ingredient_check"] } },
-      { "id": "matrix", "label": "Pair matrix", "sub": "≤190 pairs + coverage", "col": 5, "row": 0,
-        "detail": { "purpose": "Classifies each pair as ingredient overlap, direct label mention, no direct mention, or incomplete sources.", "input": "Accepted sections for 2–20 concepts", "output": "Per-pair categories with quotes", "why": "'No direct mention' is shown as coverage, never as safety.", "claims": ["dia.pairs", "dia.no_llm_review"] } },
-      { "id": "retrieval", "label": "FAISS retrieval", "sub": "exact → semantic → filter", "col": 2, "row": 2,
-        "detail": { "purpose": "Finds evidence for a drug pair.", "input": "Drug pair", "output": "Documents that mention both drugs", "why": "O(1) exact lookup first; the semantic fallback is entity-filtered so unrelated documents never reach the LLM.", "claims": ["dia.retrieval", "dia.entity_filter"] } },
-      { "id": "severity", "label": "4-tier severity", "sub": "structured · rules · RF · unknown", "col": 3, "row": 2,
-        "detail": { "purpose": "Assigns a research severity with explicit consensus rules.", "input": "Retrieved evidence", "output": "Severity + method + confidence", "why": "Trusted metadata wins; the calibrated Random Forest is used only when rules are weak; otherwise the result is 'Unknown'.", "observed": "24/24 on the curated regression set (22 via structured metadata).", "claims": ["dia.four_tier", "dia.calibration", "dia.regression24"] } },
-      { "id": "llm", "label": "LLM explanation", "sub": "Qwen3-4B (hosted)", "col": 4, "row": 2,
-        "detail": { "purpose": "Writes a pair explanation from evidence and severity context.", "input": "Evidence + severity", "output": "JSON explanation (text fallback)", "why": "Generation is bounded: 1 concurrent, 50/day, 1,800 tokens, 40 s.", "claims": ["dia.llm_provider", "dia.llm_bounds"] } },
-      { "id": "cache", "label": "Response cache", "sub": "Redis or LRU", "col": 5, "row": 2,
-        "detail": { "purpose": "Avoids repeating identical analyses.", "input": "Content-addressed key", "output": "Cached report", "why": "Keys include the evidence hash and model settings, so a hit means identical inputs; failures are never cached.", "observed": "Smoke check: 5.8 s uncached vs 0.25 ms cached (n=1).", "claims": ["dia.cache_identity", "dia.cache_backend", "dia.cache_smoke"] } }
+    "lanes": [
+      {
+        "row": 0,
+        "label": "Label review (public, no LLM)"
+      },
+      {
+        "row": 2,
+        "label": "RAG research mode"
+      }
     ],
-    "edges": [ ["ui", "api"], ["api", "rxnorm"], ["rxnorm", "dailymed"], ["dailymed", "ingredient"], ["ingredient", "matrix"], ["api", "retrieval"], ["retrieval", "severity"], ["severity", "llm"], ["llm", "cache"] ]
+    "nodes": [
+      {
+        "id": "ui",
+        "label": "React + TypeScript",
+        "sub": "Vite SPA",
+        "col": 0,
+        "row": 1,
+        "detail": {
+          "purpose": "Medication search, pair matrix, filters, quoted label context and a downloadable report.",
+          "input": "User-selected RxNorm concepts",
+          "output": "Review requests to /api/v2/review",
+          "why": "Makes coverage gaps and source passages inspectable instead of producing one verdict.",
+          "claims": [
+            "dia.frontend"
+          ]
+        }
+      },
+      {
+        "id": "api",
+        "label": "FastAPI",
+        "sub": "one Docker container",
+        "col": 1,
+        "row": 1,
+        "detail": {
+          "purpose": "Serves the React build and both API paths from one origin on a Hugging Face Space.",
+          "input": "HTTP requests",
+          "output": "Review results or research reports",
+          "why": "Same-origin serving keeps deployment to a single non-root container.",
+          "claims": [
+            "dia.shipped",
+            "dia.admission"
+          ]
+        }
+      },
+      {
+        "id": "rxnorm",
+        "label": "RxNorm catalog",
+        "sub": "23,651 terms",
+        "col": 2,
+        "row": 0,
+        "detail": {
+          "purpose": "Normalises names to RxCUI concepts (ingredients, combinations, brands).",
+          "input": "Search text",
+          "output": "RxCUI concept",
+          "why": "Explicit concept selection avoids fuzzy name matching later.",
+          "claims": [
+            "dia.catalog"
+          ]
+        }
+      },
+      {
+        "id": "dailymed",
+        "label": "DailyMed lookup",
+        "sub": "bounded, 4 workers",
+        "col": 3,
+        "row": 0,
+        "detail": {
+          "purpose": "Retrieves a bounded sample of human prescription/OTC labels per concept.",
+          "input": "RxCUI",
+          "output": "Label XML with versions",
+          "why": "Fixed origins, deadlines and size bounds keep a public endpoint predictable.",
+          "observed": "HTTP failures are not cached as 'no label'.",
+          "claims": [
+            "dia.bounded_retrieval"
+          ]
+        }
+      },
+      {
+        "id": "ingredient",
+        "label": "Ingredient-set check",
+        "sub": "identity + negation",
+        "col": 4,
+        "row": 0,
+        "detail": {
+          "purpose": "Keeps only labels whose active ingredients exactly match the concept.",
+          "input": "Label + selected concept",
+          "output": "Accepted label sections",
+          "why": "Stops a combination product from standing in for a single ingredient.",
+          "claims": [
+            "dia.ingredient_check"
+          ]
+        }
+      },
+      {
+        "id": "matrix",
+        "label": "Pair matrix",
+        "sub": "≤190 pairs + coverage",
+        "col": 5,
+        "row": 0,
+        "detail": {
+          "purpose": "Classifies each pair as ingredient overlap, direct label mention, no direct mention, or incomplete sources.",
+          "input": "Accepted sections for 2–20 concepts",
+          "output": "Per-pair categories with quotes",
+          "why": "'No direct mention' is shown as coverage, never as safety.",
+          "claims": [
+            "dia.pairs",
+            "dia.no_llm_review"
+          ]
+        }
+      },
+      {
+        "id": "retrieval",
+        "label": "FAISS retrieval",
+        "sub": "exact → semantic → filter",
+        "col": 2,
+        "row": 2,
+        "detail": {
+          "purpose": "Finds evidence for a drug pair.",
+          "input": "Drug pair",
+          "output": "Documents that mention both drugs",
+          "why": "O(1) exact lookup first; the semantic fallback is entity-filtered so unrelated documents never reach the LLM.",
+          "claims": [
+            "dia.retrieval",
+            "dia.entity_filter"
+          ]
+        }
+      },
+      {
+        "id": "severity",
+        "label": "4-tier severity",
+        "sub": "structured · rules · RF · unknown",
+        "col": 3,
+        "row": 2,
+        "detail": {
+          "purpose": "Assigns a research severity with explicit consensus rules.",
+          "input": "Retrieved evidence",
+          "output": "Severity + method + confidence",
+          "why": "Trusted metadata wins; the calibrated Random Forest is used only when rules are weak; otherwise the result is 'Unknown'.",
+          "observed": "24/24 on the curated regression set (22 via structured metadata).",
+          "claims": [
+            "dia.four_tier",
+            "dia.calibration",
+            "dia.regression24"
+          ]
+        }
+      },
+      {
+        "id": "llm",
+        "label": "LLM explanation",
+        "sub": "Qwen3-4B (hosted)",
+        "col": 4,
+        "row": 2,
+        "detail": {
+          "purpose": "Writes a pair explanation from evidence and severity context.",
+          "input": "Evidence + severity",
+          "output": "JSON explanation (text fallback)",
+          "why": "Generation is bounded: 1 concurrent, 50/day, 1,800 tokens, 40 s.",
+          "claims": [
+            "dia.llm_provider",
+            "dia.llm_bounds"
+          ]
+        }
+      },
+      {
+        "id": "cache",
+        "label": "Response cache",
+        "sub": "Redis or LRU",
+        "col": 5,
+        "row": 2,
+        "detail": {
+          "purpose": "Avoids repeating identical analyses.",
+          "input": "Content-addressed key",
+          "output": "Cached report",
+          "why": "Keys include the evidence hash and model settings, so a hit means identical inputs; failures are never cached.",
+          "observed": "Smoke check: 5.8 s uncached vs 0.25 ms cached (n=1).",
+          "claims": [
+            "dia.cache_identity",
+            "dia.cache_backend",
+            "dia.cache_smoke"
+          ]
+        }
+      }
+    ],
+    "edges": [
+      [
+        "ui",
+        "api"
+      ],
+      [
+        "api",
+        "rxnorm"
+      ],
+      [
+        "rxnorm",
+        "dailymed"
+      ],
+      [
+        "dailymed",
+        "ingredient"
+      ],
+      [
+        "ingredient",
+        "matrix"
+      ],
+      [
+        "api",
+        "retrieval"
+      ],
+      [
+        "retrieval",
+        "severity"
+      ],
+      [
+        "severity",
+        "llm"
+      ],
+      [
+        "llm",
+        "cache"
+      ]
+    ]
   },
   {
-    "id": "arch.voice", "entity": "voice", "title": "Voice-Agent QA Harness",
+    "id": "arch.voice",
+    "entity": "voice",
+    "title": "Voice-Agent QA Harness",
     "note": "The top row is the live call; the bottom row is evaluation after the call.",
-    "lanes": [ { "row": 0, "label": "Live call" }, { "row": 1, "label": "After the call" } ],
-    "nodes": [
-      { "id": "scenarios", "label": "Scenario matrix", "sub": "15 personas · 5 categories", "col": 0, "row": 0,
-        "detail": { "purpose": "Defines each synthetic patient's identity, goal and what to check.", "input": "—", "output": "System prompt for the patient", "why": "Covers everyday tasks, rules, memory, safety and compliance.", "claims": ["voice.scenarios"] } },
-      { "id": "twilio", "label": "Twilio", "sub": "outbound call + Media Streams", "col": 1, "row": 0,
-        "detail": { "purpose": "Places the PSTN call and streams call audio over a WebSocket.", "input": "Call request + TwiML <Connect><Stream>", "output": "μ-law audio frames + marks", "why": "Keeps the media loop visible and debuggable rather than hidden in a managed platform.", "claims": ["voice.harness"] } },
-      { "id": "bridge", "label": "FastAPI bridge", "sub": "/media WebSocket", "col": 2, "row": 0,
-        "detail": { "purpose": "Relays audio both ways, logs both sides and handles barge-in.", "input": "Twilio frames / Realtime deltas", "output": "Audio to the other side + transcript", "why": "μ-law passes through without transcoding.", "claims": ["voice.harness", "voice.ulaw", "voice.bargein"] } },
-      { "id": "playback", "label": "PlaybackState", "sub": "barge-in truncation", "col": 3, "row": 1,
-        "detail": { "purpose": "Tracks generated vs acknowledged audio and computes the heard cutoff on interruption.", "input": "Chunks, marks, speech_started", "output": "conversation.item.truncate event", "why": "Keeps the model's memory aligned with what the caller actually heard.", "claims": ["voice.playback_state", "voice.bargein"] } },
-      { "id": "realtime", "label": "OpenAI Realtime", "sub": "synthetic patient", "col": 3, "row": 0,
-        "detail": { "purpose": "Speech-to-speech model playing the patient persona.", "input": "Agent audio", "output": "Patient audio + transcript", "why": "Built-in turn detection and low latency, where a cascade would add about 1–2 s.", "claims": ["voice.harness"] } },
-      { "id": "capture", "label": "Transcripts + recordings", "sub": "12 saved calls", "col": 1, "row": 1,
-        "detail": { "purpose": "Durable evidence for every call.", "input": "Bridge logs, Twilio recordings", "output": ".txt / .json transcripts, dual-channel MP3", "why": "Makes each failure replayable and reviewable.", "claims": ["voice.scenarios"] } },
-      { "id": "judge", "label": "Claude judge", "sub": "schema-validated", "col": 2, "row": 1,
-        "detail": { "purpose": "Grades containment, task completion, rules, memory, safety and quality.", "input": "Transcript", "output": "Validated grade + bugs with evidence quotes", "why": "A different model from the speaker; malformed grades are rejected.", "claims": ["voice.judge", "voice.grade_validation"] } },
-      { "id": "vq", "label": "Voice-quality analysis", "sub": "VAD on dual channels", "col": 0, "row": 1,
-        "detail": { "purpose": "Measures talk-over, silence and turn gaps from the audio.", "input": "Dual-channel recordings", "output": "Per-call metrics", "observed": "0.3% talk-over, 43.9% silence, 0.5 s mean gap.", "why": "Puts numbers on 'the agent feels slow'.", "claims": ["voice.quality"] } },
-      { "id": "gate", "label": "Regression gate", "sub": "compare_runs.py · fail closed", "col": 4, "row": 1,
-        "detail": { "purpose": "Blocks a release on missing, malformed, unsafe or regressed results.", "input": "baseline.json + new scorecard", "output": "Pass or a list of failures", "observed": "Currently fails: 3 of 15 scenarios unrecorded.", "why": "An incomplete suite must not pass.", "claims": ["voice.gate", "voice.gate_honest", "voice.tests"] } }
+    "lanes": [
+      {
+        "row": 0,
+        "label": "Live call"
+      },
+      {
+        "row": 1,
+        "label": "After the call"
+      }
     ],
-    "edges": [ ["scenarios", "twilio"], ["twilio", "bridge"], ["bridge", "realtime"], ["bridge", "playback"], ["bridge", "capture"], ["capture", "judge"], ["capture", "vq"], ["judge", "gate"] ]
+    "nodes": [
+      {
+        "id": "scenarios",
+        "label": "Scenario matrix",
+        "sub": "15 personas · 5 categories",
+        "col": 0,
+        "row": 0,
+        "detail": {
+          "purpose": "Defines each synthetic patient's identity, goal and what to check.",
+          "input": "—",
+          "output": "System prompt for the patient",
+          "why": "Covers everyday tasks, rules, memory, safety and compliance.",
+          "claims": [
+            "voice.scenarios"
+          ]
+        }
+      },
+      {
+        "id": "twilio",
+        "label": "Twilio",
+        "sub": "outbound call + Media Streams",
+        "col": 1,
+        "row": 0,
+        "detail": {
+          "purpose": "Places the PSTN call and streams call audio over a WebSocket.",
+          "input": "Call request + TwiML <Connect><Stream>",
+          "output": "μ-law audio frames + marks",
+          "why": "Keeps the media loop visible and debuggable rather than hidden in a managed platform.",
+          "claims": [
+            "voice.harness"
+          ]
+        }
+      },
+      {
+        "id": "bridge",
+        "label": "FastAPI bridge",
+        "sub": "/media WebSocket",
+        "col": 2,
+        "row": 0,
+        "detail": {
+          "purpose": "Relays audio both ways, logs both sides and handles barge-in.",
+          "input": "Twilio frames / Realtime deltas",
+          "output": "Audio to the other side + transcript",
+          "why": "μ-law passes through without transcoding.",
+          "claims": [
+            "voice.harness",
+            "voice.ulaw",
+            "voice.bargein"
+          ]
+        }
+      },
+      {
+        "id": "playback",
+        "label": "PlaybackState",
+        "sub": "barge-in truncation",
+        "col": 3,
+        "row": 1,
+        "detail": {
+          "purpose": "Tracks generated vs acknowledged audio and computes the heard cutoff on interruption.",
+          "input": "Chunks, marks, speech_started",
+          "output": "conversation.item.truncate event",
+          "why": "Keeps the model's memory aligned with what the caller actually heard.",
+          "claims": [
+            "voice.playback_state",
+            "voice.bargein"
+          ]
+        }
+      },
+      {
+        "id": "realtime",
+        "label": "OpenAI Realtime",
+        "sub": "synthetic patient",
+        "col": 3,
+        "row": 0,
+        "detail": {
+          "purpose": "Speech-to-speech model playing the patient persona.",
+          "input": "Agent audio",
+          "output": "Patient audio + transcript",
+          "why": "Built-in turn detection and low latency, where a cascade would add about 1–2 s.",
+          "claims": [
+            "voice.harness"
+          ]
+        }
+      },
+      {
+        "id": "capture",
+        "label": "Transcripts + recordings",
+        "sub": "12 saved calls",
+        "col": 1,
+        "row": 1,
+        "detail": {
+          "purpose": "Durable evidence for every call.",
+          "input": "Bridge logs, Twilio recordings",
+          "output": ".txt / .json transcripts, dual-channel MP3",
+          "why": "Makes each failure replayable and reviewable.",
+          "claims": [
+            "voice.scenarios"
+          ]
+        }
+      },
+      {
+        "id": "judge",
+        "label": "Claude judge",
+        "sub": "schema-validated",
+        "col": 2,
+        "row": 1,
+        "detail": {
+          "purpose": "Grades containment, task completion, rules, memory, safety and quality.",
+          "input": "Transcript",
+          "output": "Validated grade + bugs with evidence quotes",
+          "why": "A different model from the speaker; malformed grades are rejected.",
+          "claims": [
+            "voice.judge",
+            "voice.grade_validation"
+          ]
+        }
+      },
+      {
+        "id": "vq",
+        "label": "Voice-quality analysis",
+        "sub": "VAD on dual channels",
+        "col": 0,
+        "row": 1,
+        "detail": {
+          "purpose": "Measures talk-over, silence and turn gaps from the audio.",
+          "input": "Dual-channel recordings",
+          "output": "Per-call metrics",
+          "observed": "0.3% talk-over, 43.9% silence, 0.5 s mean gap.",
+          "why": "Puts numbers on 'the agent feels slow'.",
+          "claims": [
+            "voice.quality"
+          ]
+        }
+      },
+      {
+        "id": "gate",
+        "label": "Regression gate",
+        "sub": "compare_runs.py · fail closed",
+        "col": 4,
+        "row": 1,
+        "detail": {
+          "purpose": "Blocks a release on missing, malformed, unsafe or regressed results.",
+          "input": "baseline.json + new scorecard",
+          "output": "Pass or a list of failures",
+          "observed": "Currently fails: 3 of 15 scenarios unrecorded.",
+          "why": "An incomplete suite must not pass.",
+          "claims": [
+            "voice.gate",
+            "voice.gate_honest",
+            "voice.tests"
+          ]
+        }
+      }
+    ],
+    "edges": [
+      [
+        "scenarios",
+        "twilio"
+      ],
+      [
+        "twilio",
+        "bridge"
+      ],
+      [
+        "bridge",
+        "realtime"
+      ],
+      [
+        "bridge",
+        "playback"
+      ],
+      [
+        "bridge",
+        "capture"
+      ],
+      [
+        "capture",
+        "judge"
+      ],
+      [
+        "capture",
+        "vq"
+      ],
+      [
+        "judge",
+        "gate"
+      ]
+    ]
   },
   {
-    "id": "arch.cliniq", "entity": "cliniq", "title": "ClinIQ",
+    "id": "arch.cliniq",
+    "entity": "cliniq",
+    "title": "ClinIQ",
     "note": "Three detectors evaluated on the same sample; the synthetic-claims workflow is a separate dataset.",
     "lanes": [],
     "nodes": [
-      { "id": "reviews", "label": "Public drug reviews", "sub": "52,184 rows", "col": 0, "row": 1,
-        "detail": { "purpose": "Source corpus.", "input": "—", "output": "Review text + condition/drug fields", "why": "Public, patient-written text; not EHR records.", "claims": ["cliniq.corpus"] } },
-      { "id": "pg", "label": "PostgreSQL", "sub": "11 tables + pgvector", "col": 1, "row": 1,
-        "detail": { "purpose": "Stores reviews, sources, embeddings, synthetic claims and results.", "input": "Loaded data", "output": "SQL + vector queries", "why": "Keeps structured data, provenance and embeddings in one queryable store.", "claims": ["cliniq.schema", "cliniq.pgvector"] } },
-      { "id": "rules", "label": "Rules detector", "sub": "F1 0.854", "col": 2, "row": 0,
-        "detail": { "purpose": "Keyword/vocabulary baseline.", "input": "Review text", "output": "Flag", "observed": "P 0.861 · R 0.847 · F1 0.854 (best F1).", "why": "A simple baseline to beat.", "claims": ["cliniq.comparison"] } },
-      { "id": "emb", "label": "Embedding detector", "sub": "cosine ≥ 0.32", "col": 2, "row": 1,
-        "detail": { "purpose": "Similarity to substance-use concepts.", "input": "384-d embeddings", "output": "Flag", "observed": "Recall 1.000 but 295 false positives (595/600 flagged).", "claims": ["cliniq.comparison"] } },
-      { "id": "llmrag", "label": "LLM + RAG", "sub": "Claude Haiku", "col": 2, "row": 2,
-        "detail": { "purpose": "LLM judgement over pgvector-retrieved context.", "input": "Review + retrieved guidance", "output": "Flag + rationale", "observed": "Precision 0.938 · recall 0.400.", "claims": ["cliniq.claude", "cliniq.comparison"] } },
-      { "id": "counts", "label": "Saved confusion counts", "sub": "metrics recomputed", "col": 3, "row": 1,
-        "detail": { "purpose": "Single source for every reported metric.", "input": "TP/FP/FN/TN per method", "output": "P/R/F1", "why": "Headline numbers cannot drift from the saved run.", "claims": ["cliniq.recompute"] } },
-      { "id": "workload", "label": "Workload planner", "sub": "alerts · misses · hours", "col": 4, "row": 1,
-        "detail": { "purpose": "Converts sensitivity and false-positive rate into review workload.", "input": "Counts + volume, prevalence, minutes/review", "output": "Expected alerts, missed signals, reviewer hours", "why": "The analyst's real decision is review capacity.", "claims": ["cliniq.workload"] } },
-      { "id": "clusters", "label": "UMAP + HDBSCAN", "sub": "subpopulations", "col": 3, "row": 0,
-        "detail": { "purpose": "Unsupervised discovery of review subpopulations.", "input": "Embeddings", "output": "Clusters", "claims": ["cliniq.clusters"] } },
-      { "id": "dash", "label": "Streamlit dashboard", "sub": "5 panels · live demo", "col": 5, "row": 1,
-        "detail": { "purpose": "Presents comparisons, trends and workload estimates.", "input": "Results tables", "output": "Interactive panels", "claims": ["cliniq.delivery"] } }
+      {
+        "id": "reviews",
+        "label": "Public drug reviews",
+        "sub": "52,184 rows",
+        "col": 0,
+        "row": 1,
+        "detail": {
+          "purpose": "Source corpus.",
+          "input": "—",
+          "output": "Review text + condition/drug fields",
+          "why": "Public, patient-written text; not EHR records.",
+          "claims": [
+            "cliniq.corpus"
+          ]
+        }
+      },
+      {
+        "id": "pg",
+        "label": "PostgreSQL",
+        "sub": "11 tables + pgvector",
+        "col": 1,
+        "row": 1,
+        "detail": {
+          "purpose": "Stores reviews, sources, embeddings, synthetic claims and results.",
+          "input": "Loaded data",
+          "output": "SQL + vector queries",
+          "why": "Keeps structured data, provenance and embeddings in one queryable store.",
+          "claims": [
+            "cliniq.schema",
+            "cliniq.pgvector"
+          ]
+        }
+      },
+      {
+        "id": "rules",
+        "label": "Rules detector",
+        "sub": "F1 0.854",
+        "col": 2,
+        "row": 0,
+        "detail": {
+          "purpose": "Keyword/vocabulary baseline.",
+          "input": "Review text",
+          "output": "Flag",
+          "observed": "P 0.861 · R 0.847 · F1 0.854 (best F1).",
+          "why": "A simple baseline to beat.",
+          "claims": [
+            "cliniq.comparison"
+          ]
+        }
+      },
+      {
+        "id": "emb",
+        "label": "Embedding detector",
+        "sub": "cosine ≥ 0.32",
+        "col": 2,
+        "row": 1,
+        "detail": {
+          "purpose": "Similarity to substance-use concepts.",
+          "input": "384-d embeddings",
+          "output": "Flag",
+          "observed": "Recall 1.000 but 295 false positives (595/600 flagged).",
+          "claims": [
+            "cliniq.comparison"
+          ]
+        }
+      },
+      {
+        "id": "llmrag",
+        "label": "LLM + RAG",
+        "sub": "Claude Haiku",
+        "col": 2,
+        "row": 2,
+        "detail": {
+          "purpose": "LLM judgement over pgvector-retrieved context.",
+          "input": "Review + retrieved guidance",
+          "output": "Flag + rationale",
+          "observed": "Precision 0.938 · recall 0.400.",
+          "claims": [
+            "cliniq.claude",
+            "cliniq.comparison"
+          ]
+        }
+      },
+      {
+        "id": "counts",
+        "label": "Saved confusion counts",
+        "sub": "metrics recomputed",
+        "col": 3,
+        "row": 1,
+        "detail": {
+          "purpose": "Single source for every reported metric.",
+          "input": "TP/FP/FN/TN per method",
+          "output": "P/R/F1",
+          "why": "Headline numbers cannot drift from the saved run.",
+          "claims": [
+            "cliniq.recompute"
+          ]
+        }
+      },
+      {
+        "id": "workload",
+        "label": "Workload planner",
+        "sub": "alerts · misses · hours",
+        "col": 4,
+        "row": 1,
+        "detail": {
+          "purpose": "Converts sensitivity and false-positive rate into review workload.",
+          "input": "Counts + volume, prevalence, minutes/review",
+          "output": "Expected alerts, missed signals, reviewer hours",
+          "why": "The analyst's real decision is review capacity.",
+          "claims": [
+            "cliniq.workload"
+          ]
+        }
+      },
+      {
+        "id": "clusters",
+        "label": "UMAP + HDBSCAN",
+        "sub": "subpopulations",
+        "col": 3,
+        "row": 0,
+        "detail": {
+          "purpose": "Unsupervised discovery of review subpopulations.",
+          "input": "Embeddings",
+          "output": "Clusters",
+          "claims": [
+            "cliniq.clusters"
+          ]
+        }
+      },
+      {
+        "id": "dash",
+        "label": "Streamlit dashboard",
+        "sub": "5 panels · live demo",
+        "col": 5,
+        "row": 1,
+        "detail": {
+          "purpose": "Presents comparisons, trends and workload estimates.",
+          "input": "Results tables",
+          "output": "Interactive panels",
+          "claims": [
+            "cliniq.delivery"
+          ]
+        }
+      }
     ],
-    "edges": [ ["reviews", "pg"], ["pg", "rules"], ["pg", "emb"], ["pg", "llmrag"], ["pg", "clusters"], ["rules", "counts"], ["emb", "counts"], ["llmrag", "counts"], ["counts", "workload"], ["workload", "dash"] ]
+    "edges": [
+      [
+        "reviews",
+        "pg"
+      ],
+      [
+        "pg",
+        "rules"
+      ],
+      [
+        "pg",
+        "emb"
+      ],
+      [
+        "pg",
+        "llmrag"
+      ],
+      [
+        "pg",
+        "clusters"
+      ],
+      [
+        "rules",
+        "counts"
+      ],
+      [
+        "emb",
+        "counts"
+      ],
+      [
+        "llmrag",
+        "counts"
+      ],
+      [
+        "counts",
+        "workload"
+      ],
+      [
+        "workload",
+        "dash"
+      ]
+    ]
   },
   {
-    "id": "arch.sssd", "entity": "sssd", "title": "Kinematics-conditioned Stable Diffusion",
+    "id": "arch.sssd",
+    "entity": "sssd",
+    "title": "Kinematics-conditioned Stable Diffusion",
     "note": "Training and inference path; diagnostics shown beneath.",
     "lanes": [],
     "nodes": [
-      { "id": "kin", "label": "Kinematics + gesture", "sub": "76-dim · 30 Hz", "col": 0, "row": 0,
-        "detail": { "purpose": "Robot motion for one video frame (four tool blocks × 19 fields) plus a gesture label.", "input": "JIGSAWS Suturing", "output": "Conditioning vector", "claims": ["sssd.encoder"] } },
-      { "id": "enc", "label": "KinematicEncoder", "sub": "→ [B, 77, 768]", "col": 1, "row": 0,
-        "detail": { "purpose": "Projects motion into the U-Net's cross-attention space, replacing CLIP text embeddings.", "input": "Kinematics + gesture id", "output": "77 conditioning tokens", "claims": ["sssd.encoder"] } },
-      { "id": "unet", "label": "SD U-Net + LoRA", "sub": "~1% trainable", "col": 2, "row": 0,
-        "detail": { "purpose": "Predicts noise in latent space, conditioned on motion.", "input": "Noisy latent, timestep, tokens", "output": "Denoised latent", "why": "LoRA on to_q/k/v/out keeps checkpoints small.", "claims": ["sssd.lora"] } },
-      { "id": "vae", "label": "Frozen VAE", "sub": "decode", "col": 3, "row": 0,
-        "detail": { "purpose": "Maps latents to RGB frames.", "input": "Latent", "output": "Frame", "why": "Frozen: it sets the fidelity ceiling.", "claims": ["sssd.lora", "sssd.diagnostics"] } },
-      { "id": "eval", "label": "Evaluation", "sub": "PSNR/SSIM · cross-pair · FID · flicker", "col": 4, "row": 0,
-        "detail": { "purpose": "Tests whether frames follow their own conditioning.", "input": "Real vs generated", "output": "Metrics + baselines", "claims": ["sssd.eval", "sssd.limit"] } },
-      { "id": "ddim", "label": "DDIM sampler", "sub": "diagnostics", "col": 2, "row": 1,
-        "detail": { "purpose": "Deterministic sampling used in the overfit test.", "input": "Noise", "output": "Latent trajectory", "claims": ["sssd.diagnostics"] } },
-      { "id": "diag", "label": "VAE ceiling + overfit test", "sub": "before GPU hours", "col": 3, "row": 1,
-        "detail": { "purpose": "Separates pipeline bugs from undertraining.", "input": "Real frames / one frame", "output": "Ceiling PSNR, overfit progression", "claims": ["sssd.diagnostics"] } }
+      {
+        "id": "kin",
+        "label": "Kinematics + gesture",
+        "sub": "76-dim · 30 Hz",
+        "col": 0,
+        "row": 0,
+        "detail": {
+          "purpose": "Robot motion for one video frame (four tool blocks × 19 fields) plus a gesture label.",
+          "input": "JIGSAWS Suturing",
+          "output": "Conditioning vector",
+          "claims": [
+            "sssd.encoder"
+          ]
+        }
+      },
+      {
+        "id": "enc",
+        "label": "KinematicEncoder",
+        "sub": "→ [B, 77, 768]",
+        "col": 1,
+        "row": 0,
+        "detail": {
+          "purpose": "Projects motion into the U-Net's cross-attention space, replacing CLIP text embeddings.",
+          "input": "Kinematics + gesture id",
+          "output": "77 conditioning tokens",
+          "claims": [
+            "sssd.encoder"
+          ]
+        }
+      },
+      {
+        "id": "unet",
+        "label": "SD U-Net + LoRA",
+        "sub": "~1% trainable",
+        "col": 2,
+        "row": 0,
+        "detail": {
+          "purpose": "Predicts noise in latent space, conditioned on motion.",
+          "input": "Noisy latent, timestep, tokens",
+          "output": "Denoised latent",
+          "why": "LoRA on to_q/k/v/out keeps checkpoints small.",
+          "claims": [
+            "sssd.lora"
+          ]
+        }
+      },
+      {
+        "id": "vae",
+        "label": "Frozen VAE",
+        "sub": "decode",
+        "col": 3,
+        "row": 0,
+        "detail": {
+          "purpose": "Maps latents to RGB frames.",
+          "input": "Latent",
+          "output": "Frame",
+          "why": "Frozen: it sets the fidelity ceiling.",
+          "claims": [
+            "sssd.lora",
+            "sssd.diagnostics"
+          ]
+        }
+      },
+      {
+        "id": "eval",
+        "label": "Evaluation",
+        "sub": "PSNR/SSIM · cross-pair · FID · flicker",
+        "col": 4,
+        "row": 0,
+        "detail": {
+          "purpose": "Tests whether frames follow their own conditioning.",
+          "input": "Real vs generated",
+          "output": "Metrics + baselines",
+          "claims": [
+            "sssd.eval",
+            "sssd.limit"
+          ]
+        }
+      },
+      {
+        "id": "ddim",
+        "label": "DDIM sampler",
+        "sub": "diagnostics",
+        "col": 2,
+        "row": 1,
+        "detail": {
+          "purpose": "Deterministic sampling used in the overfit test.",
+          "input": "Noise",
+          "output": "Latent trajectory",
+          "claims": [
+            "sssd.diagnostics"
+          ]
+        }
+      },
+      {
+        "id": "diag",
+        "label": "VAE ceiling + overfit test",
+        "sub": "before GPU hours",
+        "col": 3,
+        "row": 1,
+        "detail": {
+          "purpose": "Separates pipeline bugs from undertraining.",
+          "input": "Real frames / one frame",
+          "output": "Ceiling PSNR, overfit progression",
+          "claims": [
+            "sssd.diagnostics"
+          ]
+        }
+      }
     ],
-    "edges": [ ["kin", "enc"], ["enc", "unet"], ["unet", "vae"], ["vae", "eval"], ["ddim", "unet"], ["diag", "vae"] ]
+    "edges": [
+      [
+        "kin",
+        "enc"
+      ],
+      [
+        "enc",
+        "unet"
+      ],
+      [
+        "unet",
+        "vae"
+      ],
+      [
+        "vae",
+        "eval"
+      ],
+      [
+        "ddim",
+        "unet"
+      ],
+      [
+        "diag",
+        "vae"
+      ]
+    ]
   },
   {
-    "id": "arch.imw", "entity": "imw", "title": "Interview My Work (this system)",
-    "note": "The static site stays static. The AI path is optional, and the evidence engine works without it.",
+    "id": "arch.imw",
+    "entity": "imw",
+    "title": "Interview My Work (this system)",
+    "note": "The static site stays static. The AI path is optional, and the evidence engine works without it. The same evidence is also served to external AI clients over MCP.",
     "lanes": [],
     "nodes": [
-      { "id": "page", "label": "Portfolio page", "sub": "GitHub Pages, static", "col": 0, "row": 1,
-        "detail": { "purpose": "The existing site; loads about 1 KB of code until the workspace is opened.", "input": "Visitor", "output": "Lazy import of the workspace", "claims": ["imw.system"] } },
-      { "id": "engine", "label": "Evidence engine", "sub": "in the browser", "col": 1, "row": 0,
-        "detail": { "purpose": "Deterministic retrieval, role coverage, X-Ray, replays: no network needed.", "input": "Question / role / JD", "output": "Answer blocks citing claim ids", "claims": ["imw.system", "imw.evals"] } },
-      { "id": "db", "label": "Claim database", "sub": "status-gated", "col": 2, "row": 0,
-        "detail": { "purpose": "Verified, verification-required, unsupported and deprecated claims with sources and code links.", "input": "Curated JSON", "output": "Validated bundle", "claims": ["imw.system"] } },
-      { "id": "api", "label": "FastAPI", "sub": "Hugging Face Space", "col": 1, "row": 2,
-        "detail": { "purpose": "Holds the model key server-side; rate-limited.", "input": "Question + persona", "output": "Validated answer", "claims": ["imw.system"] } },
-      { "id": "ret", "label": "Claim retrieval", "sub": "verified + public only", "col": 2, "row": 2,
-        "detail": { "purpose": "Selects relevant verified claims and known gaps.", "input": "Question", "output": "Evidence pack", "claims": ["imw.system"] } },
-      { "id": "claude", "label": "Claude", "sub": "structured output", "col": 3, "row": 2,
-        "detail": { "purpose": "Writes the answer, citing claim ids only.", "input": "Evidence pack", "output": "JSON answer", "claims": ["imw.system"] } },
-      { "id": "validator", "label": "Answer validator", "sub": "citations · numbers · tone", "col": 4, "row": 2,
-        "detail": { "purpose": "Rejects unknown citations, ungrounded numbers and hype language; falls back to the engine on failure.", "input": "Model output", "output": "Displayed answer", "claims": ["imw.system", "imw.evals"] } }
+      {
+        "id": "page",
+        "label": "Portfolio page",
+        "sub": "GitHub Pages, static",
+        "col": 0,
+        "row": 1,
+        "detail": {
+          "purpose": "The existing site; loads about 1 KB of code until the workspace is opened.",
+          "input": "Visitor",
+          "output": "Lazy import of the workspace",
+          "claims": [
+            "imw.system"
+          ]
+        }
+      },
+      {
+        "id": "engine",
+        "label": "Evidence engine",
+        "sub": "in the browser",
+        "col": 1,
+        "row": 0,
+        "detail": {
+          "purpose": "Deterministic retrieval, role coverage, X-Ray, replays: no network needed.",
+          "input": "Question / role / JD",
+          "output": "Answer blocks citing claim ids",
+          "claims": [
+            "imw.system",
+            "imw.evals"
+          ]
+        }
+      },
+      {
+        "id": "db",
+        "label": "Claim database",
+        "sub": "status-gated",
+        "col": 2,
+        "row": 0,
+        "detail": {
+          "purpose": "Verified, verification-required, unsupported and deprecated claims with sources and code links.",
+          "input": "Curated JSON",
+          "output": "Validated bundle",
+          "claims": [
+            "imw.system"
+          ]
+        }
+      },
+      {
+        "id": "api",
+        "label": "FastAPI",
+        "sub": "Hugging Face Space",
+        "col": 1,
+        "row": 2,
+        "detail": {
+          "purpose": "Holds the model key server-side; rate-limited.",
+          "input": "Question + persona",
+          "output": "Validated answer",
+          "claims": [
+            "imw.system"
+          ]
+        }
+      },
+      {
+        "id": "ret",
+        "label": "Claim retrieval",
+        "sub": "verified + public only",
+        "col": 2,
+        "row": 2,
+        "detail": {
+          "purpose": "Selects relevant verified claims and known gaps.",
+          "input": "Question",
+          "output": "Evidence pack",
+          "claims": [
+            "imw.system"
+          ]
+        }
+      },
+      {
+        "id": "claude",
+        "label": "Claude",
+        "sub": "structured output",
+        "col": 3,
+        "row": 2,
+        "detail": {
+          "purpose": "Writes the answer, citing claim ids only.",
+          "input": "Evidence pack",
+          "output": "JSON answer",
+          "claims": [
+            "imw.system"
+          ]
+        }
+      },
+      {
+        "id": "validator",
+        "label": "Answer validator",
+        "sub": "citations · numbers · tone",
+        "col": 4,
+        "row": 2,
+        "detail": {
+          "purpose": "Rejects unknown citations, ungrounded numbers and hype language; falls back to the engine on failure.",
+          "input": "Model output",
+          "output": "Displayed answer",
+          "claims": [
+            "imw.system",
+            "imw.evals"
+          ]
+        }
+      },
+      {
+        "id": "mcp",
+        "label": "MCP server",
+        "sub": "/mcp · 11 read-only tools",
+        "col": 3,
+        "row": 0,
+        "detail": {
+          "purpose": "Lets any MCP client query the verified evidence directly.",
+          "input": "Tool calls from an external AI",
+          "output": "Claims with sources, code links, coverage categories and a usage policy",
+          "why": "The visitor's own AI does the reasoning, so no model runs here and the same honesty rules travel with every result.",
+          "claims": [
+            "imw.mcp"
+          ]
+        }
+      },
+      {
+        "id": "clients",
+        "label": "Your AI",
+        "sub": "Claude Code · Cursor · VS Code",
+        "col": 4,
+        "row": 0,
+        "detail": {
+          "purpose": "External assistants connected over Streamable HTTP.",
+          "input": "The visitor's question",
+          "output": "An answer citing claim ids and links",
+          "why": "Evidence reaches reviewers inside the tools they already use.",
+          "claims": [
+            "imw.mcp"
+          ]
+        }
+      }
     ],
-    "edges": [ ["page", "engine"], ["engine", "db"], ["page", "api"], ["api", "ret"], ["ret", "claude"], ["claude", "validator"], ["db", "ret"] ]
+    "edges": [
+      [
+        "page",
+        "engine"
+      ],
+      [
+        "engine",
+        "db"
+      ],
+      [
+        "page",
+        "api"
+      ],
+      [
+        "api",
+        "ret"
+      ],
+      [
+        "ret",
+        "claude"
+      ],
+      [
+        "claude",
+        "validator"
+      ],
+      [
+        "db",
+        "ret"
+      ],
+      [
+        "db",
+        "mcp"
+      ],
+      [
+        "mcp",
+        "clients"
+      ]
+    ]
   }
 ]

@@ -61,6 +61,7 @@ export function AskView({ turns }: { turns: Turn[] }) {
                 <button key={p.id} role="radio" aria-checked={persona === p.id} class={persona === p.id ? 'is-on' : ''} onClick={() => setPersona(p.id)}>{p.label}</button>
               ))}
             </div>
+            <p class="imw-help">Prefer your own assistant? <button class="imw-mini-link" onClick={() => go('connect')}>Connect Claude, Cursor or VS Code to this evidence →</button></p>
             <div class="imw-eyebrow">Start with</div>
             <div class="imw-starters">
               {STARTERS.map((s, i) => (

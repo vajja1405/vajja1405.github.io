@@ -16,6 +16,7 @@ The backend for the **Interview My Work** workspace on [vajja1405.github.io](htt
 - `POST /api/ask`: answers a question about Rahul's work from a curated, status-gated evidence pack. Claude returns schema-constrained JSON; every sentence must cite claim ids from the pack, every number must appear in its cited claims, and ranking or praise language is rejected. Invalid answers get one repair attempt and otherwise return `422`, so the browser falls back to its offline evidence engine.
 - `POST /api/jd`: extracts requirement phrases from a pasted job description. The browser maps them to evidence itself.
 - `GET /api/health`
+- `/mcp`: a public, read-only **MCP server** (Streamable HTTP, protocol 2026-07-28 plus the older handshake) exposing the same evidence to any MCP client. Eleven tools (search, skill evidence, job-description comparison, role coverage, projects, architecture, failures, code references, known gaps), two resources and a prompt. No model runs for MCP calls; results carry evidence strength and a usage policy. Connect from Claude Code with `claude mcp add --transport http rahul-vajja https://astra6-interview-my-work.hf.space/mcp`.
 
 Questions and job descriptions are never logged or stored. Only method, path, status and latency are logged.
 
@@ -29,6 +30,8 @@ Questions and job descriptions are never logged or stored. Only method, path, st
 | `IMW_ALLOWED_ORIGINS` | the portfolio, its Hugging Face preview, and localhost | CORS allowlist |
 | `IMW_ASK_PER_10MIN` | `12` | Questions per visitor per 10 minutes |
 | `IMW_DAILY_MODEL_CALLS` | `250` | Global daily cap on model calls (cost bound) |
+| `IMW_MCP_PER_10MIN` | `120` | MCP requests per client per 10 minutes |
+| `IMW_MCP_ALLOWED_HOSTS` | the Space host and localhost | Host headers accepted on `/mcp` |
 
 ## Development
 

@@ -1652,7 +1652,7 @@
       "related": [
         "classical_ml"
       ],
-      "statement": "Needs verification. The résumé reports '+19% recommendation accuracy' at TIFIN, but the portfolio describes those models as intent classification, entity extraction and retrieval ranking.",
+      "statement": "Needs verification. The résumé attributes a recommendation-accuracy gain to TIFIN, but the portfolio describes those models as intent classification, entity extraction and retrieval ranking.",
       "verify": true
     }
   ]

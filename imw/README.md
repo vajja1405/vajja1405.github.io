@@ -9,6 +9,7 @@ index.html (GitHub Pages)
        ├─ evidence/dist/evidence.json          ← built from evidence/*.json by scripts/build_evidence.py
        ├─ in-browser evidence engine           ← answers, role coverage, JD parsing, X-Ray, map, replays
        └─ optional API (Hugging Face Space)    ← api/: Claude writes prose; validator gates every answer
+                                                  also serves /mcp: the same evidence for external AI clients
 ```
 
 - **Evidence first.** Only `verified` + `public_safe` claims can be stated. Everything else is held back

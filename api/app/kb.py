@@ -21,7 +21,8 @@ STOP = set(
 def normalize(s: str) -> str:
     s = unicodedata.normalize("NFKD", s.lower())
     s = "".join(ch for ch in s if not unicodedata.combining(ch))
-    return re.sub(r"\s+", " ", s.replace("–", "-").replace("—", "-")).strip()
+    s = s.replace("–", "-").replace("—", "-").replace("’", "'").replace("‘", "'").replace("“", '"').replace("”", '"')
+    return re.sub(r"\s+", " ", s).strip()
 
 
 def stem(t: str) -> str:
@@ -49,7 +50,7 @@ class KB:
     entities: dict[str, dict] = field(default_factory=dict)
     skills: dict[str, dict] = field(default_factory=dict)
     gaps: dict[str, dict] = field(default_factory=dict)
-    aliases: list[tuple[re.Pattern, str, str]] = field(default_factory=list)  # (regex, concept id, kind)
+    aliases: list[tuple[re.Pattern, str, str, str]] = field(default_factory=list)  # (regex, concept id, kind, term)
     docs: list[tuple[dict, list[str]]] = field(default_factory=list)
     df: dict[str, int] = field(default_factory=dict)
     avg_len: float = 1.0
@@ -58,21 +59,21 @@ class KB:
     def statable_ids(self) -> set[str]:
         return {cid for cid, c in self.claims.items() if statable(c)}
 
-    def concepts(self, text: str) -> list[tuple[str, str]]:
-        t, taken, out = normalize(text), [], []
-        for rx, cid, kind in self.aliases:
+    def concepts(self, text: str) -> list[tuple[str, str, str]]:
+        """Greedy longest-match concept detection: (concept id, kind skill|gap|near, matched term)."""
+        t, taken, first = normalize(text), [], {}
+        for rx, cid, kind, term in self.aliases:
             for m in rx.finditer(t):
                 s, e = m.span()
                 if any(s < y and e > x for x, y in taken):
                     continue
                 taken.append((s, e))
-                if (cid, kind) not in out:
-                    out.append((cid, kind))
-        return out
+                first.setdefault((cid, kind, term if kind == "near" else ""), s)
+        return sorted(first, key=first.get)
 
     def retrieve(self, query: str, limit: int = 14, boost_entities: set[str] | None = None) -> list[dict]:
         q = set(tokens(query))
-        concepts = {cid for cid, kind in self.concepts(query) if kind == "skill"}
+        concepts = {cid for cid, kind, _ in self.concepts(query) if kind == "skill"}
         ents = boost_entities or set()
         n, k1, b = len(self.docs), 1.2, 0.75
         scored = []
@@ -132,11 +133,13 @@ def load_kb(path: str = str(BUNDLE)) -> KB:
     for s in raw["skills"]:
         for a in [s["name"], *s["aliases"]]:
             aliases.append((normalize(a), s["id"], "skill"))
+        for a in s.get("near", []):
+            aliases.append((normalize(a), s["id"], "near"))
     for g in raw["gaps"]:
         for a in g["aliases"]:
             aliases.append((normalize(a), g["id"], "gap"))
     aliases.sort(key=lambda x: -len(x[0]))
-    kb.aliases = [(alias_regex(a), cid, kind) for a, cid, kind in aliases if a]
+    kb.aliases = [(alias_regex(a), cid, kind, a) for a, cid, kind in aliases if a]
     for c in raw["claims"]:
         if not statable(c):
             continue

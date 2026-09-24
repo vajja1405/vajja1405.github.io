@@ -13,6 +13,7 @@ import { XRayView } from './XRay';
 import { MapView } from './Map';
 import { LabView } from './Lab';
 import { BriefView } from './Brief';
+import { ConnectView } from './Connect';
 import { EvidencePanel } from './Evidence';
 import { Rail } from './Rail';
 
@@ -25,6 +26,7 @@ const MODES: { id: Mode; label: string; hint: string }[] = [
   { id: 'map', label: 'Map', hint: 'The whole body of work as an evidence graph' },
   { id: 'lab', label: 'Proof lab', hint: 'Replays, break-it tests and live numbers' },
   { id: 'brief', label: 'Brief', hint: 'A 10-minute technical interview brief' },
+  { id: 'connect', label: 'Connect your AI', hint: 'Use this evidence from Claude, Cursor or VS Code over MCP' },
 ];
 
 // Intents where the model may write the prose. Structured intents (coverage, comparisons,
@@ -202,6 +204,7 @@ export function App({ kb, initial, register }: { kb: KB; initial: OpenOptions; r
               {mode === 'map' && <MapView />}
               {mode === 'lab' && <LabView />}
               {mode === 'brief' && <BriefView />}
+              {mode === 'connect' && <ConnectView />}
             </main>
             <aside class={`imw-right${inspect ? ' has-item' : ''}`} aria-label="Evidence"><EvidencePanel /></aside>
           </div>

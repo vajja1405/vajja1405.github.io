@@ -1,366 +1,2325 @@
 [
-  { "id": "dia.shipped", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+  {
+    "id": "dia.shipped",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The Drug Interaction Agent is deployed publicly: React and FastAPI are served from one non-root Docker container on a Hugging Face Space (CPU Basic).",
-    "tags": ["deployment", "docker", "fastapi", "frontend", "rest_api", "python"], "sources": ["dia_readme", "dia_live", "dia_smoke"],
-    "code": [ { "repo": "dia", "path": "Dockerfile", "label": "Dockerfile" } ] },
-  { "id": "dia.catalog", "entity": "dia", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "deployment",
+      "docker",
+      "fastapi",
+      "frontend",
+      "rest_api",
+      "python"
+    ],
+    "sources": [
+      "dia_readme",
+      "dia_live",
+      "dia_smoke"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "Dockerfile",
+        "label": "Dockerfile"
+      }
+    ]
+  },
+  {
+    "id": "dia.catalog",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Label review searches 23,651 RxNorm terminology entries (ingredients, combinations and brands). These are terms, not 23,651 clinically validated medicines.",
-    "tags": ["healthcare", "data_quality"], "sources": ["dia_readme", "site"], "metrics": [ { "label": "RxNorm terms", "value": "23,651" } ],
-    "code": [ { "repo": "dia", "path": "medication_review/catalog.py", "label": "Catalog search" } ] },
-  { "id": "dia.pairs", "entity": "dia", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "healthcare",
+      "data_quality"
+    ],
+    "sources": [
+      "dia_readme",
+      "site"
+    ],
+    "metrics": [
+      {
+        "label": "RxNorm terms",
+        "value": "23,651"
+      }
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "medication_review/catalog.py",
+        "label": "Catalog search"
+      }
+    ]
+  },
+  {
+    "id": "dia.pairs",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "A review accepts 2–20 medication concepts and inspects every unordered pair, up to 190 pairs.",
-    "tags": ["healthcare", "product_judgment"], "sources": ["dia_readme", "site"], "metrics": [ { "label": "Max pairs per review", "value": "190" } ],
-    "code": [ { "repo": "dia", "path": "tests/test_medication_review.py", "lines": [97, 103], "label": "Test: 20 medications → 190 pairs" } ] },
-  { "id": "dia.no_llm_review", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "healthcare",
+      "product_judgment"
+    ],
+    "sources": [
+      "dia_readme",
+      "site"
+    ],
+    "metrics": [
+      {
+        "label": "Max pairs per review",
+        "value": "190"
+      }
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "tests/test_medication_review.py",
+        "lines": [
+          97,
+          103
+        ],
+        "label": "Test: 20 medications → 190 pairs"
+      }
+    ]
+  },
+  {
+    "id": "dia.no_llm_review",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The public label-review path uses terminology matching and DailyMed label text with no LLM and no generated severity score. A missing mention is displayed as a coverage result, never as evidence of safety.",
-    "tags": ["provenance", "safety_testing", "healthcare", "product_judgment"], "sources": ["dia_readme", "site"],
-    "code": [ { "repo": "dia", "path": "tests/test_medication_review.py", "lines": [178, 198], "label": "Test: v2 review has no LLM dependency" } ] },
-  { "id": "dia.ingredient_check", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "provenance",
+      "safety_testing",
+      "healthcare",
+      "product_judgment"
+    ],
+    "sources": [
+      "dia_readme",
+      "site"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "tests/test_medication_review.py",
+        "lines": [
+          178,
+          198
+        ],
+        "label": "Test: v2 review has no LLM dependency"
+      }
+    ]
+  },
+  {
+    "id": "dia.ingredient_check",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Retrieved labels are kept only when their active-ingredient set matches the selected RxNorm concept. Combination labels cannot stand in for a single ingredient, and negated mentions are not converted into risk.",
-    "tags": ["data_quality", "healthcare", "testing", "provenance"], "sources": ["dia_readme"],
+    "tags": [
+      "data_quality",
+      "healthcare",
+      "testing",
+      "provenance"
+    ],
+    "sources": [
+      "dia_readme"
+    ],
     "code": [
-      { "repo": "dia", "path": "medication_review/evidence.py", "lines": [58, 70], "label": "ingredient_set_matches()" },
-      { "repo": "dia", "path": "tests/test_medication_review.py", "lines": [65, 95], "label": "Tests: negation, missing source, combination labels" } ] },
-  { "id": "dia.bounded_retrieval", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "dia",
+        "path": "medication_review/evidence.py",
+        "lines": [
+          58,
+          70
+        ],
+        "label": "ingredient_set_matches()"
+      },
+      {
+        "repo": "dia",
+        "path": "tests/test_medication_review.py",
+        "lines": [
+          65,
+          95
+        ],
+        "label": "Tests: negation, missing source, combination labels"
+      }
+    ]
+  },
+  {
+    "id": "dia.bounded_retrieval",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Source retrieval is bounded: fixed NLM origins, bounded response sizes, four retrieval workers, per-medication and overall deadlines, and a 12-hour in-memory source cache that never stores an HTTP failure as an empty result.",
-    "tags": ["rest_api", "caching", "rate_limiting", "data_quality"], "sources": ["dia_readme"],
-    "code": [ { "repo": "dia", "path": "tests/test_medication_review.py", "lines": [112, 140], "label": "Test: HTTP failure is not cached as 'no label'" } ] },
-  { "id": "dia.admission", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "rest_api",
+      "caching",
+      "rate_limiting",
+      "data_quality"
+    ],
+    "sources": [
+      "dia_readme"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "tests/test_medication_review.py",
+        "lines": [
+          112,
+          140
+        ],
+        "label": "Test: HTTP failure is not cached as 'no label'"
+      }
+    ]
+  },
+  {
+    "id": "dia.admission",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Public review admission allows two concurrent requests and 1,000 requests per process per UTC day; the endpoint allows five reviews per minute per client IP.",
-    "tags": ["rate_limiting", "rest_api", "deployment"], "sources": ["dia_readme"],
-    "code": [ { "repo": "dia", "path": "hosting_limits.py", "lines": [6, 20], "label": "AnalysisBudget admission control" } ] },
-  { "id": "dia.llm_bounds", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "rate_limiting",
+      "rest_api",
+      "deployment"
+    ],
+    "sources": [
+      "dia_readme"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "hosting_limits.py",
+        "lines": [
+          6,
+          20
+        ],
+        "label": "AnalysisBudget admission control"
+      }
+    ]
+  },
+  {
+    "id": "dia.llm_bounds",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Hosted LLM inference in the research mode is bounded to 1 concurrent uncached analysis, 50 uncached analyses per process per UTC day, 1,800 output tokens and 40 seconds per attempt.",
-    "tags": ["rate_limiting", "llm", "deployment"], "sources": ["dia_readme"],
-    "code": [ { "repo": "dia", "path": "tests/test_hosting.py", "lines": [6, 30], "label": "Tests: budget, daily allowance, long inputs" } ] },
-  { "id": "dia.llm_provider", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "rate_limiting",
+      "llm",
+      "deployment"
+    ],
+    "sources": [
+      "dia_readme"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "tests/test_hosting.py",
+        "lines": [
+          6,
+          30
+        ],
+        "label": "Tests: budget, daily allowance, long inputs"
+      }
+    ]
+  },
+  {
+    "id": "dia.llm_provider",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The hosted RAG research mode calls Qwen/Qwen3-4B-Instruct-2507 through Hugging Face Inference Providers, with the credential stored as a runtime secret. The explanation model is configurable through an OpenAI-compatible LangChain client.",
-    "tags": ["llm", "llm_apis", "langchain", "deployment"], "sources": ["dia_readme", "dia_smoke"],
-    "code": [ { "repo": "dia", "path": "chatbot/interaction_agent.py", "lines": [530, 560], "label": "LLM client configuration" } ] },
-  { "id": "dia.rag_pipeline", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "llm",
+      "llm_apis",
+      "langchain",
+      "deployment"
+    ],
+    "sources": [
+      "dia_readme",
+      "dia_smoke"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "chatbot/interaction_agent.py",
+        "lines": [
+          530,
+          560
+        ],
+        "label": "LLM client configuration"
+      }
+    ]
+  },
+  {
+    "id": "dia.rag_pipeline",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The separate RAG research mode runs pair expansion → FAISS retrieval → structured / keyword / calibrated-model severity assessment → LLM explanation → versioned response cache, orchestrated as a six-stage agent pipeline.",
-    "tags": ["rag", "llm", "vector_db", "langchain", "agents", "python"], "sources": ["dia_readme", "dia_arch"],
-    "code": [ { "repo": "dia", "path": "chatbot/interaction_agent.py", "label": "DrugInteractionAgent (6 stages)" } ] },
-  { "id": "dia.retrieval", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "rag",
+      "llm",
+      "vector_db",
+      "langchain",
+      "agents",
+      "python"
+    ],
+    "sources": [
+      "dia_readme",
+      "dia_arch"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "chatbot/interaction_agent.py",
+        "label": "DrugInteractionAgent (6 stages)"
+      }
+    ]
+  },
+  {
+    "id": "dia.retrieval",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Retrieval runs an O(1) exact drug-pair lookup first and falls back to cosine search over 384-dimension all-MiniLM-L6-v2 embeddings in a FAISS inner-product index.",
-    "tags": ["rag", "vector_db", "embeddings", "semantic_search"], "sources": ["dia_arch"],
-    "code": [ { "repo": "dia", "path": "rag_pipeline/retriever.py", "lines": [295, 325], "label": "retrieve_for_pair(): exact → semantic" } ] },
-  { "id": "dia.entity_filter", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "rag",
+      "vector_db",
+      "embeddings",
+      "semantic_search"
+    ],
+    "sources": [
+      "dia_arch"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "rag_pipeline/retriever.py",
+        "lines": [
+          295,
+          325
+        ],
+        "label": "retrieve_for_pair(): exact → semantic"
+      }
+    ]
+  },
+  {
+    "id": "dia.entity_filter",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Semantic results are rejected unless the text mentions both queried drugs (or the metadata matches exactly), so the LLM is never handed an unrelated document to explain.",
-    "tags": ["rag", "provenance", "safety_testing", "semantic_search"], "sources": ["dia_arch"],
-    "code": [ { "repo": "dia", "path": "rag_pipeline/retriever.py", "lines": [330, 360], "label": "Entity-match filter" } ] },
-  { "id": "dia.four_tier", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "rag",
+      "provenance",
+      "safety_testing",
+      "semantic_search"
+    ],
+    "sources": [
+      "dia_arch"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "rag_pipeline/retriever.py",
+        "lines": [
+          330,
+          360
+        ],
+        "label": "Entity-match filter"
+      }
+    ]
+  },
+  {
+    "id": "dia.four_tier",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Severity uses four tiers (trusted structured metadata, clinical keyword rules, a TF-IDF Random Forest, and an 'Unknown' fallback), with explicit consensus rules when keyword and model results disagree.",
-    "tags": ["classical_ml", "nlp", "model_comparison"], "sources": ["dia_arch"],
-    "code": [ { "repo": "dia", "path": "models/interaction_classifier.py", "lines": [150, 205], "label": "InteractionClassifier.classify()" } ] },
-  { "id": "dia.calibration", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "classical_ml",
+      "nlp",
+      "model_comparison"
+    ],
+    "sources": [
+      "dia_arch"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "models/interaction_classifier.py",
+        "lines": [
+          150,
+          205
+        ],
+        "label": "InteractionClassifier.classify()"
+      }
+    ]
+  },
+  {
+    "id": "dia.calibration",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The Random Forest pipeline is wrapped in isotonic calibration with 3-fold cross-validation (CalibratedClassifierCV). Calibration-fold data does not fit the TF-IDF vocabulary.",
-    "tags": ["calibration", "classical_ml", "cross_validation", "feature_engineering"], "sources": ["dia_readme", "site"],
+    "tags": [
+      "calibration",
+      "classical_ml",
+      "cross_validation",
+      "feature_engineering"
+    ],
+    "sources": [
+      "dia_readme",
+      "site"
+    ],
     "code": [
-      { "repo": "dia", "path": "models/severity_classifier.py", "lines": [773, 800], "label": "RandomForestSeverityClassifier" },
-      { "repo": "dia", "path": "tests/test_repairs.py", "lines": [28, 40], "label": "Test: calibration fits features inside each fold" } ] },
-  { "id": "dia.regression24", "entity": "dia", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "dia",
+        "path": "models/severity_classifier.py",
+        "lines": [
+          773,
+          800
+        ],
+        "label": "RandomForestSeverityClassifier"
+      },
+      {
+        "repo": "dia",
+        "path": "tests/test_repairs.py",
+        "lines": [
+          28,
+          40
+        ],
+        "label": "Test: calibration fits features inside each fold"
+      }
+    ]
+  },
+  {
+    "id": "dia.regression24",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "On a curated 24-pair severity regression set, the retriever-plus-classifier path matched all 24 expected severities: 22 through structured metadata, and 2 correctly returned 'Unknown'. The final LLM explanation is excluded, so this is not a clinical validation or a RAGAS evaluation.",
-    "tags": ["eval_design", "regression_testing", "metrics"], "sources": ["dia_validation", "site"],
-    "metrics": [ { "label": "Severity agreement", "value": "24 / 24" }, { "label": "Context precision", "value": "0.917" }, { "label": "Citation accuracy", "value": "0.917" } ],
-    "code": [ { "repo": "dia", "path": "evaluation/run_eval.py", "lines": [53, 120], "label": "run_evaluation()" } ] },
-  { "id": "dia.cache_identity", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "eval_design",
+      "regression_testing",
+      "metrics"
+    ],
+    "sources": [
+      "dia_validation",
+      "site"
+    ],
+    "metrics": [
+      {
+        "label": "Severity agreement",
+        "value": "24 / 24"
+      },
+      {
+        "label": "Context precision",
+        "value": "0.917"
+      },
+      {
+        "label": "Citation accuracy",
+        "value": "0.917"
+      }
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "evaluation/run_eval.py",
+        "lines": [
+          53,
+          120
+        ],
+        "label": "run_evaluation()"
+      }
+    ]
+  },
+  {
+    "id": "dia.cache_identity",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Response-cache keys are content-addressed: pipeline version, sorted drug names, an evidence hash, model, temperature and token settings. Failed generations are never cached as successes.",
-    "tags": ["caching", "rest_api", "research_methods"], "sources": ["dia_readme"],
+    "tags": [
+      "caching",
+      "rest_api",
+      "research_methods"
+    ],
+    "sources": [
+      "dia_readme"
+    ],
     "code": [
-      { "repo": "dia", "path": "cache_identity.py", "lines": [1, 15], "label": "pair_cache_key()" },
-      { "repo": "dia", "path": "tests/test_hosting.py", "lines": [41, 54], "label": "Test: model failure is explicit and not cached" } ] },
-  { "id": "dia.cache_backend", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "dia",
+        "path": "cache_identity.py",
+        "lines": [
+          1,
+          15
+        ],
+        "label": "pair_cache_key()"
+      },
+      {
+        "repo": "dia",
+        "path": "tests/test_hosting.py",
+        "lines": [
+          41,
+          54
+        ],
+        "label": "Test: model failure is explicit and not cached"
+      }
+    ]
+  },
+  {
+    "id": "dia.cache_backend",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The response cache uses Redis when REDIS_URL is configured and otherwise falls back to an in-process LRU cache with TTL and eviction.",
-    "tags": ["caching"], "sources": ["dia_arch"],
-    "code": [ { "repo": "dia", "path": "cache.py", "lines": [45, 90], "label": "PairCache (Redis or LRU)" } ] },
-  { "id": "dia.cache_smoke", "entity": "dia", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "caching"
+    ],
+    "sources": [
+      "dia_arch"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "cache.py",
+        "lines": [
+          45,
+          90
+        ],
+        "label": "PairCache (Redis or LRU)"
+      }
+    ]
+  },
+  {
+    "id": "dia.cache_smoke",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "A hosted smoke check (one known pair, one repeat request) recorded 5.8 s for the uncached request and 0.25 ms for the cache hit. It is a deployment smoke check, not a performance benchmark.",
-    "tags": ["caching", "deployment"], "sources": ["dia_smoke"],
-    "metrics": [ { "label": "Uncached (n=1)", "value": "5.8 s" }, { "label": "Cache hit (n=1)", "value": "0.25 ms" } ] },
-  { "id": "dia.frontend", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "caching",
+      "deployment"
+    ],
+    "sources": [
+      "dia_smoke"
+    ],
+    "metrics": [
+      {
+        "label": "Uncached (n=1)",
+        "value": "5.8 s"
+      },
+      {
+        "label": "Cache hit (n=1)",
+        "value": "0.25 ms"
+      }
+    ]
+  },
+  {
+    "id": "dia.frontend",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The interface is React + TypeScript (Vite) with a pair matrix, filters, pagination, quoted label context, source versions and a downloadable discussion report.",
-    "tags": ["frontend", "product_judgment"], "sources": ["dia_readme"],
-    "code": [ { "repo": "dia", "path": "frontend/src/MedicationReview.tsx", "label": "MedicationReview.tsx" } ] },
-  { "id": "dia.tests", "entity": "dia", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "frontend",
+      "product_judgment"
+    ],
+    "sources": [
+      "dia_readme"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "frontend/src/MedicationReview.tsx",
+        "label": "MedicationReview.tsx"
+      }
+    ]
+  },
+  {
+    "id": "dia.tests",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The repository has 41 pytest tests (API, classifier, hosting limits, medication review, cache repairs, retriever and Spark preprocessing) and 7 frontend tests. They check software behaviour, not medical accuracy. GitHub Actions runs classifier tests on pull requests and the integration suite on pushes to main.",
-    "tags": ["testing", "ci_cd"], "sources": ["dia_repo", "site"], "metrics": [ { "label": "pytest tests", "value": "41" } ],
-    "code": [ { "repo": "dia", "path": ".github/workflows/ci.yml", "label": "CI workflow" } ] },
-  { "id": "dia.spark", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "testing",
+      "ci_cd"
+    ],
+    "sources": [
+      "dia_repo",
+      "site"
+    ],
+    "metrics": [
+      {
+        "label": "pytest tests",
+        "value": "41"
+      }
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": ".github/workflows/ci.yml",
+        "label": "CI workflow"
+      }
+    ]
+  },
+  {
+    "id": "dia.spark",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "A PySpark preprocessing job normalises drug names, deduplicates interaction pairs and builds embeddable document text, with its own tests.",
-    "tags": ["pyspark", "etl", "data_quality"], "sources": ["dia_repo"],
-    "code": [ { "repo": "dia", "path": "data_pipeline/spark_preprocess.py", "lines": [109, 194], "label": "preprocess()" } ] },
-  { "id": "dia.privacy", "entity": "dia", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "pyspark",
+      "etl",
+      "data_quality"
+    ],
+    "sources": [
+      "dia_repo"
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "data_pipeline/spark_preprocess.py",
+        "lines": [
+          109,
+          194
+        ],
+        "label": "preprocess()"
+      }
+    ]
+  },
+  {
+    "id": "dia.privacy",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Label review does not persist a user's medication list or send it to a language-model provider.",
-    "tags": ["healthcare", "product_judgment"], "sources": ["dia_readme"] },
-  { "id": "dia.scope_limit", "entity": "dia", "kind": "limitation", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "healthcare",
+      "product_judgment"
+    ],
+    "sources": [
+      "dia_readme"
+    ]
+  },
+  {
+    "id": "dia.scope_limit",
+    "entity": "dia",
+    "kind": "limitation",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Limits: a research and source-review tool, not a clinically validated interaction checker. Label sampling can miss evidence, pairwise review does not model higher-order interactions, and generated-answer faithfulness is not evaluated.",
-    "tags": ["healthcare", "eval_design"], "sources": ["dia_readme", "site"] },
-  { "id": "dia.latency_20s", "entity": "dia", "kind": "metric", "status": "verification_required", "strength": "resume_only", "public_safe": false,
+    "tags": [
+      "healthcare",
+      "eval_design"
+    ],
+    "sources": [
+      "dia_readme",
+      "site"
+    ]
+  },
+  {
+    "id": "dia.latency_20s",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verification_required",
+    "strength": "resume_only",
+    "public_safe": false,
     "text": "Repeat-query latency was cut from 20+ seconds to under 100 ms with Redis caching.",
-    "tags": ["caching"], "sources": ["resume_v2"],
-    "note": "The repository records one hosted smoke check (5.8 s uncached vs 0.25 ms cached, n=1), and Redis is optional (LRU fallback). The 20+ s baseline is not documented." },
-  { "id": "dia.gpt4o", "entity": "dia", "kind": "fact", "status": "unsupported", "strength": "resume_only", "public_safe": false,
+    "tags": [
+      "caching"
+    ],
+    "sources": [
+      "resume_v2"
+    ],
+    "note": "The repository records one hosted smoke check (5.8 s uncached vs 0.25 ms cached, n=1), and Redis is optional (LRU fallback). The 20+ s baseline is not documented."
+  },
+  {
+    "id": "dia.gpt4o",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "unsupported",
+    "strength": "resume_only",
+    "public_safe": false,
     "text": "A GPT-4o fallback is the fourth tier of the severity classifier.",
-    "tags": ["llm_apis"], "sources": ["resume_v2"],
-    "note": "In the repository the fourth tier is an 'Unknown' fallback. The LLM writes explanations, not severity. The hosted model is Qwen3-4B, and the config default is gpt-4o-mini." },
-
-  { "id": "voice.harness", "entity": "voice", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "llm_apis"
+    ],
+    "sources": [
+      "resume_v2"
+    ],
+    "note": "In the repository the fourth tier is an 'Unknown' fallback. The LLM writes explanations, not severity. The hosted model is Qwen3-4B, and the config default is gpt-4o-mini."
+  },
+  {
+    "id": "voice.harness",
+    "entity": "voice",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "A Python/FastAPI harness places real phone calls to a healthcare AI phone agent as a synthetic patient, relaying audio between Twilio Media Streams and the OpenAI Realtime API over WebSockets.",
-    "tags": ["voice_ai", "twilio", "websockets", "realtime_audio", "fastapi", "python", "eval_design", "healthcare"], "sources": ["voice_readme", "voice_arch", "site"],
-    "code": [ { "repo": "voice", "path": "server.py", "lines": [179, 240], "label": "/media WebSocket bridge" } ] },
-  { "id": "voice.scenarios", "entity": "voice", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "voice_ai",
+      "twilio",
+      "websockets",
+      "realtime_audio",
+      "fastapi",
+      "python",
+      "eval_design",
+      "healthcare"
+    ],
+    "sources": [
+      "voice_readme",
+      "voice_arch",
+      "site"
+    ],
+    "code": [
+      {
+        "repo": "voice",
+        "path": "server.py",
+        "lines": [
+          179,
+          240
+        ],
+        "label": "/media WebSocket bridge"
+      }
+    ]
+  },
+  {
+    "id": "voice.scenarios",
+    "entity": "voice",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "15 scenarios across 5 categories (everyday tasks, rule conformance, memory, safety and compliance) are declared; 12 have saved historical calls with transcripts and recordings.",
-    "tags": ["eval_design", "safety_testing"], "sources": ["voice_readme", "site"],
-    "metrics": [ { "label": "Designed scenarios", "value": "15" }, { "label": "Recorded calls", "value": "12" } ],
-    "code": [ { "repo": "voice", "path": "scenarios.py", "label": "Scenario matrix" } ] },
-  { "id": "voice.ulaw", "entity": "voice", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "eval_design",
+      "safety_testing"
+    ],
+    "sources": [
+      "voice_readme",
+      "site"
+    ],
+    "metrics": [
+      {
+        "label": "Designed scenarios",
+        "value": "15"
+      },
+      {
+        "label": "Recorded calls",
+        "value": "12"
+      }
+    ],
+    "code": [
+      {
+        "repo": "voice",
+        "path": "scenarios.py",
+        "label": "Scenario matrix"
+      }
+    ]
+  },
+  {
+    "id": "voice.ulaw",
+    "entity": "voice",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Twilio and the Realtime API both use G.711 μ-law at 8 kHz, so audio passes through the bridge without transcoding.",
-    "tags": ["realtime_audio", "voice_ai"], "sources": ["voice_arch"] },
-  { "id": "voice.judge", "entity": "voice", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "realtime_audio",
+      "voice_ai"
+    ],
+    "sources": [
+      "voice_arch"
+    ]
+  },
+  {
+    "id": "voice.judge",
+    "entity": "voice",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Transcripts are graded by an LLM judge (Claude) that is a different model from the OpenAI voice model, so the speaker does not grade itself.",
-    "tags": ["llm_eval", "eval_design", "llm_apis"], "sources": ["voice_arch"],
-    "code": [ { "repo": "voice", "path": "analyzer.py", "lines": [87, 111], "label": "grade_with_judge()" } ] },
-  { "id": "voice.grade_validation", "entity": "voice", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "llm_eval",
+      "eval_design",
+      "llm_apis"
+    ],
+    "sources": [
+      "voice_arch"
+    ],
+    "code": [
+      {
+        "repo": "voice",
+        "path": "analyzer.py",
+        "lines": [
+          87,
+          111
+        ],
+        "label": "grade_with_judge()"
+      }
+    ]
+  },
+  {
+    "id": "voice.grade_validation",
+    "entity": "voice",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Judge output is schema-validated: booleans must be booleans, quality must be an integer from 1 to 5, and every reported bug needs a title, an evidence quote and why it matters.",
-    "tags": ["llm_eval", "structured_outputs", "eval_design", "testing"], "sources": ["voice_readme"],
+    "tags": [
+      "llm_eval",
+      "structured_outputs",
+      "eval_design",
+      "testing"
+    ],
+    "sources": [
+      "voice_readme"
+    ],
     "code": [
-      { "repo": "voice", "path": "grading.py", "lines": [16, 37], "label": "validate_grade()" },
-      { "repo": "voice", "path": "tests/test_grading_audio.py", "lines": [32, 40], "label": "Tests: malformed / missing evidence rejected" } ] },
-  { "id": "voice.manual_review", "entity": "voice", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "voice",
+        "path": "grading.py",
+        "lines": [
+          16,
+          37
+        ],
+        "label": "validate_grade()"
+      },
+      {
+        "repo": "voice",
+        "path": "tests/test_grading_audio.py",
+        "lines": [
+          32,
+          40
+        ],
+        "label": "Tests: malformed / missing evidence rejected"
+      }
+    ]
+  },
+  {
+    "id": "voice.manual_review",
+    "entity": "voice",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Every auto-graded call was reviewed by hand. Three classes of test-setup artifacts were excluded, leaving six calibrated findings: turn-taking, the PHI-authorization flow, ASR name capture, dead air, choppy audio, and service-type reconciliation.",
-    "tags": ["llm_eval", "error_analysis", "eval_design"], "sources": ["voice_findings"],
-    "metrics": [ { "label": "Calibrated findings", "value": "6" }, { "label": "Artifact classes excluded", "value": "3" } ] },
-  { "id": "voice.safety_held", "entity": "voice", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "llm_eval",
+      "error_analysis",
+      "eval_design"
+    ],
+    "sources": [
+      "voice_findings"
+    ],
+    "metrics": [
+      {
+        "label": "Calibrated findings",
+        "value": "6"
+      },
+      {
+        "label": "Artifact classes excluded",
+        "value": "3"
+      }
+    ]
+  },
+  {
+    "id": "voice.safety_held",
+    "entity": "voice",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "In the recorded calls, the tested agent directed a chest-pain caller to 911, refused a prompt-injection request for its system prompt, and declined to advise doubling a medication dose.",
-    "tags": ["safety_testing", "eval_design"], "sources": ["voice_findings"],
-    "code": [ { "repo": "voice", "path": "transcripts/emergency_escalation-20260814-105400.txt", "label": "Transcript: emergency escalation" } ] },
-  { "id": "voice.quality", "entity": "voice", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "safety_testing",
+      "eval_design"
+    ],
+    "sources": [
+      "voice_findings"
+    ],
+    "code": [
+      {
+        "repo": "voice",
+        "path": "transcripts/emergency_escalation-20260814-105400.txt",
+        "label": "Transcript: emergency escalation"
+      }
+    ]
+  },
+  {
+    "id": "voice.quality",
+    "entity": "voice",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Measured from dual-channel recordings of 12 calls: 0.3% talk-over, 43.9% mid-call silence and a 0.5 s mean pause between turns. Energy-based voice-activity detection makes gap timings indicative.",
-    "tags": ["voice_ai", "metrics", "realtime_audio"], "sources": ["voice_quality"],
-    "metrics": [ { "label": "Talk-over", "value": "0.3%" }, { "label": "Mid-call silence", "value": "43.9%" }, { "label": "Mean turn gap", "value": "0.5 s" } ],
-    "code": [ { "repo": "voice", "path": "voice_quality.py", "lines": [76, 144], "label": "analyze() — VAD metrics" } ] },
-  { "id": "voice.cost_model", "entity": "voice", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "voice_ai",
+      "metrics",
+      "realtime_audio"
+    ],
+    "sources": [
+      "voice_quality"
+    ],
+    "metrics": [
+      {
+        "label": "Talk-over",
+        "value": "0.3%"
+      },
+      {
+        "label": "Mid-call silence",
+        "value": "43.9%"
+      },
+      {
+        "label": "Mean turn gap",
+        "value": "0.5 s"
+      }
+    ],
+    "code": [
+      {
+        "repo": "voice",
+        "path": "voice_quality.py",
+        "lines": [
+          76,
+          144
+        ],
+        "label": "analyze() — VAD metrics"
+      }
+    ]
+  },
+  {
+    "id": "voice.cost_model",
+    "entity": "voice",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "A transparent, editable money model prices failure types under stated, illustrative assumptions (for example about $8 of staff time per uncontained routine call). Safety and PHI items are flagged but left unpriced.",
-    "tags": ["cost_modeling", "product_judgment"], "sources": ["voice_findings"],
-    "code": [ { "repo": "voice", "path": "money_model.py", "label": "money_model.py" } ] },
-  { "id": "voice.bargein", "entity": "voice", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "cost_modeling",
+      "product_judgment"
+    ],
+    "sources": [
+      "voice_findings"
+    ],
+    "code": [
+      {
+        "repo": "voice",
+        "path": "money_model.py",
+        "label": "money_model.py"
+      }
+    ]
+  },
+  {
+    "id": "voice.bargein",
+    "entity": "voice",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Fixed barge-in handling in the realtime bridge. On an interruption it clears queued Twilio audio and truncates the model's conversation item to what the caller actually heard (conversation.item.truncate with audio_end_ms), so the model's memory stays in sync with the call.",
-    "tags": ["realtime_audio", "websockets", "error_analysis", "voice_ai"], "sources": ["voice_bargein_commit", "voice_readme"],
+    "tags": [
+      "realtime_audio",
+      "websockets",
+      "error_analysis",
+      "voice_ai"
+    ],
+    "sources": [
+      "voice_bargein_commit",
+      "voice_readme"
+    ],
     "code": [
-      { "repo": "voice", "path": "server.py", "lines": [299, 306], "label": "speech_started → truncate + clear" },
-      { "repo": "voice", "path": "playback.py", "lines": [48, 59], "label": "PlaybackState.interrupt()" } ] },
-  { "id": "voice.playback_state", "entity": "voice", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "voice",
+        "path": "server.py",
+        "lines": [
+          299,
+          306
+        ],
+        "label": "speech_started → truncate + clear"
+      },
+      {
+        "repo": "voice",
+        "path": "playback.py",
+        "lines": [
+          48,
+          59
+        ],
+        "label": "PlaybackState.interrupt()"
+      }
+    ]
+  },
+  {
+    "id": "voice.playback_state",
+    "entity": "voice",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Playback state separates generated audio from Twilio-acknowledged playback. It retires a response only after both generation and playback complete, discards late chunks from interrupted items, and does not treat marks returned after a clear as heard audio.",
-    "tags": ["realtime_audio", "testing"], "sources": ["voice_readme"],
+    "tags": [
+      "realtime_audio",
+      "testing"
+    ],
+    "sources": [
+      "voice_readme"
+    ],
     "code": [
-      { "repo": "voice", "path": "playback.py", "lines": [5, 59], "label": "PlaybackState" },
-      { "repo": "voice", "path": "tests/test_repairs.py", "lines": [10, 26], "label": "Tests: interrupt / cutoff / clear-ack" } ] },
-  { "id": "voice.gate", "entity": "voice", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "voice",
+        "path": "playback.py",
+        "lines": [
+          5,
+          59
+        ],
+        "label": "PlaybackState"
+      },
+      {
+        "repo": "voice",
+        "path": "tests/test_repairs.py",
+        "lines": [
+          10,
+          26
+        ],
+        "label": "Tests: interrupt / cutoff / clear-ack"
+      }
+    ]
+  },
+  {
+    "id": "voice.gate",
+    "entity": "voice",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "A regression gate (compare_runs.py) fails closed. It rejects missing scenarios, malformed scores, missing or failed safety results, dry-run grades, lost task completion and quality drops of 2 points or more.",
-    "tags": ["regression_testing", "eval_design", "safety_testing", "ci_cd"], "sources": ["voice_readme", "site"],
+    "tags": [
+      "regression_testing",
+      "eval_design",
+      "safety_testing",
+      "ci_cd"
+    ],
+    "sources": [
+      "voice_readme",
+      "site"
+    ],
     "code": [
-      { "repo": "voice", "path": "compare_runs.py", "lines": [9, 46], "label": "compare()" },
-      { "repo": "voice", "path": "tests/test_repairs.py", "lines": [27, 54], "label": "Tests: gate rules" } ] },
-  { "id": "voice.gate_honest", "entity": "voice", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "voice",
+        "path": "compare_runs.py",
+        "lines": [
+          9,
+          46
+        ],
+        "label": "compare()"
+      },
+      {
+        "repo": "voice",
+        "path": "tests/test_repairs.py",
+        "lines": [
+          27,
+          54
+        ],
+        "label": "Tests: gate rules"
+      }
+    ]
+  },
+  {
+    "id": "voice.gate_honest",
+    "entity": "voice",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The strict gate currently fails on the committed snapshots because 3 of 15 scenarios (provider_rule, multi_intent, spanish) have no recorded call. The suite was not shrunk and no passing calls were invented.",
-    "tags": ["eval_design", "regression_testing"], "sources": ["voice_readme"] },
-  { "id": "voice.tests", "entity": "voice", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "eval_design",
+      "regression_testing"
+    ],
+    "sources": [
+      "voice_readme"
+    ]
+  },
+  {
+    "id": "voice.tests",
+    "entity": "voice",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "26 offline tests run in GitHub Actions CI. No CI job places calls or spends LLM credits; the strict evidence audit runs only on manual dispatch.",
-    "tags": ["testing", "ci_cd"], "sources": ["voice_repo", "voice_readme"], "metrics": [ { "label": "Offline tests", "value": "26" } ],
-    "code": [ { "repo": "voice", "path": ".github/workflows/voice-eval.yml", "label": "CI workflow" } ] },
-  { "id": "voice.limit_live", "entity": "voice", "kind": "limitation", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "testing",
+      "ci_cd"
+    ],
+    "sources": [
+      "voice_repo",
+      "voice_readme"
+    ],
+    "metrics": [
+      {
+        "label": "Offline tests",
+        "value": "26"
+      }
+    ],
+    "code": [
+      {
+        "repo": "voice",
+        "path": ".github/workflows/voice-eval.yml",
+        "label": "CI workflow"
+      }
+    ]
+  },
+  {
+    "id": "voice.limit_live",
+    "entity": "voice",
+    "kind": "limitation",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Limits: bridge changes made after the recorded calls have offline tests only, and an authorized live rerun is still needed to validate them. These are synthetic-patient tests, not a patient deployment.",
-    "tags": ["eval_design"], "sources": ["voice_readme", "site"] },
-  { "id": "voice.limit_autograde", "entity": "voice", "kind": "limitation", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "eval_design"
+    ],
+    "sources": [
+      "voice_readme",
+      "site"
+    ]
+  },
+  {
+    "id": "voice.limit_autograde",
+    "entity": "voice",
+    "kind": "limitation",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The automated scorecard is intentionally aggressive; for example it marks refill_basic as a safety failure. The hand-reviewed FINDINGS report is the calibrated result, and no judge-agreement study was run.",
-    "tags": ["llm_eval"], "sources": ["voice_findings", "voice_scorecard"] },
-
-  { "id": "cliniq.corpus", "entity": "cliniq", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "llm_eval"
+    ],
+    "sources": [
+      "voice_findings",
+      "voice_scorecard"
+    ]
+  },
+  {
+    "id": "cliniq.corpus",
+    "entity": "cliniq",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "ClinIQ benchmarks substance-use signal detection over 52,184 public drug-review rows. These are not clinical EHR records or verified unique patients.",
-    "tags": ["nlp", "healthcare"], "sources": ["cliniq_readme", "site"], "metrics": [ { "label": "Public review rows", "value": "52,184" } ] },
-  { "id": "cliniq.comparison", "entity": "cliniq", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "nlp",
+      "healthcare"
+    ],
+    "sources": [
+      "cliniq_readme",
+      "site"
+    ],
+    "metrics": [
+      {
+        "label": "Public review rows",
+        "value": "52,184"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.comparison",
+    "entity": "cliniq",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "On a balanced 600-review sample (300 proxy positives, 300 proxy negatives): rules scored P 0.861 / R 0.847 / F1 0.854; the embedding detector P 0.504 / R 1.000 / F1 0.670; LLM+RAG P 0.938 / R 0.400 / F1 0.561.",
-    "tags": ["model_comparison", "metrics", "nlp", "rag", "embeddings", "llm_eval", "eval_design"], "sources": ["cliniq_results", "site"],
-    "metrics": [ { "label": "Rules F1", "value": "0.854" }, { "label": "Embedding recall", "value": "1.000" }, { "label": "LLM+RAG precision", "value": "0.938" } ],
-    "code": [ { "repo": "cliniq", "path": "outputs/method_comparison_results.csv", "label": "Saved confusion counts" } ] },
-  { "id": "cliniq.proxy_labels", "entity": "cliniq", "kind": "limitation", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "model_comparison",
+      "metrics",
+      "nlp",
+      "rag",
+      "embeddings",
+      "llm_eval",
+      "eval_design"
+    ],
+    "sources": [
+      "cliniq_results",
+      "site"
+    ],
+    "metrics": [
+      {
+        "label": "Rules F1",
+        "value": "0.854"
+      },
+      {
+        "label": "Embedding recall",
+        "value": "1.000"
+      },
+      {
+        "label": "LLM+RAG precision",
+        "value": "0.938"
+      }
+    ],
+    "code": [
+      {
+        "repo": "cliniq",
+        "path": "outputs/method_comparison_results.csv",
+        "label": "Saved confusion counts"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.proxy_labels",
+    "entity": "cliniq",
+    "kind": "limitation",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Limits: labels are keyword-derived proxies from condition and drug-name fields, not clinician-adjudicated diagnoses, and the 600-case model run was not repeated.",
-    "tags": ["eval_design", "research_methods"], "sources": ["cliniq_readme", "site"] },
-  { "id": "cliniq.schema", "entity": "cliniq", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "eval_design",
+      "research_methods"
+    ],
+    "sources": [
+      "cliniq_readme",
+      "site"
+    ]
+  },
+  {
+    "id": "cliniq.schema",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "An 11-table PostgreSQL schema holds reviews, CDC data, RAG embeddings with a source registry, synthetic-claims dimensions and facts, AI findings, method comparisons and temporal analysis.",
-    "tags": ["postgresql", "data_modeling", "sql"], "sources": ["cliniq_readme"],
-    "code": [ { "repo": "cliniq", "path": "db/schema.sql", "label": "schema.sql" } ] },
-  { "id": "cliniq.pgvector", "entity": "cliniq", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "postgresql",
+      "data_modeling",
+      "sql"
+    ],
+    "sources": [
+      "cliniq_readme"
+    ],
+    "code": [
+      {
+        "repo": "cliniq",
+        "path": "db/schema.sql",
+        "label": "schema.sql"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.pgvector",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "RAG embeddings are 384-dimension all-MiniLM-L6-v2 vectors stored in pgvector with an IVFFlat cosine index (lists=100).",
-    "tags": ["vector_db", "embeddings", "rag", "postgresql", "semantic_search"], "sources": ["cliniq_readme"],
+    "tags": [
+      "vector_db",
+      "embeddings",
+      "rag",
+      "postgresql",
+      "semantic_search"
+    ],
+    "sources": [
+      "cliniq_readme"
+    ],
     "code": [
-      { "repo": "cliniq", "path": "db/schema.sql", "lines": [39, 48], "label": "rag_embeddings vector(384)" },
-      { "repo": "cliniq", "path": "agent/build_rag.py", "lines": [373, 389], "label": "IVFFlat index build" } ] },
-  { "id": "cliniq.claude", "entity": "cliniq", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "cliniq",
+        "path": "db/schema.sql",
+        "lines": [
+          39,
+          48
+        ],
+        "label": "rag_embeddings vector(384)"
+      },
+      {
+        "repo": "cliniq",
+        "path": "agent/build_rag.py",
+        "lines": [
+          373,
+          389
+        ],
+        "label": "IVFFlat index build"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.claude",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The LLM+RAG detector and the clinical-bridge agent use Claude Haiku over context retrieved from pgvector.",
-    "tags": ["llm", "llm_apis", "rag"], "sources": ["cliniq_readme"],
-    "code": [ { "repo": "cliniq", "path": "agent/cliniq_agent.py", "lines": [33, 112], "label": "get_rag_context()" } ] },
-  { "id": "cliniq.clusters", "entity": "cliniq", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "llm",
+      "llm_apis",
+      "rag"
+    ],
+    "sources": [
+      "cliniq_readme"
+    ],
+    "code": [
+      {
+        "repo": "cliniq",
+        "path": "agent/cliniq_agent.py",
+        "lines": [
+          33,
+          112
+        ],
+        "label": "get_rag_context()"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.clusters",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "UMAP dimensionality reduction plus HDBSCAN density clustering identified review subpopulations.",
-    "tags": ["clustering"], "sources": ["cliniq_readme", "site"] },
-  { "id": "cliniq.recompute", "entity": "cliniq", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "clustering"
+    ],
+    "sources": [
+      "cliniq_readme",
+      "site"
+    ]
+  },
+  {
+    "id": "cliniq.recompute",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Dashboard metrics are recomputed from saved confusion counts rather than rounded headline numbers, and undefined precision is not reported as zero.",
-    "tags": ["research_methods", "metrics", "testing"], "sources": ["cliniq_readme"],
+    "tags": [
+      "research_methods",
+      "metrics",
+      "testing"
+    ],
+    "sources": [
+      "cliniq_readme"
+    ],
     "code": [
-      { "repo": "cliniq", "path": "analysis/evidence.py", "lines": [7, 28], "label": "metrics_from_counts()" },
-      { "repo": "cliniq", "path": "tests/test_detection.py", "lines": [15, 26], "label": "Tests: counts, undefined precision" } ] },
-  { "id": "cliniq.workload", "entity": "cliniq", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "cliniq",
+        "path": "analysis/evidence.py",
+        "lines": [
+          7,
+          28
+        ],
+        "label": "metrics_from_counts()"
+      },
+      {
+        "repo": "cliniq",
+        "path": "tests/test_detection.py",
+        "lines": [
+          15,
+          26
+        ],
+        "label": "Tests: counts, undefined precision"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.workload",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "A review-workload planner turns measured sensitivity and false-positive rate into expected alerts, missed signals and reviewer hours under explicit prevalence and review-time assumptions.",
-    "tags": ["product_judgment", "eval_design", "cost_modeling"], "sources": ["site", "cliniq_repo"],
+    "tags": [
+      "product_judgment",
+      "eval_design",
+      "cost_modeling"
+    ],
+    "sources": [
+      "site",
+      "cliniq_repo"
+    ],
     "code": [
-      { "repo": "cliniq", "path": "analysis/review_workload.py", "lines": [5, 21], "label": "estimate_workload()" },
-      { "repo": "cliniq", "path": "tests/test_review_workload.py", "label": "Tests" } ] },
-  { "id": "cliniq.delivery", "entity": "cliniq", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "cliniq",
+        "path": "analysis/review_workload.py",
+        "lines": [
+          5,
+          21
+        ],
+        "label": "estimate_workload()"
+      },
+      {
+        "repo": "cliniq",
+        "path": "tests/test_review_workload.py",
+        "label": "Tests"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.delivery",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Delivered as a 5-panel Streamlit dashboard with Docker Compose, GitHub Actions CI, 9 offline tests and a live demo on Hugging Face Spaces.",
-    "tags": ["dashboards", "docker", "ci_cd", "testing", "deployment"], "sources": ["cliniq_readme", "cliniq_demo", "site"],
-    "code": [ { "repo": "cliniq", "path": "streamlit_app/app.py", "label": "Streamlit app" } ] },
-  { "id": "cliniq.financial_corrected", "entity": "cliniq", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "dashboards",
+      "docker",
+      "ci_cd",
+      "testing",
+      "deployment"
+    ],
+    "sources": [
+      "cliniq_readme",
+      "cliniq_demo",
+      "site"
+    ],
+    "code": [
+      {
+        "repo": "cliniq",
+        "path": "streamlit_app/app.py",
+        "label": "Streamlit app"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.financial_corrected",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "An earlier $27.5M–$60M figure was a scenario (10,000 admissions × an assumed $2,750–$6,000), not measured revenue. It was replaced by an explicit hypothetical funnel, and per-claim payment impact now returns 'unknown' without validated payments.",
-    "tags": ["cost_modeling", "research_methods", "healthcare"], "sources": ["cliniq_readme", "site"],
+    "tags": [
+      "cost_modeling",
+      "research_methods",
+      "healthcare"
+    ],
+    "sources": [
+      "cliniq_readme",
+      "site"
+    ],
     "code": [
-      { "repo": "cliniq", "path": "analysis/evidence.py", "lines": [29, 54], "label": "opportunity_funnel() / claim_payment_delta()" },
-      { "repo": "cliniq", "path": "tests/test_detection.py", "lines": [27, 38], "label": "Test: unvalidated coding changes cannot generate revenue" } ] },
-  { "id": "cliniq.temporal", "entity": "cliniq", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "cliniq",
+        "path": "analysis/evidence.py",
+        "lines": [
+          29,
+          54
+        ],
+        "label": "opportunity_funnel() / claim_payment_delta()"
+      },
+      {
+        "repo": "cliniq",
+        "path": "tests/test_detection.py",
+        "lines": [
+          27,
+          38
+        ],
+        "label": "Test: unvalidated coding changes cannot generate revenue"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.temporal",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Exploratory temporal analysis found the share of reviews expressing distress rising from 1.7% (2008) to 30.5% (2017). Review trends cannot establish individual linkage or causation.",
-    "tags": ["research_methods", "healthcare"], "sources": ["cliniq_readme"] },
-  { "id": "cliniq.award", "entity": "cliniq", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "research_methods",
+      "healthcare"
+    ],
+    "sources": [
+      "cliniq_readme"
+    ]
+  },
+  {
+    "id": "cliniq.award",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "4th place, NSF NRT Research-A-Thon 2026 (Challenge 1, Track A: AI Modeling and Reasoning).",
-    "tags": ["research_methods"], "sources": ["cliniq_readme", "site"] },
-
-  { "id": "sssd.encoder", "entity": "sssd", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "research_methods"
+    ],
+    "sources": [
+      "cliniq_readme",
+      "site"
+    ]
+  },
+  {
+    "id": "sssd.encoder",
+    "entity": "sssd",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Replaced Stable Diffusion 1.5's CLIP text conditioning with a custom KinematicEncoder. It projects a 76-dimension JIGSAWS kinematics vector plus a gesture id into the U-Net's cross-attention space ([B, 77, 768]).",
-    "tags": ["diffusion", "deep_learning", "computer_vision", "research_methods"], "sources": ["sssd_repo", "site"],
-    "code": [ { "repo": "sssd", "path": "src/suturing_pipeline/synthesis/kinematic_encoder.py", "lines": [48, 110], "label": "KinematicEncoder" } ] },
-  { "id": "sssd.lora", "entity": "sssd", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "diffusion",
+      "deep_learning",
+      "computer_vision",
+      "research_methods"
+    ],
+    "sources": [
+      "sssd_repo",
+      "site"
+    ],
+    "code": [
+      {
+        "repo": "sssd",
+        "path": "src/suturing_pipeline/synthesis/kinematic_encoder.py",
+        "lines": [
+          48,
+          110
+        ],
+        "label": "KinematicEncoder"
+      }
+    ]
+  },
+  {
+    "id": "sssd.lora",
+    "entity": "sssd",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "LoRA on the U-Net cross-attention projections (to_q / to_k / to_v / to_out.0) keeps about 1% of parameters trainable; the VAE stays frozen.",
-    "tags": ["fine_tuning", "diffusion", "deep_learning"], "sources": ["sssd_repo"],
-    "code": [ { "repo": "sssd", "path": "scripts/train_sd.py", "label": "train_sd.py" } ] },
-  { "id": "sssd.eval", "entity": "sssd", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "fine_tuning",
+      "diffusion",
+      "deep_learning"
+    ],
+    "sources": [
+      "sssd_repo"
+    ],
+    "code": [
+      {
+        "repo": "sssd",
+        "path": "scripts/train_sd.py",
+        "label": "train_sd.py"
+      }
+    ]
+  },
+  {
+    "id": "sssd.eval",
+    "entity": "sssd",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Evaluation tooling includes PSNR / SSIM / histogram / edge-IoU on real-vs-generated grids, with cross-pair baselines that test whether outputs follow their own conditioning rather than a scene average. It also includes FID and optical-flow flicker detection.",
-    "tags": ["eval_design", "metrics", "computer_vision", "research_methods", "model_comparison"], "sources": ["sssd_repo"],
+    "tags": [
+      "eval_design",
+      "metrics",
+      "computer_vision",
+      "research_methods",
+      "model_comparison"
+    ],
+    "sources": [
+      "sssd_repo"
+    ],
     "code": [
-      { "repo": "sssd", "path": "scripts/metrics_on_grid.py", "lines": [110, 240], "label": "Grid metrics + cross-pair baseline" },
-      { "repo": "sssd", "path": "scripts/video_quality_metrics.py", "label": "Optical-flow flicker detection" } ] },
-  { "id": "sssd.diagnostics", "entity": "sssd", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "sssd",
+        "path": "scripts/metrics_on_grid.py",
+        "lines": [
+          110,
+          240
+        ],
+        "label": "Grid metrics + cross-pair baseline"
+      },
+      {
+        "repo": "sssd",
+        "path": "scripts/video_quality_metrics.py",
+        "label": "Optical-flow flicker detection"
+      }
+    ]
+  },
+  {
+    "id": "sssd.diagnostics",
+    "entity": "sssd",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Diagnostics measure the frozen VAE's reconstruction ceiling and run single-frame overfit tests with DDIM sampling. Together they separate pipeline bugs from undertraining before GPU hours are spent.",
-    "tags": ["error_analysis", "research_methods", "diffusion"], "sources": ["sssd_repo"],
+    "tags": [
+      "error_analysis",
+      "research_methods",
+      "diffusion"
+    ],
+    "sources": [
+      "sssd_repo"
+    ],
     "code": [
-      { "repo": "sssd", "path": "scripts/diagnose_vae.py", "lines": [116, 180], "label": "VAE ceiling diagnostic" },
-      { "repo": "sssd", "path": "scripts/overfit_one_frame.py", "lines": [141, 191], "label": "_run_ddim() in overfit test" } ] },
-  { "id": "sssd.limit", "entity": "sssd", "kind": "limitation", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "sssd",
+        "path": "scripts/diagnose_vae.py",
+        "lines": [
+          116,
+          180
+        ],
+        "label": "VAE ceiling diagnostic"
+      },
+      {
+        "repo": "sssd",
+        "path": "scripts/overfit_one_frame.py",
+        "lines": [
+          141,
+          191
+        ],
+        "label": "_run_ddim() in overfit test"
+      }
+    ]
+  },
+  {
+    "id": "sssd.limit",
+    "entity": "sssd",
+    "kind": "limitation",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Limits: reconstruction and image-quality metrics do not establish surgical accuracy or clinical usefulness.",
-    "tags": ["research_methods"], "sources": ["site"] },
-  { "id": "sssd.metric_values", "entity": "sssd", "kind": "metric", "status": "verification_required", "strength": "resume_only", "public_safe": false,
+    "tags": [
+      "research_methods"
+    ],
+    "sources": [
+      "site"
+    ]
+  },
+  {
+    "id": "sssd.metric_values",
+    "entity": "sssd",
+    "kind": "metric",
+    "status": "verification_required",
+    "strength": "resume_only",
+    "public_safe": false,
     "text": "Generated surgical frames reached PSNR 19–22 dB and SSIM 0.61–0.74.",
-    "tags": ["metrics"], "sources": ["resume_v2"], "note": "These values do not appear in the repository or on the site." },
-
-  { "id": "qml.benchmark", "entity": "qml", "kind": "metric", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "metrics"
+    ],
+    "sources": [
+      "resume_v2"
+    ],
+    "note": "These values do not appear in the repository or on the site."
+  },
+  {
+    "id": "qml.benchmark",
+    "entity": "qml",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Benchmarked CNN, QCNN (PennyLane), SVM and QSVM (Qiskit) on chest X-ray classification using AUROC, AUCPR and F1. The classical CNN reported AUROC 0.76.",
-    "tags": ["quantum_ml", "cnn", "computer_vision", "model_comparison", "metrics", "deep_learning"], "sources": ["qml_repo", "site"],
-    "metrics": [ { "label": "CNN AUROC", "value": "0.76" } ] },
-  { "id": "qml.xai", "entity": "qml", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "quantum_ml",
+      "cnn",
+      "computer_vision",
+      "model_comparison",
+      "metrics",
+      "deep_learning"
+    ],
+    "sources": [
+      "qml_repo",
+      "site"
+    ],
+    "metrics": [
+      {
+        "label": "CNN AUROC",
+        "value": "0.76"
+      }
+    ]
+  },
+  {
+    "id": "qml.xai",
+    "entity": "qml",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Used SHAP and Grad-CAM to inspect model behaviour and investigate errors. The findings were published as a research paper and poster.",
-    "tags": ["xai", "research_methods"], "sources": ["qml_repo", "qml_paper", "site"] },
-  { "id": "qml.audit", "entity": "qml", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+    "tags": [
+      "xai",
+      "research_methods"
+    ],
+    "sources": [
+      "qml_repo",
+      "qml_paper",
+      "site"
+    ]
+  },
+  {
+    "id": "qml.audit",
+    "entity": "qml",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "Added benchmark_audit.py, which requires paired run metadata before it will compute any runtime ratio (with offline tests).",
-    "tags": ["research_methods", "testing"], "sources": ["qml_repo"],
-    "code": [ { "repo": "qml", "path": "benchmark_audit.py", "lines": [10, 33], "label": "audit()" } ] },
-  { "id": "qml.speedup", "entity": "qml", "kind": "metric", "status": "verification_required", "strength": "public_artifact", "public_safe": false,
-    "text": "The QCNN trained 5× faster than the CNN.",
-    "tags": ["quantum_ml"], "sources": ["qml_repo", "resume_v2"], "note": "The repository says this result lacks run metadata and should not be advertised as a general quantum advantage." },
-
-  { "id": "tifin.role", "entity": "tifin", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "AI/ML Engineer Intern at TIFIN (contract, remote), Mar 2025 – May 2026, working on an AI portfolio copilot for investment questions and advisor preparation.",
-    "tags": ["fintech", "llm"], "sources": ["site", "resume_v2"] },
-  { "id": "tifin.models", "entity": "tifin", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "Supported three models in the copilot: query-intent classification, financial entity extraction and retrieval relevance ranking.",
-    "tags": ["nlp", "classical_ml", "deep_learning", "semantic_search", "fintech"], "sources": ["site"] },
-  { "id": "tifin.deploy", "entity": "tifin", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "Ownership included model deployment and monitoring on AWS SageMaker and GCP Vertex AI.",
-    "tags": ["sagemaker", "vertex_ai", "aws", "gcp", "deployment", "monitoring", "mlops"], "sources": ["site", "resume_v2"] },
-  { "id": "tifin.agents", "entity": "tifin", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "LangChain connected retrieval and analytical tools; LangGraph coordinated steps, shared state, validation and retries across three advisor workflows (meeting preparation, portfolio questions and research, and post-meeting summaries and follow-ups).",
-    "tags": ["langchain", "langgraph", "agents", "rag", "tool_calling", "workflow_automation", "llm", "fintech"], "sources": ["site", "resume_v2"] },
-  { "id": "tifin.structured", "entity": "tifin", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "The advisor copilots used tool calling and structured outputs under enterprise compliance controls, producing sourced briefings, answers and drafts for advisor review.",
-    "tags": ["structured_outputs", "tool_calling", "provenance", "fintech"], "sources": ["resume_v2", "site"] },
-  { "id": "tifin.reach", "entity": "tifin", "kind": "metric", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "The deployed AI capabilities reached 40,000+ users; 150+ users were in the automated-workflow group. Reach is not concurrent load.",
-    "tags": ["deployment", "fintech"], "sources": ["site", "resume_v2"], "metrics": [ { "label": "Users reached", "value": "40,000+" } ] },
-  { "id": "tifin.effort", "entity": "tifin", "kind": "metric", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "A 65% reduction in manual effort was reported across the three advisor workflows, including the review work that remained.",
-    "tags": ["workflow_automation", "product_judgment", "fintech"], "sources": ["site", "resume_v2"], "metrics": [ { "label": "Manual effort", "value": "−65%" } ] },
-  { "id": "tifin.snowflake", "entity": "tifin", "kind": "metric", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "Supporting Snowflake pipelines handled 5M+ daily data points (portfolio, account, transaction and usage data).",
-    "tags": ["snowflake", "etl", "sql", "fintech"], "sources": ["site", "resume_v2"], "metrics": [ { "label": "Daily data points", "value": "5M+" } ] },
-  { "id": "tifin.dq", "entity": "tifin", "kind": "metric", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "Automated data-quality audits covered 2M+ records, and 15% of the identified reliability gaps were resolved.",
-    "tags": ["data_quality", "etl"], "sources": ["site", "resume_v2"], "metrics": [ { "label": "Records audited", "value": "2M+" } ] },
-  { "id": "tifin.frameworks", "entity": "tifin", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "Model work used PyTorch, TensorFlow and scikit-learn.",
-    "tags": ["deep_learning", "classical_ml", "python"], "sources": ["resume_v2", "site"] },
-  { "id": "tifin.gains", "entity": "tifin", "kind": "metric", "status": "verification_required", "strength": "self_reported", "public_safe": false,
-    "text": "Model improvements of 19% in accuracy and 24% in F1.",
-    "tags": ["metrics"], "sources": ["site", "resume_v2"],
-    "note": "The site says baselines, exact task mapping and relative-vs-percentage-point definitions need confirmation. The résumé calls the first figure 'recommendation accuracy', while the site ties it to query-intent classification." },
-
-  { "id": "citizen.role", "entity": "citizen", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "AI Engineer at Citizen Health (May 2026 – present), building retrieval and source-linked summarization for a patient-advocacy product serving people with rare and complex conditions.",
-    "tags": ["rag", "provenance", "healthcare", "llm"], "sources": ["site"] },
-  { "id": "citizen.scope", "entity": "citizen", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "The work includes medical-record ingestion, normalization, entity resolution, schema checks and evaluation cases, in collaboration with clinicians, patient-community leads and engineers.",
-    "tags": ["etl", "data_quality", "eval_design", "stakeholder", "healthcare"], "sources": ["site"] },
-  { "id": "citizen.metrics", "entity": "citizen", "kind": "metric", "status": "deprecated", "strength": "resume_only", "public_safe": false,
-    "text": "5,000+ patients, 10,000+ records from 6 provider sources, a 300+ case release evaluation suite, a 6-person team.",
-    "tags": [], "sources": ["resume_v2", "target_roles"], "note": "Withdrawn as unverified (target roles analysis, 2026-09-22). Must not be stated." },
-
-  { "id": "athena.role", "entity": "athena", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "AI Engineering Intern at Athena (Jan – May 2024). Prototyped task planning, tool use and prompt orchestration for executive-assistant delegation workflows, wrote evaluation tests for agent behaviour, and refined prompts using reviewer feedback with product and software engineers.",
-    "tags": ["agents", "tool_calling", "prompt_engineering", "eval_design", "llm", "stakeholder"], "sources": ["site"] },
-  { "id": "athena.gain", "entity": "athena", "kind": "metric", "status": "unsupported", "strength": "resume_only", "public_safe": false,
-    "text": "Improved LLM instruction quality 15% on a reviewer-scored rubric across 20+ delegation workflows.",
-    "tags": [], "sources": ["resume_v2", "target_roles"], "note": "No confirmed numerical improvement for Athena (target roles analysis)." },
-
-  { "id": "nyc.forecast", "entity": "nyc", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
-    "text": "Analyzed 735,502 NYC Citi Bike trips across 51 start stations and compared four regression models on RMSLE; a tuned Random Forest performed best. Delivered through a Flask app and a Tableau dashboard as part of a team capstone.",
-    "tags": ["forecasting", "classical_ml", "sql", "dashboards", "feature_engineering", "model_comparison"], "sources": ["nyc_repo", "site"],
-    "metrics": [ { "label": "Trips", "value": "735,502" } ] },
-  { "id": "nyc.limit", "entity": "nyc", "kind": "limitation", "status": "verified", "strength": "public_artifact", "public_safe": true,
-    "text": "Numeric RMSLE scores were not preserved in the repository; only the model ranking is documented.",
-    "tags": ["metrics"], "sources": ["nyc_repo"] },
-
-  { "id": "dac.lead", "entity": "dac", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "Vice President of the Data Analytics Club at UMKC (Aug 2024 – May 2026). Led a 30+ member organization, ran practical Python, SQL and ML workshops, organized industry speaker sessions and mentored students.",
-    "tags": ["leadership", "stakeholder"], "sources": ["site"] },
-  { "id": "award.hackaroo", "entity": "dac", "kind": "fact", "status": "verification_required", "strength": "resume_only", "public_safe": false,
-    "text": "Guided a team to 3rd place in Quantum Computing at UMKC Hack-A-Roo 2025.",
-    "tags": ["leadership"], "sources": ["resume_v2"], "note": "Listed on the résumé and an earlier site version, but removed from the current site." },
-
-  { "id": "edu.ms", "entity": "education", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "M.S. in Computer Science with an AI emphasis, University of Missouri–Kansas City, May 2026.", "tags": [], "sources": ["site", "resume_v2"] },
-  { "id": "edu.bs", "entity": "education", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "B.S. in Computer Science, University of Missouri–Kansas City, May 2025.", "tags": [], "sources": ["site", "resume_v2"] },
-  { "id": "edu.certs", "entity": "education", "kind": "fact", "status": "verified", "strength": "self_reported", "public_safe": true,
-    "text": "Certifications: AI in Healthcare (Stanford School of Medicine); Supervised ML: Regression & Classification (Stanford Online); Facial Expression Recognition with PyTorch (Coursera); Predictive Modeling & ML with MATLAB (MathWorks); Fraud Detection with ML on GCP Vertex AI (Google Cloud).",
-    "tags": ["healthcare", "vertex_ai", "deep_learning"], "sources": ["site", "resume_v2"] },
-  { "id": "edu.ibm", "entity": "education", "kind": "fact", "status": "verification_required", "strength": "self_reported", "public_safe": false,
-    "text": "IBM Machine Learning Professional Certificate (Deep Learning & Reinforcement Learning), in progress.",
-    "tags": [], "sources": ["site"], "note": "Listed as in progress on the site; not listed on the current résumé." },
-
-  { "id": "imw.system", "entity": "imw", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
-    "text": "Interview My Work is a lazy-loaded TypeScript module on the static portfolio plus a FastAPI service. It answers only from status-gated claims, and a validator rejects unknown or unverified citations, ungrounded numbers and hype language before an answer is shown.",
-    "tags": ["rag", "llm", "provenance", "fastapi", "frontend", "llm_apis", "structured_outputs", "safety_testing", "rate_limiting", "deployment"], "sources": ["imw_repo"],
+    "tags": [
+      "research_methods",
+      "testing"
+    ],
+    "sources": [
+      "qml_repo"
+    ],
     "code": [
-      { "repo": "site", "path": "api/app/validate.py", "label": "Answer validator" },
-      { "repo": "site", "path": "imw/src/engine/answer.ts", "label": "In-browser evidence engine" } ] },
-  { "id": "imw.evals", "entity": "imw", "kind": "fact", "status": "verified", "strength": "public_artifact", "public_safe": true,
+      {
+        "repo": "qml",
+        "path": "benchmark_audit.py",
+        "lines": [
+          10,
+          33
+        ],
+        "label": "audit()"
+      }
+    ]
+  },
+  {
+    "id": "qml.speedup",
+    "entity": "qml",
+    "kind": "metric",
+    "status": "verification_required",
+    "strength": "public_artifact",
+    "public_safe": false,
+    "text": "The QCNN trained 5× faster than the CNN.",
+    "tags": [
+      "quantum_ml"
+    ],
+    "sources": [
+      "qml_repo",
+      "resume_v2"
+    ],
+    "note": "The repository says this result lacks run metadata and should not be advertised as a general quantum advantage."
+  },
+  {
+    "id": "tifin.role",
+    "entity": "tifin",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "AI/ML Engineer Intern at TIFIN (contract, remote), Mar 2025 – May 2026, working on an AI portfolio copilot for investment questions and advisor preparation.",
+    "tags": [
+      "fintech",
+      "llm"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ]
+  },
+  {
+    "id": "tifin.models",
+    "entity": "tifin",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Supported three models in the copilot: query-intent classification, financial entity extraction and retrieval relevance ranking.",
+    "tags": [
+      "nlp",
+      "classical_ml",
+      "deep_learning",
+      "semantic_search",
+      "fintech"
+    ],
+    "sources": [
+      "site"
+    ]
+  },
+  {
+    "id": "tifin.deploy",
+    "entity": "tifin",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Ownership included model deployment and monitoring on AWS SageMaker and GCP Vertex AI.",
+    "tags": [
+      "sagemaker",
+      "vertex_ai",
+      "aws",
+      "gcp",
+      "deployment",
+      "monitoring",
+      "mlops"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ]
+  },
+  {
+    "id": "tifin.agents",
+    "entity": "tifin",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "LangChain connected retrieval and analytical tools; LangGraph coordinated steps, shared state, validation and retries across three advisor workflows (meeting preparation, portfolio questions and research, and post-meeting summaries and follow-ups).",
+    "tags": [
+      "langchain",
+      "langgraph",
+      "agents",
+      "rag",
+      "tool_calling",
+      "workflow_automation",
+      "llm",
+      "fintech"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ]
+  },
+  {
+    "id": "tifin.structured",
+    "entity": "tifin",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "The advisor copilots used tool calling and structured outputs under enterprise compliance controls, producing sourced briefings, answers and drafts for advisor review.",
+    "tags": [
+      "structured_outputs",
+      "tool_calling",
+      "provenance",
+      "fintech"
+    ],
+    "sources": [
+      "resume_v2",
+      "site"
+    ]
+  },
+  {
+    "id": "tifin.reach",
+    "entity": "tifin",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "The deployed AI capabilities reached 40,000+ users; 150+ users were in the automated-workflow group. Reach is not concurrent load.",
+    "tags": [
+      "deployment",
+      "fintech"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ],
+    "metrics": [
+      {
+        "label": "Users reached",
+        "value": "40,000+"
+      }
+    ]
+  },
+  {
+    "id": "tifin.effort",
+    "entity": "tifin",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "A 65% reduction in manual effort was reported across the three advisor workflows, including the review work that remained.",
+    "tags": [
+      "workflow_automation",
+      "product_judgment",
+      "fintech"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ],
+    "metrics": [
+      {
+        "label": "Manual effort",
+        "value": "−65%"
+      }
+    ]
+  },
+  {
+    "id": "tifin.snowflake",
+    "entity": "tifin",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Supporting Snowflake pipelines handled 5M+ daily data points (portfolio, account, transaction and usage data).",
+    "tags": [
+      "snowflake",
+      "etl",
+      "sql",
+      "fintech"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ],
+    "metrics": [
+      {
+        "label": "Daily data points",
+        "value": "5M+"
+      }
+    ]
+  },
+  {
+    "id": "tifin.dq",
+    "entity": "tifin",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Automated data-quality audits covered 2M+ records, and 15% of the identified reliability gaps were resolved.",
+    "tags": [
+      "data_quality",
+      "etl"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ],
+    "metrics": [
+      {
+        "label": "Records audited",
+        "value": "2M+"
+      }
+    ]
+  },
+  {
+    "id": "tifin.frameworks",
+    "entity": "tifin",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Model work used PyTorch, TensorFlow and scikit-learn.",
+    "tags": [
+      "deep_learning",
+      "classical_ml",
+      "python"
+    ],
+    "sources": [
+      "resume_v2",
+      "site"
+    ]
+  },
+  {
+    "id": "tifin.gains",
+    "entity": "tifin",
+    "kind": "metric",
+    "status": "verification_required",
+    "strength": "self_reported",
+    "public_safe": false,
+    "text": "Model improvements of 19% in accuracy and 24% in F1.",
+    "tags": [
+      "metrics"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ],
+    "note": "The site says baselines, exact task mapping and relative-vs-percentage-point definitions need confirmation. The résumé calls the first figure 'recommendation accuracy', while the site ties it to query-intent classification."
+  },
+  {
+    "id": "citizen.role",
+    "entity": "citizen",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "AI Engineer at Citizen Health (May 2026 – present), building retrieval and source-linked summarization for a patient-advocacy product serving people with rare and complex conditions.",
+    "tags": [
+      "rag",
+      "provenance",
+      "healthcare",
+      "llm"
+    ],
+    "sources": [
+      "site"
+    ]
+  },
+  {
+    "id": "citizen.scope",
+    "entity": "citizen",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "The work includes medical-record ingestion, normalization, entity resolution, schema checks and evaluation cases, in collaboration with clinicians, patient-community leads and engineers.",
+    "tags": [
+      "etl",
+      "data_quality",
+      "eval_design",
+      "stakeholder",
+      "healthcare"
+    ],
+    "sources": [
+      "site"
+    ]
+  },
+  {
+    "id": "citizen.metrics",
+    "entity": "citizen",
+    "kind": "metric",
+    "status": "deprecated",
+    "strength": "resume_only",
+    "public_safe": false,
+    "text": "5,000+ patients, 10,000+ records from 6 provider sources, a 300+ case release evaluation suite, a 6-person team.",
+    "tags": [],
+    "sources": [
+      "resume_v2",
+      "target_roles"
+    ],
+    "note": "Withdrawn as unverified (target roles analysis, 2026-09-22). Must not be stated."
+  },
+  {
+    "id": "athena.role",
+    "entity": "athena",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "AI Engineering Intern at Athena (Jan – May 2024). Prototyped task planning, tool use and prompt orchestration for executive-assistant delegation workflows, wrote evaluation tests for agent behaviour, and refined prompts using reviewer feedback with product and software engineers.",
+    "tags": [
+      "agents",
+      "tool_calling",
+      "prompt_engineering",
+      "eval_design",
+      "llm",
+      "stakeholder"
+    ],
+    "sources": [
+      "site"
+    ]
+  },
+  {
+    "id": "athena.gain",
+    "entity": "athena",
+    "kind": "metric",
+    "status": "unsupported",
+    "strength": "resume_only",
+    "public_safe": false,
+    "text": "Improved LLM instruction quality 15% on a reviewer-scored rubric across 20+ delegation workflows.",
+    "tags": [],
+    "sources": [
+      "resume_v2",
+      "target_roles"
+    ],
+    "note": "No confirmed numerical improvement for Athena (target roles analysis)."
+  },
+  {
+    "id": "nyc.forecast",
+    "entity": "nyc",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Analyzed 735,502 NYC Citi Bike trips across 51 start stations and compared four regression models on RMSLE; a tuned Random Forest performed best. Delivered through a Flask app and a Tableau dashboard as part of a team capstone.",
+    "tags": [
+      "forecasting",
+      "classical_ml",
+      "sql",
+      "dashboards",
+      "feature_engineering",
+      "model_comparison"
+    ],
+    "sources": [
+      "nyc_repo",
+      "site"
+    ],
+    "metrics": [
+      {
+        "label": "Trips",
+        "value": "735,502"
+      }
+    ]
+  },
+  {
+    "id": "nyc.limit",
+    "entity": "nyc",
+    "kind": "limitation",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Numeric RMSLE scores were not preserved in the repository; only the model ranking is documented.",
+    "tags": [
+      "metrics"
+    ],
+    "sources": [
+      "nyc_repo"
+    ]
+  },
+  {
+    "id": "dac.lead",
+    "entity": "dac",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Vice President of the Data Analytics Club at UMKC (Aug 2024 – May 2026). Led a 30+ member organization, ran practical Python, SQL and ML workshops, organized industry speaker sessions and mentored students.",
+    "tags": [
+      "leadership",
+      "stakeholder"
+    ],
+    "sources": [
+      "site"
+    ]
+  },
+  {
+    "id": "award.hackaroo",
+    "entity": "dac",
+    "kind": "fact",
+    "status": "verification_required",
+    "strength": "resume_only",
+    "public_safe": false,
+    "text": "Guided a team to 3rd place in Quantum Computing at UMKC Hack-A-Roo 2025.",
+    "tags": [
+      "leadership"
+    ],
+    "sources": [
+      "resume_v2"
+    ],
+    "note": "Listed on the résumé and an earlier site version, but removed from the current site."
+  },
+  {
+    "id": "edu.ms",
+    "entity": "education",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "M.S. in Computer Science with an AI emphasis, University of Missouri–Kansas City, May 2026.",
+    "tags": [],
+    "sources": [
+      "site",
+      "resume_v2"
+    ]
+  },
+  {
+    "id": "edu.bs",
+    "entity": "education",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "B.S. in Computer Science, University of Missouri–Kansas City, May 2025.",
+    "tags": [],
+    "sources": [
+      "site",
+      "resume_v2"
+    ]
+  },
+  {
+    "id": "edu.certs",
+    "entity": "education",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Certifications: AI in Healthcare (Stanford School of Medicine); Supervised ML: Regression & Classification (Stanford Online); Facial Expression Recognition with PyTorch (Coursera); Predictive Modeling & ML with MATLAB (MathWorks); Fraud Detection with ML on GCP Vertex AI (Google Cloud).",
+    "tags": [
+      "healthcare",
+      "vertex_ai",
+      "deep_learning"
+    ],
+    "sources": [
+      "site",
+      "resume_v2"
+    ]
+  },
+  {
+    "id": "edu.ibm",
+    "entity": "education",
+    "kind": "fact",
+    "status": "verification_required",
+    "strength": "self_reported",
+    "public_safe": false,
+    "text": "IBM Machine Learning Professional Certificate (Deep Learning & Reinforcement Learning), in progress.",
+    "tags": [],
+    "sources": [
+      "site"
+    ],
+    "note": "Listed as in progress on the site; not listed on the current résumé."
+  },
+  {
+    "id": "imw.system",
+    "entity": "imw",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Interview My Work is a lazy-loaded TypeScript module on the static portfolio plus a FastAPI service. It answers only from status-gated claims, and a validator rejects unknown or unverified citations, ungrounded numbers and hype language before an answer is shown.",
+    "tags": [
+      "rag",
+      "llm",
+      "provenance",
+      "fastapi",
+      "frontend",
+      "llm_apis",
+      "structured_outputs",
+      "safety_testing",
+      "rate_limiting",
+      "deployment"
+    ],
+    "sources": [
+      "imw_repo"
+    ],
+    "code": [
+      {
+        "repo": "site",
+        "path": "api/app/validate.py",
+        "label": "Answer validator"
+      },
+      {
+        "repo": "site",
+        "path": "imw/src/engine/answer.ts",
+        "label": "In-browser evidence engine"
+      }
+    ]
+  },
+  {
+    "id": "imw.evals",
+    "entity": "imw",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
     "text": "The assistant ships with an evaluation suite covering unsupported skills, false premises, prompt injection, hype language, conflicting claims, role mapping and link correctness, and CI runs it on every change.",
-    "tags": ["llm_eval", "eval_design", "regression_testing", "safety_testing", "testing", "ci_cd"], "sources": ["imw_repo"],
-    "code": [ { "repo": "site", "path": "imw/tests/engine.test.ts", "label": "Engine evaluation suite" }, { "repo": "site", "path": "api/eval/cases.json", "label": "API red-team cases" } ] }
+    "tags": [
+      "llm_eval",
+      "eval_design",
+      "regression_testing",
+      "safety_testing",
+      "testing",
+      "ci_cd"
+    ],
+    "sources": [
+      "imw_repo"
+    ],
+    "code": [
+      {
+        "repo": "site",
+        "path": "imw/tests/engine.test.ts",
+        "label": "Engine evaluation suite"
+      },
+      {
+        "repo": "site",
+        "path": "api/eval/cases.json",
+        "label": "API red-team cases"
+      }
+    ]
+  },
+  {
+    "id": "imw.mcp",
+    "entity": "imw",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "The same verified evidence is exposed as a public, read-only MCP server with 11 tools (Streamable HTTP; protocol 2026-07-28 plus the older handshake), so any MCP client can query it. Every result carries its evidence strength and a usage policy, and no model runs on the server.",
+    "tags": [
+      "tool_calling",
+      "rest_api",
+      "fastapi",
+      "python",
+      "provenance",
+      "rate_limiting",
+      "deployment",
+      "agents"
+    ],
+    "sources": [
+      "imw_repo"
+    ],
+    "code": [
+      {
+        "repo": "site",
+        "path": "api/app/mcp_server.py",
+        "label": "MCP server and tools"
+      },
+      {
+        "repo": "site",
+        "path": "api/tests/test_mcp.py",
+        "label": "Protocol, parity and leak tests"
+      }
+    ]
+  }
 ]

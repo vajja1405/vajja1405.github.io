@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-09-23T21:58:56Z",
+  "generated_at": "2026-09-24T07:41:25Z",
   "suites": [
     {
       "name": "Engine: evidence integrity",
-      "passed": 2,
-      "total": 2,
+      "passed": 3,
+      "total": 3,
       "source": "imw/tests/engine.test.ts"
     },
     {
@@ -39,8 +39,8 @@
     },
     {
       "name": "API: answers must cite verified evidence and grounded numbers",
-      "passed": 8,
-      "total": 8,
+      "passed": 19,
+      "total": 19,
       "source": "api/tests/test_api.py"
     },
     {
@@ -57,8 +57,8 @@
     },
     {
       "name": "API: failure handling and rate limits",
-      "passed": 7,
-      "total": 7,
+      "passed": 9,
+      "total": 9,
       "source": "api/tests/test_api.py"
     }
   ]
