@@ -12,7 +12,12 @@ export default defineConfig({
     cssCodeSplit: false,
     sourcemap: false,
     lib: { entry: 'src/main.tsx', formats: ['es'], fileName: () => 'imw.js' },
-    rollupOptions: { output: { assetFileNames: 'imw.[ext]' } },
+    rollupOptions: {
+      // jsPDF's HTML renderer is never used; its optional peers stay out of the build.
+      external: ['html2canvas', 'dompurify', 'canvg'],
+      // jsPDF is split into its own chunk and only fetched when a visitor downloads a PDF.
+      output: { assetFileNames: 'imw.[ext]', chunkFileNames: 'chunks/[name]-[hash].js' },
+    },
   },
   server: { fs: { allow: ['..'] } },
   test: { environment: 'node', include: ['tests/**/*.test.ts'] },

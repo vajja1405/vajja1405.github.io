@@ -9,13 +9,14 @@ import { CliniqChart, VoiceQualityChart } from './charts';
 type Tab = 'why' | 'failures' | 'break' | 'evaluation' | 'code' | 'questions';
 
 export function XRayView() {
-  const { kb, modeArg, setInspect, inspect, ask } = useWs();
+  const { kb, modeArg, setInspect, inspect, ask, noteEntity } = useWs();
   const archs = kb.architectures;
   const [archId, setArchId] = useState(archs.find((a) => a.entity === modeArg)?.id ?? archs[0].id);
   const arch = archs.find((a) => a.id === archId)!;
   const [tab, setTab] = useState<Tab>('why');
 
   useEffect(() => { const m = archs.find((a) => a.entity === modeArg); if (m) setArchId(m.id); }, [modeArg]);
+  useEffect(() => { noteEntity(arch.entity); }, [arch.entity]);
 
   const e = kb.entity.get(arch.entity)!;
   const own = kb.statableByEntity.get(arch.entity) ?? [];

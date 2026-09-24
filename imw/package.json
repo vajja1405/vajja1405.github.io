@@ -13,6 +13,7 @@
     "eval": "vitest run --reporter=default --reporter=json --outputFile=../evidence/dist/.engine-eval.json && cd ../api && .venv/bin/python -m pytest -q --junitxml=../evidence/dist/.api-eval.xml && cd .. && python3 scripts/eval_report.py"
   },
   "dependencies": {
+    "jspdf": "^4.2.1",
     "preact": "^10.29.8"
   },
   "devDependencies": {

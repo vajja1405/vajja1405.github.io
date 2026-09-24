@@ -9,7 +9,7 @@ import { CoverageBar } from './charts';
 
 /** "Technical interview me": a deterministic, evidence-only briefing for a 10-minute review. */
 export function BriefView() {
-  const { kb, coverage, modeArg } = useWs();
+  const { kb, coverage, modeArg, setCoverage, go } = useWs();
   const [roleId, setRoleId] = useState(modeArg && kb.role.has(modeArg) ? modeArg : coverage?.roleId ?? 'applied_ai');
   useEffect(() => { if (modeArg && kb.role.has(modeArg)) setRoleId(modeArg); }, [modeArg]);
   const useCurrent = coverage?.source === 'jd' && !modeArg;
@@ -53,7 +53,7 @@ export function BriefView() {
             </label>
           )}
           <button class="imw-btn" onClick={async () => { try { await navigator.clipboard.writeText(md()); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch { /* ignore */ } }}>{copied ? 'Copied' : 'Copy as Markdown'}</button>
-          <button class="imw-btn" onClick={() => window.print()}>Print</button>
+          <button class="imw-btn" onClick={() => { setCoverage(a); go('export'); }}>Download PDF</button>
         </div>
         <CoverageBar counts={a.counts} compact />
       </header>

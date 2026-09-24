@@ -62,7 +62,7 @@ export function RoleView() {
     track('jd_analyzed', { requirements: a.requirements.length });
     if (api === 'ready') {
       setRefining(true);
-      parseJDRemote(jd).then((phrases) => { if (phrases.length) setCoverage(analyzeJD(kb, jd, phrases)); }).catch(() => {}).finally(() => setRefining(false));
+      parseJDRemote(jd).then((phrases) => { if (phrases.length) setCoverage(analyzeJD(kb, jd, phrases), a); }).catch(() => {}).finally(() => setRefining(false));
     }
   };
 
@@ -149,6 +149,7 @@ export function RoleView() {
             <button class="imw-btn" onClick={() => go('map', coverage.roleId)}>View on the evidence map</button>
             <button class="imw-btn" onClick={() => copy('link')}>{copied === 'link' ? 'Link copied' : 'Copy shareable link'}</button>
             <button class="imw-btn" onClick={() => copy('md')}>{copied === 'md' ? 'Summary copied' : 'Copy summary'}</button>
+            <button class="imw-btn" onClick={() => go('export')}>Download PDF</button>
           </div>
         </section>
       )}

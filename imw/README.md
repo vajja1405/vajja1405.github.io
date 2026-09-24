@@ -16,6 +16,9 @@ index.html (GitHub Pages)
   and explained (`evidence/CONFLICTS.md`).
 - **No scores.** Role and job-description analysis classify each requirement as direct evidence, related
   evidence, verification required, or not currently demonstrated.
+- **Take it with you.** Visitors can download a PDF of what they explored (their questions and answers, role
+  analyses, projects), written for their perspective. It is built in the browser (`src/dossier/`); jsPDF is a
+  separate chunk fetched only on download, and pasted job descriptions appear only as detected requirements.
 - **Fails soft.** If the API is asleep, rate-limited, or returns an answer that fails validation, the
   offline engine answers. If the module itself fails to load, the portfolio is unaffected.
 

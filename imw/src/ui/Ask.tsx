@@ -84,6 +84,11 @@ export function AskView({ turns }: { turns: Turn[] }) {
             {t.a && <AnswerView a={t.a} />}
           </section>
         ))}
+        {turns.some((t) => t.a) && !last?.pending && (
+          <p class="imw-keep">
+            Want to keep this? <button class="imw-mini-link" onClick={() => go('export')}>Download your questions and answers as a PDF →</button>
+          </p>
+        )}
       </div>
       <form class="imw-composer" onSubmit={(e) => { e.preventDefault(); submit(); }}>
         {jd && <p class="imw-jd-hint">This looks like a job description. Sending it runs an evidence-coverage analysis.</p>}
