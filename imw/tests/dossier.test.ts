@@ -43,7 +43,7 @@ describe('dossier content', () => {
 
   it.each(personas)('holds back unverified figures and never says contract (%s)', (persona) => {
     const text = dossierText(build(persona).nodes);
-    for (const f of ['19%', '24%', '5,000+', '10,000+', 'GPT-4o fallback', '20+ seconds', '19–22 dB', '5×', '5x faster']) expect(text).not.toContain(f);
+    for (const f of ['5,000+', '10,000+', '300+ case', 'GPT-4o fallback', '20+ seconds', 'IBM', '3rd place']) expect(text).not.toContain(f);
     expect(text).not.toMatch(/\bcontract(s|ed|or)?\b/i);
   });
 

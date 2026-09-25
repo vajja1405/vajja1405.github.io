@@ -6,6 +6,7 @@ import type { KB } from '../engine/kb';
 import { entityName, isStatable } from '../engine/kb';
 import { CATEGORY_LABEL } from '../engine/coverage';
 import { citedIds } from '../engine/answer';
+import { topicById } from '../engine/topics';
 import type { Answer, Block, Category, Claim, CoverageAnalysis, Entity, PersonaId } from '../engine/types';
 
 export type Tone = 'artifact' | 'self';
@@ -76,7 +77,7 @@ export const SECTION_LABEL: Record<SectionId, string> = {
   roles: 'Role and job-description evidence',
   projects: 'Projects and experience in detail',
   questions: 'Suggested interview questions',
-  gaps: 'Gaps and items held back',
+  gaps: 'Growth areas',
 };
 
 const WORK_KINDS = new Set(['project', 'research', 'experience']);
@@ -171,14 +172,21 @@ function coverageNodes(kb: KB, a: CoverageAnalysis, max = 99): Node[] {
 const sameAnalysis = (x: CoverageAnalysis, y: CoverageAnalysis) =>
   x.title === y.title && x.source === y.source && x.requirements.map((r) => r.id).join() === y.requirements.map((r) => r.id).join();
 
-interface Ctx { kb: KB; persona: PersonaId; lens: Lens; detailed: CoverageAnalysis[] }
+interface Ctx { kb: KB; persona: PersonaId; lens: Lens; detailed: CoverageAnalysis[]; shown: Set<string> }
 
 function blockNodes(x: Ctx, b: Block): Node[] {
   const { kb, persona, lens } = x;
   switch (b.type) {
     case 'p': return [{ t: 'p', text: b.text }];
+    case 'points': return [{ t: 'kv', items: b.items.map((i) => [i.label, i.text] as [string, string]) }];
+    case 'takeaway': return [{ t: 'note', text: b.text }];
     case 'note': return [{ t: 'note', text: b.text }];
-    case 'claims': return [...(b.title ? [{ t: 'h3', text: b.title } as Node] : []), ...claimNodes(kb, b.ids, lens)];
+    case 'claims': {
+      // Collapsed "Sources" repeat what the points already said; print only the ones that add something.
+      const ids = b.collapsed ? b.ids.filter((id) => !x.shown.has(kb.claim.get(id)?.text ?? '')) : b.ids;
+      const out = claimNodes(kb, ids, lens);
+      return out.length ? [...(b.title ? [{ t: 'h3', text: b.title } as Node] : []), ...out] : [];
+    }
     case 'entity': {
       const e = kb.entity.get(b.id);
       return e ? [{ t: 'p', text: `${e.name}: ${summaryFor(e, persona)}` }] : [];
@@ -224,13 +232,15 @@ function answerNodes(x: Ctx, a: Answer): Node[] {
   const { kb, lens } = x;
   const out: Node[] = [];
   const notes = new Set<string>();
+  x.shown.clear();
+  for (const b of a.blocks) if (b.type === 'points') b.items.forEach((i) => x.shown.add(i.text));
   for (const b of a.blocks) {
     for (const n of blockNodes(x, b)) {
       if (n.t === 'note') { if (notes.has(n.text)) continue; notes.add(n.text); }
       out.push(n);
     }
   }
-  const shown = new Set(a.blocks.flatMap((b) => (b.type === 'claims' ? b.ids : [])));
+  const shown = new Set(a.blocks.flatMap((b) => (b.type === 'claims' ? b.ids : b.type === 'points' ? b.items.flatMap((i) => i.cites) : [])));
   const cited = citedIds(a).filter((id) => !shown.has(id));
   const cites = claimNodes(kb, cited, lens).slice(0, 8);
   if (cites.length) out.push({ t: 'h3', text: 'Evidence cited' }, ...cites);
@@ -315,7 +325,7 @@ export function buildDossier(kb: KB, s: Session, o: Options): { title: string; n
     nodes.push({ t: 'kv', items: skills.map(([g, names]) => [g, names.join(', ')] as [string, string]) });
   }
 
-  const ctx: Ctx = { kb, persona: o.persona, lens, detailed: o.sections.roles ? s.analyses : [] };
+  const ctx: Ctx = { kb, persona: o.persona, lens, detailed: o.sections.roles ? s.analyses : [], shown: new Set() };
   if (o.sections.qa && answered.length) {
     nodes.push({ t: 'h1', text: SECTION_LABEL.qa, lead: 'Each answer was generated from the evidence database and checked before it was shown.' });
     answered.forEach((t, i) => {
@@ -353,13 +363,9 @@ export function buildDossier(kb: KB, s: Session, o: Options): { title: string; n
     nodes.push({ t: 'h1', text: SECTION_LABEL.gaps });
     const reqGaps = uniq(s.analyses.flatMap((a) => a.requirements.filter((r) => r.category === 'missing').map((r) => `${r.label}: ${r.statement ?? 'Not demonstrated in the evidence.'}`)));
     const gaps = reqGaps.length ? reqGaps : kb.gaps.filter((g) => !g.verify).slice(0, 6).map((g) => `${g.name}: ${g.statement}`);
-    nodes.push({ t: 'h3', text: reqGaps.length ? 'Not demonstrated for the roles you checked' : 'Not currently demonstrated' }, { t: 'bullets', items: gaps });
-    const held = kb.conflicts.map((c) => c.label).filter(Boolean);
-    if (held.length) {
-      nodes.push({ t: 'h3', text: 'Held back until verified' });
-      nodes.push({ t: 'p', text: 'These résumé items have no public source yet, so this document and the assistant do not state their figures. Ask Rahul about them directly.', muted: true });
-      nodes.push({ t: 'bullets', items: held });
-    }
+    nodes.push({ t: 'h3', text: reqGaps.length ? 'Not yet shown for the roles you checked' : 'Not yet part of his work' }, { t: 'bullets', items: gaps });
+    const learning = topicById(kb, 'learning');
+    if (learning?.takeaway) nodes.push({ t: 'h3', text: 'How he closes gaps' }, { t: 'p', text: learning.takeaway.text.replace(/^For your team: /, '') });
   }
 
   nodes.push({ t: 'h1', text: 'About this document', keep: 150 });

@@ -217,6 +217,13 @@
       "title": "This portfolio's source (Interview My Work)",
       "url": "https://github.com/vajja1405/vajja1405.github.io",
       "public": true
+    },
+    {
+      "id": "rahul_confirmed",
+      "type": "confirmation",
+      "title": "Confirmed by Rahul (2026-09-24)",
+      "public": false,
+      "note": "Rahul reviewed these résumé items and confirmed them for the portfolio."
     }
   ],
   "personas": [

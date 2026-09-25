@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T17:25:25Z",
+  "generated_at": "2026-09-25T05:16:52Z",
   "suites": [
     {
       "name": "Engine: dossier content",
@@ -15,8 +15,8 @@
     },
     {
       "name": "Engine: evidence integrity",
-      "passed": 4,
-      "total": 4,
+      "passed": 5,
+      "total": 5,
       "source": "imw/tests/engine.test.ts"
     },
     {
@@ -33,8 +33,8 @@
     },
     {
       "name": "Engine: safety and tone",
-      "passed": 8,
-      "total": 8,
+      "passed": 9,
+      "total": 9,
       "source": "imw/tests/engine.test.ts"
     },
     {
@@ -50,9 +50,15 @@
       "source": "imw/tests/engine.test.ts"
     },
     {
+      "name": "Engine: conversational answers",
+      "passed": 28,
+      "total": 28,
+      "source": "imw/tests/engine.test.ts"
+    },
+    {
       "name": "API: answers must cite verified evidence and grounded numbers",
-      "passed": 19,
-      "total": 19,
+      "passed": 22,
+      "total": 22,
       "source": "api/tests/test_api.py"
     },
     {

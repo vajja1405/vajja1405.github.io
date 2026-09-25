@@ -32,7 +32,7 @@ const MODES: { id: Mode; label: string; hint: string }[] = [
 
 // Intents where the model may write the prose. Structured intents (coverage, comparisons,
 // premise checks, refusals) always come from the deterministic engine.
-const MODEL_INTENTS = new Set(['retrieval', 'no_evidence', 'topic', 'entity', 'focused', 'skill', 'personally', 'scale', 'challenge', 'level', 'overview', 'shipped', 'beyond_wrappers', 'evaluation', 'strongest']);
+const MODEL_INTENTS = new Set(['retrieval', 'no_evidence', 'topic', 'topic_answer', 'reasoning', 'entity', 'focused', 'skill', 'personally', 'scale', 'challenge', 'level', 'overview', 'shipped', 'beyond_wrappers', 'evaluation', 'strongest']);
 const STRUCTURAL = new Set(['entity', 'claims', 'xray', 'chart', 'trace', 'decisions', 'failures']);
 
 export function App({ kb, initial, register }: { kb: KB; initial: OpenOptions; register: (fn: (o: OpenOptions) => void) => void }) {
@@ -148,7 +148,8 @@ export function App({ kb, initial, register }: { kb: KB; initial: OpenOptions; r
     go('ask');
     const id = Date.now();
     const lastEntities = [...turns].reverse().find((t) => t.a?.entities.length)?.a?.entities;
-    const local = answer(kb, q, { persona, roleId: coverage?.roleId, lastEntities });
+    const prev = [...turns].reverse().find((t) => t.a);
+    const local = answer(kb, q, { persona, roleId: coverage?.roleId, lastEntities, lastTopic: prev?.a?.topic, lastQuestion: prev?.q, lastIntent: prev?.a?.intent });
     const isJD = looksLikeJD(q);
     if (local.intent === 'jd' || local.intent === 'role') {
       const cov = local.blocks.find((b) => b.type === 'coverage');
@@ -172,10 +173,10 @@ export function App({ kb, initial, register }: { kb: KB; initial: OpenOptions; r
     const history = turns.filter((t) => t.a).slice(-3).map((t) => ({ q: t.q, cites: t.a!.basis?.retrieved?.slice(0, 8) ?? [] }));
     let final: Answer;
     try {
-      const m = await askModel(kb, q, persona, history, coverage?.roleId);
+      const m = await askModel(kb, q, persona, history, coverage?.roleId, local.topic);
       // The model writes the prose; the evidence engine supplies the inspectable structure.
-      const extra = local.blocks.filter((b) => STRUCTURAL.has(b.type)).map((b) => (b.type === 'claims' ? { ...b, title: b.title ?? 'Supporting evidence' } : b));
-      final = { ...m, blocks: [...m.blocks, ...extra], actions: local.actions, followups: m.followups.length ? m.followups : local.followups, entities: [...new Set([...m.entities, ...local.entities])] };
+      const extra = local.blocks.filter((b) => STRUCTURAL.has(b.type)).map((b) => (b.type === 'claims' ? { ...b, title: 'Sources', collapsed: true } : b));
+      final = { ...m, blocks: [...m.blocks, ...extra], actions: local.actions, followups: m.followups.length ? m.followups : local.followups, entities: [...new Set([...m.entities, ...local.entities])], topic: local.topic };
     } catch {
       final = { ...local, blocks: [{ type: 'note', tone: 'info', text: 'The AI service did not return a validated answer, so this one comes from the offline evidence engine.' }, ...local.blocks] };
     }

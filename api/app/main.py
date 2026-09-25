@@ -114,6 +114,8 @@ class AskRequest(BaseModel):
     persona: Literal["recruiter", "engineer", "manager", "founder", "researcher"] = "recruiter"
     history: list[Turn] = Field(default_factory=list, max_length=3)
     role: str | None = Field(default=None, max_length=40)
+    # A question family the browser recognised (teamwork, why hire...). Looked up server-side, never trusted as text.
+    topic: str | None = Field(default=None, max_length=40, pattern=r"^[a-z_]+$")
 
 
 class JDRequest(BaseModel):
@@ -128,11 +130,28 @@ def strength_label(c: dict) -> str:
     return "verified, public artifact" if c["strength"] == "public_artifact" else "verified, self-reported employment (no public artifact)"
 
 
+def topic_of(kb: KB, topic_id: str | None) -> dict | None:
+    topics = {t["id"]: t for t in kb.raw.get("topics", [])}
+    t = topics.get(topic_id or "")
+    if not t:
+        return None
+    base = topics.get(t.get("points_from") or "", {})
+    return {**t, "points": t.get("points") or base.get("points", []), "why": t.get("why") or base.get("why"),
+            "takeaway": t.get("takeaway") or base.get("takeaway")}
+
+
 def build_pack(kb: KB, req: AskRequest) -> tuple[str, set[str]]:
     history_text = " ".join(t.q for t in req.history)
     ents = find_entities(req.question) or find_entities(history_text)
-    claims = kb.retrieve(f"{req.question} {history_text}", limit=14, boost_entities=ents)
-    picked = {c["id"]: c for c in claims}
+    topic = topic_of(kb, req.topic)
+    picked: dict[str, dict] = {}
+    if topic:  # the claims behind the written answer come first, so they survive the pack limit
+        for cid in topic["lead"].get("cites", []) + [c for p in topic["points"] for c in p["cites"]]:
+            c = kb.claims.get(cid)
+            if c and statable(c):
+                picked.setdefault(cid, c)
+    for c in kb.retrieve(f"{req.question} {history_text}", limit=14, boost_entities=ents):
+        picked.setdefault(c["id"], c)
     for eid in ents:  # always give the model the stated limits of what it is discussing
         for c in kb.raw["claims"]:
             if c["entity"] == eid and c.get("kind") == "limitation" and statable(c):
@@ -152,7 +171,7 @@ def build_pack(kb: KB, req: AskRequest) -> tuple[str, set[str]]:
             gap_ids.append(g)
 
     lines = ["EVIDENCE PACK (the only facts you may state)"]
-    for c in list(picked.values())[:20]:
+    for c in list(picked.values())[:26 if topic else 20]:
         ent = kb.entities.get(c["entity"], {})
         lines.append(f"[{c['id']}] ({ent.get('short', c['entity'])} · entity id {c['entity']} · {strength_label(c)}) {c['text']}")
     lines.append("")
@@ -168,9 +187,16 @@ def build_pack(kb: KB, req: AskRequest) -> tuple[str, set[str]]:
         if gap:
             lines.append(f"[{g}] {gap['name']}: {gap['statement']}")
     lines.append("")
-    lines.append("UNVERIFIED (do not state these figures): " + "; ".join(cf["label"] for cf in kb.raw["conflicts"] if not cf["decision"].startswith("No conflict")))
+    lines.append("UNVERIFIED (do not state these figures): " + "; ".join(cf["label"] for cf in kb.raw["conflicts"] if cf.get("open")))
     lines.append(f"PROFILE: {kb.raw['subject']['level_note']}")
-    return "\n".join(lines), set(picked)
+    if topic:
+        lines.append("")
+        lines.append(f"TOPIC GUIDANCE (written for this portfolio; use it to shape the answer, cite the pack for every fact): {topic['title']}")
+        lines.append(f"Suggested direct answer: {topic['lead']['text']}")
+        if topic.get("why"):
+            lines.append(f"Why the evidence answers it: {topic['why']}")
+        lines.append("Reasons with their evidence: " + " | ".join(f"{p['label']} [{', '.join(p['cites'])}]" for p in topic["points"]))
+    return "\n".join(lines), set(list(picked)[:26 if topic else 20])
 
 
 # ---- Endpoints --------------------------------------------------------------------------------

@@ -42,7 +42,7 @@ export async function probe(onStatus: (s: ApiStatus) => void): Promise<void> {
 }
 
 interface ModelAnswer {
-  sentences: { text: string; cites: string[] }[];
+  sentences: { text: string; cites: string[]; kind?: 'lead' | 'point' | 'takeaway'; label?: string | null }[];
   hypothetical?: string | null;
   gaps?: string[];
   followups?: string[];
@@ -53,26 +53,37 @@ interface ModelAnswer {
 }
 
 /** Ask the model. Its output is re-validated here against the local evidence before display. */
-export async function askModel(kb: KB, question: string, persona: PersonaId, history: { q: string; cites: string[] }[], roleId?: string): Promise<Answer> {
+export async function askModel(kb: KB, question: string, persona: PersonaId, history: { q: string; cites: string[] }[], roleId?: string, topic?: string): Promise<Answer> {
   const data = (await fetchJSON('/api/ask', {
     method: 'POST', timeout: 30000,
-    body: JSON.stringify({ question, persona, history: history.slice(-3), role: roleId ?? null }),
+    body: JSON.stringify({ question, persona, history: history.slice(-3), role: roleId ?? null, topic: topic ?? null }),
   })) as ModelAnswer;
 
   const cites = data.sentences.flatMap((s) => s.cites);
-  const allText = [...data.sentences.map((s) => s.text), data.hypothetical ?? ''].join(' ');
+  const allText = [...data.sentences.map((s) => `${s.label ?? ''} ${s.text}`), data.hypothetical ?? ''].join(' ');
   if (!data.sentences.length || cites.some((id) => !isStatable(kb.claim.get(id))) || HYPE.test(allText)) {
     throw new Error('model answer failed client validation');
   }
 
   const blocks: Block[] = [];
-  let para: { text: string; cites: string[] } = { text: '', cites: [] };
-  for (const s of data.sentences) {
-    para.text += (para.text ? ' ' : '') + s.text.trim();
-    para.cites.push(...s.cites);
-    if (para.text.length > 320) { blocks.push({ type: 'p', text: para.text, cites: [...new Set(para.cites)] }); para = { text: '', cites: [] }; }
+  const structured = data.sentences.some((s) => s.kind === 'point' && s.label);
+  if (structured) {
+    // Lead sentence(s), then labeled points, then the bottom line: the same shape as the offline answers.
+    const lead = data.sentences.filter((s) => s.kind === 'lead');
+    const points = data.sentences.filter((s) => s.kind === 'point');
+    const take = data.sentences.filter((s) => s.kind === 'takeaway');
+    if (lead.length) blocks.push({ type: 'p', lead: true, text: lead.map((s) => s.text.trim()).join(' '), cites: [...new Set(lead.flatMap((s) => s.cites))] });
+    blocks.push({ type: 'points', items: points.map((s) => ({ label: (s.label || '').trim() || 'Evidence', text: s.text.trim(), cites: s.cites })) });
+    if (take.length) blocks.push({ type: 'takeaway', text: take.map((s) => s.text.trim()).join(' '), cites: [...new Set(take.flatMap((s) => s.cites))] });
+  } else {
+    let para: { text: string; cites: string[] } = { text: '', cites: [] };
+    for (const s of data.sentences) {
+      para.text += (para.text ? ' ' : '') + s.text.trim();
+      para.cites.push(...s.cites);
+      if (para.text.length > 320) { blocks.push({ type: 'p', text: para.text, cites: [...new Set(para.cites)], lead: !blocks.length }); para = { text: '', cites: [] }; }
+    }
+    if (para.text) blocks.push({ type: 'p', text: para.text, cites: [...new Set(para.cites)], lead: !blocks.length });
   }
-  if (para.text) blocks.push({ type: 'p', text: para.text, cites: [...new Set(para.cites)] });
   if (data.hypothetical) blocks.push({ type: 'note', tone: 'info', text: `Hypothetical, not implemented: ${data.hypothetical}` });
   const gaps = (data.gaps ?? []).map((g) => kb.gap.get(g)).filter(Boolean);
   if (gaps.length) blocks.push({ type: 'gaps', items: gaps.map((g) => ({ id: g!.id, name: g!.name, statement: g!.statement, closest: [] })) });

@@ -37,7 +37,7 @@ export function ExportView() {
       items: projects.ids.map((id) => entityName(kb, id)),
     },
     questions: { text: 'Questions that test the evidence rather than repeat it, including your gaps' },
-    gaps: { text: 'What is not demonstrated, and résumé figures held back until a source confirms them' },
+    gaps: { text: "What he hasn't done yet, and how he closes gaps" },
   };
   const available = (id: SectionId) => (id === 'qa' ? answered.length > 0 : id === 'roles' ? session.analyses.length > 0 : true);
   const file = filename(kb, lens);

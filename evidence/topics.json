@@ -1,0 +1,1149 @@
+[
+  {
+    "id": "team_problems",
+    "title": "Handling problems in a team",
+    "match": [
+      "team (problem|issue|conflict)",
+      "problems? (in|within|with) (a |the |his |your )?team",
+      "conflict",
+      "disagree",
+      "difficult (teammate|coworker|colleague|people|person|situation|stakeholder)",
+      "(handle|deal with|manage|resolve|solve|navigate) (team|people|interpersonal|workplace) (problems|issues|conflicts|situations)",
+      "push ?back",
+      "tension",
+      "friction"
+    ],
+    "lead": {
+      "text": "Yes. When a team hits a problem, Rahul's pattern is to make it visible and checkable, so the team decides on evidence rather than opinion, and then to fix the process so the problem doesn't come back.",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "He turns disagreements into explicit rules",
+        "text": "In the Drug Interaction Agent, explicit consensus rules decide when keyword rules and the model disagree on severity. In the voice-agent project, a release gate blocks a release on recorded evidence: missing scenarios, failed safety results or a drop in quality.",
+        "cites": [
+          "dia.four_tier",
+          "voice.gate"
+        ]
+      },
+      {
+        "label": "He raises problems early, even uncomfortable ones",
+        "text": "He hand-reviewed every auto-graded call and separated test-setup artifacts from real defects. When the strict gate failed because 3 of 15 scenarios had no recorded call, he reported it instead of shrinking the suite.",
+        "cites": [
+          "voice.manual_review",
+          "voice.gate_honest"
+        ]
+      },
+      {
+        "label": "He owns and corrects his own mistakes",
+        "text": "When a ClinIQ revenue figure turned out to be a scenario rather than a measurement, he replaced it with an explicit hypothetical model and documented the correction.",
+        "cites": [
+          "cliniq.financial_corrected"
+        ]
+      },
+      {
+        "label": "He works problems through with the people affected",
+        "text": "At Citizen Health he reviews grounded outputs with clinical input and translates patient needs into specifications. At Athena he iterated with product and software engineers against a reviewer rubric.",
+        "cites": [
+          "citizen.collab",
+          "athena.eval"
+        ]
+      },
+      {
+        "label": "He has kept a group of people moving",
+        "text": "As Vice President of the Data Analytics Club at UMKC he led a 30+ member organization, ran workshops and mentored students.",
+        "cites": [
+          "dac.lead"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: expect someone who brings facts to a disagreement, owns his mistakes and fixes the root cause. The portfolio documents technical problems rather than personal conflicts, so ask him for a specific story in the interview; the pattern above is what you should hear.",
+      "cites": []
+    },
+    "why": "A team problem is usually a disagreement about what is true or what to do next. The evidence shows how Rahul handles exactly that: he makes the facts checkable with tests, gates and hand review, he reports problems even when they make his own work look worse, and he changes the process so the problem does not repeat. Those are the behaviors that resolve team problems, which is why these examples answer the question.",
+    "entities": [
+      "voice",
+      "dia",
+      "cliniq",
+      "citizen",
+      "athena",
+      "dac"
+    ],
+    "followups": [
+      "How does he work in a team?",
+      "What failure did he find and fix?",
+      "How does he communicate with non-technical people?"
+    ],
+    "plain": "Put simply: most team problems come down to a disagreement about the facts or a mistake nobody wants to own. Rahul's record shows him settling the facts with tests and reviews, and owning his mistakes openly. That is what makes someone easy to work through problems with."
+  },
+  {
+    "id": "teamwork",
+    "title": "Teamwork and collaboration",
+    "match": [
+      "team ?work",
+      "team player",
+      "collaborat",
+      "work(s|ing)? (well )?(with|in) (a |the )?(team|teams|others|other people|people|colleagues|stakeholders)",
+      "cross-functional",
+      "get along",
+      "coworker",
+      "colleague",
+      "teammate",
+      "people skills",
+      "interpersonal",
+      "soft skills",
+      "good (in|at|with) (a )?team"
+    ],
+    "lead": {
+      "text": "Yes. Every role on this portfolio involved building with other people: clinicians, product managers, engineers, financial advisors, research teammates and students.",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "Cross-functional product team (Citizen Health, current)",
+        "text": "Works with clinicians, patient-community leads and engineers in iterative releases, translating patient needs into specifications and reviewing grounded outputs with clinical input.",
+        "cites": [
+          "citizen.collab"
+        ]
+      },
+      {
+        "label": "Product and engineering partners (Athena)",
+        "text": "Wrote evaluation tests for agent behavior, scored instruction quality against a reviewer rubric, and iterated prompts together with product and software engineers.",
+        "cites": [
+          "athena.eval"
+        ]
+      },
+      {
+        "label": "Built around real users (TIFIN)",
+        "text": "Built three advisor workflows (meeting preparation, portfolio research and post-meeting follow-ups) around how advisors work, with sourced drafts produced for their review.",
+        "cites": [
+          "tifin.agents",
+          "tifin.structured"
+        ]
+      },
+      {
+        "label": "Competition and project teams",
+        "text": "Placed 4th with ClinIQ at the NSF NRT Research-A-Thon 2026, and delivered the NYC Citi Bike demand forecast as part of a team capstone.",
+        "cites": [
+          "cliniq.award",
+          "nyc.forecast"
+        ]
+      },
+      {
+        "label": "Leading and teaching others",
+        "text": "As Vice President of the Data Analytics Club at UMKC he led a 30+ member organization, ran Python, SQL and ML workshops, mentored students and guided a team to 2nd place in the AI Agents track at UMKC Hack-A-Roo.",
+        "cites": [
+          "dac.lead",
+          "award.hackaroo"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: building alongside product, clinical, engineering and business partners is already how he works, so joining your team's process is familiar ground rather than a new skill.",
+      "cites": []
+    },
+    "why": "Teamwork can't be shown with a single number, so the evidence is who he worked with and what they built together: clinicians and engineers at Citizen Health, product and software engineers at Athena, advisors at TIFIN, a competition team that placed at a national research event, and a student organization he led. Each point links to its source.",
+    "entities": [
+      "citizen",
+      "athena",
+      "tifin",
+      "cliniq",
+      "dac"
+    ],
+    "followups": [
+      "How does he handle problems in a team?",
+      "Has he led people?",
+      "What is he working on now?"
+    ],
+    "plain": "Put simply: every job and project on this portfolio involved other people, from clinicians to engineers to advisors, and he delivered with them. None of it was built in isolation from the people who used it."
+  },
+  {
+    "id": "leadership",
+    "title": "Leadership",
+    "match": [
+      "\\blead(er|ers|ership)?\\b",
+      "take (the )?(lead|initiative|charge)",
+      "initiative",
+      "mentor",
+      "manage (people|a team|teams|engineers|others)",
+      "management experience",
+      "people manage"
+    ],
+    "lead": {
+      "text": "Yes, in the ways that matter at his career stage: he has led a 30+ member organization, and he leads technical work from design to release. He has not yet managed a team of engineers.",
+      "cites": [
+        "dac.lead"
+      ]
+    },
+    "points": [
+      {
+        "label": "Leading people",
+        "text": "Vice President of the Data Analytics Club at UMKC: led a 30+ member organization, ran practical Python, SQL and ML workshops, organized industry speaker sessions and mentored students, guiding a team to 2nd place in the AI Agents track at UMKC Hack-A-Roo.",
+        "cites": [
+          "dac.lead",
+          "award.hackaroo"
+        ]
+      },
+      {
+        "label": "Leading a system end to end",
+        "text": "Designed and shipped the Drug Interaction Agent: a React and FastAPI application in one Docker container on a public Hugging Face Space, with 41 backend tests, 7 frontend tests and CI.",
+        "cites": [
+          "dia.shipped",
+          "dia.tests"
+        ]
+      },
+      {
+        "label": "Setting the quality bar others work to",
+        "text": "Maintains the evaluation suite that gates each Citizen Health release, built a fail-closed release gate for voice agents, and built the validator behind this assistant.",
+        "cites": [
+          "citizen.release_eval",
+          "voice.gate",
+          "imw.system"
+        ]
+      },
+      {
+        "label": "Owning production outcomes",
+        "text": "At TIFIN his ownership included deploying and monitoring models on AWS SageMaker and GCP Vertex AI.",
+        "cites": [
+          "tifin.deploy"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: he can own a feature or workstream, set how it is tested, and help teammates ramp up. Managing engineers would be a next step for him, not something he has done yet.",
+      "cites": []
+    },
+    "why": "Leadership at an early-career level shows up as leading people without a management title and leading work: owning a system, setting its quality bar and bringing others along. The evidence covers both, an elected student-leadership role with workshops and mentoring, and systems he designed, tested and released himself.",
+    "entities": [
+      "dac",
+      "dia",
+      "citizen",
+      "voice",
+      "tifin"
+    ],
+    "followups": [
+      "How does he work in a team?",
+      "What has Rahul actually shipped?",
+      "How does he communicate with non-technical people?"
+    ],
+    "plain": "Put simply: he has led people, as Vice President of a student organization, and he has led work, with systems he designed, tested and shipped himself. He has not yet had direct reports."
+  },
+  {
+    "id": "communication",
+    "title": "Communication",
+    "match": [
+      "communicat",
+      "explain (things|technical|complex|his work|ideas|work)",
+      "non-?technical|non technical",
+      "stakeholder",
+      "presentation",
+      "present (to|his)",
+      "writing|documentation",
+      "articulate",
+      "talk (to|with) (clients|customers|business|users|executives)"
+    ],
+    "lead": {
+      "text": "Clearly, and in a form people can check. He has explained technical work to clinicians, financial advisors, students and research reviewers, and he writes down limitations next to results.",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "With clinicians and patient advocates",
+        "text": "At Citizen Health he translates patient needs into specifications and builds summaries in which every statement links to the medical record it came from, so an advocate can verify it.",
+        "cites": [
+          "citizen.collab",
+          "citizen.source_linked"
+        ]
+      },
+      {
+        "label": "With business users",
+        "text": "At TIFIN the copilots produced sourced briefings, answers and drafts for advisors to review, under enterprise compliance controls.",
+        "cites": [
+          "tifin.structured"
+        ]
+      },
+      {
+        "label": "Teaching",
+        "text": "Ran practical Python, SQL and ML workshops and mentored students as Vice President of the Data Analytics Club.",
+        "cites": [
+          "dac.lead"
+        ]
+      },
+      {
+        "label": "Research writing",
+        "text": "Published his quantum-ML imaging findings as a research paper and poster, and documents project pipelines so others can rerun them.",
+        "cites": [
+          "qml.xai",
+          "nyc.forecast"
+        ]
+      },
+      {
+        "label": "Honest reporting",
+        "text": "States limits alongside results: the voice harness keeps an intentionally aggressive automated scorecard separate from the hand-reviewed findings report.",
+        "cites": [
+          "voice.limit_autograde"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: stakeholders get explanations they can verify, and engineers get documentation they can build on. This portfolio is itself an example, since every statement links to its source.",
+      "cites": []
+    },
+    "why": "Good communication in an engineering role means non-specialists can understand and trust the work. The evidence shows him doing that for clinicians with source-linked summaries, for advisors with sourced briefings, for students through workshops and for researchers through a published paper, while consistently writing down limitations.",
+    "entities": [
+      "citizen",
+      "tifin",
+      "dac",
+      "qml",
+      "voice"
+    ],
+    "followups": [
+      "How does he work in a team?",
+      "What is he working on now?",
+      "How does he evaluate AI systems?"
+    ],
+    "plain": "Put simply: the people who used his work were clinicians, advisors and students rather than engineers, and he built it so they could understand and check it."
+  },
+  {
+    "id": "learning",
+    "title": "Learning and adaptability",
+    "match": [
+      "(?<!machine )(?<!deep )(?<!reinforcement )(?<!supervised )\\blearn(s|ing|er)?\\b",
+      "pick(s)? up",
+      "adapt",
+      "new (technolog|tool|stack|domain|framework|language|area|field|skill)",
+      "versatil",
+      "any (task|role|job|kind of work|project|problem)",
+      "take (up|on) (any|new|different|unfamiliar)",
+      "ramp(s)? up",
+      "quick learner|learns? quickly|fast learner|learns? fast",
+      "outside (his|of his) (comfort|experience)",
+      "unfamiliar",
+      "can (he|rahul) (handle|do) anything"
+    ],
+    "lead": {
+      "text": "Yes. The clearest evidence is how many different kinds of systems he has built from scratch, each in a new stack or domain, and each one working, tested and documented.",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "Realtime voice AI",
+        "text": "Built a harness that places real phone calls through Twilio and the OpenAI Realtime API, and fixed interruption (barge-in) handling at the audio-protocol level.",
+        "cites": [
+          "voice.harness",
+          "voice.bargein"
+        ]
+      },
+      {
+        "label": "Generative vision research",
+        "text": "Replaced Stable Diffusion's text conditioning with a custom encoder driven by surgical kinematics and fine-tuned it with LoRA, generating frames at PSNR 19–22 dB and SSIM 0.61–0.74.",
+        "cites": [
+          "sssd.encoder",
+          "sssd.lora",
+          "sssd.metric_values"
+        ]
+      },
+      {
+        "label": "Quantum machine learning",
+        "text": "Benchmarked quantum and classical models (PennyLane and Qiskit) on chest X-rays, where the QCNN trained 5× faster than the CNN, and published the findings as a paper and poster.",
+        "cites": [
+          "qml.benchmark",
+          "qml.speedup",
+          "qml.xai"
+        ]
+      },
+      {
+        "label": "LLM systems in finance and healthcare",
+        "text": "Built LangGraph advisor workflows at TIFIN, and now builds source-grounded retrieval over medical records at Citizen Health.",
+        "cites": [
+          "tifin.agents",
+          "citizen.role"
+        ]
+      },
+      {
+        "label": "Full-stack product engineering",
+        "text": "Shipped a React + TypeScript and FastAPI application in Docker on a public Hugging Face Space.",
+        "cites": [
+          "dia.shipped",
+          "dia.frontend"
+        ]
+      },
+      {
+        "label": "New standards as they arrive",
+        "text": "Exposed this portfolio's evidence as a public, read-only MCP server that any MCP client can query.",
+        "cites": [
+          "imw.mcp"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: a new stack or domain is not a blocker. He learns it by building something real, testing it and writing down its limits, which is how he becomes useful quickly on unfamiliar work.",
+      "cites": []
+    },
+    "why": "The best predictor of how someone handles an unfamiliar task is what they did the last several times. Rahul's record is a run of unfamiliar tasks, audio protocols, diffusion models, quantum ML, finance and healthcare, each taken to a working and tested result. That pattern is why the answer is yes.",
+    "entities": [
+      "voice",
+      "sssd",
+      "qml",
+      "tifin",
+      "citizen",
+      "dia"
+    ],
+    "followups": [
+      "What has Rahul actually shipped?",
+      "What has he built beyond LLM wrappers?",
+      "How does he solve hard problems?"
+    ],
+    "plain": "Put simply: nearly every project he has done used technology he had not used before, and each one ended in a working, tested result."
+  },
+  {
+    "id": "problem_solving",
+    "title": "Problem solving",
+    "match": [
+      "problem[- ]solv",
+      "solv(e|es|ing) (hard |difficult |complex |tough |real )?problems",
+      "hardest problem",
+      "troubleshoot",
+      "figur(e|es|ing) (things|it|problems) out",
+      "analytical",
+      "critical(ly)? think|think(s|ing)? critically",
+      "root[- ]cause",
+      "handle (hard|difficult|complex|technical) (problems|challenges)"
+    ],
+    "lead": {
+      "text": "He finds the root cause, fixes it, and then adds a check so the problem can't quietly return. Four examples, each with the fix in code:",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "A realtime audio bug",
+        "text": "When callers interrupted the voice agent, the model's memory drifted from what the caller had actually heard. He cleared queued audio and truncated the model's conversation item to exactly what was played.",
+        "cites": [
+          "voice.bargein",
+          "voice.playback_state"
+        ]
+      },
+      {
+        "label": "A misleading metric",
+        "text": "In ClinIQ he recomputed dashboard metrics from saved confusion counts instead of rounded headline numbers, and replaced a revenue scenario that could be mistaken for a measurement.",
+        "cites": [
+          "cliniq.recompute",
+          "cliniq.financial_corrected"
+        ]
+      },
+      {
+        "label": "An ML pipeline, debugged before spending GPU time",
+        "text": "For the diffusion model he measured the frozen VAE's reconstruction ceiling and ran single-frame overfit tests to separate pipeline bugs from undertraining.",
+        "cites": [
+          "sssd.diagnostics"
+        ]
+      },
+      {
+        "label": "A benchmark that could mislead",
+        "text": "Added an audit that refuses to compute runtime ratios unless paired run metadata exists, with its own tests.",
+        "cites": [
+          "qml.audit"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: problems get root-caused, fixed and guarded by a test or a gate, so the same issue doesn't return in the next release.",
+      "cites": []
+    },
+    "why": "Problem solving is visible in what happens after something breaks. In each example he identified the real cause rather than the symptom, fixed it in code, and added a test, audit or gate to prevent a repeat. The failure write-ups show how each problem was detected and diagnosed.",
+    "failures": [
+      "f.voice.bargein",
+      "f.cliniq.revenue",
+      "f.sssd.debug"
+    ],
+    "entities": [
+      "voice",
+      "cliniq",
+      "sssd",
+      "qml"
+    ],
+    "followups": [
+      "Show me the barge-in fix in code",
+      "What has he built beyond LLM wrappers?",
+      "How does he evaluate AI systems?"
+    ],
+    "plain": "Put simply: when something broke, he found the real cause, fixed it, and added a check so it could not break the same way again."
+  },
+  {
+    "id": "ownership",
+    "title": "Ownership and end-to-end delivery",
+    "match": [
+      "end[- ]to[- ]end",
+      "full[- ]stack",
+      "\\bown(s|ed|ership)? (a |the )?(project|feature|product|system|work)",
+      "ownership",
+      "independent",
+      "self[- ]starter|self[- ]motivated|proactive",
+      "on his own|by himself|autonomous",
+      "from scratch",
+      "(idea|prototype|zero) to production"
+    ],
+    "lead": {
+      "text": "Yes. He regularly owns a system from the first design decision to a deployed, tested product, and he documents what it can and can't do.",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "Drug Interaction Agent",
+        "text": "Data pipeline, retrieval, a calibrated classifier, a six-stage agent pipeline, a React interface, 41 backend and 7 frontend tests, CI and a public deployment, scoring 24/24 on severity and 97.9% on management coverage in its regression set.",
+        "cites": [
+          "dia.rag_pipeline",
+          "dia.calibration",
+          "dia.tests",
+          "dia.shipped",
+          "dia.eval_scores"
+        ]
+      },
+      {
+        "label": "ClinIQ",
+        "text": "An 11-table PostgreSQL schema, three detection methods compared head to head, a 5-panel dashboard with CI and tests, and 4th place at the NSF NRT Research-A-Thon.",
+        "cites": [
+          "cliniq.schema",
+          "cliniq.comparison",
+          "cliniq.delivery",
+          "cliniq.award"
+        ]
+      },
+      {
+        "label": "Production models at TIFIN",
+        "text": "Supported three models in the advisor copilot, and his ownership included their deployment and monitoring on AWS SageMaker and GCP Vertex AI.",
+        "cites": [
+          "tifin.models",
+          "tifin.deploy"
+        ]
+      },
+      {
+        "label": "Release quality at Citizen Health",
+        "text": "Maintains the evaluation suite that gates each release, catching regressions in LLM answer quality before changes reach patients.",
+        "cites": [
+          "citizen.release_eval"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: you can hand him an ambiguous problem and get back a working, tested, deployed system with its limits written down.",
+      "cites": []
+    },
+    "why": "Ownership means carrying work through every stage without someone else filling the gaps. These projects show him handling the data, modeling, backend, frontend, testing, deployment and release gating himself, which is why the answer is yes.",
+    "entities": [
+      "dia",
+      "cliniq",
+      "tifin",
+      "citizen"
+    ],
+    "followups": [
+      "Show the architecture of the Drug Interaction Agent",
+      "How was ClinIQ evaluated?",
+      "What is he working on now?"
+    ],
+    "plain": "Put simply: in these projects nobody else filled in the missing parts. He took them from design through deployment himself."
+  },
+  {
+    "id": "why_hire",
+    "title": "Why Rahul",
+    "match": [
+      "why (should (we|i|anyone) )?(hire|choose|pick|interview|consider) (him|rahul)",
+      "why (him|rahul)",
+      "what makes (him|rahul) (different|stand out|unique|special)",
+      "strength",
+      "what (does|would|can|will) (he|rahul) bring",
+      "value (does|would|can|will) (he|rahul) (add|bring)",
+      "(key|best|top|main) (skills|qualities|strengths)",
+      "stand(s)? out",
+      "sell me|pitch|convince me"
+    ],
+    "lead": {
+      "text": "He can take an AI feature from idea to production, prove that it works, and explain it to the people who depend on it. Here is the evidence, point by point:",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "He ships AI that people use",
+        "text": "Advisor copilots at TIFIN whose AI capabilities reached 40,000+ users, with reported model gains of 19% in recommendation accuracy and 24% in F1; a current AI Engineer role building patient-facing retrieval at Citizen Health; and a public full-stack AI application you can try today.",
+        "cites": [
+          "tifin.reach",
+          "tifin.gains",
+          "citizen.role",
+          "dia.shipped"
+        ]
+      },
+      {
+        "label": "He makes AI measurable",
+        "text": "Release gates that fail closed, an evaluation suite that gates every Citizen Health release, and this assistant, which refuses to state anything it can't source.",
+        "cites": [
+          "voice.gate",
+          "citizen.release_eval",
+          "imw.system"
+        ]
+      },
+      {
+        "label": "He goes deep, not just wide",
+        "text": "Custom conditioning for a diffusion model, a protocol-level fix for realtime voice and calibrated classical models, alongside LLM agents and RAG.",
+        "cites": [
+          "sssd.encoder",
+          "voice.bargein",
+          "dia.calibration",
+          "tifin.agents"
+        ]
+      },
+      {
+        "label": "He works well with people",
+        "text": "Builds with clinicians and with product and engineering partners, and led a 30+ member student organization.",
+        "cites": [
+          "citizen.collab",
+          "dac.lead"
+        ]
+      },
+      {
+        "label": "His claims hold up",
+        "text": "He reports what didn't work, such as a corrected revenue figure and a release gate left failing rather than weakened, which makes the rest of his work easier to trust.",
+        "cites": [
+          "cliniq.financial_corrected",
+          "voice.gate_honest"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "Bottom line: production experience, a habit of proving his work, and range across the AI stack. The best next step is a technical conversation, and every claim here links to something you can check first.",
+      "cites": []
+    },
+    "why": "Hiring comes down to three questions: can he do the work, will the work be reliable, and can he work with the team. Each point answers one of them with evidence you can open: shipped systems and the users they reached, evaluation and release gates, and collaboration with clinical, product and engineering partners.",
+    "entities": [
+      "tifin",
+      "citizen",
+      "dia",
+      "voice",
+      "sssd"
+    ],
+    "followups": [
+      "What has Rahul actually shipped?",
+      "How does he handle problems in a team?",
+      "What is not demonstrated yet?"
+    ],
+    "plain": "Put simply: he has shipped AI that people use, he proves it works before it is released, and he works well with the people around him."
+  },
+  {
+    "id": "fit",
+    "title": "Is he a fit for our team?",
+    "match": [
+      "good fit|right fit|fit (for|in|with|into) (us|our|my|the|this|a|your)",
+      "worth (hiring|interviewing)",
+      "would (he|rahul) be (a )?(good|great|valuable|useful|right|an? asset)",
+      "can (he|rahul) (work|join|succeed|contribute|do (the|this|our) (job|work|role))",
+      "(work|join) (in|at|for|with) (our|my|a|your) (company|team|startup|organization|org|firm)",
+      "is (he|rahul) (qualified|capable|ready|able|suitable)",
+      "able to (do|handle|take on) (the|this|our|a) (job|role|work)",
+      "(?<!why )should (we|i) (hire|interview)",
+      "(perfect|ideal|best|right|good|great|strong) (candidate|fit|hire|choice|match)",
+      "is (he|rahul) the (best|perfect|ideal|right) (person|one|engineer|candidate)"
+    ],
+    "lead": {
+      "text": "That decision is yours, and the quickest way to make it is to check his evidence against your job description in the Role fit tab. Here is what he brings to an AI engineering team, each point backed by work you can open:",
+      "cites": []
+    },
+    "points_from": "why_hire",
+    "takeaway_from": "why_hire",
+    "why_from": "why_hire",
+    "actions": [
+      {
+        "kind": "mode",
+        "label": "Check against your job description",
+        "target": "role",
+        "arg": "jd"
+      }
+    ],
+    "entities": [
+      "tifin",
+      "citizen",
+      "dia",
+      "voice"
+    ],
+    "followups": [
+      "How does he work in a team?",
+      "What is not demonstrated yet?",
+      "What has Rahul actually shipped?"
+    ]
+  },
+  {
+    "id": "experience_impact",
+    "title": "Real-world experience and impact",
+    "match": [
+      "real[- ]world",
+      "production (experience|systems|work)",
+      "industry experience",
+      "professional experience",
+      "work experience",
+      "\\bimpact\\b",
+      "business (value|impact|results|outcomes)",
+      "(how many|real|actual) users",
+      "internship",
+      "worked (at|for) (companies|a company|startups)"
+    ],
+    "lead": {
+      "text": "Yes. He has worked on production AI at TIFIN and now at Citizen Health, and he has public systems you can use today.",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "TIFIN · AI/ML Engineer Intern · Mar 2025 – May 2026",
+        "text": "Worked on an AI portfolio copilot for investment questions and advisor preparation. Its AI capabilities reached 40,000+ users, domain-specific models improved recommendation accuracy by 19% and F1 by 24%, and a 65% reduction in manual effort was reported across three advisor workflows.",
+        "cites": [
+          "tifin.role",
+          "tifin.reach",
+          "tifin.gains",
+          "tifin.effort"
+        ]
+      },
+      {
+        "label": "Data at production scale",
+        "text": "Supporting Snowflake pipelines handled 5M+ daily data points, and automated data-quality audits covered 2M+ records.",
+        "cites": [
+          "tifin.snowflake",
+          "tifin.dq"
+        ]
+      },
+      {
+        "label": "Citizen Health · AI Engineer · May 2026 – present",
+        "text": "Builds source-grounded retrieval and summarization for a patient-advocacy product, with an evaluation suite that gates every release.",
+        "cites": [
+          "citizen.role",
+          "citizen.release_eval"
+        ]
+      },
+      {
+        "label": "Athena · AI Engineering Intern · Jan – May 2024",
+        "text": "Prototyped task-planning, tool-use and prompt-orchestration components for an executive-assistant workflow, with evaluation tests for agent behavior.",
+        "cites": [
+          "athena.role",
+          "athena.eval"
+        ]
+      },
+      {
+        "label": "Public, working systems",
+        "text": "The Drug Interaction Agent and the ClinIQ dashboard are both live on Hugging Face Spaces.",
+        "cites": [
+          "dia.shipped",
+          "cliniq.delivery"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: he has already worked under real constraints, including compliance controls, production data, release gates and actual users, not only in coursework.",
+      "cites": []
+    },
+    "why": "Real-world experience means work that other people used, under real constraints. TIFIN and Citizen Health are production roles with users, compliance and release processes, and the public projects are running systems anyone can open. Employment details are self-reported because employer systems are not public.",
+    "entities": [
+      "tifin",
+      "citizen",
+      "athena",
+      "dia",
+      "cliniq"
+    ],
+    "followups": [
+      "What did Rahul personally do on TIFIN?",
+      "What is he working on now?",
+      "What has Rahul actually shipped?"
+    ],
+    "plain": "Put simply: his AI work has been used by real users inside companies, not only in class projects."
+  },
+  {
+    "id": "ai_depth",
+    "title": "Depth of AI and ML knowledge",
+    "match": [
+      "how (good|strong|deep|skilled|knowledgeable|experienced) (is (he|rahul) )?(at|in|with) (ai|ml|machine learning|llms?|deep learning|data science)",
+      "(ai|ml|machine learning|llm) (knowledge|skills?|expertise|depth|background|abilit)",
+      "know(s|ledge)? (of |about )?(ai|ml|machine learning|llms)",
+      "understand(ing|s)? (of )?(ai|ml|llms|models|machine learning)",
+      "technical (skills|depth|abilit|strength|background)"
+    ],
+    "lead": {
+      "text": "Broad and hands-on. He has built across the AI stack, from classical ML to LLM agents to generative vision, and he evaluates what he builds.",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "LLM applications and agents",
+        "text": "LangGraph workflows with tool calling and structured outputs at TIFIN, a six-stage RAG pipeline in the Drug Interaction Agent, and task-planning and tool-use components at Athena.",
+        "cites": [
+          "tifin.agents",
+          "tifin.structured",
+          "dia.rag_pipeline",
+          "athena.role"
+        ]
+      },
+      {
+        "label": "Retrieval",
+        "text": "Exact lookup with a FAISS fallback over sentence embeddings, and pgvector retrieval with an IVFFlat cosine index.",
+        "cites": [
+          "dia.retrieval",
+          "cliniq.pgvector"
+        ]
+      },
+      {
+        "label": "Classical ML, done carefully",
+        "text": "A calibrated Random Forest with cross-validation, and a four-model regression comparison for demand forecasting.",
+        "cites": [
+          "dia.calibration",
+          "nyc.forecast"
+        ]
+      },
+      {
+        "label": "Deep learning and generative models",
+        "text": "A custom conditioning encoder and LoRA fine-tuning for Stable Diffusion (PSNR 19–22 dB, SSIM 0.61–0.74), and CNN versus quantum-model benchmarks on chest X-rays, where the CNN reached AUROC 0.757 and the QCNN trained 5× faster.",
+        "cites": [
+          "sssd.encoder",
+          "sssd.lora",
+          "sssd.metric_values",
+          "qml.paper_results",
+          "qml.speedup"
+        ]
+      },
+      {
+        "label": "Evaluation",
+        "text": "A separate LLM judge with schema-validated output, a head-to-head comparison of rules, embeddings and LLM+RAG on the same labeled sample, and a regression set on which the Drug Interaction Agent scored 24/24 on severity.",
+        "cites": [
+          "voice.judge",
+          "voice.grade_validation",
+          "cliniq.comparison",
+          "dia.eval_scores"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: he understands models well enough to change how they are conditioned, calibrated and evaluated, not only how to call an API.",
+      "cites": []
+    },
+    "why": "Depth shows when someone changes how a model works rather than only calling it. The evidence includes a custom diffusion conditioning encoder, a calibrated classifier, retrieval he designed and tuned, and evaluations that compare methods on the same data, across LLMs, classical ML and computer vision.",
+    "entities": [
+      "tifin",
+      "dia",
+      "cliniq",
+      "sssd",
+      "qml",
+      "voice"
+    ],
+    "followups": [
+      "Show me his strongest RAG work.",
+      "How does he evaluate AI systems?",
+      "What has he built beyond LLM wrappers?"
+    ],
+    "plain": "Put simply: he has built with every major kind of model, and he changes how they work rather than only calling them."
+  },
+  {
+    "id": "current_role",
+    "title": "What he is doing now",
+    "match": [
+      "current(ly)? (role|job|position|work|doing|working|employ)",
+      "(doing|working) (now|currently|these days|at the moment)",
+      "right now",
+      "present (role|job|position|company|employer)",
+      "where (does|is) (he|rahul) (work|working|employed)",
+      "latest (role|job)",
+      "what (is|does) (he|rahul) (do|doing) (now|today|currently)"
+    ],
+    "lead": {
+      "text": "He is an AI Engineer at Citizen Health (May 2026 – present), building source-grounded retrieval and summarization for a patient-advocacy product that serves people with rare and complex conditions.",
+      "cites": [
+        "citizen.role"
+      ]
+    },
+    "points": [
+      {
+        "label": "Source-linked summaries",
+        "text": "Each statement in a summary links to the medical record it came from, so a patient advocate can verify it.",
+        "cites": [
+          "citizen.source_linked"
+        ]
+      },
+      {
+        "label": "Record ingestion and entity resolution",
+        "text": "Normalizes records from multiple provider sources, resolves duplicate patient records and validates schemas that adapt as provider formats change.",
+        "cites": [
+          "citizen.ingestion"
+        ]
+      },
+      {
+        "label": "Release evaluation",
+        "text": "Maintains the evaluation suite that gates each release, catching regressions in LLM answer quality before changes reach patients.",
+        "cites": [
+          "citizen.release_eval"
+        ]
+      },
+      {
+        "label": "How the work ships",
+        "text": "Works with clinicians, patient-community leads and engineers in iterative releases.",
+        "cites": [
+          "citizen.collab"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "This is the same kind of work he has shown publicly, retrieval, evaluation and grounding, now applied in production for patients.",
+      "cites": []
+    },
+    "why": "His current role is described on the portfolio and résumé. Employer systems are not public, so these items are self-reported, but they match the retrieval, grounding and evaluation work you can inspect in his public projects.",
+    "entities": [
+      "citizen"
+    ],
+    "followups": [
+      "What did he do at TIFIN?",
+      "Show me his strongest RAG work.",
+      "How does he evaluate AI systems?"
+    ],
+    "plain": "Put simply: he builds the AI that turns patients' medical records into summaries that advocates can trust and verify."
+  },
+  {
+    "id": "pressure",
+    "title": "Deadlines, pressure and ambiguity",
+    "match": [
+      "pressure",
+      "deadline",
+      "fast[- ]paced",
+      "startup",
+      "tight (timeline|schedule|deadlines?)",
+      "stress",
+      "hackathon|competition",
+      "ambigu",
+      "multitask|juggl",
+      "work (hard|long hours)"
+    ],
+    "lead": {
+      "text": "Yes. Several of his results came from fixed timelines or open-ended problems, and he worked in industry while finishing his master's degree.",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "Competition deadline",
+        "text": "Built ClinIQ for the NSF NRT Research-A-Thon 2026 and placed 4th, delivered with a dashboard, CI and tests.",
+        "cites": [
+          "cliniq.award",
+          "cliniq.delivery"
+        ]
+      },
+      {
+        "label": "Ambiguous inputs",
+        "text": "At Athena he built components that turn an open-ended client request into structured steps an assistant can act on.",
+        "cites": [
+          "athena.role"
+        ]
+      },
+      {
+        "label": "A steady release cadence",
+        "text": "At Citizen Health he ships in iterative releases, each gated by an evaluation suite.",
+        "cites": [
+          "citizen.collab",
+          "citizen.release_eval"
+        ]
+      },
+      {
+        "label": "Work and study in parallel",
+        "text": "He worked at TIFIN from Mar 2025 to May 2026 while completing an M.S. in Computer Science, awarded in May 2026.",
+        "cites": [
+          "tifin.role",
+          "edu.ms"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: he has delivered on fixed dates and in ambiguous settings while carrying a graduate course load.",
+      "cites": []
+    },
+    "why": "Handling pressure shows up as delivering on a fixed date, making progress when the problem is not well defined, and keeping quality up on a release cadence. Each point is an example of one of those.",
+    "entities": [
+      "cliniq",
+      "athena",
+      "citizen",
+      "tifin"
+    ],
+    "followups": [
+      "How does he handle problems in a team?",
+      "What has Rahul actually shipped?",
+      "How does he work in a team?"
+    ],
+    "plain": "Put simply: he has delivered on competition deadlines and release schedules, and did industry work while finishing a master's degree."
+  },
+  {
+    "id": "work_style",
+    "title": "How he works",
+    "match": [
+      "work(ing)? style",
+      "how (does|would) (he|rahul) work",
+      "culture",
+      "\\bvalues\\b",
+      "what kind of (engineer|person|teammate|employee|developer)",
+      "personality",
+      "attitude",
+      "work ethic",
+      "character",
+      "trust(worthy| him| his work)",
+      "reliable|dependable",
+      "honest|integrity|ethic"
+    ],
+    "lead": {
+      "text": "Evidence-first. He writes tests, builds gates, documents limitations and makes his work easy for other people to check.",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "Tests by default",
+        "text": "41 backend and 7 frontend tests in the Drug Interaction Agent, 26 offline tests in the voice harness and 9 in ClinIQ, all running in CI.",
+        "cites": [
+          "dia.tests",
+          "voice.tests",
+          "cliniq.delivery"
+        ]
+      },
+      {
+        "label": "Honest about limits",
+        "text": "When the strict release gate failed on missing recordings, he left it failing and reported why instead of shrinking the suite.",
+        "cites": [
+          "voice.gate_honest"
+        ]
+      },
+      {
+        "label": "Numbers you can recompute",
+        "text": "ClinIQ's dashboard recomputes its metrics from saved confusion counts, and his benchmark audit refuses to compute ratios without paired metadata.",
+        "cites": [
+          "cliniq.recompute",
+          "qml.audit"
+        ]
+      },
+      {
+        "label": "Built for others to use",
+        "text": "Pipelines are documented so others can rerun them, and this portfolio links every statement to its source.",
+        "cites": [
+          "nyc.forecast",
+          "imw.system"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: work that is tested, documented and honest about its limits, which is what makes an engineer easy to trust with production systems.",
+      "cites": []
+    },
+    "why": "Work style is best judged from habits that show up across projects. Tests, release gates, recomputable metrics and written limitations appear in nearly everything he has published, so they describe how he works rather than a one-off.",
+    "entities": [
+      "dia",
+      "voice",
+      "cliniq",
+      "qml",
+      "imw"
+    ],
+    "followups": [
+      "How does he handle problems in a team?",
+      "How does he evaluate AI systems?",
+      "What failure did he find and fix?"
+    ],
+    "plain": "Put simply: he tests his work, writes down its limits and makes it easy for other people to check."
+  },
+  {
+    "id": "remote",
+    "title": "Remote work and location",
+    "match": [
+      "\\bremote",
+      "work from home|\\bwfh\\b",
+      "\\blocation\\b",
+      "relocat",
+      "on[- ]?site",
+      "\\bhybrid\\b",
+      "time ?zone",
+      "based (in|out of)",
+      "where (does|is) (he|rahul) (live|located|based)"
+    ],
+    "lead": {
+      "text": "Yes, he has worked remotely: his TIFIN role was remote, and at Citizen Health he ships in iterative releases with clinicians, engineers and product partners.",
+      "cites": [
+        "tifin.role",
+        "citizen.collab"
+      ]
+    },
+    "points": [],
+    "takeaway": {
+      "text": "For relocation, on-site or time-zone preferences, ask him directly; his contact details are on the portfolio.",
+      "cites": []
+    },
+    "why": "The evidence records where and how his roles were done; personal preferences like relocation are not part of it, so they are best confirmed with him.",
+    "actions": [
+      {
+        "kind": "url",
+        "label": "Email Rahul",
+        "target": "mailto:rahulvajja.ai@gmail.com"
+      }
+    ],
+    "entities": [
+      "tifin",
+      "citizen"
+    ],
+    "followups": [
+      "What is he working on now?",
+      "How does he work in a team?"
+    ]
+  },
+  {
+    "id": "education",
+    "title": "Education",
+    "match": [
+      "educat",
+      "\\bdegree",
+      "master'?s|\\bm\\.?s\\.? (in|degree)|bachelor",
+      "universit|college|umkc",
+      "graduat",
+      "certif",
+      "\\bgpa\\b|coursework"
+    ],
+    "lead": {
+      "text": "He holds an M.S. in Computer Science with an AI emphasis (May 2026) and a B.S. in Computer Science (May 2025), both from the University of Missouri–Kansas City.",
+      "cites": [
+        "edu.ms",
+        "edu.bs"
+      ]
+    },
+    "points": [
+      {
+        "label": "Certifications",
+        "text": "AI in Healthcare (Stanford School of Medicine), Supervised ML (Stanford Online), and ML certifications from Google Cloud, MathWorks and Coursera.",
+        "cites": [
+          "edu.certs"
+        ]
+      },
+      {
+        "label": "Graduate research",
+        "text": "Kinematic-conditioned diffusion for surgical video, and a classical-versus-quantum ML imaging study published as a paper and poster.",
+        "cites": [
+          "sssd.encoder",
+          "qml.xai"
+        ]
+      },
+      {
+        "label": "Leadership on campus",
+        "text": "Vice President of the Data Analytics Club (Aug 2024 – May 2026), leading a 30+ member organization and guiding a team to 2nd place in the AI Agents track at UMKC Hack-A-Roo.",
+        "cites": [
+          "dac.lead",
+          "award.hackaroo"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "He paired both degrees with industry work at Athena and TIFIN, so his coursework was applied as he learned it.",
+      "cites": []
+    },
+    "why": "Education is recorded from his degrees and certificates; the research and leadership items show what he did with it beyond coursework.",
+    "entities": [
+      "education",
+      "sssd",
+      "qml",
+      "dac"
+    ],
+    "followups": [
+      "What is he working on now?",
+      "What research has he done?",
+      "Has he led people?"
+    ]
+  }
+]

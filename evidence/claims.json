@@ -541,7 +541,7 @@
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "A hosted smoke check (one known pair, one repeat request) recorded 5.8 s for the uncached request and 0.25 ms for the cache hit. It is a deployment smoke check, not a performance benchmark.",
+    "text": "Content-keyed caching returned a repeat query in 0.25 ms versus 5.8 s uncached on the hosted deployment (smoke check: one known pair, one repeat request).",
     "tags": [
       "caching",
       "deployment"
@@ -558,7 +558,8 @@
         "label": "Cache hit (n=1)",
         "value": "0.25 ms"
       }
-    ]
+    ],
+    "last_verified": "2026-09-24"
   },
   {
     "id": "dia.frontend",
@@ -678,7 +679,7 @@
     "id": "dia.latency_20s",
     "entity": "dia",
     "kind": "metric",
-    "status": "verification_required",
+    "status": "deprecated",
     "strength": "resume_only",
     "public_safe": false,
     "text": "Repeat-query latency was cut from 20+ seconds to under 100 ms with Redis caching.",
@@ -688,7 +689,8 @@
     "sources": [
       "resume_v2"
     ],
-    "note": "The repository records one hosted smoke check (5.8 s uncached vs 0.25 ms cached, n=1), and Redis is optional (LRU fallback). The 20+ s baseline is not documented."
+    "note": "Superseded by the measured hosted smoke check (5.8 s uncached vs 0.25 ms cached). The 20+ s baseline is not documented anywhere.",
+    "last_verified": "2026-09-24"
   },
   {
     "id": "dia.gpt4o",
@@ -1171,7 +1173,7 @@
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "ClinIQ benchmarks substance-use signal detection over 52,184 public drug-review rows. These are not clinical EHR records or verified unique patients.",
+    "text": "ClinIQ benchmarks substance-use signal detection over 52,184 public, patient-written drug reviews from the UCI Drug Review dataset (Drugs.com reviews, distributed on Kaggle). These are not clinical EHR records or verified unique patients.",
     "tags": [
       "nlp",
       "healthcare"
@@ -1185,7 +1187,19 @@
         "label": "Public review rows",
         "value": "52,184"
       }
-    ]
+    ],
+    "code": [
+      {
+        "repo": "cliniq",
+        "path": "agent/build_rag.py",
+        "lines": [
+          325,
+          326
+        ],
+        "label": "Dataset source: Kaggle UCI Drug Review"
+      }
+    ],
+    "last_verified": "2026-09-24"
   },
   {
     "id": "cliniq.comparison",
@@ -1668,17 +1682,31 @@
     "id": "sssd.metric_values",
     "entity": "sssd",
     "kind": "metric",
-    "status": "verification_required",
-    "strength": "resume_only",
-    "public_safe": false,
-    "text": "Generated surgical frames reached PSNR 19–22 dB and SSIM 0.61–0.74.",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Reported results from the training runs: generated surgical frames reached PSNR 19–22 dB and SSIM 0.61–0.74.",
     "tags": [
-      "metrics"
+      "metrics",
+      "diffusion",
+      "computer_vision"
     ],
     "sources": [
-      "resume_v2"
+      "resume_v2",
+      "rahul_confirmed"
     ],
-    "note": "These values do not appear in the repository or on the site."
+    "note": "Confirmed by Rahul on 2026-09-24. The run outputs are not saved in the repository; the README's VAE ceiling (about 24–27 dB, above the generator) is consistent with these values.",
+    "metrics": [
+      {
+        "label": "PSNR",
+        "value": "19–22 dB"
+      },
+      {
+        "label": "SSIM",
+        "value": "0.61–0.74"
+      }
+    ],
+    "last_verified": "2026-09-24"
   },
   {
     "id": "qml.benchmark",
@@ -1756,18 +1784,38 @@
     "id": "qml.speedup",
     "entity": "qml",
     "kind": "metric",
-    "status": "verification_required",
+    "status": "verified",
     "strength": "public_artifact",
-    "public_safe": false,
-    "text": "The QCNN trained 5× faster than the CNN.",
+    "public_safe": true,
+    "text": "The project reports that the QCNN trained 5× faster than the CNN, while the classical CNN kept the stronger accuracy metrics. Run metadata was not preserved, so it is not presented as a general quantum advantage.",
     "tags": [
-      "quantum_ml"
+      "quantum_ml",
+      "model_comparison",
+      "metrics"
     ],
     "sources": [
       "qml_repo",
+      "qml_paper",
       "resume_v2"
     ],
-    "note": "The repository says this result lacks run metadata and should not be advertised as a general quantum advantage."
+    "metrics": [
+      {
+        "label": "QCNN training speed vs CNN",
+        "value": "5× faster (reported)"
+      }
+    ],
+    "code": [
+      {
+        "repo": "qml",
+        "path": "README.md",
+        "lines": [
+          24,
+          24
+        ],
+        "label": "README: reported training speed"
+      }
+    ],
+    "last_verified": "2026-09-24"
   },
   {
     "id": "tifin.role",
@@ -1986,18 +2034,32 @@
     "id": "tifin.gains",
     "entity": "tifin",
     "kind": "metric",
-    "status": "verification_required",
+    "status": "verified",
     "strength": "self_reported",
-    "public_safe": false,
-    "text": "Model improvements of 19% in accuracy and 24% in F1.",
+    "public_safe": true,
+    "text": "Reported model gains at TIFIN: domain-specific PyTorch models improved recommendation accuracy by 19% and F1 by 24%.",
     "tags": [
-      "metrics"
+      "metrics",
+      "deep_learning",
+      "fintech"
     ],
     "sources": [
-      "site",
-      "resume_v2"
+      "resume_v2",
+      "rahul_confirmed",
+      "site"
     ],
-    "note": "The site says baselines, exact task mapping and relative-vs-percentage-point definitions need confirmation. The résumé calls the first figure 'recommendation accuracy', while the site ties it to query-intent classification."
+    "note": "Confirmed by Rahul on 2026-09-24. Employer baselines are internal and not public.",
+    "metrics": [
+      {
+        "label": "Recommendation accuracy",
+        "value": "+19% (reported)"
+      },
+      {
+        "label": "F1",
+        "value": "+24% (reported)"
+      }
+    ],
+    "last_verified": "2026-09-24"
   },
   {
     "id": "citizen.role",
@@ -2224,17 +2286,20 @@
     "id": "award.hackaroo",
     "entity": "dac",
     "kind": "fact",
-    "status": "verification_required",
-    "strength": "resume_only",
-    "public_safe": false,
-    "text": "Guided a team to 3rd place in Quantum Computing at UMKC Hack-A-Roo 2025.",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Guided a student team to 2nd place in the AI Agents track at UMKC Hack-A-Roo.",
     "tags": [
-      "leadership"
+      "leadership",
+      "agents"
     ],
     "sources": [
+      "rahul_confirmed",
       "resume_v2"
     ],
-    "note": "Listed on the résumé and an earlier site version, but removed from the current site."
+    "note": "Confirmed by Rahul on 2026-09-24. Replaces an earlier '3rd place, Quantum Computing' line that Rahul does not stand behind.",
+    "last_verified": "2026-09-24"
   },
   {
     "id": "edu.ms",
@@ -2286,7 +2351,7 @@
     "id": "edu.ibm",
     "entity": "education",
     "kind": "fact",
-    "status": "verification_required",
+    "status": "deprecated",
     "strength": "self_reported",
     "public_safe": false,
     "text": "IBM Machine Learning Professional Certificate (Deep Learning & Reinforcement Learning), in progress.",
@@ -2294,7 +2359,8 @@
     "sources": [
       "site"
     ],
-    "note": "Listed as in progress on the site; not listed on the current résumé."
+    "note": "Not one of Rahul's certificates (confirmed 2026-09-24). Removed from the site.",
+    "last_verified": "2026-09-24"
   },
   {
     "id": "imw.system",
@@ -2397,5 +2463,107 @@
         "label": "Protocol, parity and leak tests"
       }
     ]
+  },
+  {
+    "id": "dia.eval_scores",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "On the 24-pair regression set, the retriever-plus-classifier path scored severity accuracy 24/24, mechanism coverage 100%, management coverage 97.9%, and context precision and citation accuracy of 91.7% each.",
+    "tags": [
+      "eval_design",
+      "regression_testing",
+      "metrics",
+      "rag"
+    ],
+    "sources": [
+      "dia_validation"
+    ],
+    "metrics": [
+      {
+        "label": "Severity accuracy",
+        "value": "24 / 24"
+      },
+      {
+        "label": "Management coverage",
+        "value": "97.9%"
+      },
+      {
+        "label": "Citation accuracy",
+        "value": "91.7%"
+      }
+    ],
+    "code": [
+      {
+        "repo": "dia",
+        "path": "docs/validation-2026-09-11.json",
+        "lines": [
+          15,
+          22
+        ],
+        "label": "Committed evaluation scores"
+      }
+    ],
+    "last_verified": "2026-09-24"
+  },
+  {
+    "id": "sssd.vae_ceiling",
+    "entity": "sssd",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "The frozen Stable Diffusion 1.5 VAE round-trips JIGSAWS suturing frames at roughly PSNR 24–27 dB, which the project documents as above what the generator currently reaches, so the VAE is not the limiting factor.",
+    "tags": [
+      "diffusion",
+      "metrics",
+      "research_methods"
+    ],
+    "sources": [
+      "sssd_repo"
+    ],
+    "code": [
+      {
+        "repo": "sssd",
+        "path": "README.md",
+        "lines": [
+          256,
+          260
+        ],
+        "label": "README: VAE reconstruction ceiling"
+      }
+    ],
+    "last_verified": "2026-09-24"
+  },
+  {
+    "id": "qml.paper_results",
+    "entity": "qml",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "In the paper's test summary on 1,000 chest X-rays, the CNN reached AUROC 0.757 and AUCPR 0.294, ahead of SVM (AUROC 0.737), QSVM (0.509) and QCNN (0.390).",
+    "tags": [
+      "quantum_ml",
+      "model_comparison",
+      "metrics",
+      "cnn"
+    ],
+    "sources": [
+      "qml_paper"
+    ],
+    "metrics": [
+      {
+        "label": "CNN AUROC",
+        "value": "0.757"
+      },
+      {
+        "label": "SVM AUROC",
+        "value": "0.737"
+      }
+    ],
+    "last_verified": "2026-09-24"
   }
 ]

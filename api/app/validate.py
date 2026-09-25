@@ -65,6 +65,10 @@ def validate_answer(ans: dict, pack_ids: set[str], statable_ids: set[str], gap_i
         return Result(False, ["schema: 1-8 sentences required"])
     for i, s in enumerate(sentences):
         text, cites = s.get("text", ""), s.get("cites", [])
+        label = s.get("label") or ""
+        if not isinstance(label, str) or len(label) > 80:
+            errors.append(f"schema: sentence {i} label invalid")
+            label = ""
         if not isinstance(text, str) or not text.strip() or len(text) > 600:
             errors.append(f"schema: sentence {i} text invalid")
             continue
@@ -81,7 +85,7 @@ def validate_answer(ans: dict, pack_ids: set[str], statable_ids: set[str], gap_i
         cited_numbers: set[str] = set()
         for cid in cites:
             cited_numbers |= _num_forms(claim_text.get(cid, ""))
-        for n in _num_forms(text):
+        for n in _num_forms(f"{label} {text}"):
             # Counts of one to three ("two paths") are wording, not measurements.
             if n not in cited_numbers and n not in {"1", "2", "3"}:
                 errors.append(f"number: sentence {i} states {n}, which its citations do not contain")
@@ -97,7 +101,7 @@ def validate_answer(ans: dict, pack_ids: set[str], statable_ids: set[str], gap_i
     for e in ans.get("entities") or []:
         if e not in entity_ids:
             errors.append(f"schema: unknown entity {e}")
-    all_text = " ".join([s.get("text", "") for s in sentences] + [hypo or ""] + (ans.get("followups") or []))
+    all_text = " ".join([f"{s.get('label') or ''} {s.get('text', '')}" for s in sentences] + [hypo or ""] + (ans.get("followups") or []))
     if HYPE.search(all_text):
         errors.append("tone: ranking or praise language")
     return Result(not errors, errors)

@@ -8,8 +8,14 @@ import { coverConcept, roleAnalysis, CATEGORY_LABEL } from './coverage';
 import { analyzeJD, looksLikeJD } from './jd';
 import { HYPE, INJECTION, OFF_TOPIC, SCORE_REQUEST } from './guard';
 import { normalize } from './text';
+import { CHALLENGE, claimPoints, entityPoints, matchTopic, reasoningAnswer, structuredBlocks, topicAnswer as writtenAnswer, topicById } from './topics';
+import type { Topic, TopicPoint } from './types';
 
-export interface AskContext { persona: PersonaId; roleId?: string; lastEntities?: string[] }
+export interface AskContext {
+  persona: PersonaId; roleId?: string; lastEntities?: string[];
+  /** The previous answer's topic and question, for follow-ups like "how does that make sense?". */
+  lastTopic?: string; lastQuestion?: string; lastIntent?: string;
+}
 
 const has = (q: string, re: RegExp) => re.test(q);
 const uniq = <T,>(xs: T[]) => [...new Set(xs)];
@@ -103,19 +109,25 @@ const GENERAL_FOLLOWUPS = [
 function mk(intent: string, blocks: Block[], extra: Partial<Answer> = {}): Answer {
   return {
     blocks, followups: extra.followups ?? GENERAL_FOLLOWUPS.slice(0, 4), actions: extra.actions ?? [],
-    engine: 'evidence', intent, entities: extra.entities ?? [], basis: extra.basis,
+    engine: 'evidence', intent, entities: extra.entities ?? [], basis: extra.basis, topic: extra.topic,
   };
 }
 
 export function citedIds(a: Answer): string[] {
-  return uniq(a.blocks.flatMap((b) => (b.type === 'claims' ? b.ids : b.type === 'p' ? b.cites ?? [] : [])));
+  return uniq(a.blocks.flatMap((b) => {
+    if (b.type === 'claims') return b.ids;
+    if (b.type === 'p' || b.type === 'takeaway') return b.cites ?? [];
+    if (b.type === 'points') return b.items.flatMap((i) => i.cites);
+    return [];
+  }));
 }
 
 /** All user-visible prose in an answer (used by the tone check and tests). */
 export function answerText(a: Answer): string {
   return a.blocks.map((b) => {
     switch (b.type) {
-      case 'p': case 'note': return b.text;
+      case 'p': case 'note': case 'takeaway': return b.text;
+      case 'points': return b.items.map((i) => `${i.label}: ${i.text}`).join(' ');
       case 'gaps': return b.items.map((i) => `${i.name}: ${i.statement}`).join(' ');
       case 'compare': return b.rows.map((r) => r.values.join(' ')).join(' ');
       case 'coverage': return b.analysis.requirements.map((r) => `${r.label} ${r.statement ?? ''}`).join(' ') + ' ' + b.analysis.notes.join(' ');
@@ -192,9 +204,9 @@ function route(kb: KB, question: string, ctx: AskContext): Answer {
   if (looksLikeJD(raw)) return jdAnswer(kb, raw);
 
   if (SCORE_REQUEST.test(q)) {
-    return mk('no_scores', [
-      { type: 'p', text: "I don't produce fit scores, rankings or hiring recommendations. What I can do is show evidence coverage: for each requirement of a role, whether the portfolio has direct evidence, related evidence, claims awaiting verification, or nothing yet." },
-    ], { actions: [{ kind: 'mode', label: 'Evaluate against a role', target: 'role' }], followups: ['Evaluate Rahul for an Applied AI Engineer role', 'Evaluate Rahul for an AI Evaluation Engineer role', 'What is not demonstrated yet?'] });
+    const t = topicById(kb, 'why_hire');
+    const lead = "I won't put a number on a person, because a score hides the evidence you actually need. Here is the case instead, point by point:";
+    if (t) return { ...writtenAnswer(kb, t, persona, { lead }), intent: 'no_scores', actions: [{ kind: 'mode', label: 'Check against your job description', target: 'role', arg: 'jd' }] };
   }
 
   const entities = findEntities(raw);
@@ -205,9 +217,17 @@ function route(kb: KB, question: string, ctx: AskContext): Answer {
     return mk('off_topic', [{ type: 'p', text: "That's outside what I can help with. I answer questions about Rahul's projects, engineering decisions, experience, and how his evidence maps to a role." }]);
   }
 
-  if (has(q, /\b(contact|email|reach (him|rahul|out)|get in touch|hire him|linkedin|resume|cv)\b/)) return contactAnswer(kb);
+  if (has(q, /\b(contact|email|reach (him|rahul|out)|get in touch|linkedin|resume|cv|available|availability|open to (work|roles|opportunities)|job search|start date)\b/)) return contactAnswer(kb);
 
-  const premise = falsePremise(kb, q, raw, entities, conceptIds);
+  // Pushback on the previous answer ("how can you say that?", "how does that make sense?").
+  const topic = matchTopic(kb, raw);
+  if (CHALLENGE.test(q) && (topic || (!entities.length && !concepts.length))) {
+    const t = topic ?? topicById(kb, ctx.lastTopic);
+    if (t) return writtenAnswer(kb, t, persona, { challenged: true, again: ctx.lastIntent === 'reasoning' && ctx.lastTopic === t.id });
+    return reasoningAnswer(kb, persona, { question: ctx.lastQuestion, entities: ctx.lastEntities });
+  }
+
+  const premise = falsePremise(kb, q, raw, entities, conceptIds, persona);
   if (premise) return premise;
 
   const roleId = detectRole(q);
@@ -230,7 +250,11 @@ function route(kb: KB, question: string, ctx: AskContext): Answer {
     if (other) return compareAnswer(kb, [other, entities[0]], persona);
   }
 
-  if (has(q, /(who is (rahul|he)|about rahul|overview|summari[sz]e|introduce|strongest (evidence|work) overall|most impressive|best work|in a nutshell|tl;?dr)/)) return overviewAnswer(kb, persona);
+  if (has(q, /(who is (rahul|he)|about rahul|about him|overview|summari[sz]e|introduce|strongest (evidence|work) overall|most impressive|best work|in a nutshell|tl;?dr|tell me about (rahul|him)$)/)) return overviewAnswer(kb, persona);
+
+  // Question families with written, cited answers: teamwork, leadership, learning, why hire him...
+  // A named project or role still gets the written answer when the topic already covers it.
+  if (topic && entities.every((e) => topic.entities.includes(e))) return topicWithConcept(kb, topic, concepts.map((c) => c.id), persona);
 
   const bestMatch = q.match(/which (project|experience|work|one)s? (best )?(prove|show|demonstrate|is (the )?(strongest|best) (evidence )?for)s?/);
   if (bestMatch || has(q, /(strongest|best) (evidence|proof|project) (for|of)/)) {
@@ -255,7 +279,7 @@ function route(kb: KB, question: string, ctx: AskContext): Answer {
   if (has(q, /(personally|himself|his own|individual contribution)/)) return mk('personally', [{ type: 'p', text: 'Ask about a specific project or role. Ownership is recorded per item:' }, ...kb.entities.filter((e) => e.ownership && e.kind !== 'education').slice(0, 7).map((e) => ({ type: 'p' as const, text: `${e.short}: ${e.ownership}` }))]);
 
   const topical = topicConcepts(q);
-  if (topical.length) return topicAnswer(kb, q, topical, persona);
+  if (topical.length) return conceptTopicAnswer(kb, q, topical, persona);
   if (concepts.length) return skillAnswer(kb, concepts.map((c) => ({ id: c.id, near: c.near ? c.term.toLowerCase() : undefined })), persona, q);
 
   return fallback(kb, raw, persona);
@@ -269,13 +293,14 @@ function help(kb: KB): Answer {
 }
 
 function contactAnswer(kb: KB): Answer {
-  return mk('contact', [{ type: 'p', text: `${kb.subject.name} is seeking full-time AI / ML engineering roles across the US.` }], {
+  return mk('contact', [{ type: 'p', lead: true, text: `${kb.subject.name} is open to full-time AI / ML engineering roles in the US. Email is the fastest way to reach him, and his LinkedIn and GitHub are linked below.` }], {
     actions: [
       { kind: 'url', label: 'Email Rahul', target: `mailto:${kb.subject.email}` },
       { kind: 'url', label: 'LinkedIn', target: kb.subject.links.linkedin },
       { kind: 'url', label: 'GitHub', target: kb.subject.links.github },
       { kind: 'anchor', label: 'Jump to contact', target: '#contact' },
     ],
+    followups: ['Why should we hire Rahul?', 'What has Rahul actually shipped?', 'How does he work in a team?'],
   });
 }
 
@@ -283,7 +308,7 @@ const FIGURE = /(\$?\d{1,3}(?:,\d{3})+\+?|\$?\d+(?:\.\d+)?\s?(?:%|×|ms\b|m\b|mi
 const EXTERNAL_MODELS =/\b(gpt-?[345](\.\d)?o?|chatgpt|gpt|claude|llama ?\d*|gemini|bert|mistral|qwen|stable diffusion|whisper)\b/;
 const TRAIN_VERBS = /\b(train(ed)?|pre-?train(ed)?|create(d)?|invent(ed)?|develop(ed)? (the )?(model|llm)|build (the )?model|built (the )?model|fine-?tune(d)? (gpt|claude|llama))\b/;
 
-function falsePremise(kb: KB, q: string, raw: string, entities: string[], conceptIds: string[]): Answer | null {
+function falsePremise(kb: KB, q: string, raw: string, entities: string[], conceptIds: string[], persona: PersonaId): Answer | null {
   const asks = /^(did|does|has|have|is|was|were|can|could|do)\b|\?$/.test(q) || /\b(did|has) (he|rahul)\b/.test(q);
   if (!asks) return null;
 
@@ -299,12 +324,8 @@ function falsePremise(kb: KB, q: string, raw: string, entities: string[], concep
   }
 
   if (/\b(lead|led|manage[ds]?|managing|supervis\w*)\b.*\b(team|engineers|people|reports|org)\b/.test(q) && !/club/.test(q)) {
-    const lead = kb.claim.get('dac.lead')!;
-    const collab = claimsForConcepts(kb, ['stakeholder']).filter((c) => c.id !== 'dac.lead').slice(0, 2);
-    return mk('false_premise', [
-      { type: 'p', text: 'The portfolio does not show people management or leading an engineering team. The closest evidence is student leadership and cross-functional collaboration:' },
-      { type: 'claims', ids: [lead.id, ...ids(collab)] },
-    ]);
+    const t = topicById(kb, 'leadership');
+    if (t) return { ...writtenAnswer(kb, t, persona, { lead: "He hasn't managed a team of engineers yet. He has led people and led technical work end to end, which is the foundation for it:" }), intent: 'false_premise' };
   }
 
   // A figure in the question: confirm it against verified claims, or say where it comes from.
@@ -336,10 +357,13 @@ function falsePremise(kb: KB, q: string, raw: string, entities: string[], concep
   const gapHit = conceptIds.map((id) => kb.gap.get(id)).find((g) => g && !g.verify);
   if (gapHit && /\b(did|does|has|have|is|was)\b/.test(q)) {
     const closest = gapHit.related.flatMap((r) => kb.statableBySkill.get(r) ?? []);
-    return mk('unsupported_skill', [
-      { type: 'p', text: `No. ${gapHit.statement}` },
-      ...(closest.length ? [{ type: 'claims' as const, title: 'Closest related evidence', ids: ids(pick(kb, closest, 'engineer', 1, 4)) }] : []),
-    ], { followups: ['What is not demonstrated yet?', 'Show me his backend engineering experience.', 'Evaluate Rahul for an MLOps Engineer role'] });
+    const near = pick(kb, closest, 'engineer', 1, 4);
+    const learning = topicById(kb, 'learning');
+    return mk('unsupported_skill', structuredBlocks({
+      lead: `Not yet. ${gapHit.statement}`,
+      points: entityPoints(kb, near, 1),
+      takeaway: learning?.takeaway ? `How he would close it: ${learning.takeaway.text.replace(/^For your team: /, '')}` : undefined,
+    }), { topic: 'learning', followups: ['How fast does he learn new technology?', 'What is not demonstrated yet?', 'Show me his backend engineering experience.'] });
   }
   return null;
 }
@@ -419,41 +443,48 @@ function strongestFor(kb: KB, concepts: string[], persona: PersonaId, q: string)
   if (!ranked.length) return skillAnswer(kb, concepts.map((id) => ({ id })), persona, q);
   const [bestId, best] = ranked[0];
   const e = kb.entity.get(bestId)!;
-  const cname = conceptName(kb, concepts[0]).toLowerCase();
-  const codeCount = best.claims.filter((c) => c.code?.length).length;
-  const runner = ranked[1] ? ` The next strongest is ${entityName(kb, ranked[1][0])}.` : '';
-  return mk('strongest', [
-    { type: 'p', text: `The strongest evidence for ${cname} is ${e.name}: ${best.claims.length} supporting claims, ${codeCount} with linked code.${runner}`, cites: ids(best.claims.slice(0, 2)) },
-    { type: 'claims', ids: ids(pick(kb, best.claims, persona, 5, 5)) },
-    ...(kb.archByEntity.has(bestId) ? [{ type: 'xray' as const, arch: kb.archByEntity.get(bestId)!.id }] : []),
-  ], { entities: [bestId], actions: entityActions(kb, bestId), followups: entityFollowups(kb, bestId) });
+  const cname = conceptName(kb, concepts[0]);
+  const chosen = pick(kb, best.claims, persona, 5, 5);
+  const runner = ranked[1] ? ` ${entityName(kb, ranked[1][0])} is next.` : '';
+  return mk('strongest', structuredBlocks({
+    lead: `His strongest ${cname} work is ${e.name}.${runner}`,
+    points: claimPoints(kb, chosen),
+    extra: kb.archByEntity.has(bestId) ? [{ type: 'xray', arch: kb.archByEntity.get(bestId)!.id }] : [],
+  }), { entities: [bestId], actions: entityActions(kb, bestId), followups: entityFollowups(kb, bestId) });
 }
 
 function skillAnswer(kb: KB, concepts: { id: string; near?: string }[], persona: PersonaId, q: string): Answer {
   const blocks: Block[] = [];
   const ents: string[] = [];
   const actions: Action[] = [];
+  const sources: string[] = [];
   const seen = new Set<string>();
   for (const c of concepts.slice(0, 3)) {
     const cov = coverConcept(kb, c.id, { near: c.near });
     if (seen.has(cov.id)) continue;
     seen.add(cov.id);
     const where = cov.entities.map((id) => entityName(kb, id));
+    const lead = !blocks.length;
     if (cov.category === 'direct') {
-      const self = cov.strength === 'self_reported' ? ' This evidence is self-reported employment experience; there is no public artifact.' : '';
-      blocks.push({ type: 'p', text: `${CATEGORY_LABEL.direct}: ${cov.label} appears in ${listText(where.slice(0, 4))}.${self}`, cites: cov.claims.slice(0, 2) });
-      blocks.push({ type: 'claims', ids: ids(pick(kb, cov.claims.map((id) => kb.claim.get(id)!), persona, 2, 5)) });
+      const chosen = pick(kb, cov.claims.map((id) => kb.claim.get(id)!), persona, 2, 5);
+      blocks.push({ type: 'p', lead, text: `Yes. He has used ${cov.label} in ${listText(where.slice(0, 4))}.`, cites: cov.claims.slice(0, 2) });
+      blocks.push({ type: 'points', items: entityPoints(kb, chosen, 1) });
+      sources.push(...ids(chosen));
     } else if (cov.category === 'related') {
-      blocks.push({ type: 'p', text: `${CATEGORY_LABEL.related}: ${cov.statement}`, cites: cov.claims.slice(0, 1) });
-      blocks.push({ type: 'claims', ids: cov.claims.slice(0, 4) });
+      blocks.push({ type: 'p', lead, text: `Not directly, but he has closely related experience. ${cov.statement ?? ''}`.trim(), cites: cov.claims.slice(0, 1) });
+      const chosen = cov.claims.slice(0, 4).map((id) => kb.claim.get(id)!).filter(Boolean);
+      blocks.push({ type: 'points', items: entityPoints(kb, chosen, 1) });
+      sources.push(...ids(chosen));
     } else if (cov.category === 'verification') {
-      blocks.push({ type: 'p', text: `${CATEGORY_LABEL.verification}: ${cov.statement ?? ''}` });
+      blocks.push({ type: 'p', lead, text: `${CATEGORY_LABEL.verification}: ${cov.statement ?? ''}` });
     } else {
+      if (lead) blocks.push({ type: 'p', lead, text: `Not yet: ${cov.label} isn't part of his work so far. Here is the closest experience, and how he tends to pick up new tools:` });
       blocks.push({ type: 'gaps', items: [{ id: cov.id, name: cov.label, statement: cov.statement ?? '', closest: cov.entities }] });
     }
     ents.push(...cov.entities);
     if (/where/.test(q)) for (const id of cov.entities.slice(0, 3)) { const e = kb.entity.get(id); if (e) actions.push(anchorAction(e)); }
   }
+  if (sources.length) blocks.push({ type: 'claims', title: 'Sources', ids: uniq(sources), collapsed: true });
   const top = uniq(ents)[0];
   return mk('skill', blocks, { entities: uniq(ents), actions: actions.length ? actions : top ? entityActions(kb, top) : [], followups: top ? entityFollowups(kb, top).slice(0, 3).concat(['What is not demonstrated yet?']) : GENERAL_FOLLOWUPS.slice(0, 4) });
 }
@@ -539,11 +570,12 @@ function entityAnswer(kb: KB, id: string, q: string, persona: PersonaId): Answer
 
   // Overview
   const summary = e.summaries[persona] ?? e.tagline;
-  const chosen = pick(kb, own, persona, persona === 'recruiter' ? 3 : 5, persona === 'recruiter' ? 3 : 5);
-  const blocks: Block[] = [{ type: 'entity', id }, { type: 'p', text: summary, cites: ids(chosen.slice(0, 2)) }, { type: 'claims', ids: ids(chosen) }];
-  if (persona === 'engineer' && arch) blocks.push({ type: 'xray', arch: arch.id });
-  if (persona === 'researcher') { const lim = limitClaims(kb, id); if (lim.length) blocks.push({ type: 'claims', title: 'Stated limitations', ids: ids(lim) }); }
-  if (persona === 'manager' && e.ownership) blocks.push({ type: 'note', tone: 'info', text: `Ownership: ${e.ownership}` });
+  const chosen = pick(kb, own, persona, persona === 'recruiter' ? 4 : 5, persona === 'recruiter' ? 4 : 5);
+  const extra: Block[] = [];
+  if (persona === 'engineer' && arch) extra.push({ type: 'xray', arch: arch.id });
+  if (persona === 'researcher') { const lim = limitClaims(kb, id); if (lim.length) extra.push({ type: 'claims', title: 'Stated limitations', ids: ids(lim) }); }
+  if (persona === 'manager' && e.ownership) extra.push({ type: 'note', tone: 'info', text: `Ownership: ${e.ownership}` });
+  const blocks: Block[] = [{ type: 'entity', id }, ...structuredBlocks({ lead: summary, leadCites: ids(chosen.slice(0, 2)), points: claimPoints(kb, chosen), extra })];
   return mk('entity', blocks, { entities: [id], actions, followups: entityFollowups(kb, id) });
 }
 
@@ -567,99 +599,164 @@ function failuresAnswer(kb: KB, persona: PersonaId, all = false): Answer {
 }
 
 function beyondWrappers(kb: KB, persona: PersonaId): Answer {
-  const picks = ['dia.no_llm_review', 'dia.four_tier', 'dia.calibration', 'dia.entity_filter', 'voice.bargein', 'voice.gate', 'cliniq.schema', 'cliniq.workload', 'sssd.encoder'];
-  const cs = picks.map((id) => kb.claim.get(id)).filter(isStatable);
-  return mk('beyond_wrappers', [
-    { type: 'p', text: 'Work where a language model is one component, or absent entirely: deterministic review pipelines, classical classifiers with calibration, realtime audio engineering, database design, release gates, and a custom diffusion conditioning encoder.' },
-    { type: 'claims', ids: ids(persona === 'recruiter' ? cs.slice(0, 5) : cs) },
-  ], { entities: uniq(cs.map((c) => c.entity)), actions: [{ kind: 'mode', label: 'X-Ray the Drug Interaction Agent', target: 'xray', arg: 'dia' }], followups: ['Why keep label review free of an LLM?', 'Show me the barge-in fix in code', 'Show the architecture of ClinIQ'] });
+  const picks: [string, string][] = [
+    ['dia.no_llm_review', 'Deterministic label review, no LLM'], ['dia.four_tier', 'A four-tier severity classifier'], ['dia.calibration', 'Calibrated classical ML'],
+    ['dia.entity_filter', 'Retrieval guardrails'], ['voice.bargein', 'A realtime audio protocol fix'], ['voice.gate', 'A fail-closed release gate'],
+    ['cliniq.schema', 'Database design'], ['cliniq.workload', 'An operational planning model'], ['sssd.encoder', 'Custom diffusion conditioning'],
+  ];
+  const chosen = picks.filter(([id]) => isStatable(kb.claim.get(id))).slice(0, persona === 'recruiter' ? 5 : 9);
+  return mk('beyond_wrappers', structuredBlocks({
+    lead: 'A lot. In much of his work the language model is one component, or absent entirely:',
+    points: chosen.map(([id, label]) => ({ label, text: kb.claim.get(id)!.text, cites: [id] })),
+    takeaway: 'For your team: he knows when not to use an LLM, and how to engineer the parts around one, which is what keeps AI systems reliable.',
+  }), { entities: uniq(chosen.map(([id]) => kb.claim.get(id)!.entity)), actions: [{ kind: 'mode', label: 'X-Ray the Drug Interaction Agent', target: 'xray', arg: 'dia' }], followups: ['Why keep label review free of an LLM?', 'Show me the barge-in fix in code', 'Show the architecture of ClinIQ'] });
 }
 
 function shippedAnswer(kb: KB, _persona?: PersonaId): Answer {
-  const cs = ['dia.shipped', 'cliniq.delivery', 'tifin.deploy', 'tifin.reach', 'imw.system'].map((id) => kb.claim.get(id)).filter(isStatable);
-  return mk('shipped', [
-    { type: 'p', text: 'Publicly deployed and inspectable: the Drug Interaction Agent (live app) and ClinIQ (live demo), both on Hugging Face Spaces. Production work at TIFIN is self-reported employment experience with no public artifact. The Voice-Agent QA Harness is a test system, not a deployed product.', cites: ['dia.shipped', 'cliniq.delivery', 'tifin.deploy'] },
-    { type: 'claims', ids: ids(cs) },
-  ], {
-    entities: ['dia', 'cliniq', 'tifin'],
+  const points: TopicPoint[] = [
+    { label: 'In production at TIFIN (Mar 2025 – May 2026)', text: 'Three models in an AI portfolio copilot (intent classification, entity extraction and retrieval ranking), deployed and monitored on AWS SageMaker and GCP Vertex AI. The AI capabilities reached 40,000+ users.', cites: ['tifin.role', 'tifin.models', 'tifin.deploy', 'tifin.reach'] },
+    { label: 'In production at Citizen Health (current)', text: 'Source-grounded retrieval and summarization for a patient-advocacy product, released behind an evaluation suite that catches regressions before they reach patients.', cites: ['citizen.role', 'citizen.release_eval'] },
+    { label: 'Live: Drug Interaction Agent', text: 'A React + FastAPI application in one Docker container on a public Hugging Face Space, with 41 backend and 7 frontend tests in CI and 24/24 severity accuracy on its regression set.', cites: ['dia.shipped', 'dia.tests', 'dia.eval_scores'] },
+    { label: 'Live: ClinIQ', text: 'A 5-panel Streamlit dashboard with Docker Compose, CI and a live demo; 4th place at the NSF NRT Research-A-Thon 2026.', cites: ['cliniq.delivery', 'cliniq.award'] },
+    { label: 'Live: this assistant', text: 'An evidence-gated assistant on this portfolio, plus a public MCP server any AI client can query.', cites: ['imw.system', 'imw.mcp'] },
+  ];
+  return mk('shipped', structuredBlocks({
+    lead: 'He has shipped AI both in production at work and as public, live systems you can try right now:',
+    points,
+    takeaway: 'Bottom line: he has taken AI from prototype to production end to end, including the model, API, interface, container, CI and the evaluation that keeps it reliable.',
+  }), {
+    entities: ['tifin', 'citizen', 'dia', 'cliniq'],
     actions: [{ kind: 'url', label: 'Open Drug Interaction Agent', target: kb.entity.get('dia')!.links[0].url }, { kind: 'url', label: 'Open ClinIQ demo', target: kb.entity.get('cliniq')!.links[0].url }, { kind: 'anchor', label: 'Jump to TIFIN experience', target: '#tifin' }],
-    followups: ['Show the architecture of the Drug Interaction Agent', 'How was ClinIQ evaluated?', 'What did Rahul personally do on TIFIN?'],
+    followups: ['What did Rahul personally do on TIFIN?', 'Show the architecture of the Drug Interaction Agent', 'How was ClinIQ evaluated?'],
   });
 }
 
 function gapsAnswer(kb: KB): Answer {
   const pick = ['kubernetes', 'iac', 'distributed_inference', 'pretraining', 'orchestration', 'human_annotation', 'online_experiments', 'customer_deployments'];
-  return mk('gaps', [
-    { type: 'p', text: 'What the current portfolio does not demonstrate, and the closest related evidence for each:' },
-    { type: 'gaps', items: pick.map((id) => kb.gap.get(id)!).map((g) => ({ id: g.id, name: g.name, statement: g.statement, closest: uniq(g.related.flatMap((r) => (kb.statableBySkill.get(r) ?? []).map((c) => c.entity))).slice(0, 3) })) },
-    { type: 'note', tone: 'info', text: `Also pending verification (not stated as fact): ${kb.conflicts.filter((c) => !c.decision.startsWith('No conflict')).map((c) => c.label).slice(0, 5).join('; ')}.` },
-  ], { followups: ['Evaluate Rahul for an MLOps Engineer role', 'What is his strongest evidence overall?', 'How does he evaluate AI systems?'] });
+  return mk('gaps', structuredBlocks({
+    lead: 'Honest answer: his gaps are large-scale infrastructure and formal people management, which is typical at his career stage, and each one sits next to experience he can build on:',
+    points: [],
+    extra: [{ type: 'gaps', items: pick.map((id) => kb.gap.get(id)!).map((g) => ({ id: g.id, name: g.name, statement: g.statement, closest: uniq(g.related.flatMap((r) => (kb.statableBySkill.get(r) ?? []).map((c) => c.entity))).slice(0, 3) })) }],
+    takeaway: 'How he closes gaps: by building. Realtime voice, diffusion models and quantum ML were each new to him, and each became a working, tested system.',
+    takeawayCites: ['voice.harness', 'sssd.encoder', 'qml.benchmark'],
+  }), { topic: 'learning', followups: ['How fast does he learn new technology?', 'Evaluate Rahul for an MLOps Engineer role', 'Why should we hire Rahul?'] });
 }
 
-function levelAnswer(kb: KB): Answer {
-  const roles = ['citizen.role', 'tifin.role', 'athena.role', 'edu.ms'].map((id) => kb.claim.get(id)).filter(isStatable);
-  return mk('level', [{ type: 'p', text: kb.subject.level_note }, { type: 'claims', ids: ids(roles) }], { followups: ['What has Rahul actually shipped?', 'Evaluate Rahul for a Machine Learning Engineer I role'] });
+function levelAnswer(_kb: KB): Answer {
+  const points: TopicPoint[] = [
+    { label: 'Now · Citizen Health', text: 'AI Engineer building source-grounded retrieval and summarization for a patient-advocacy product.', cites: ['citizen.role'] },
+    { label: 'Production AI · TIFIN', text: 'AI/ML Engineer Intern on an AI portfolio copilot, with ownership that included deploying and monitoring models on AWS SageMaker and GCP Vertex AI.', cites: ['tifin.role', 'tifin.deploy'] },
+    { label: 'Agents · Athena', text: 'Prototyped task-planning, tool-use and prompt-orchestration components for an executive-assistant workflow.', cites: ['athena.role'] },
+    { label: 'Education', text: 'M.S. in Computer Science with an AI emphasis and a B.S. in Computer Science, both from UMKC.', cites: ['edu.ms', 'edu.bs'] },
+  ];
+  return mk('level', structuredBlocks({
+    lead: 'Early-career, with real production experience: he has worked on production AI at TIFIN and now at Citizen Health, and holds an M.S. in Computer Science.',
+    points,
+    takeaway: 'He fits AI / ML engineer roles at the early-career level, and the work itself (production deployment, evaluation and end-to-end systems) is what those roles ask for. For senior roles, the difference is years of ownership rather than the kind of work.',
+  }), { followups: ['What has Rahul actually shipped?', 'Why should we hire Rahul?', 'Evaluate Rahul for a Machine Learning Engineer I role'] });
 }
 
-const TOPICS: [RegExp, string[], string][] = [
-  [/\b(rag|retrieval|vector|embedding|semantic search|grounded)/, ['rag', 'vector_db', 'semantic_search', 'embeddings', 'provenance'], 'Retrieval and RAG work, grouped by where it was done:'],
-  [/(evaluat|test(ing|s)?\b|measure|benchmark|metrics|quality assurance|qa\b|red[- ]team|judge)/, ['eval_design', 'llm_eval', 'regression_testing', 'safety_testing', 'model_comparison'], 'How Rahul evaluates AI systems: designed test suites, a separate LLM judge with validated output, hand review, fail-closed release gates, and baselines:'],
-  [/(backend|back-end|api|fastapi|server|cache|redis|rate limit|docker|infrastructure)/, ['fastapi', 'rest_api', 'caching', 'rate_limiting', 'docker', 'testing'], 'Backend engineering evidence:'],
-  [/(vision|image|diffusion|cnn|imaging|stable diffusion|lora)/, ['computer_vision', 'diffusion', 'fine_tuning', 'cnn', 'xai'], 'Computer-vision and generative-vision research:'],
-  [/(data engineer|pipeline|snowflake|spark|etl|sql|data quality|warehouse)/, ['etl', 'snowflake', 'pyspark', 'data_quality', 'data_modeling', 'sql'], 'Data engineering evidence:'],
-  [/(voice|realtime|real-time|speech|audio|twilio|websocket|phone)/, ['voice_ai', 'realtime_audio', 'twilio', 'websockets'], 'Realtime voice AI evidence:'],
-  [/(agent|agentic|langgraph|langchain|tool call|workflow|automation)/, ['agents', 'langgraph', 'langchain', 'tool_calling', 'workflow_automation'], 'Agents and workflow automation:'],
-  [/(research|paper|experiment|reproducib|baseline|scientific)/, ['research_methods', 'model_comparison', 'metrics'], 'Research practice: baselines, metrics, limitations and reproducibility checks:'],
-  [/(ml model|machine learning|classifier|model development|train)/, ['classical_ml', 'deep_learning', 'calibration', 'model_comparison'], 'Model development evidence:'],
-  [/(aws|gcp|cloud|sagemaker|vertex|mlops|deploy)/, ['sagemaker', 'vertex_ai', 'deployment', 'mlops', 'docker'], 'Cloud and deployment evidence:'],
-  [/(healthcare|clinical|medical|patient)/, ['healthcare'], 'Healthcare work:'],
-  [/(fintech|financ|advisor|invest)/, ['fintech'], 'Financial-services work:'],
+const TOPICS: [RegExp, string[], string, string][] = [
+  [/\b(rag|retrieval|vector|embedding|semantic search|grounded)/, ['rag', 'vector_db', 'semantic_search', 'embeddings', 'provenance'],
+    'Retrieval and RAG run through his work, from a public medication assistant to production systems in finance and healthcare:',
+    'For your team: he designs retrieval as an engineering system, with exact lookups, relevance filters, calibrated scoring and caching, not just a vector search.'],
+  [/(evaluat|test(ing|s)?\b|measure|benchmark|metrics|quality assurance|qa\b|red[- ]team|judge)/, ['eval_design', 'llm_eval', 'regression_testing', 'safety_testing', 'model_comparison'],
+    'He evaluates AI systems the way production teams need to: designed test suites, a separate LLM judge with validated output, hand review, fail-closed release gates and baselines.',
+    'For your team: releases are gated on evidence, and regressions are caught before users see them.'],
+  [/(backend|back-end|api|fastapi|server|cache|redis|rate limit|docker|infrastructure)/, ['fastapi', 'rest_api', 'caching', 'rate_limiting', 'docker', 'testing'],
+    'He builds production backends in Python: FastAPI services with caching, rate limiting, containers and tests.',
+    'For your team: he can own the service around a model, not only the model.'],
+  [/(vision|image|diffusion|cnn|imaging|stable diffusion|lora)/, ['computer_vision', 'diffusion', 'fine_tuning', 'cnn', 'xai'],
+    'He has done hands-on computer-vision research, from generative diffusion models to explainable image classification:',
+    'For your team: he can change model internals (conditioning, adapters and evaluation), not only apply pretrained models.'],
+  [/(data engineer|pipeline|snowflake|spark|etl|sql|data quality|warehouse)/, ['etl', 'snowflake', 'pyspark', 'data_quality', 'data_modeling', 'sql'],
+    'He has built data pipelines at production scale and in research:',
+    'For your team: data quality is treated as part of the ML system, with audits and validation built in.'],
+  [/(voice|realtime|real-time|speech|audio|twilio|websocket|phone)/, ['voice_ai', 'realtime_audio', 'twilio', 'websockets'],
+    'He has built and debugged realtime voice AI down to the audio-protocol level:',
+    'For your team: he can work below the SDK, where realtime systems actually break.'],
+  [/(agent|agentic|langgraph|langchain|tool call|workflow|automation)/, ['agents', 'langgraph', 'langchain', 'tool_calling', 'workflow_automation'],
+    'He has built LLM agents and multi-step workflows in production and in public projects:',
+    'For your team: agents with shared state, validation and retries, evaluated like any other system.'],
+  [/(research|paper|experiment|reproducib|baseline|scientific)/, ['research_methods', 'model_comparison', 'metrics'],
+    'His research practice centers on baselines, honest metrics and reproducibility:',
+    'For your team: results you can rerun and trust.'],
+  [/(ml model|machine learning|classifier|model development|train)/, ['classical_ml', 'deep_learning', 'calibration', 'model_comparison'],
+    'He has developed models across classical ML and deep learning, with calibration and head-to-head comparisons:',
+    'For your team: models chosen and tuned on evidence rather than habit.'],
+  [/(aws|gcp|cloud|sagemaker|vertex|mlops|deploy)/, ['sagemaker', 'vertex_ai', 'deployment', 'mlops', 'docker'],
+    'He has deployed models and applications on AWS SageMaker, GCP Vertex AI, Docker and Hugging Face Spaces:',
+    'For your team: he can take a model from a notebook to a monitored deployment.'],
+  [/(healthcare|clinical|medical|patient)/, ['healthcare'],
+    'Healthcare runs through his work, from patient records in production to clinical research prototypes:',
+    'For your team: he understands the grounding, privacy and safety constraints that healthcare AI has to meet.'],
+  [/(fintech|financ|advisor|invest)/, ['fintech'],
+    'He has built AI for financial advisors in production:',
+    'For your team: experience shipping AI under enterprise compliance controls.'],
 ];
 
 function topicConcepts(q: string): string[] {
   return TOPICS.find(([re]) => re.test(q))?.[1] ?? [];
 }
 
-function topicAnswer(kb: KB, q: string, concepts: string[], persona: PersonaId): Answer {
-  const intro = TOPICS.find(([re]) => re.test(q))![2];
+function conceptTopicAnswer(kb: KB, q: string, concepts: string[], persona: PersonaId): Answer {
+  const [, , intro, takeaway] = TOPICS.find(([re]) => re.test(q))!;
   const cs = pick(kb, claimsForConcepts(kb, concepts), persona, persona === 'recruiter' ? 2 : 3, persona === 'recruiter' ? 6 : 9);
   const ents = uniq(cs.map((c) => c.entity));
-  const blocks: Block[] = [{ type: 'p', text: intro, cites: ids(cs.slice(0, 2)) }, { type: 'claims', ids: ids(cs) }];
-  if (concepts.includes('eval_design') && persona !== 'recruiter') blocks.push({ type: 'chart', chart: 'cliniq' });
-  if (concepts.includes('rag') && ents.includes('dia') && persona === 'engineer') blocks.push({ type: 'xray', arch: 'arch.dia' });
-  if (concepts.includes('voice_ai')) blocks.push({ type: 'trace', id: 't.voice.emergency' });
-  return mk('topic', blocks, {
+  const extra: Block[] = [];
+  if (concepts.includes('eval_design') && persona !== 'recruiter') extra.push({ type: 'chart', chart: 'cliniq' });
+  if (concepts.includes('rag') && ents.includes('dia') && persona === 'engineer') extra.push({ type: 'xray', arch: 'arch.dia' });
+  if (concepts.includes('voice_ai')) extra.push({ type: 'trace', id: 't.voice.emergency' });
+  return mk('topic', structuredBlocks({ lead: intro, points: entityPoints(kb, cs, persona === 'recruiter' ? 1 : 2), extra, takeaway }), {
     entities: ents,
     actions: ents.slice(0, 3).map((id) => anchorAction(kb.entity.get(id)!)),
     followups: ents[0] ? entityFollowups(kb, ents[0]).slice(0, 3).concat(ents[1] ? [`Compare ${entityName(kb, ents[0])} and ${entityName(kb, ents[1])}`] : []) : GENERAL_FOLLOWUPS.slice(0, 4),
   });
 }
 
-function fallback(kb: KB, raw: string, persona: PersonaId): Answer {
-  const hits = retrieve(kb, raw, { limit: 6 });
-  if (!hits.length || hits[0].score < 2) {
-    return mk('no_evidence', [
-      { type: 'p', text: "The evidence database doesn't cover that. I only answer from verified material about Rahul's work, so here is what I can answer:" },
-    ], { followups: GENERAL_FOLLOWUPS });
-  }
-  const cs = pick(kb, hits.map((h) => h.claim), persona, 2, 5);
-  const top = cs[0].entity;
-  return mk('retrieval', [
-    { type: 'p', text: 'The closest verified evidence:', cites: ids(cs.slice(0, 1)) },
-    { type: 'claims', ids: ids(cs) },
-  ], { entities: uniq(cs.map((c) => c.entity)), actions: entityActions(kb, top), followups: entityFollowups(kb, top).slice(0, 3), basis: { retrieved: hits.map((h) => h.claim.id) } });
+/** A written topic answer; for "can he learn X?" it first says where X stands in his work. */
+function topicWithConcept(kb: KB, t: Topic, conceptIds: string[], persona: PersonaId): Answer {
+  const cid = t.id === 'learning' ? conceptIds[0] : undefined;
+  if (!cid) return writtenAnswer(kb, t, persona);
+  const cov = coverConcept(kb, cid);
+  const where = listText(cov.entities.slice(0, 3).map((id) => entityName(kb, id)));
+  const status = cov.category === 'direct' ? `He already has direct experience with ${cov.label}, in ${where}.`
+    : cov.category === 'related' ? `He has closely related experience: ${cov.statement ?? ''}`.trim()
+    : `${cov.label} isn't part of his work yet. ${cov.statement ?? ''}`.trim();
+  return writtenAnswer(kb, t, persona, { lead: `${status} On picking it up: the clearest evidence is how many different kinds of systems he has built from scratch, each in a new stack or domain, and each one working, tested and documented.` });
 }
 
-function overviewAnswer(kb: KB, persona: PersonaId): Answer {
-  const picks = ['dia.shipped', 'voice.gate', 'cliniq.comparison', 'tifin.agents', 'sssd.encoder'].map((id) => kb.claim.get(id)).filter(isStatable);
-  return mk('overview', [
-    { type: 'p', text: `${kb.subject.name} is an early-career AI/ML engineer. The strongest inspectable evidence, one item per area:` },
-    { type: 'claims', ids: ids(persona === 'recruiter' ? picks.slice(0, 4) : picks) },
-    { type: 'note', tone: 'info', text: kb.subject.level_note },
-  ], {
-    entities: uniq(picks.map((c) => c.entity)),
-    actions: [{ kind: 'mode', label: 'Explore the evidence map', target: 'map' }, { kind: 'mode', label: 'Evaluate against a role', target: 'role' }],
-    followups: ['What has Rahul actually shipped?', 'What failure did he find and fix?', 'What is not demonstrated yet?'],
+function fallback(kb: KB, raw: string, persona: PersonaId): Answer {
+  const hits = retrieve(kb, raw, { limit: 8 });
+  if (!hits.length || hits[0].score < 2) {
+    return mk('no_evidence', [
+      { type: 'p', lead: true, text: "I don't have evidence that answers that directly. I can speak to his projects, experience, technical skills, and how he works with people. For example:" },
+    ], { followups: ['Why should we hire Rahul?', 'How does he work in a team?', 'What has Rahul actually shipped?', 'How fast does he learn new technology?'] });
+  }
+  const cs = pick(kb, hits.map((h) => h.claim), persona, 2, 6);
+  const top = cs[0].entity;
+  return mk('retrieval', structuredBlocks({ lead: 'Here is what his work shows on that:', points: entityPoints(kb, cs) }),
+    { entities: uniq(cs.map((c) => c.entity)), actions: entityActions(kb, top), followups: entityFollowups(kb, top).slice(0, 3), basis: { retrieved: hits.map((h) => h.claim.id) } });
+}
+
+function overviewAnswer(kb: KB, _persona: PersonaId): Answer {
+  const points: TopicPoint[] = [
+    { label: 'Current role · Citizen Health', text: 'Builds source-grounded retrieval and summarization for a patient-advocacy product, with each statement linked to its medical record and every release gated by evaluation.', cites: ['citizen.role', 'citizen.source_linked', 'citizen.release_eval'] },
+    { label: 'Production AI · TIFIN', text: 'LangGraph advisor workflows with tool calling and structured outputs. The AI capabilities reached 40,000+ users, models improved recommendation accuracy by 19% and F1 by 24%, and a 65% reduction in manual effort was reported.', cites: ['tifin.agents', 'tifin.structured', 'tifin.reach', 'tifin.gains', 'tifin.effort'] },
+    { label: 'Public systems you can try', text: 'A deployed Drug Interaction Agent (React, FastAPI, Docker) and the ClinIQ dashboard, both live on Hugging Face Spaces.', cites: ['dia.shipped', 'cliniq.delivery'] },
+    { label: 'Evaluation discipline', text: 'A voice-agent QA harness that places real calls, with an LLM judge, hand review and a fail-closed release gate.', cites: ['voice.harness', 'voice.judge', 'voice.gate'] },
+    { label: 'Research depth', text: 'Kinematic-conditioned diffusion for surgical video, and a published classical-versus-quantum ML imaging study.', cites: ['sssd.encoder', 'qml.xai'] },
+    { label: 'Education', text: 'M.S. in Computer Science with an AI emphasis (May 2026).', cites: ['edu.ms'] },
+  ];
+  return mk('overview', structuredBlocks({
+    lead: `${kb.subject.name} is an AI / ML engineer who builds LLM applications, retrieval systems and ML models, and makes them measurable. He is currently an AI Engineer at Citizen Health.`,
+    leadCites: ['citizen.role'],
+    points,
+    takeaway: 'Bottom line: production experience, public work you can inspect, and the evaluation habits that make AI systems dependable.',
+  }), {
+    entities: ['citizen', 'tifin', 'dia', 'voice'],
+    actions: [{ kind: 'mode', label: 'Evaluate against a role', target: 'role' }, { kind: 'mode', label: 'Explore the evidence map', target: 'map' }],
+    followups: ['Why should we hire Rahul?', 'How does he work in a team?', 'What has Rahul actually shipped?'],
   });
 }
 

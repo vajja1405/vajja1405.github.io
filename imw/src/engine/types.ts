@@ -53,7 +53,17 @@ export interface Role {
   id: string; title: string; tier: 'strong' | 'adjacent' | 'stretch'; priority?: number;
   requirements: string[]; gaps: string[]; proof_note: string; level_note?: string; focus_entities: string[];
 }
-export interface Conflict { id: string; topic: string; label: string; site: string; resume: string; repo?: string; decision: string; claims: string[] }
+export interface Conflict { id: string; topic: string; label: string; site: string; resume: string; repo?: string; decision: string; claims: string[]; open: boolean }
+
+/** A written answer to a common question family (teamwork, leadership, why hire...). Every point is cited. */
+export interface Cited { text: string; cites: string[] }
+export interface TopicPoint { label: string; text: string; cites: string[] }
+export interface Topic {
+  id: string; title: string; match: string[];
+  lead: Cited; points?: TopicPoint[]; takeaway?: Cited; why?: string; plain?: string;
+  points_from?: string; takeaway_from?: string; why_from?: string;
+  failures?: string[]; entities: string[]; followups: string[]; actions?: Action[];
+}
 
 export interface Bundle {
   version: string;
@@ -62,14 +72,16 @@ export interface Bundle {
   sources: Source[]; personas: { id: PersonaId; label: string; focus: string }[];
   entities: Entity[]; groups: Group[]; skills: Skill[]; gaps: Gap[]; claims: Claim[];
   decisions: Decision[]; failures: Failure[]; attacks: Attack[]; architectures: Architecture[];
-  traces: Trace[]; datasets: Record<string, any>; roles: Role[]; conflicts: Conflict[];
+  traces: Trace[]; datasets: Record<string, any>; roles: Role[]; conflicts: Conflict[]; topics: Topic[];
 }
 
 // ---- Answer model (shared by the offline engine and the API) -------------------
 
 export type Block =
-  | { type: 'p'; text: string; cites?: string[] }
-  | { type: 'claims'; title?: string; ids: string[] }
+  | { type: 'p'; text: string; cites?: string[]; lead?: boolean }
+  | { type: 'points'; items: TopicPoint[] }
+  | { type: 'takeaway'; text: string; cites?: string[] }
+  | { type: 'claims'; title?: string; ids: string[]; collapsed?: boolean }
   | { type: 'entity'; id: string }
   | { type: 'coverage'; analysis: CoverageAnalysis }
   | { type: 'xray'; arch: string }
@@ -94,6 +106,8 @@ export interface Answer {
   engine: 'evidence' | 'model';
   intent: string;
   entities: string[];
+  /** The question family this answered, so "how does that make sense?" can explain it. */
+  topic?: string;
   /** Transparency record for "Why this answer?" — never model reasoning. */
   basis?: { retrieved: string[]; checks?: { label: string; ok: boolean }[]; model?: string };
 }

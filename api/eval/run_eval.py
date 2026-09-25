@@ -22,7 +22,7 @@ HERE = Path(__file__).parent
 
 
 def call(base: str, case: dict) -> tuple[int, dict]:
-    body = json.dumps({"question": case["question"], "persona": case.get("persona", "recruiter")}).encode()
+    body = json.dumps({"question": case["question"], "persona": case.get("persona", "recruiter"), "topic": case.get("topic")}).encode()
     req = urllib.request.Request(f"{base}/api/ask", data=body, headers={"Content-Type": "application/json", "Origin": "https://vajja1405.github.io"})
     try:
         with urllib.request.urlopen(req, timeout=90) as r:

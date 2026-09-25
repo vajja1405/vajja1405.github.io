@@ -1,5 +1,6 @@
 import { useState } from 'preact/hooks';
 import type { Answer, Block } from '../engine/types';
+import { citedIds } from '../engine/answer';
 import { useWs } from '../context';
 import { CATEGORY_LABEL } from '../engine/coverage';
 import { ActionButton, CAT_CLASS, ClaimList, CodeLinks, EntityChip } from './bits';
@@ -9,6 +10,9 @@ import { TracePlayer } from './Lab';
 
 export function AnswerView({ a }: { a: Answer }) {
   const { setInspect, ask } = useWs();
+  // One citation numbering for the whole answer, so [2] means the same source everywhere.
+  const order = citedIds(a);
+  const num = (id: string) => order.indexOf(id) + 1;
   return (
     <div class="imw-answer">
       <div class="imw-answer-head">
@@ -18,7 +22,7 @@ export function AnswerView({ a }: { a: Answer }) {
         </button>
         {(a as Answer & { refined?: boolean }).refined && <span class="imw-help">Requirements refined by AI parsing</span>}
       </div>
-      {a.blocks.map((b, i) => <BlockView key={i} b={b} />)}
+      {a.blocks.map((b, i) => <BlockView key={i} b={b} num={num} />)}
       {a.actions.length > 0 && <div class="imw-actions">{a.actions.map((x, i) => <ActionButton key={i} a={x} />)}</div>}
       {a.followups.length > 0 && (
         <div class="imw-followups" aria-label="Suggested follow-up questions">
@@ -29,22 +33,59 @@ export function AnswerView({ a }: { a: Answer }) {
   );
 }
 
-function BlockView({ b }: { b: Block }) {
+/** The box is already titled "Bottom line", so drop that prefix (and keep the sentence capitalised). */
+const bottomLine = (t: string) => {
+  const rest = t.replace(/^Bottom line: /, '');
+  return rest.charAt(0).toUpperCase() + rest.slice(1);
+};
+
+function Cites({ ids, num }: { ids?: string[]; num: (id: string) => number }) {
+  const { kb, setInspect } = useWs();
+  if (!ids?.length) return null;
+  return (
+    <>
+      {ids.map((id) => (
+        <button key={id} class="imw-cite" onClick={() => setInspect({ kind: 'claim', id })} aria-label={`Source ${num(id)}: ${kb.claim.get(id)?.text ?? id}`}>{num(id)}</button>
+      ))}
+    </>
+  );
+}
+
+function BlockView({ b, num }: { b: Block; num: (id: string) => number }) {
   const ws = useWs();
   const { kb, setInspect, go } = ws;
   switch (b.type) {
     case 'p':
+      return <p class={`imw-p${b.lead ? ' is-lead' : ''}`}>{b.text}<Cites ids={b.cites} num={num} /></p>;
+    case 'points':
       return (
-        <p class="imw-p">
-          {b.text}
-          {b.cites?.map((id, i) => (
-            <button key={id} class="imw-cite" onClick={() => setInspect({ kind: 'claim', id })} aria-label={`Evidence ${i + 1}: ${kb.claim.get(id)?.text ?? id}`}>{i + 1}</button>
+        <ol class="imw-points">
+          {b.items.map((it) => (
+            <li key={it.label}>
+              <strong>{it.label}</strong>
+              <span>{it.text}<Cites ids={it.cites} num={num} /></span>
+            </li>
           ))}
-        </p>
+        </ol>
+      );
+    case 'takeaway':
+      return (
+        <div class="imw-takeaway">
+          <span class="imw-eyebrow">Bottom line</span>
+          <p>{bottomLine(b.text)}<Cites ids={b.cites} num={num} /></p>
+        </div>
       );
     case 'note':
       return <p class={`imw-note${b.tone === 'warn' ? ' is-warn' : ''}`}>{b.text}</p>;
     case 'claims':
+      if (b.collapsed) {
+        return (
+          <details class="imw-sources">
+            <summary>Sources · {b.ids.length} verified item{b.ids.length === 1 ? '' : 's'} with links</summary>
+            <ClaimList ids={b.ids} />
+          </details>
+        );
+      }
       return <ClaimList ids={b.ids} title={b.title} />;
     case 'entity': {
       const e = kb.entity.get(b.id);

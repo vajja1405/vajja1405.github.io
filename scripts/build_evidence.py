@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -23,6 +24,69 @@ STATUSES = {"verified", "verification_required", "unsupported", "deprecated"}
 STRENGTHS = {"public_artifact", "self_reported", "resume_only"}
 KINDS = {"fact", "metric", "limitation"}
 GITHUB_OWNER = "vajja1405"
+
+sys.path.insert(0, str(ROOT / "api"))
+from app.validate import HYPE, _num_forms  # noqa: E402  (one source of truth for tone and number grounding)
+
+CONTRACT = re.compile(r"\bcontract(s|ed|or)?\b", re.I)
+
+
+def check_topics(topics: list[dict], claims: dict, entity_ids: set[str], failure_ids: set[str], errors: list[str]) -> None:
+    """Written answers must obey the same rules as model answers: statable citations only, every
+    number grounded in the claims cited next to it, and no ranking, praise or "contract" wording."""
+    ids = {t["id"] for t in topics}
+    statable = {cid for cid, c in claims.items() if c["status"] == "verified" and c.get("public_safe")}
+
+    def text_ok(owner: str, text: str, cites: list[str]) -> None:
+        for cid in cites:
+            if cid not in claims:
+                errors.append(f"{owner}: unknown claim {cid}")
+            elif cid not in statable:
+                errors.append(f"{owner}: cites unverified claim {cid}")
+        grounded: set[str] = set()
+        for cid in cites:
+            grounded |= _num_forms(claims.get(cid, {}).get("text", ""))
+        for n in _num_forms(text):
+            if n not in grounded and n not in {"1", "2", "3"}:
+                errors.append(f"{owner}: states {n}, which its citations do not contain")
+        if HYPE.search(text):
+            errors.append(f"{owner}: ranking or praise language")
+        if CONTRACT.search(text):
+            errors.append(f"{owner}: says 'contract'")
+
+    for t in topics:
+        tid = t["id"]
+        for field in ("title", "match", "lead", "entities", "followups"):
+            if field not in t:
+                errors.append(f"topic {tid}: missing {field}")
+        for pat in t.get("match", []):
+            try:
+                re.compile(pat)
+            except re.error as e:
+                errors.append(f"topic {tid}: bad pattern {pat!r} ({e})")
+        for ref in ("points_from", "takeaway_from", "why_from"):
+            if t.get(ref) and t[ref] not in ids:
+                errors.append(f"topic {tid}: {ref} points at unknown topic {t[ref]}")
+        if "points" not in t and not t.get("points_from"):
+            errors.append(f"topic {tid}: needs points or points_from")
+        lead = t.get("lead", {})
+        text_ok(f"topic {tid} lead", lead.get("text", ""), lead.get("cites", []))
+        for i, pt in enumerate(t.get("points", [])):
+            text_ok(f"topic {tid} point {i}", f"{pt['label']} {pt['text']}", pt.get("cites", []))
+            if not pt.get("cites"):
+                errors.append(f"topic {tid} point {i}: every point needs a citation")
+        if t.get("takeaway"):
+            text_ok(f"topic {tid} takeaway", t["takeaway"]["text"], t["takeaway"].get("cites", []))
+        if t.get("why"):
+            text_ok(f"topic {tid} why", t["why"], [])
+        if t.get("plain"):
+            text_ok(f"topic {tid} plain", t["plain"], [])
+        for e in t.get("entities", []):
+            if e not in entity_ids:
+                errors.append(f"topic {tid}: unknown entity {e}")
+        for f in t.get("failures", []):
+            if f not in failure_ids:
+                errors.append(f"topic {tid}: unknown failure {f}")
 
 
 def load(name: str):
@@ -48,6 +112,7 @@ def build() -> tuple[dict, list[str]]:
     replays = load("replays")
     roles = load("roles")
     conflicts = load("conflicts")
+    topics = load("topics")
 
     errors: list[str] = []
     repos = meta["repos"]
@@ -169,10 +234,15 @@ def build() -> tuple[dict, list[str]]:
 
     for cf in conflicts:
         check_claims(f"conflict {cf['id']}", cf.get("claims"))
+        if not isinstance(cf.get("open"), bool):
+            errors.append(f"conflict {cf['id']}: 'open' must be true or false")
 
     for e in entities:
         if e.get("repo") and e["repo"] not in repos:
             errors.append(f"entity {e['id']}: unknown repo")
+
+    dupes([t["id"] for t in topics], "topic")
+    check_topics(topics, {c["id"]: c for c in claims}, entity_ids, {f["id"] for f in stories["failures"]}, errors)
 
     bundle = {
         "version": meta["version"],
@@ -193,6 +263,7 @@ def build() -> tuple[dict, list[str]]:
         "datasets": replays["datasets"],
         "roles": roles,
         "conflicts": conflicts,
+        "topics": topics,
     }
     return bundle, errors
 

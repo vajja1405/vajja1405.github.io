@@ -295,7 +295,7 @@ def get_known_gaps() -> dict[str, Any]:
         gaps.append({"gap": g["name"], "status": "Verification required" if g.get("verify") else "Not currently demonstrated",
                      "statement": g["statement"], "closest_projects": sorted(kb.entities[e]["name"] for e in closest if e in kb.entities)[:4]})
     return {"gaps": gaps,
-            "held_back_pending_verification": [cf["label"] for cf in kb.raw["conflicts"] if not cf["decision"].startswith("No conflict")],
+            "not_stated_until_confirmed": [cf["label"] for cf in kb.raw["conflicts"] if cf.get("open")],
             "level": kb.raw["subject"]["level_note"], "policy": POLICY}
 
 
