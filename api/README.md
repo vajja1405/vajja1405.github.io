@@ -25,6 +25,7 @@ Questions and job descriptions are never logged or stored. Only method, path, st
 | Name | Default | Purpose |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | none (required) | Secret. Without it the API reports `ai_enabled: false` and the site uses the offline engine. |
+| `ANTHROPIC_WORKSPACE_ID` | unset | Variable. Only needed when the API key was not created inside a workspace; the Anthropic Console shows the ID (`wrkspc_…`) under Settings → Workspaces. |
 | `IMW_MODEL` | `claude-opus-5` | Model id |
 | `IMW_EFFORT` | `low` | Output effort |
 | `IMW_ALLOWED_ORIGINS` | the portfolio, its Hugging Face preview, and localhost | CORS allowlist |

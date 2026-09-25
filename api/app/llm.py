@@ -104,7 +104,10 @@ class ClaudeClient:
         import anthropic
 
         self._anthropic = anthropic
-        self._client = anthropic.Anthropic(timeout=28.0, max_retries=1)
+        # Keys created outside a workspace must name one on every request.
+        workspace = os.environ.get("ANTHROPIC_WORKSPACE_ID", "").strip()
+        headers = {"anthropic-workspace-id": workspace} if workspace else None
+        self._client = anthropic.Anthropic(timeout=28.0, max_retries=1, default_headers=headers)
         self._fallbacks = USE_FALLBACKS
         self.name = MODEL
 
@@ -123,6 +126,8 @@ class ClaudeClient:
             else:
                 resp = self._client.messages.create(**kwargs)
         except a.BadRequestError as e:
+            # The API's message names the rejected parameter; it never contains the visitor's question.
+            log.warning("bad request: %s", getattr(e, "message", "")[:500])
             if self._fallbacks:
                 # Some deployments reject the fallback parameter; retry once without it and remember.
                 log.warning("fallbacks rejected (%s); continuing without", e.status_code)
