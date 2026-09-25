@@ -177,8 +177,11 @@ export function App({ kb, initial, register }: { kb: KB; initial: OpenOptions; r
       // The model writes the prose; the evidence engine supplies the inspectable structure.
       const extra = local.blocks.filter((b) => STRUCTURAL.has(b.type)).map((b) => (b.type === 'claims' ? { ...b, title: 'Sources', collapsed: true } : b));
       final = { ...m, blocks: [...m.blocks, ...extra], actions: local.actions, followups: m.followups.length ? m.followups : local.followups, entities: [...new Set([...m.entities, ...local.entities])], topic: local.topic };
-    } catch {
-      final = { ...local, blocks: [{ type: 'note', tone: 'info', text: 'The AI service did not return a validated answer, so this one comes from the offline evidence engine.' }, ...local.blocks] };
+    } catch (e) {
+      // The written answer stands on its own; the badge already says which engine answered.
+      final = local;
+      // A server-side failure (misconfiguration, outage) will repeat, so stop asking for this visit.
+      if (((e as { status?: number }).status ?? 0) >= 500) setApi('offline');
     }
     setTurns((ts) => ts.map((t) => (t.id === id ? { ...t, a: final, pending: false } : t)));
   }, [kb, persona, coverage, api, turns, go, recordCoverage]);
