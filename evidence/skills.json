@@ -1312,6 +1312,38 @@
       "related": [
         "stakeholder"
       ]
+    },
+    {
+      "id": "human_in_the_loop",
+      "name": "Human-in-the-loop and escalation design",
+      "group": "genai",
+      "aliases": [
+        "human-in-the-loop",
+        "human in the loop",
+        "hitl",
+        "escalation policy",
+        "human escalation",
+        "human handoff"
+      ],
+      "related": [
+        "agents",
+        "safety_testing"
+      ]
+    },
+    {
+      "id": "event_streaming",
+      "name": "Event-driven pipelines (Kafka)",
+      "group": "data",
+      "aliases": [
+        "kafka",
+        "event streaming",
+        "event-driven",
+        "stream processing",
+        "dead-letter queue"
+      ],
+      "related": [
+        "etl"
+      ]
     }
   ],
   "gaps": [
@@ -1331,7 +1363,7 @@
         "docker",
         "deployment"
       ],
-      "statement": "The portfolio does not show verified Kubernetes or cluster-orchestration ownership. The closest evidence is Docker containers, Hugging Face Space deployments, and SageMaker / Vertex AI model deployment at TIFIN."
+      "statement": "Operating Kubernetes in production is not demonstrated. The drug-interaction project includes Kubernetes manifests (probes, autoscaling, resource limits, a GPU inference deployment) validated against Kubernetes schemas in CI; no cluster was run. Other deployment evidence is Docker, Hugging Face Spaces, and SageMaker / Vertex AI at TIFIN."
     },
     {
       "id": "iac",
@@ -1348,7 +1380,7 @@
         "deployment",
         "ci_cd"
       ],
-      "statement": "Infrastructure-as-code (Terraform, CloudFormation, Pulumi) is not demonstrated."
+      "statement": "Terraform for an AWS EKS stack (VPC, EKS, GPU node group, container registry) is written and validated in CI in the drug-interaction project but was never applied; operating infrastructure as code for a live system is not demonstrated."
     },
     {
       "id": "orchestration",
@@ -1365,23 +1397,6 @@
         "etl"
       ],
       "statement": "Airflow-style orchestration ownership is not verified. The closest evidence is Snowflake pipelines at TIFIN and a PySpark preprocessing job."
-    },
-    {
-      "id": "streaming_data",
-      "name": "Event streaming (Kafka etc.)",
-      "aliases": [
-        "kafka",
-        "kinesis",
-        "pub/sub",
-        "pubsub",
-        "flink",
-        "event streaming",
-        "stream processing"
-      ],
-      "related": [
-        "etl"
-      ],
-      "statement": "Kafka or stream-processing ownership is not demonstrated."
     },
     {
       "id": "dbt",
@@ -1417,7 +1432,7 @@
         "deployment",
         "deep_learning"
       ],
-      "statement": "Ownership of distributed inference or training infrastructure is not demonstrated. Current evidence stops at bounded single-service deployments and managed model deployment."
+      "statement": "Distributed inference or training infrastructure is not demonstrated. Evidence stops at a self-hosted Llama 3.2 behind an OpenAI-compatible gateway on a laptop CPU and ONNX INT8 quantization of a small encoder; vLLM appears only in deployment manifests and was not run."
     },
     {
       "id": "pretraining",

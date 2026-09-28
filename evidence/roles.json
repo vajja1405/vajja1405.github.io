@@ -250,7 +250,6 @@
     ],
     "gaps": [
       "orchestration",
-      "streaming_data",
       "dbt"
     ],
     "proof_note": "TIFIN 5M+ daily data points; audits across 2M+ records.",

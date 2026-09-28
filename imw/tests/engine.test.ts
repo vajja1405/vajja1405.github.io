@@ -210,7 +210,8 @@ describe('roles and job descriptions', () => {
     const a = ask('Why is Rahul suited to an AI Evaluation role?');
     expect(a.intent).toBe('role');
     const cov = a.blocks.find((b) => b.type === 'coverage');
-    expect(cov && cov.type === 'coverage' && cov.analysis.entities[0].id).toBe('voice');
+    // The drug project's 127-scenario agent trajectory evaluation (Sep 2026) is now the strongest evaluation evidence.
+    expect(cov && cov.type === 'coverage' && cov.analysis.entities[0].id).toBe('dia');
     expect(answerText(a)).not.toMatch(/%/);
     expectClean(a);
   });

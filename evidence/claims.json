@@ -2565,5 +2565,346 @@
       }
     ],
     "last_verified": "2026-09-24"
+  },
+  {
+    "id": "dia.agent",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "A stateful LangGraph agent (Sep 2026) resolves medications to RxNorm, retrieves FDA label evidence for each pair, and runs proposer → critic → judge review with self-correction. High-risk or unverifiable cases pause at a human-in-the-loop step and resume from a SQLite checkpoint. It keeps patient memory, builds a token-budgeted context, and exposes its tools through an MCP server.",
+    "tags": [
+      "agents",
+      "langgraph",
+      "tool_calling",
+      "structured_outputs",
+      "human_in_the_loop",
+      "healthcare",
+      "provenance"
+    ],
+    "sources": [
+      "dia_agent_doc",
+      "dia_repo"
+    ],
+    "code": [
+      {
+        "repo": "dia_sep",
+        "path": "agent/graph.py",
+        "label": "LangGraph state machine"
+      },
+      {
+        "repo": "dia_sep",
+        "path": "agent/mcp_server.py",
+        "label": "MCP server"
+      },
+      {
+        "repo": "dia_sep",
+        "path": "agent/policy.py",
+        "label": "Escalation policy"
+      }
+    ]
+  },
+  {
+    "id": "dia.trajectory_eval",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Trajectory evaluation: 127 scenarios (tool faults, prompt injection, misspellings, patient memory) scored on the path, not just the answer. Against a single pass, the critic loop fixed 4 failures and broke none, raised escalation recall to 0.88 (0.882), and released no ungrounded findings; plain rules still scored highest on task success (0.827 vs 0.772 for the agent and 0.740 single pass), which is why the safety checks stay deterministic.",
+    "tags": [
+      "llm_eval",
+      "eval_design",
+      "agents",
+      "safety_testing",
+      "metrics"
+    ],
+    "sources": [
+      "dia_agent_eval"
+    ],
+    "metrics": [
+      {
+        "label": "Scenarios",
+        "value": "127"
+      },
+      {
+        "label": "Escalation recall",
+        "value": "0.88"
+      },
+      {
+        "label": "Task success (rules / agent)",
+        "value": "0.827 / 0.772"
+      }
+    ],
+    "code": [
+      {
+        "repo": "dia_sep",
+        "path": "docs/benchmarks/agent-trajectory-2026-09-27.md",
+        "label": "Results table"
+      },
+      {
+        "repo": "dia_sep",
+        "path": "agent/eval/scenarios.py",
+        "label": "Scenarios and ground truth"
+      }
+    ]
+  },
+  {
+    "id": "dia.context_budget",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "A token-budgeted context builder cut prompt evidence 79% versus top-k retrieval: all retrieved passages would average 1,727 tokens per case, cross-mention filtering leaves 495 and sentence compression 362.",
+    "tags": [
+      "rag",
+      "prompt_engineering",
+      "metrics"
+    ],
+    "sources": [
+      "dia_agent_eval"
+    ],
+    "code": [
+      {
+        "repo": "dia_sep",
+        "path": "agent/memory.py",
+        "label": "PatientMemory and ContextBuilder"
+      },
+      {
+        "repo": "dia_sep",
+        "path": "README.md",
+        "lines": [
+          146,
+          149
+        ],
+        "label": "Measured context sizes"
+      }
+    ]
+  },
+  {
+    "id": "dia.hybrid_retrieval",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "BM25 + dense search with rank fusion and a cross-encoder reranker lifted MRR 25% at the deployed rerank depth (0.496 → 0.619; 0.652 at full depth) on a 600-query benchmark over 1,011 FDA label passages. Relevance is mention-based, a proxy rather than pharmacist judgment.",
+    "tags": [
+      "semantic_search",
+      "embeddings",
+      "rag",
+      "metrics",
+      "eval_design"
+    ],
+    "sources": [
+      "dia_benchmarks"
+    ],
+    "metrics": [
+      {
+        "label": "MRR@10 (deployed depth)",
+        "value": "0.496 → 0.619"
+      },
+      {
+        "label": "Passages",
+        "value": "1,011"
+      }
+    ],
+    "code": [
+      {
+        "repo": "dia_sep",
+        "path": "search/hybrid.py",
+        "label": "HybridSearcher"
+      },
+      {
+        "repo": "dia_sep",
+        "path": "docs/benchmarks/rerank-depth-2026-09-26.json",
+        "label": "Rerank-depth sweep"
+      }
+    ]
+  },
+  {
+    "id": "dia.load_test",
+    "entity": "dia",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Prometheus stage metrics exposed the reranker as the bottleneck; retuning cut p95 latency 84% (7.4 → 1.2 s) and raised throughput 4.9× under Locust on a laptop CPU.",
+    "tags": [
+      "monitoring",
+      "metrics",
+      "deployment",
+      "caching"
+    ],
+    "sources": [
+      "dia_benchmarks"
+    ],
+    "code": [
+      {
+        "repo": "dia_sep",
+        "path": "docs/benchmarks/load-2026-09-26.json",
+        "label": "Load-test results"
+      },
+      {
+        "repo": "dia_sep",
+        "path": "observability.py",
+        "label": "Prometheus stage metrics"
+      }
+    ]
+  },
+  {
+    "id": "dia.gateway",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "An OpenAI-compatible model gateway routes to a self-hosted Llama 3.2 with API fallback and a circuit breaker; an outage drill kept every request served. Kubernetes manifests and Terraform for AWS EKS are validated in CI but were not applied.",
+    "tags": [
+      "llm_apis",
+      "deployment",
+      "ci_cd",
+      "monitoring"
+    ],
+    "sources": [
+      "dia_benchmarks"
+    ],
+    "code": [
+      {
+        "repo": "dia_sep",
+        "path": "inference/router.py",
+        "label": "Router and circuit breaker"
+      },
+      {
+        "repo": "dia_sep",
+        "path": "docs/benchmarks/inference-2026-09-26.json",
+        "label": "Gateway measurements"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.fhir",
+    "entity": "cliniq",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "FHIR R4 ingestion: 118,868 resources from 109 Synthea synthetic patients, validated and mapped to SNOMED CT, RxNorm and LOINC, with Safe Harbor–style de-identification (0 PHI leaks found), role-based access and a hash-chained audit log. Embedding search recovered only 52% of code-defined patient cohorts (BM25 71%), so cohorts are selected by terminology codes.",
+    "tags": [
+      "healthcare",
+      "data_quality",
+      "etl",
+      "provenance",
+      "embeddings",
+      "metrics"
+    ],
+    "sources": [
+      "cliniq_interop"
+    ],
+    "code": [
+      {
+        "repo": "cliniq_sep",
+        "path": "interop/fhir_ingest.py",
+        "label": "Ingestion and validation"
+      },
+      {
+        "repo": "cliniq_sep",
+        "path": "outputs/fhir_interop_report.json",
+        "label": "Run report"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.prior_auth",
+    "entity": "cliniq",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Synthetic prior authorization (LangGraph): a criteria engine checks four synthetic payer-style policies against FHIR evidence, a local LLM drafts reviewer summaries that a checker validates, and only a clinician can deny. Across 118 requests: 31 auto-approved, 87 routed to review, 0 auto-denials, and 89/89 missing-documentation tests pended with the right criteria. Policies and patients are synthetic.",
+    "tags": [
+      "agents",
+      "langgraph",
+      "human_in_the_loop",
+      "healthcare",
+      "safety_testing",
+      "eval_design"
+    ],
+    "sources": [
+      "cliniq_prior_auth"
+    ],
+    "code": [
+      {
+        "repo": "cliniq_sep",
+        "path": "prior_auth/workflow.py",
+        "label": "Workflow graph"
+      },
+      {
+        "repo": "cliniq_sep",
+        "path": "prior_auth/evaluate.py",
+        "label": "Evaluation and perturbation tests"
+      }
+    ]
+  },
+  {
+    "id": "voice.kafka",
+    "entity": "voice",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Post-call evaluation runs as an event-driven Kafka pipeline (keyed partitions, idempotent consumers, bounded retries, dead-letter queue). Measured on Apache Kafka: throughput 12.4 → 26.8 events/s from 1 to 4 workers per stage, with all 240 replayed events completed.",
+    "tags": [
+      "event_streaming",
+      "etl",
+      "testing",
+      "metrics"
+    ],
+    "sources": [
+      "voice_pipeline"
+    ],
+    "code": [
+      {
+        "repo": "voice_sep",
+        "path": "pipeline/bus.py",
+        "label": "Bus, retries, DLQ"
+      },
+      {
+        "repo": "voice_sep",
+        "path": "docs/pipeline-scaling-2026-09-26.json",
+        "label": "Scaling run"
+      }
+    ]
+  },
+  {
+    "id": "sssd.onnx",
+    "entity": "sssd",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Inference optimization: exported the 30.5M-parameter kinematic encoder to ONNX with INT8 quantization — 4× smaller and 4.7× faster on CPU at batch 1, with export parity checked against PyTorch.",
+    "tags": [
+      "deep_learning",
+      "deployment",
+      "metrics"
+    ],
+    "sources": [
+      "sssd_onnx"
+    ],
+    "code": [
+      {
+        "repo": "sssd_sep",
+        "path": "scripts/optimize_encoder.py",
+        "label": "Export and quantization"
+      },
+      {
+        "repo": "sssd_sep",
+        "path": "docs/encoder-optimization-2026-09-26.json",
+        "label": "Measurements"
+      }
+    ]
   }
 ]

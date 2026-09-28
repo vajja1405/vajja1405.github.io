@@ -125,12 +125,15 @@ def test_requirement_list_maps_unknown_phrases_to_not_demonstrated():
     assert cat(out, "Languages beyond Python / SQL / TypeScript") == "Not currently demonstrated"
     assert cat(out, "LangGraph") == "Direct evidence"
     lg = next(r for r in out["requirements"] if r["requirement"] == "LangGraph")
-    assert lg.get("note") == "Supported only by self-reported employment experience."
+    # Public project code (the LangGraph clinical agent, Sep 2026) now backs LangGraph, not only employment claims.
+    assert lg.get("note") is None and "Drug Interaction Agent" in lg["evidence_from"]
 
 
 def test_role_evidence():
     out = srv.get_role_evidence("AI Evaluation Engineer")
-    assert out["strongest_evidence_from"][0] == "Voice-Agent QA Harness"
+    # The agent trajectory evaluation (Sep 2026) made the drug project the strongest evaluation evidence.
+    assert out["strongest_evidence_from"][0] == "Drug Interaction Agent"
+    assert "Voice-Agent QA Harness" in out["strongest_evidence_from"]
     assert "#imw=role:ai_eval" in out["view_on_site"]
     assert "error" in srv.get_role_evidence("astronaut")
 

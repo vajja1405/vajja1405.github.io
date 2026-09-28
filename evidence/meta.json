@@ -40,6 +40,22 @@
     "site": {
       "name": "vajja1405.github.io",
       "sha": "main"
+    },
+    "dia_sep": {
+      "name": "drug-interaction-rag-chatbot",
+      "sha": "67a8123ae33cc95216eb88aae399e3c1a4a787ef"
+    },
+    "cliniq_sep": {
+      "name": "ClinIQ-AI-for-Substance-Abuse-Risk-Detection",
+      "sha": "5c05c65c2aca2eb58bf9d6fcf9e93295c49548bf"
+    },
+    "voice_sep": {
+      "name": "voice-agent-qa-harness",
+      "sha": "013e686b323dbe9d435beb7aff050200c327dd83"
+    },
+    "sssd_sep": {
+      "name": "SS-SD",
+      "sha": "e27fe74e6b9b10cee37ce4363649f43c0f795972"
     }
   },
   "sources": [
@@ -224,6 +240,55 @@
       "title": "Confirmed by Rahul (2026-09-24)",
       "public": false,
       "note": "Rahul reviewed these résumé items and confirmed them for the portfolio."
+    },
+    {
+      "id": "dia_agent_eval",
+      "type": "evaluation",
+      "title": "Agent trajectory evaluation, 127 scenarios (2026-09-27)",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/67a8123ae33cc95216eb88aae399e3c1a4a787ef/docs/benchmarks/agent-trajectory-2026-09-27.md",
+      "public": true
+    },
+    {
+      "id": "dia_agent_doc",
+      "type": "design",
+      "title": "docs/AGENT.md: clinical agent architecture and policy",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/67a8123ae33cc95216eb88aae399e3c1a4a787ef/docs/AGENT.md",
+      "public": true
+    },
+    {
+      "id": "dia_benchmarks",
+      "type": "evaluation",
+      "title": "Retrieval, rerank-depth and load benchmarks (2026-09-26)",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/67a8123ae33cc95216eb88aae399e3c1a4a787ef/docs/benchmarks/rerank-depth-2026-09-26.json",
+      "public": true
+    },
+    {
+      "id": "cliniq_interop",
+      "type": "evaluation",
+      "title": "FHIR interoperability report (Synthea)",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/5c05c65c2aca2eb58bf9d6fcf9e93295c49548bf/outputs/fhir_interop_report.json",
+      "public": true
+    },
+    {
+      "id": "cliniq_prior_auth",
+      "type": "evaluation",
+      "title": "README: synthetic prior-authorization agent (2026-09-27)",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/5c05c65c2aca2eb58bf9d6fcf9e93295c49548bf/README.md#synthetic-prior-authorization-agent-september-27-2026",
+      "public": true
+    },
+    {
+      "id": "voice_pipeline",
+      "type": "evaluation",
+      "title": "Kafka pipeline scaling run (2026-09-26)",
+      "url": "https://github.com/vajja1405/voice-agent-qa-harness/blob/013e686b323dbe9d435beb7aff050200c327dd83/docs/pipeline-scaling-2026-09-26.json",
+      "public": true
+    },
+    {
+      "id": "sssd_onnx",
+      "type": "evaluation",
+      "title": "Encoder ONNX/INT8 optimization run (2026-09-26)",
+      "url": "https://github.com/vajja1405/SS-SD/blob/e27fe74e6b9b10cee37ce4363649f43c0f795972/docs/encoder-optimization-2026-09-26.json",
+      "public": true
     }
   ],
   "personas": [
