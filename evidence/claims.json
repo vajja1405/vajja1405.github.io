@@ -1852,8 +1852,10 @@
       "fintech"
     ],
     "sources": [
-      "site"
-    ]
+      "site",
+      "rahul_confirmed"
+    ],
+    "note": "Confirmed by Rahul on 2026-09-28."
   },
   {
     "id": "tifin.deploy",
@@ -1897,8 +1899,10 @@
     ],
     "sources": [
       "site",
-      "resume_v2"
-    ]
+      "resume_v2",
+      "rahul_confirmed"
+    ],
+    "note": "Confirmed by Rahul on 2026-09-28."
   },
   {
     "id": "tifin.structured",
@@ -1982,14 +1986,16 @@
     ],
     "sources": [
       "site",
-      "resume_v2"
+      "resume_v2",
+      "rahul_confirmed"
     ],
     "metrics": [
       {
         "label": "Daily data points",
         "value": "5M+"
       }
-    ]
+    ],
+    "note": "Confirmed by Rahul on 2026-09-28."
   },
   {
     "id": "tifin.dq",
