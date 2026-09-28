@@ -2325,7 +2325,7 @@ function ar({ turns: e }) {
   }, [e.length, m?.pending]);
   const g = () => {
     const w = o.trim();
-    w && (l(""), n(w));
+    w && (l(""), p.current && (p.current.style.height = "auto"), n(w));
   }, c = ei(o), y = t.claims.reduce((w, u) => w + (W(u) ? u.code?.length ?? 0 : 0), 0);
   return /* @__PURE__ */ i("div", { class: "imw-ask", children: [
     /* @__PURE__ */ i("div", { class: "imw-log", ref: d, children: [

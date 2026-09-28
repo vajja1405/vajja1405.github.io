@@ -36,6 +36,7 @@ export function AskView({ turns }: { turns: Turn[] }) {
     const q = text.trim();
     if (!q) return;
     setText('');
+    if (input.current) input.current.style.height = 'auto';  // shrink back after a long question
     ask(q);
   };
   const jd = looksLikeJD(text);
