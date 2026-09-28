@@ -2657,7 +2657,7 @@
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "A token-budgeted context builder cut prompt evidence 79% versus top-k retrieval: all retrieved passages would average 1,727 tokens per case, cross-mention filtering leaves 495 and sentence compression 362.",
+    "text": "Evidence filtering plus a token-budgeted context builder cut prompt evidence 79% versus top-k retrieval: all retrieved passages would average 1,727 tokens per case, cross-mention filtering leaves 495 and sentence compression 362. In an ablation on 35 cases, compression did not improve accuracy; it halves latency.",
     "tags": [
       "rag",
       "prompt_engineering",
