@@ -1824,15 +1824,17 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "AI/ML Engineer Intern at TIFIN (remote), Mar 2025 – May 2026, working on an AI portfolio copilot for investment questions and advisor preparation.",
+    "text": "AI/ML Engineer at TIFIN (remote), Mar 2025 – May 2026, working on an AI portfolio copilot for investment questions and advisor preparation.",
     "tags": [
       "fintech",
       "llm"
     ],
     "sources": [
       "site",
-      "resume_v2"
-    ]
+      "resume_v2",
+      "rahul_confirmed"
+    ],
+    "note": "Title confirmed by Rahul from his employment records on 2026-09-28."
   },
   {
     "id": "tifin.models",

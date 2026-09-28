@@ -1263,7 +1263,7 @@ function Rs(e) {
     lead: "Early-career, with real production experience: he has worked on production AI at TIFIN and now at Citizen Health, and holds an M.S. in Computer Science.",
     points: [
       { label: "Now · Citizen Health", text: "AI Engineer building source-grounded retrieval and summarization for a patient-advocacy product.", cites: ["citizen.role"] },
-      { label: "Production AI · TIFIN", text: "AI/ML Engineer Intern on an AI portfolio copilot, with ownership that included deploying and monitoring models on AWS SageMaker and GCP Vertex AI.", cites: ["tifin.role", "tifin.deploy"] },
+      { label: "Production AI · TIFIN", text: "AI/ML Engineer on an AI portfolio copilot, with ownership that included deploying and monitoring models on AWS SageMaker and GCP Vertex AI.", cites: ["tifin.role", "tifin.deploy"] },
       { label: "Agents · Athena", text: "Prototyped task-planning, tool-use and prompt-orchestration components for an executive-assistant workflow.", cites: ["athena.role"] },
       { label: "Education", text: "M.S. in Computer Science with an AI emphasis and a B.S. in Computer Science, both from UMKC.", cites: ["edu.ms", "edu.bs"] }
     ],
