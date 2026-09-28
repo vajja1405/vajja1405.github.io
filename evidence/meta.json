@@ -47,7 +47,7 @@
     },
     "cliniq_sep": {
       "name": "ClinIQ-AI-for-Substance-Abuse-Risk-Detection",
-      "sha": "5c05c65c2aca2eb58bf9d6fcf9e93295c49548bf"
+      "sha": "f39b12b5e62425c05853e7b92ffe2a16532c9448"
     },
     "voice_sep": {
       "name": "voice-agent-qa-harness",
@@ -281,6 +281,13 @@
       "type": "evaluation",
       "title": "README: synthetic prior-authorization agent (2026-09-27)",
       "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/5c05c65c2aca2eb58bf9d6fcf9e93295c49548bf/README.md#synthetic-prior-authorization-agent-september-27-2026",
+      "public": true
+    },
+    {
+      "id": "cliniq_bert",
+      "type": "evaluation",
+      "title": "README: fine-tuned DistilBERT, tracked in Weights & Biases (2026-09-28)",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/f39b12b5e62425c05853e7b92ffe2a16532c9448/README.md#fine-tuned-distilbert-tracked-in-weights--biases-september-28-2026",
       "public": true
     },
     {

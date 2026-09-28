@@ -596,7 +596,7 @@
     },
     {
       "id": "fine_tuning",
-      "name": "Parameter-efficient fine-tuning (LoRA)",
+      "name": "Fine-tuning (LoRA, DistilBERT)",
       "group": "vision",
       "aliases": [
         "lora",
@@ -1061,13 +1061,14 @@
         "ml ops",
         "ml pipelines",
         "model lifecycle",
-        "ml infrastructure"
+        "ml infrastructure",
+        "weights & biases",
+        "wandb",
+        "experiment tracking"
       ],
       "near": [
         "mlflow",
-        "kubeflow",
-        "weights & biases",
-        "wandb"
+        "kubeflow"
       ],
       "related": [
         "deployment",
@@ -1453,7 +1454,7 @@
       "related": [
         "fine_tuning"
       ],
-      "statement": "Foundation-model pretraining and production fine-tuning at scale are not demonstrated. The closest evidence is LoRA adaptation of Stable Diffusion in graduate research."
+      "statement": "Foundation-model pretraining and production fine-tuning at scale are not demonstrated. The closest evidence is LoRA adaptation of Stable Diffusion in graduate research and fine-tuning DistilBERT as a text classifier in ClinIQ."
     },
     {
       "id": "human_annotation",

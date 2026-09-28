@@ -2922,6 +2922,49 @@
     ]
   },
   {
+    "id": "cliniq.bert",
+    "entity": "cliniq",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Fine-tuned DistilBERT (Hugging Face Trainer, CPU) to flag substance-use-relevant drug reviews, with runs tracked in Weights & Biases. On the same 600 held-out proxy-labeled reviews, reading review text only, it reached F1 0.873 (precision 0.910, recall 0.840) against 0.762 for keyword rules. With the drug name as an input as well, F1 was 0.932 against 0.841, but the drug name can set the proxy label by itself, so the text-only comparison is the fair one. On a random validation split the text-only F1 was 0.755. Labels are keyword proxies, not clinician adjudication.",
+    "tags": [
+      "nlp",
+      "fine_tuning",
+      "deep_learning",
+      "model_comparison",
+      "mlops",
+      "healthcare",
+      "eval_design"
+    ],
+    "sources": [
+      "cliniq_bert"
+    ],
+    "code": [
+      {
+        "repo": "cliniq_sep",
+        "path": "analysis/bert_classifier.py",
+        "label": "Fine-tuning and evaluation"
+      },
+      {
+        "repo": "cliniq_sep",
+        "path": "outputs/bert_eval_textonly.json",
+        "label": "Text-only results"
+      }
+    ],
+    "metrics": [
+      {
+        "label": "F1, review text only",
+        "value": "0.873 vs 0.762 (rules)"
+      },
+      {
+        "label": "Test set",
+        "value": "600 proxy-labeled reviews"
+      }
+    ]
+  },
+  {
     "id": "voice.kafka",
     "entity": "voice",
     "kind": "metric",
