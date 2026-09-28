@@ -90,18 +90,6 @@
     "open": false
   },
   {
-    "id": "cf.hackaroo",
-    "topic": "Hack-A-Roo 2025 3rd place",
-    "site": "Removed from the current site.",
-    "resume": "3rd place, Quantum Computing, UMKC Hack-A-Roo 2025.",
-    "decision": "Resolved 2026-09-24: corrected to 'guided a team to 2nd place in the AI Agents track' at Rahul's direction; the 3rd-place Quantum line was removed from the résumé.",
-    "claims": [
-      "award.hackaroo"
-    ],
-    "label": "Hack-A-Roo placement",
-    "open": false
-  },
-  {
     "id": "cf.ibm",
     "topic": "IBM ML Professional Certificate",
     "site": "Listed as in progress.",

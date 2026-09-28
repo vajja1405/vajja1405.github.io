@@ -12,7 +12,6 @@ Items still **open** are never stated by the assistant, the PDF or the MCP serve
 | Drug agent latency | "20+ s → under 100 ms with Redis" | Repo: hosted check 5.8 s → 0.25 ms; no 20 s baseline anywhere | Resolved: `dia.cache_smoke` states the measured values; `dia.latency_20s` deprecated |
 | Surgical synthesis metrics | PSNR 19–22 dB, SSIM 0.61–0.74 | Confirmed by Rahul; README documents the VAE ceiling (~24–27 dB) above the generator | Resolved: `sssd.metric_values` verified · self-reported, `sssd.vae_ceiling` public |
 | QCNN "5× faster" | Stated as a result | Public README states it; the paper has a training-cost comparison | Resolved: `qml.speedup` verified, with the CNN's accuracy lead stated alongside |
-| Hack-A-Roo | "3rd place, Quantum Computing" | Rahul: incorrect; he guided a team to 2nd place in the AI Agents track | Resolved: `award.hackaroo` corrected; résumé v2 updated |
 | IBM ML certificate | Not listed | Not one of Rahul's certificates | Resolved: removed from the site; `edu.ibm` deprecated |
 | ClinIQ corpus | "52,184 public drug reviews" | Repo: Kaggle UCI Drug Review dataset (Drugs.com reviews) | No conflict; dataset now named |
 
