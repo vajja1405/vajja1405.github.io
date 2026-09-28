@@ -114,29 +114,29 @@ function fi(e) {
   };
 }
 function Jt(e, t, n, r, s, a, o, l, p, d) {
-  var m, g, c, y, w, u, f, v, k, _, b, h, x, C, q, A, H = t.type;
+  var m, g, c, y, w, u, f, v, k, b, _, h, x, C, q, A, H = t.type;
   if (t.constructor !== void 0) return null;
   128 & n.__u && (p = !!(32 & n.__u), a = [l = t.__e = n.__e]), (m = R.__b) && m(t);
   e: if (typeof H == "function") {
     g = o.length;
     try {
-      if (k = t.props, _ = H.prototype && H.prototype.render, b = (m = H.contextType) && r[m.__c], h = m ? b ? b.props.value : m.__ : r, n.__c ? v = (c = t.__c = n.__c).__ = c.__E : (_ ? t.__c = c = new H(k, h) : (t.__c = c = new rt(k, h), c.constructor = H, c.render = Fn), b && b.sub(c), c.state || (c.state = {}), c.__n = r, y = c.__d = !0, c.__h = [], c._sb = []), _ && c.__s == null && (c.__s = c.state), _ && H.getDerivedStateFromProps != null && (c.__s == c.state && (c.__s = we({}, c.__s)), we(c.__s, H.getDerivedStateFromProps(k, c.__s))), w = c.props, u = c.state, c.__v = t, y) _ && H.getDerivedStateFromProps == null && c.componentWillMount != null && c.componentWillMount(), _ && c.componentDidMount != null && c.__h.push(c.componentDidMount);
+      if (k = t.props, b = H.prototype && H.prototype.render, _ = (m = H.contextType) && r[m.__c], h = m ? _ ? _.props.value : m.__ : r, n.__c ? v = (c = t.__c = n.__c).__ = c.__E : (b ? t.__c = c = new H(k, h) : (t.__c = c = new rt(k, h), c.constructor = H, c.render = Fn), _ && _.sub(c), c.state || (c.state = {}), c.__n = r, y = c.__d = !0, c.__h = [], c._sb = []), b && c.__s == null && (c.__s = c.state), b && H.getDerivedStateFromProps != null && (c.__s == c.state && (c.__s = we({}, c.__s)), we(c.__s, H.getDerivedStateFromProps(k, c.__s))), w = c.props, u = c.state, c.__v = t, y) b && H.getDerivedStateFromProps == null && c.componentWillMount != null && c.componentWillMount(), b && c.componentDidMount != null && c.__h.push(c.componentDidMount);
       else {
-        if (_ && H.getDerivedStateFromProps == null && k !== w && c.componentWillReceiveProps != null && c.componentWillReceiveProps(k, h), t.__v == n.__v || !c.__e && c.shouldComponentUpdate != null && c.shouldComponentUpdate(k, c.__s, h) === !1) {
+        if (b && H.getDerivedStateFromProps == null && k !== w && c.componentWillReceiveProps != null && c.componentWillReceiveProps(k, h), t.__v == n.__v || !c.__e && c.shouldComponentUpdate != null && c.shouldComponentUpdate(k, c.__s, h) === !1) {
           t.__v != n.__v && (c.props = k, c.state = c.__s, c.__d = !1), t.__e = n.__e, t.__k = n.__k, t.__k.some(function(K) {
             K && (K.__ = t);
           }), dt.push.apply(c.__h, c._sb), c._sb = [], c.__h.length && o.push(c), l = Ie(n);
           break e;
         }
-        c.componentWillUpdate != null && c.componentWillUpdate(k, c.__s, h), _ && c.componentDidUpdate != null && c.__h.push(function() {
+        c.componentWillUpdate != null && c.componentWillUpdate(k, c.__s, h), b && c.componentDidUpdate != null && c.__h.push(function() {
           c.componentDidUpdate(w, u, f);
         });
       }
-      if (c.context = h, c.props = k, c.__P = e, c.__e = !1, x = R.__r, C = 0, _) c.state = c.__s, c.__d = !1, x && x(t), m = c.render(c.props, c.state, c.context), dt.push.apply(c.__h, c._sb), c._sb = [];
+      if (c.context = h, c.props = k, c.__P = e, c.__e = !1, x = R.__r, C = 0, b) c.state = c.__s, c.__d = !1, x && x(t), m = c.render(c.props, c.state, c.context), dt.push.apply(c.__h, c._sb), c._sb = [];
       else do
         c.__d = !1, x && x(t), m = c.render(c.props, c.state, c.context), c.state = c.__s;
       while (c.__d && ++C < 25);
-      c.state = c.__s, c.getChildContext != null && (r = we(we({}, r), c.getChildContext())), _ && !y && c.getSnapshotBeforeUpdate != null && (f = c.getSnapshotBeforeUpdate(w, u)), q = m != null && m.type === oe && m.key == null ? Ji(m.props.children) : m, l = Vi(e, wt(q) ? q : [q], t, n, r, s, a, o, l, p, d), c.base = t.__e, t.__u &= -161, c.__h.length && o.push(c), v && (c.__E = c.__ = null);
+      c.state = c.__s, c.getChildContext != null && (r = we(we({}, r), c.getChildContext())), b && !y && c.getSnapshotBeforeUpdate != null && (f = c.getSnapshotBeforeUpdate(w, u)), q = m != null && m.type === oe && m.key == null ? Ji(m.props.children) : m, l = Vi(e, wt(q) ? q : [q], t, n, r, s, a, o, l, p, d), c.base = t.__e, t.__u &= -161, c.__h.length && o.push(c), v && (c.__E = c.__ = null);
     } catch (K) {
       if (o.length = g, t.__v = null, p || a != null) {
         if (K.then) {
@@ -267,7 +267,7 @@ function i(e, t, n, r, s, a) {
   if (typeof e == "function" && (o = e.defaultProps)) for (l in o) p[l] === void 0 && (p[l] = o[l]);
   return R.vnode && R.vnode(d), d;
 }
-var Me, P, St, gi, Ve = 0, Xi = [], F = R, wi = F.__b, yi = F.__r, vi = F.diffed, _i = F.__c, bi = F.unmount, ki = F.__;
+var Me, P, St, gi, Ve = 0, Xi = [], F = R, wi = F.__b, yi = F.__r, vi = F.diffed, bi = F.__c, _i = F.unmount, ki = F.__;
 function Je(e, t) {
   F.__h && F.__h(P, e, Ve || t), Ve = 0;
   var n = P.__H || (P.__H = { __: [], __h: [] });
@@ -372,9 +372,9 @@ F.__b = function(e) {
         s.__h && (s.__h = []);
       }), t = [], F.__e(r, n.__v);
     }
-  }), _i && _i(e, t);
+  }), bi && bi(e, t);
 }, F.unmount = function(e) {
-  bi && bi(e);
+  _i && _i(e);
   var t, n = e.__c;
   n && n.__H && (n.__H.__.some(function(r) {
     try {
@@ -848,7 +848,7 @@ function O(e, t, n = []) {
   ], o = e.archByEntity.has(t);
   return a.filter(([l]) => !n.includes(l)).filter(([l]) => l === "architecture" ? o : !0).filter(([l]) => l === "failure" ? e.failures.some((p) => p.entity === t) || Ae(e, t).length > 0 : !0).filter(([l]) => l === "why" ? e.decisions.some((p) => p.entity === t) : !0).map(([, l]) => l).slice(0, 5);
 }
-const _t = [
+const bt = [
   "What has Rahul actually shipped?",
   "Show me his strongest RAG work.",
   "How does he evaluate AI systems?",
@@ -859,7 +859,7 @@ const _t = [
 function S(e, t, n = {}) {
   return {
     blocks: t,
-    followups: n.followups ?? _t.slice(0, 4),
+    followups: n.followups ?? bt.slice(0, 4),
     actions: n.actions ?? [],
     engine: "evidence",
     intent: e,
@@ -930,16 +930,16 @@ function vs(e) {
   const t = ue(e);
   return ys.find(([n]) => n.test(t))?.[1];
 }
-function _s(e, t, n) {
-  return ws(e, bs(e, t, n));
-}
 function bs(e, t, n) {
+  return ws(e, _s(e, t, n));
+}
+function _s(e, t, n) {
   const r = t.trim(), s = ue(r), a = n.persona;
   if (!s) return ks(e);
   if (rs.test(r))
     return S("injection", [
       { type: "p", text: "I can't change my instructions or reveal configuration. I only answer questions about Rahul's work, from a verified evidence database." }
-    ], { followups: _t.slice(0, 4) });
+    ], { followups: bt.slice(0, 4) });
   if (ei(r)) return Ss(e, r);
   if (as.test(s)) {
     const f = Fe(e, "why_hire"), v = "I won't put a number on a person, because a score hides the evidence you actually need. Here is the case instead, point by point:";
@@ -976,7 +976,7 @@ function bs(e, t, n) {
   if (T(s, /(who is (rahul|he)|about rahul|about him|overview|summari[sz]e|introduce|strongest (evidence|work) overall|most impressive|best work|in a nutshell|tl;?dr|tell me about (rahul|him)$)/)) return Ws(e);
   if (d && o.every((f) => d.entities.includes(f))) return Ps(e, d, l.map((f) => f.id), a);
   if (s.match(/which (project|experience|work|one)s? (best )?(prove|show|demonstrate|is (the )?(strongest|best) (evidence )?for)s?/) || T(s, /(strongest|best) (evidence|proof|project) (for|of)/)) {
-    const f = l.filter((_) => _.kind === "skill").map((_) => _.id), v = Ze(s), k = f.length ? f : v;
+    const f = l.filter((b) => b.kind === "skill").map((b) => b.id), v = Ze(s), k = f.length ? f : v;
     if (k.length) return Ii(e, k, a, s);
   }
   if (T(s, /\b(strongest|best)\b/) && Ze(s).length) return Ii(e, Ze(s), a, s);
@@ -1133,7 +1133,7 @@ function Bt(e, t, n, r) {
   }
   l.length && s.push({ type: "claims", title: "Sources", ids: Q(l), collapsed: !0 });
   const d = Q(a)[0];
-  return S("skill", s, { entities: Q(a), actions: o.length ? o : d ? We(e, d) : [], followups: d ? O(e, d).slice(0, 3).concat(["What is not demonstrated yet?"]) : _t.slice(0, 4) });
+  return S("skill", s, { entities: Q(a), actions: o.length ? o : d ? We(e, d) : [], followups: d ? O(e, d).slice(0, 3).concat(["What is not demonstrated yet?"]) : bt.slice(0, 4) });
 }
 function As(e, t, n, r) {
   const s = e.entity.get(t), a = e.statableByEntity.get(t) ?? [], o = e.archByEntity.get(t), l = e.failures.filter((w) => w.entity === t), p = e.decisions.filter((w) => w.entity === t), d = We(e, t);
@@ -1352,7 +1352,7 @@ function Ls(e, t, n, r) {
   return n.includes("eval_design") && r !== "recruiter" && p.push({ type: "chart", chart: "cliniq" }), n.includes("rag") && l.includes("dia") && r === "engineer" && p.push({ type: "xray", arch: "arch.dia" }), n.includes("voice_ai") && p.push({ type: "trace", id: "t.voice.emergency" }), S("topic", se({ lead: s, points: Qe(e, o, r === "recruiter" ? 1 : 2), extra: p, takeaway: a }), {
     entities: l,
     actions: l.slice(0, 3).map((d) => ii(e.entity.get(d))),
-    followups: l[0] ? O(e, l[0]).slice(0, 3).concat(l[1] ? [`Compare ${ee(e, l[0])} and ${ee(e, l[1])}`] : []) : _t.slice(0, 4)
+    followups: l[0] ? O(e, l[0]).slice(0, 3).concat(l[1] ? [`Compare ${ee(e, l[0])} and ${ee(e, l[1])}`] : []) : bt.slice(0, 4)
   });
 }
 function Ps(e, t, n, r) {
@@ -1489,13 +1489,13 @@ function Bs(e, t, n) {
   const r = new Map(t.entities.map((v) => [v.id, v.score])), s = (v) => t.requirements.filter((k) => (k.category === "direct" || k.category === "related") && k.entities.includes(v)), a = document.getElementById("work"), o = a ? [...a.querySelectorAll(":scope > article.project")] : [];
   if (o.length && a) {
     Le = { parent: a, order: [...a.children], numbers: o.map((h) => [h.querySelector(".project-number"), h.querySelector(".project-number")?.textContent ?? ""]) };
-    const v = (h) => e.entities.find((x) => x.anchor === `#${h.id}`)?.id ?? "", k = new Map(o.map((h) => [h, h.getBoundingClientRect()])), _ = [...o].sort((h, x) => (r.get(v(x)) ?? 0) - (r.get(v(h)) ?? 0)), b = a.querySelector(":scope > .research");
-    if (_.forEach((h, x) => {
-      a.insertBefore(h, b);
+    const v = (h) => e.entities.find((x) => x.anchor === `#${h.id}`)?.id ?? "", k = new Map(o.map((h) => [h, h.getBoundingClientRect()])), b = [...o].sort((h, x) => (r.get(v(x)) ?? 0) - (r.get(v(h)) ?? 0)), _ = a.querySelector(":scope > .research");
+    if (b.forEach((h, x) => {
+      a.insertBefore(h, _);
       const C = h.querySelector(".project-number");
       C && (C.textContent = `${String(x + 1).padStart(2, "0")} —`);
     }), !qe())
-      for (const h of _) {
+      for (const h of b) {
         const x = k.get(h), C = h.getBoundingClientRect(), q = x.top - C.top;
         q && h.animate([{ transform: `translateY(${q}px)` }, { transform: "none" }], { duration: 700, easing: "cubic-bezier(.2,.8,.2,1)" });
       }
@@ -1504,16 +1504,16 @@ function Bs(e, t, n) {
     if (v.id === "imw" || v.kind === "education") continue;
     const k = document.querySelector(v.anchor);
     if (!k || k.id === "work" || k.id === "experience") continue;
-    const _ = s(v.id);
-    if (k.classList.add(_.length ? "imw-lens-hit" : "imw-lens-dim"), mt.add(k), _.length) {
-      const b = V("div", "imw-lens-tag");
-      b.append(V("span", "imw-lens-tag-label", `✦ Evidence for ${t.title}`)), _.slice(0, 6).forEach((h) => b.append(V("span", `imw-lens-chip is-${h.category}`, h.label))), k.prepend(b), Ot.push(b);
+    const b = s(v.id);
+    if (k.classList.add(b.length ? "imw-lens-hit" : "imw-lens-dim"), mt.add(k), b.length) {
+      const _ = V("div", "imw-lens-tag");
+      _.append(V("span", "imw-lens-tag-label", `✦ Evidence for ${t.title}`)), b.slice(0, 6).forEach((h) => _.append(V("span", `imw-lens-chip is-${h.category}`, h.label))), k.prepend(_), Ot.push(_);
     }
   }
   const l = t.requirements.filter((v) => v.category === "direct").flatMap((v) => [v.label, ...e.skill.get(v.id)?.aliases ?? []]).map((v) => v.toLowerCase());
   document.querySelectorAll("#skills .skill").forEach((v) => {
     const k = v.textContent?.toLowerCase() ?? "";
-    v.classList.add(l.some((_) => _.length > 2 && k.includes(_)) ? "imw-lens-hit" : "imw-lens-dim"), mt.add(v);
+    v.classList.add(l.some((b) => b.length > 2 && k.includes(b)) ? "imw-lens-hit" : "imw-lens-dim"), mt.add(v);
   });
   const p = V("div", "imw-lens-bar");
   p.setAttribute("role", "region"), p.setAttribute("aria-label", "Role lens");
@@ -1533,17 +1533,17 @@ function zt() {
     e && (e.textContent = t);
   }), Le = null), document.documentElement.classList.remove("imw-lens");
 }
-let _e = null;
+let be = null;
 function Os(e, t) {
   const n = document.querySelector(e);
   if (!n) {
     t();
     return;
   }
-  n.scrollIntoView({ behavior: qe() ? "auto" : "smooth", block: "start" }), n.classList.add("imw-flash"), setTimeout(() => n.classList.remove("imw-flash"), 2400), n.hasAttribute("tabindex") || n.setAttribute("tabindex", "-1"), n.focus({ preventScroll: !0 }), _e?.remove(), _e = V("button", "imw-return", "✦ Back to Interview My Work"), _e.onclick = () => {
-    _e?.remove(), _e = null, t();
-  }, document.body.append(_e), setTimeout(() => {
-    _e?.remove(), _e = null;
+  n.scrollIntoView({ behavior: qe() ? "auto" : "smooth", block: "start" }), n.classList.add("imw-flash"), setTimeout(() => n.classList.remove("imw-flash"), 2400), n.hasAttribute("tabindex") || n.setAttribute("tabindex", "-1"), n.focus({ preventScroll: !0 }), be?.remove(), be = V("button", "imw-return", "✦ Back to Interview My Work"), be.onclick = () => {
+    be?.remove(), be = null, t();
+  }, document.body.append(be), setTimeout(() => {
+    be?.remove(), be = null;
   }, 2e4);
 }
 function un(e) {
@@ -1615,7 +1615,7 @@ function Us({ id: e }) {
   return r ? /* @__PURE__ */ i("button", { class: "imw-chip", onClick: () => n({ kind: "entity", id: e }), children: r.short }) : null;
 }
 const et = ["direct", "related", "verification", "missing"], Vs = { direct: "direct", related: "related", verification: "to verify", missing: "not shown" };
-function bt({ counts: e, compact: t }) {
+function _t({ counts: e, compact: t }) {
   const n = et.reduce((r, s) => r + e[s], 0) || 1;
   return /* @__PURE__ */ i("div", { class: `imw-covbar${t ? " is-compact" : ""}`, children: [
     /* @__PURE__ */ i("div", { class: "imw-covbar-track", role: "img", "aria-label": et.map((r) => `${e[r]} ${ie[r]}`).join(", "), children: et.filter((r) => e[r]).map((r) => /* @__PURE__ */ i("span", { class: `imw-covbar-seg ${Ee[r]}`, style: { flexGrow: e[r] / n }, title: `${e[r]} · ${ie[r]}` }, r)) }),
@@ -1628,61 +1628,61 @@ function bt({ counts: e, compact: t }) {
   ] });
 }
 function pn({ analysis: e, max: t = 16 }) {
-  const { kb: n, setInspect: r } = M(), [s, a] = E(null), o = e.requirements.slice(0, t), l = e.entities.slice(0, 7).map((_) => _.id), p = 26, d = 18, m = 640, g = d * 2 + Math.max(o.length, l.length) * p, c = (_) => d + (_ + 0.5) * p * (Math.max(o.length, l.length) / Math.max(l.length, 1)), y = (_) => d + (_ + 0.5) * p, w = 232, u = 408, f = o.flatMap(
-    (_, b) => _.category === "direct" || _.category === "related" ? _.entities.filter((h) => l.includes(h)).slice(0, 3).map((h) => ({ r: _.id, e: h, cat: _.category, y1: y(b), y2: c(l.indexOf(h)) })) : []
-  ), v = (_, b) => !s || s === _ || s === b, k = !qe();
+  const { kb: n, setInspect: r } = M(), [s, a] = E(null), o = e.requirements.slice(0, t), l = e.entities.slice(0, 7).map((b) => b.id), p = 26, d = 18, m = 640, g = d * 2 + Math.max(o.length, l.length) * p, c = (b) => d + (b + 0.5) * p * (Math.max(o.length, l.length) / Math.max(l.length, 1)), y = (b) => d + (b + 0.5) * p, w = 232, u = 408, f = o.flatMap(
+    (b, _) => b.category === "direct" || b.category === "related" ? b.entities.filter((h) => l.includes(h)).slice(0, 3).map((h) => ({ r: b.id, e: h, cat: b.category, y1: y(_), y2: c(l.indexOf(h)) })) : []
+  ), v = (b, _) => !s || s === b || s === _, k = !qe();
   return /* @__PURE__ */ i("figure", { class: "imw-map", children: [
     /* @__PURE__ */ i("svg", { viewBox: `0 0 ${m} ${g}`, role: "group", "aria-label": "Requirement to evidence map", class: k ? "is-anim" : "", children: [
-      f.map((_, b) => /* @__PURE__ */ i(
+      f.map((b, _) => /* @__PURE__ */ i(
         "path",
         {
-          d: `M${w},${_.y1} C${w + 90},${_.y1} ${u - 90},${_.y2} ${u},${_.y2}`,
-          class: `imw-link ${_.cat === "direct" ? "is-direct" : "is-related"}${v(_.r, _.e) ? " is-lit" : " is-dim"}`,
-          style: { animationDelay: `${Math.min(b * 25, 700)}ms` }
-        },
-        b
-      )),
-      o.map((_, b) => /* @__PURE__ */ i(
-        "g",
-        {
-          class: `imw-map-req ${Ee[_.category]}${s && s !== _.id ? " is-dim" : ""}`,
-          tabIndex: 0,
-          role: "button",
-          "aria-label": `${_.label}: ${ie[_.category]}`,
-          onMouseEnter: () => a(_.id),
-          onMouseLeave: () => a(null),
-          onFocus: () => a(_.id),
-          onBlur: () => a(null),
-          onClick: () => r({ kind: "req", req: _ }),
-          onKeyDown: (h) => (h.key === "Enter" || h.key === " ") && (h.preventDefault(), r({ kind: "req", req: _ })),
-          children: [
-            /* @__PURE__ */ i("rect", { x: 0, y: y(b) - p / 2, width: w + 6, height: p, class: "imw-hit" }),
-            /* @__PURE__ */ i("text", { x: w - 12, y: y(b) + 4, "text-anchor": "end", children: Gs(_.label, 30) }),
-            /* @__PURE__ */ i("circle", { cx: w, cy: y(b), r: 4.5 })
-          ]
-        },
-        _.id
-      )),
-      l.map((_, b) => /* @__PURE__ */ i(
-        "g",
-        {
-          class: `imw-map-ent${s && s !== _ && !f.some((h) => h.e === _ && h.r === s) ? " is-dim" : ""}`,
-          tabIndex: 0,
-          role: "button",
-          "aria-label": n.entity.get(_)?.name,
-          onMouseEnter: () => a(_),
-          onMouseLeave: () => a(null),
-          onFocus: () => a(_),
-          onBlur: () => a(null),
-          onClick: () => r({ kind: "entity", id: _ }),
-          onKeyDown: (h) => (h.key === "Enter" || h.key === " ") && (h.preventDefault(), r({ kind: "entity", id: _ })),
-          children: [
-            /* @__PURE__ */ i("rect", { x: u - 6, y: c(b) - p / 2, width: m - u + 6, height: p, class: "imw-hit" }),
-            /* @__PURE__ */ i("circle", { cx: u, cy: c(b), r: 5.5 }),
-            /* @__PURE__ */ i("text", { x: u + 14, y: c(b) + 4, children: n.entity.get(_)?.short })
-          ]
+          d: `M${w},${b.y1} C${w + 90},${b.y1} ${u - 90},${b.y2} ${u},${b.y2}`,
+          class: `imw-link ${b.cat === "direct" ? "is-direct" : "is-related"}${v(b.r, b.e) ? " is-lit" : " is-dim"}`,
+          style: { animationDelay: `${Math.min(_ * 25, 700)}ms` }
         },
         _
+      )),
+      o.map((b, _) => /* @__PURE__ */ i(
+        "g",
+        {
+          class: `imw-map-req ${Ee[b.category]}${s && s !== b.id ? " is-dim" : ""}`,
+          tabIndex: 0,
+          role: "button",
+          "aria-label": `${b.label}: ${ie[b.category]}`,
+          onMouseEnter: () => a(b.id),
+          onMouseLeave: () => a(null),
+          onFocus: () => a(b.id),
+          onBlur: () => a(null),
+          onClick: () => r({ kind: "req", req: b }),
+          onKeyDown: (h) => (h.key === "Enter" || h.key === " ") && (h.preventDefault(), r({ kind: "req", req: b })),
+          children: [
+            /* @__PURE__ */ i("rect", { x: 0, y: y(_) - p / 2, width: w + 6, height: p, class: "imw-hit" }),
+            /* @__PURE__ */ i("text", { x: w - 12, y: y(_) + 4, "text-anchor": "end", children: Gs(b.label, 30) }),
+            /* @__PURE__ */ i("circle", { cx: w, cy: y(_), r: 4.5 })
+          ]
+        },
+        b.id
+      )),
+      l.map((b, _) => /* @__PURE__ */ i(
+        "g",
+        {
+          class: `imw-map-ent${s && s !== b && !f.some((h) => h.e === b && h.r === s) ? " is-dim" : ""}`,
+          tabIndex: 0,
+          role: "button",
+          "aria-label": n.entity.get(b)?.name,
+          onMouseEnter: () => a(b),
+          onMouseLeave: () => a(null),
+          onFocus: () => a(b),
+          onBlur: () => a(null),
+          onClick: () => r({ kind: "entity", id: b }),
+          onKeyDown: (h) => (h.key === "Enter" || h.key === " ") && (h.preventDefault(), r({ kind: "entity", id: b })),
+          children: [
+            /* @__PURE__ */ i("rect", { x: u - 6, y: c(_) - p / 2, width: m - u + 6, height: p, class: "imw-hit" }),
+            /* @__PURE__ */ i("circle", { cx: u, cy: c(_), r: 5.5 }),
+            /* @__PURE__ */ i("text", { x: u + 14, y: c(_) + 4, children: n.entity.get(b)?.short })
+          ]
+        },
+        b
       ))
     ] }),
     /* @__PURE__ */ i("figcaption", { class: "imw-help", children: [
@@ -1739,16 +1739,16 @@ function mn() {
         o.map((f, v) => {
           const k = d + v * c + (c - (y * 3 + w * 2)) / 2;
           return /* @__PURE__ */ i("g", { children: [
-            Ti.map((_, b) => {
-              const h = f[_.key], x = k + b * (y + w);
+            Ti.map((b, _) => {
+              const h = f[b.key], x = k + _ * (y + w);
               return /* @__PURE__ */ i(
                 "path",
                 {
-                  class: `imw-bar ${_.cls}`,
+                  class: `imw-bar ${b.cls}`,
                   d: Qs(x, u(h), y, u(0) - u(h)),
-                  onMouseEnter: () => r({ x: (x + y / 2) / l, y: u(h) / p, text: `${f.label} · ${_.label} ${h.toFixed(3)}` })
+                  onMouseEnter: () => r({ x: (x + y / 2) / l, y: u(h) / p, text: `${f.label} · ${b.label} ${h.toFixed(3)}` })
                 },
-                _.key
+                b.key
               );
             }),
             /* @__PURE__ */ i("text", { class: "imw-axis-label", x: d + v * c + c / 2, y: p - 10, "text-anchor": "middle", children: f.label })
@@ -1808,7 +1808,7 @@ function Ks(e, t, n, r) {
   const s = Math.min(4, r / 2, n / 2);
   return n <= 0 ? "" : `M${e},${t} H${e + n - s} Q${e + n},${t} ${e + n},${t + s} V${t + r - s} Q${e + n},${t + r} ${e + n - s},${t + r} H${e} Z`;
 }
-const jt = 198, tt = 96, Oe = 174, be = 56, Te = 28, Ri = (e, t) => e.length > t ? e.slice(0, t - 1) + "…" : e;
+const jt = 198, tt = 96, Oe = 174, _e = 56, Te = 28, Ri = (e, t) => e.length > t ? e.slice(0, t - 1) + "…" : e;
 function fn({ arch: e, selected: t, onSelect: n, scan: r = !0 }) {
   const s = ye(null), [a, o] = E(!1), [l, p] = E(!1);
   Bn(() => {
@@ -1822,49 +1822,49 @@ function fn({ arch: e, selected: t, onSelect: n, scan: r = !0 }) {
     const u = setTimeout(() => p(!1), 1300);
     return () => clearTimeout(u);
   }, [e.id, r]);
-  const d = Math.max(...e.nodes.map((u) => u.col)) + 1, m = Math.max(...e.nodes.map((u) => u.row)) + 1, g = Te * 2 + d * jt - (jt - Oe), c = Te * 2 + m * tt - (tt - be) + (e.lanes.length ? 14 : 0), y = (u) => {
+  const d = Math.max(...e.nodes.map((u) => u.col)) + 1, m = Math.max(...e.nodes.map((u) => u.row)) + 1, g = Te * 2 + d * jt - (jt - Oe), c = Te * 2 + m * tt - (tt - _e) + (e.lanes.length ? 14 : 0), y = (u) => {
     const f = e.nodes.find((v) => v.id === u);
     return { x: Te + f.col * jt, y: Te + (e.lanes.length ? 14 : 0) + f.row * tt };
   }, w = (u, f) => {
     (u.key === "Enter" || u.key === " ") && (u.preventDefault(), n(f));
   };
   if (a) {
-    const u = new Map(e.nodes.map((_) => [_.id, 0]));
-    e.edges.forEach(([, _]) => u.set(_, (u.get(_) ?? 0) + 1));
-    const f = (_, b) => _.col - b.col || _.row - b.row, v = e.nodes.filter((_) => !u.get(_.id)).sort(f), k = [];
+    const u = new Map(e.nodes.map((b) => [b.id, 0]));
+    e.edges.forEach(([, b]) => u.set(b, (u.get(b) ?? 0) + 1));
+    const f = (b, _) => b.col - _.col || b.row - _.row, v = e.nodes.filter((b) => !u.get(b.id)).sort(f), k = [];
     for (; v.length; ) {
-      const _ = v.shift();
-      k.push(_);
-      const b = e.edges.filter(([h]) => h === _.id).map(([, h]) => h).filter((h) => (u.set(h, u.get(h) - 1), u.get(h) === 0)).map((h) => e.nodes.find((x) => x.id === h)).sort(f);
-      v.unshift(...b);
+      const b = v.shift();
+      k.push(b);
+      const _ = e.edges.filter(([h]) => h === b.id).map(([, h]) => h).filter((h) => (u.set(h, u.get(h) - 1), u.get(h) === 0)).map((h) => e.nodes.find((x) => x.id === h)).sort(f);
+      v.unshift(..._);
     }
-    return e.nodes.forEach((_) => {
-      k.includes(_) || k.push(_);
-    }), /* @__PURE__ */ i("div", { ref: s, class: "imw-arch-stack", children: k.map((_, b) => /* @__PURE__ */ i("div", { class: "imw-arch-step", children: [
-      b > 0 && /* @__PURE__ */ i("span", { class: "imw-arch-arrow", "aria-hidden": "true", children: "↓" }),
-      /* @__PURE__ */ i("button", { class: `imw-arch-card${t === _.id ? " is-on" : ""}`, onClick: () => n(_.id), "aria-pressed": t === _.id, children: [
-        /* @__PURE__ */ i("strong", { children: _.label }),
-        /* @__PURE__ */ i("small", { children: _.sub })
+    return e.nodes.forEach((b) => {
+      k.includes(b) || k.push(b);
+    }), /* @__PURE__ */ i("div", { ref: s, class: "imw-arch-stack", children: k.map((b, _) => /* @__PURE__ */ i("div", { class: "imw-arch-step", children: [
+      _ > 0 && /* @__PURE__ */ i("span", { class: "imw-arch-arrow", "aria-hidden": "true", children: "↓" }),
+      /* @__PURE__ */ i("button", { class: `imw-arch-card${t === b.id ? " is-on" : ""}`, onClick: () => n(b.id), "aria-pressed": t === b.id, children: [
+        /* @__PURE__ */ i("strong", { children: b.label }),
+        /* @__PURE__ */ i("small", { children: b.sub })
       ] })
-    ] }, _.id)) });
+    ] }, b.id)) });
   }
   return /* @__PURE__ */ i("div", { ref: s, class: `imw-arch${l ? " is-scanning" : ""}`, children: /* @__PURE__ */ i("svg", { viewBox: `0 0 ${g} ${c}`, role: "group", "aria-label": `${e.title} architecture`, children: [
     /* @__PURE__ */ i("defs", { children: /* @__PURE__ */ i("marker", { id: `ah-${e.id}`, viewBox: "0 0 8 8", refX: "7", refY: "4", markerWidth: "7", markerHeight: "7", orient: "auto-start-reverse", children: /* @__PURE__ */ i("path", { d: "M0,0 L8,4 L0,8 z", class: "imw-arrowhead" }) }) }),
     e.lanes.map((u) => /* @__PURE__ */ i("text", { class: "imw-lane", x: Te, y: Te + u.row * tt + 6, children: u.label.toUpperCase() }, u.row)),
     e.edges.map(([u, f]) => {
       const v = y(u), k = y(f);
-      let _;
+      let b;
       if (k.x > v.x) {
-        const h = v.x + Oe, x = v.y + be / 2, C = k.x - 4, q = k.y + be / 2, A = (h + C) / 2;
-        _ = `M${h},${x} C${A},${x} ${A},${q} ${C},${q}`;
+        const h = v.x + Oe, x = v.y + _e / 2, C = k.x - 4, q = k.y + _e / 2, A = (h + C) / 2;
+        b = `M${h},${x} C${A},${x} ${A},${q} ${C},${q}`;
       } else if (k.x < v.x) {
-        const h = v.x, x = v.y + be / 2, C = k.x + Oe + 4, q = k.y + be / 2, A = (h + C) / 2;
-        _ = `M${h},${x} C${A},${x} ${A},${q} ${C},${q}`;
+        const h = v.x, x = v.y + _e / 2, C = k.x + Oe + 4, q = k.y + _e / 2, A = (h + C) / 2;
+        b = `M${h},${x} C${A},${x} ${A},${q} ${C},${q}`;
       } else {
-        const h = k.y > v.y, x = v.x + Oe / 2, C = h ? v.y + be : v.y, q = h ? k.y - 4 : k.y + be + 4;
-        _ = `M${x},${C} L${x},${q}`;
+        const h = k.y > v.y, x = v.x + Oe / 2, C = h ? v.y + _e : v.y, q = h ? k.y - 4 : k.y + _e + 4;
+        b = `M${x},${C} L${x},${q}`;
       }
-      return /* @__PURE__ */ i("path", { d: _, class: `imw-edge${t === u || t === f ? " is-on" : ""}`, "marker-end": `url(#ah-${e.id})` }, u + f);
+      return /* @__PURE__ */ i("path", { d: b, class: `imw-edge${t === u || t === f ? " is-on" : ""}`, "marker-end": `url(#ah-${e.id})` }, u + f);
     }),
     e.nodes.map((u) => {
       const f = y(u.id);
@@ -1881,7 +1881,7 @@ function fn({ arch: e, selected: t, onSelect: n, scan: r = !0 }) {
           onClick: () => n(u.id),
           onKeyDown: (v) => w(v, u.id),
           children: [
-            /* @__PURE__ */ i("rect", { width: Oe, height: be, rx: 4 }),
+            /* @__PURE__ */ i("rect", { width: Oe, height: _e, rx: 4 }),
             /* @__PURE__ */ i("text", { x: 12, y: 24, class: "imw-node-label", children: Ri(u.label, 22) }),
             /* @__PURE__ */ i("text", { x: 12, y: 42, class: "imw-node-sub", children: Ri(u.sub, 25) })
           ]
@@ -2199,7 +2199,7 @@ function nr({ b: e, num: t }) {
     }
     case "coverage":
       return /* @__PURE__ */ i("div", { class: "imw-coverage-inline", children: [
-        /* @__PURE__ */ i(bt, { counts: e.analysis.counts }),
+        /* @__PURE__ */ i(_t, { counts: e.analysis.counts }),
         /* @__PURE__ */ i(pn, { analysis: e.analysis, max: 12 }),
         /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => {
           n.setCoverage(e.analysis), a("role");
@@ -2375,7 +2375,7 @@ function ar({ turns: e }) {
         ] }),
         w.pending && /* @__PURE__ */ i("div", { class: "imw-pending", role: "status", children: [
           /* @__PURE__ */ i("span", { class: "imw-pulse", "aria-hidden": "true" }),
-          "Retrieving evidence and validating the answer…"
+          "Writing an answer from the evidence and checking every citation (about 10 seconds)…"
         ] }),
         w.a && /* @__PURE__ */ i(tr, { a: w.a })
       ] }, w.id)),
@@ -2456,7 +2456,7 @@ function cr() {
         await navigator.clipboard.writeText(h === "link" ? or(t) : lr(t, e.subject.name)), u(h), setTimeout(() => u(""), 2e3);
       } catch {
       }
-  }, _ = e.roles.filter((h) => h.priority).sort((h, x) => h.priority - x.priority), b = [["strong", "Strong fit"], ["adjacent", "Adjacent"], ["stretch", "Stretch"]];
+  }, b = e.roles.filter((h) => h.priority).sort((h, x) => h.priority - x.priority), _ = [["strong", "Strong fit"], ["adjacent", "Adjacent"], ["stretch", "Stretch"]];
   return /* @__PURE__ */ i("div", { class: "imw-view", children: [
     /* @__PURE__ */ i("header", { class: "imw-view-head", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Evaluate against a role" }),
@@ -2468,7 +2468,7 @@ function cr() {
       /* @__PURE__ */ i("button", { role: "tab", "aria-selected": p === "jd", class: p === "jd" ? "is-on" : "", onClick: () => d("jd"), children: "Paste a job description" })
     ] }),
     p === "role" ? /* @__PURE__ */ i("div", { class: "imw-rolepick", children: [
-      /* @__PURE__ */ i("div", { class: "imw-role-cards", children: _.map((h) => /* @__PURE__ */ i("button", { class: t?.roleId === h.id && t.source === "role" ? "is-on" : "", onClick: () => f(h.id), children: [
+      /* @__PURE__ */ i("div", { class: "imw-role-cards", children: b.map((h) => /* @__PURE__ */ i("button", { class: t?.roleId === h.id && t.source === "role" ? "is-on" : "", onClick: () => f(h.id), children: [
         /* @__PURE__ */ i("strong", { children: h.title }),
         /* @__PURE__ */ i("small", { children: h.proof_note })
       ] }, h.id)) }),
@@ -2476,7 +2476,7 @@ function cr() {
         /* @__PURE__ */ i("span", { children: "More roles" }),
         /* @__PURE__ */ i("select", { onChange: (h) => f(h.target.value), value: t?.source === "role" ? t.roleId : "", children: [
           /* @__PURE__ */ i("option", { value: "", children: "Choose a role…" }),
-          b.map(([h, x]) => /* @__PURE__ */ i("optgroup", { label: x, children: e.roles.filter((C) => C.tier === h && !C.priority).map((C) => /* @__PURE__ */ i("option", { value: C.id, children: C.title }, C.id)) }, h))
+          _.map(([h, x]) => /* @__PURE__ */ i("optgroup", { label: x, children: e.roles.filter((C) => C.tier === h && !C.priority).map((C) => /* @__PURE__ */ i("option", { value: C.id, children: C.title }, C.id)) }, h))
         ] })
       ] })
     ] }) : /* @__PURE__ */ i("div", { class: "imw-jd", children: [
@@ -2515,7 +2515,7 @@ function cr() {
           /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => l("brief"), children: "10-minute brief" })
         ] })
       ] }),
-      /* @__PURE__ */ i(bt, { counts: t.counts }),
+      /* @__PURE__ */ i(_t, { counts: t.counts }),
       t.notes.map((h) => /* @__PURE__ */ i("p", { class: "imw-note", children: h }, h)),
       /* @__PURE__ */ i(pn, { analysis: t, max: 18 }),
       /* @__PURE__ */ i(sr, { analysis: t }),
@@ -2537,7 +2537,7 @@ function dr() {
   }, [t]), z(() => {
     a(d.entity);
   }, [d.entity]);
-  const c = e.entity.get(d.entity), y = e.statableByEntity.get(d.entity) ?? [], w = e.decisions.filter((h) => h.entity === d.entity), u = e.failures.filter((h) => h.entity === d.entity), f = e.attacks.filter((h) => h.entity === d.entity), v = y.filter((h) => h.tags.some((x) => ["eval_design", "llm_eval", "regression_testing", "metrics", "testing", "model_comparison"].includes(x))), k = y.flatMap((h) => h.code ?? []), _ = r?.kind === "node" && r.arch === d.id ? r.node : void 0, b = [
+  const c = e.entity.get(d.entity), y = e.statableByEntity.get(d.entity) ?? [], w = e.decisions.filter((h) => h.entity === d.entity), u = e.failures.filter((h) => h.entity === d.entity), f = e.attacks.filter((h) => h.entity === d.entity), v = y.filter((h) => h.tags.some((x) => ["eval_design", "llm_eval", "regression_testing", "metrics", "testing", "model_comparison"].includes(x))), k = y.flatMap((h) => h.code ?? []), b = r?.kind === "node" && r.arch === d.id ? r.node : void 0, _ = [
     ["why", "Why this design?", w.length],
     ["failures", "Failure cases", u.length + y.filter((h) => h.kind === "limitation").length],
     ["break", "Try to break it", f.length],
@@ -2557,8 +2557,8 @@ function dr() {
     /* @__PURE__ */ i("div", { class: "imw-seg is-scroll", role: "tablist", "aria-label": "System", children: o.map((h) => /* @__PURE__ */ i("button", { role: "tab", "aria-selected": h.id === l, class: h.id === l ? "is-on" : "", onClick: () => {
       p(h.id), n(null);
     }, children: e.entity.get(h.entity)?.short }, h.id)) }),
-    /* @__PURE__ */ i(fn, { arch: d, selected: _, onSelect: (h) => n({ kind: "node", arch: d.id, node: h }) }),
-    /* @__PURE__ */ i("div", { class: "imw-subtabs", role: "tablist", "aria-label": "Inspect", children: b.filter(([, , h]) => h > 0).map(([h, x, C]) => /* @__PURE__ */ i("button", { role: "tab", "aria-selected": m === h, class: m === h ? "is-on" : "", onClick: () => g(h), children: [
+    /* @__PURE__ */ i(fn, { arch: d, selected: b, onSelect: (h) => n({ kind: "node", arch: d.id, node: h }) }),
+    /* @__PURE__ */ i("div", { class: "imw-subtabs", role: "tablist", "aria-label": "Inspect", children: _.filter(([, , h]) => h > 0).map(([h, x, C]) => /* @__PURE__ */ i("button", { role: "tab", "aria-selected": m === h, class: m === h ? "is-on" : "", onClick: () => g(h), children: [
       x,
       " ",
       /* @__PURE__ */ i("small", { children: C })
@@ -2602,18 +2602,18 @@ function mr(e, t) {
   const c = r.map((u) => {
     const f = a.get(u.id) ?? /* @__PURE__ */ new Map();
     let v = 0, k = 0;
-    return f.forEach((_, b) => {
-      const h = o.get(b);
-      v += _ * Math.cos(h), k += _ * Math.sin(h);
+    return f.forEach((b, _) => {
+      const h = o.get(_);
+      v += b * Math.cos(h), k += b * Math.sin(h);
     }), { id: u.id, a: Math.atan2(k, v) };
   }).sort((u, f) => u.a - f.a), y = Math.PI * 2 / c.length * 0.8;
   for (let u = 0; u < 8; u++)
     for (let f = 0; f < c.length; f++) {
       const v = c[f], k = c[(f + 1) % c.length];
-      let _ = k.a - v.a;
-      if (f === c.length - 1 && (_ += Math.PI * 2), _ < y) {
-        const b = (y - _) / 2;
-        v.a -= b, k.a += b;
+      let b = k.a - v.a;
+      if (f === c.length - 1 && (b += Math.PI * 2), b < y) {
+        const _ = (y - b) / 2;
+        v.a -= _, k.a += _;
       }
     }
   const w = /* @__PURE__ */ new Map();
@@ -2625,28 +2625,28 @@ function mr(e, t) {
 }
 const fr = (e) => e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2;
 function gr() {
-  const { kb: e, modeArg: t, coverage: n, setInspect: r, go: s } = M(), [a, o] = E(t && e.role.has(t) ? t : ""), [l, p] = E(null), d = he(() => a === "__current" ? n : a ? Ce(e, a) : null, [a, e, n]), m = he(() => mr(e, d), [e, d]), [g, c] = E(() => new Map([...m.gPos, ...m.ePos].map(([b]) => [b, { x: Y, y: te, o: 0 }]))), y = ye(g);
+  const { kb: e, modeArg: t, coverage: n, setInspect: r, go: s } = M(), [a, o] = E(t && e.role.has(t) ? t : ""), [l, p] = E(null), d = he(() => a === "__current" ? n : a ? Ce(e, a) : null, [a, e, n]), m = he(() => mr(e, d), [e, d]), [g, c] = E(() => new Map([...m.gPos, ...m.ePos].map(([_]) => [_, { x: Y, y: te, o: 0 }]))), y = ye(g);
   z(() => {
-    const b = new Map([...m.gPos, ...m.ePos]);
+    const _ = new Map([...m.gPos, ...m.ePos]);
     if (qe()) {
-      y.current = b, c(b);
+      y.current = _, c(_);
       return;
     }
     const h = y.current, x = performance.now(), C = 850;
     let q = 0;
     const A = (H) => {
       const K = fr(Math.min(1, (H - x) / C)), re = /* @__PURE__ */ new Map();
-      b.forEach((pe, J) => {
+      _.forEach((pe, J) => {
         const me = h.get(J) ?? { x: Y, y: te, o: 0 };
         re.set(J, { x: me.x + (pe.x - me.x) * K, y: me.y + (pe.y - me.y) * K, o: me.o + (pe.o - me.o) * K });
       }), y.current = re, c(re), K < 1 && (q = requestAnimationFrame(A));
     };
     return q = requestAnimationFrame(A), () => cancelAnimationFrame(q);
   }, [m]);
-  const w = (b) => g.get(b) ?? { x: Y, y: te, o: 0 }, u = Math.max(1, ...[...m.weight.values()].flatMap((b) => [...b.values()])), f = (b) => e.claims.filter((h) => W(h) && h.tags.some((x) => e.skill.get(x)?.group === b)).length, v = (b) => e.statableByEntity.get(b)?.length ?? 0, k = l ? e.skills.filter((b) => b.group === l).map((b, h, x) => {
+  const w = (_) => g.get(_) ?? { x: Y, y: te, o: 0 }, u = Math.max(1, ...[...m.weight.values()].flatMap((_) => [..._.values()])), f = (_) => e.claims.filter((h) => W(h) && h.tags.some((x) => e.skill.get(x)?.group === _)).length, v = (_) => e.statableByEntity.get(_)?.length ?? 0, k = l ? e.skills.filter((_) => _.group === l).map((_, h, x) => {
     const C = w(l), q = Math.atan2(C.y - te, C.x - Y), A = Math.min(Math.PI * 0.9, x.length * 0.22), H = q - A / 2 + A * (h + 0.5) / x.length;
-    return { s: b, cov: le(e, b.id), x: C.x + 92 * Math.cos(H), y: C.y + 92 * Math.sin(H) };
-  }) : [], _ = e.roles.filter((b) => b.priority).sort((b, h) => b.priority - h.priority);
+    return { s: _, cov: le(e, _.id), x: C.x + 92 * Math.cos(H), y: C.y + 92 * Math.sin(H) };
+  }) : [], b = e.roles.filter((_) => _.priority).sort((_, h) => _.priority - h.priority);
   return /* @__PURE__ */ i("div", { class: "imw-view is-map", children: [
     /* @__PURE__ */ i("header", { class: "imw-view-head", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Explore my engineering" }),
@@ -2656,16 +2656,16 @@ function gr() {
     /* @__PURE__ */ i("div", { class: "imw-row imw-map-controls", children: [
       /* @__PURE__ */ i("label", { class: "imw-select", children: [
         /* @__PURE__ */ i("span", { children: "Role lens" }),
-        /* @__PURE__ */ i("select", { value: a, onChange: (b) => {
-          o(b.target.value), p(null);
+        /* @__PURE__ */ i("select", { value: a, onChange: (_) => {
+          o(_.target.value), p(null);
         }, children: [
           /* @__PURE__ */ i("option", { value: "", children: "No lens: everything" }),
           n && /* @__PURE__ */ i("option", { value: "__current", children: [
             "Current analysis: ",
             n.title
           ] }),
-          /* @__PURE__ */ i("optgroup", { label: "Priority roles", children: _.map((b) => /* @__PURE__ */ i("option", { value: b.id, children: b.title }, b.id)) }),
-          /* @__PURE__ */ i("optgroup", { label: "Other roles", children: e.roles.filter((b) => !b.priority).map((b) => /* @__PURE__ */ i("option", { value: b.id, children: b.title }, b.id)) })
+          /* @__PURE__ */ i("optgroup", { label: "Priority roles", children: b.map((_) => /* @__PURE__ */ i("option", { value: _.id, children: _.title }, _.id)) }),
+          /* @__PURE__ */ i("optgroup", { label: "Other roles", children: e.roles.filter((_) => !_.priority).map((_) => /* @__PURE__ */ i("option", { value: _.id, children: _.title }, _.id)) })
         ] })
       ] }),
       d && /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => {
@@ -2675,80 +2675,80 @@ function gr() {
     /* @__PURE__ */ i("div", { class: "imw-constellation", children: /* @__PURE__ */ i("svg", { viewBox: `0 0 ${hr} ${ur}`, role: "group", "aria-label": "Evidence map of capability areas and projects", children: [
       /* @__PURE__ */ i("circle", { cx: Y, cy: te, r: Ut, class: "imw-orbit" }),
       /* @__PURE__ */ i("circle", { cx: Y, cy: te, r: Vt, class: "imw-orbit" }),
-      m.groups.map((b) => {
-        const h = w(b.id);
-        return /* @__PURE__ */ i("line", { x1: Y, y1: te, x2: h.x, y2: h.y, class: "imw-spoke", style: { opacity: h.o * 0.5 } }, `c-${b.id}`);
+      m.groups.map((_) => {
+        const h = w(_.id);
+        return /* @__PURE__ */ i("line", { x1: Y, y1: te, x2: h.x, y2: h.y, class: "imw-spoke", style: { opacity: h.o * 0.5 } }, `c-${_.id}`);
       }),
-      m.ents.flatMap((b) => [...(m.weight.get(b.id) ?? /* @__PURE__ */ new Map()).entries()].map(([h, x]) => {
-        const C = w(h), q = w(b.id), A = l ? l === h : !0;
-        return /* @__PURE__ */ i("line", { x1: C.x, y1: C.y, x2: q.x, y2: q.y, class: "imw-web", style: { strokeWidth: 0.6 + 2.2 * x / u, opacity: Math.min(C.o, q.o) * (A ? 0.55 : 0.08) } }, `${b.id}-${h}`);
+      m.ents.flatMap((_) => [...(m.weight.get(_.id) ?? /* @__PURE__ */ new Map()).entries()].map(([h, x]) => {
+        const C = w(h), q = w(_.id), A = l ? l === h : !0;
+        return /* @__PURE__ */ i("line", { x1: C.x, y1: C.y, x2: q.x, y2: q.y, class: "imw-web", style: { strokeWidth: 0.6 + 2.2 * x / u, opacity: Math.min(C.o, q.o) * (A ? 0.55 : 0.08) } }, `${_.id}-${h}`);
       })),
       /* @__PURE__ */ i("g", { class: "imw-core", children: [
         /* @__PURE__ */ i("circle", { cx: Y, cy: te, r: 34 }),
         /* @__PURE__ */ i("text", { x: Y, y: te - 2, "text-anchor": "middle", children: "Rahul" }),
         /* @__PURE__ */ i("text", { x: Y, y: te + 14, "text-anchor": "middle", class: "imw-core-sub", children: "Vajja" })
       ] }),
-      m.groups.map((b) => {
-        const h = w(b.id), x = f(b.id), C = 6 + Math.sqrt(x) * 1.6, q = h.x < Y - 5;
+      m.groups.map((_) => {
+        const h = w(_.id), x = f(_.id), C = 6 + Math.sqrt(x) * 1.6, q = h.x < Y - 5;
         return /* @__PURE__ */ i(
           "g",
           {
-            class: `imw-gnode${l === b.id ? " is-on" : ""}`,
+            class: `imw-gnode${l === _.id ? " is-on" : ""}`,
             style: { opacity: h.o },
             tabIndex: 0,
             role: "button",
-            "aria-label": `${b.label}: ${x} verified claims`,
+            "aria-label": `${_.label}: ${x} verified claims`,
             onClick: () => {
-              p(l === b.id ? null : b.id), r({ kind: "group", id: b.id });
+              p(l === _.id ? null : _.id), r({ kind: "group", id: _.id });
             },
             onKeyDown: (A) => {
-              (A.key === "Enter" || A.key === " ") && (A.preventDefault(), p(l === b.id ? null : b.id), r({ kind: "group", id: b.id }));
+              (A.key === "Enter" || A.key === " ") && (A.preventDefault(), p(l === _.id ? null : _.id), r({ kind: "group", id: _.id }));
             },
             children: [
               /* @__PURE__ */ i("circle", { cx: h.x, cy: h.y, r: C + 10, class: "imw-hit" }),
               /* @__PURE__ */ i("circle", { cx: h.x, cy: h.y, r: C }),
-              /* @__PURE__ */ i("text", { x: h.x + (q ? -C - 7 : C + 7), y: h.y + 4, "text-anchor": q ? "end" : "start", children: b.label })
+              /* @__PURE__ */ i("text", { x: h.x + (q ? -C - 7 : C + 7), y: h.y + 4, "text-anchor": q ? "end" : "start", children: _.label })
             ]
           },
-          b.id
+          _.id
         );
       }),
-      k.map(({ s: b, cov: h, x, y: C }) => /* @__PURE__ */ i(
+      k.map(({ s: _, cov: h, x, y: C }) => /* @__PURE__ */ i(
         "g",
         {
           class: `imw-sat ${Ee[h.category]}`,
           tabIndex: 0,
           role: "button",
-          "aria-label": `${b.name}: ${h.category}`,
+          "aria-label": `${_.name}: ${h.category}`,
           onClick: () => r({ kind: "req", req: h }),
           onKeyDown: (q) => (q.key === "Enter" || q.key === " ") && (q.preventDefault(), r({ kind: "req", req: h })),
           children: [
             /* @__PURE__ */ i("line", { x1: w(l).x, y1: w(l).y, x2: x, y2: C }),
             /* @__PURE__ */ i("circle", { cx: x, cy: C, r: 4 }),
-            /* @__PURE__ */ i("text", { x, y: C - 8, "text-anchor": "middle", children: b.name.length > 22 ? b.name.slice(0, 21) + "…" : b.name })
+            /* @__PURE__ */ i("text", { x, y: C - 8, "text-anchor": "middle", children: _.name.length > 22 ? _.name.slice(0, 21) + "…" : _.name })
           ]
         },
-        b.id
+        _.id
       )),
-      m.ents.map((b) => {
-        const h = w(b.id), x = v(b.id), C = 7 + Math.sqrt(x) * 1.4, q = h.x < Y - 5;
+      m.ents.map((_) => {
+        const h = w(_.id), x = v(_.id), C = 7 + Math.sqrt(x) * 1.4, q = h.x < Y - 5;
         return /* @__PURE__ */ i(
           "g",
           {
-            class: `imw-enode is-${b.kind}`,
+            class: `imw-enode is-${_.kind}`,
             style: { opacity: h.o },
             tabIndex: 0,
             role: "button",
-            "aria-label": `${b.name}: ${x} verified claims`,
-            onClick: () => r({ kind: "entity", id: b.id }),
-            onKeyDown: (A) => (A.key === "Enter" || A.key === " ") && (A.preventDefault(), r({ kind: "entity", id: b.id })),
+            "aria-label": `${_.name}: ${x} verified claims`,
+            onClick: () => r({ kind: "entity", id: _.id }),
+            onKeyDown: (A) => (A.key === "Enter" || A.key === " ") && (A.preventDefault(), r({ kind: "entity", id: _.id })),
             children: [
               /* @__PURE__ */ i("circle", { cx: h.x, cy: h.y, r: C + 10, class: "imw-hit" }),
-              /* @__PURE__ */ i("rect", { x: h.x - C, y: h.y - C, width: C * 2, height: C * 2, rx: b.kind === "experience" ? C : 3 }),
-              /* @__PURE__ */ i("text", { x: h.x + (q ? -C - 8 : C + 8), y: h.y + 4, "text-anchor": q ? "end" : "start", children: b.short })
+              /* @__PURE__ */ i("rect", { x: h.x - C, y: h.y - C, width: C * 2, height: C * 2, rx: _.kind === "experience" ? C : 3 }),
+              /* @__PURE__ */ i("text", { x: h.x + (q ? -C - 8 : C + 8), y: h.y + 4, "text-anchor": q ? "end" : "start", children: _.short })
             ]
           },
-          b.id
+          _.id
         );
       })
     ] }) }),
@@ -2801,7 +2801,7 @@ function wr() {
     "## Suggested questions",
     ...v.map((h) => `- (${h.e}) ${h.q}`)
   ].join(`
-`), [_, b] = E(!1);
+`), [b, _] = E(!1);
   return /* @__PURE__ */ i("div", { class: "imw-view imw-brief", children: [
     /* @__PURE__ */ i("header", { class: "imw-view-head", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Technical interview brief · 10 minutes" }),
@@ -2813,15 +2813,15 @@ function wr() {
         ] }),
         /* @__PURE__ */ i("button", { class: "imw-btn", onClick: async () => {
           try {
-            await navigator.clipboard.writeText(k()), b(!0), setTimeout(() => b(!1), 2e3);
+            await navigator.clipboard.writeText(k()), _(!0), setTimeout(() => _(!1), 2e3);
           } catch {
           }
-        }, children: _ ? "Copied" : "Copy as Markdown" }),
+        }, children: b ? "Copied" : "Copy as Markdown" }),
         /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => {
           r(p), s("export");
         }, children: "Download PDF" })
       ] }),
-      /* @__PURE__ */ i(bt, { counts: p.counts, compact: !0 })
+      /* @__PURE__ */ i(_t, { counts: p.counts, compact: !0 })
     ] }),
     /* @__PURE__ */ i("ol", { class: "imw-agenda", children: [
       /* @__PURE__ */ i("li", { children: [
@@ -2897,7 +2897,7 @@ const Rt = "rahul-vajja", yr = [
   "Does Rahul have AI evaluation experience? Show the evidence and the code.",
   "What would you challenge in the Drug Interaction Agent architecture?"
 ];
-function _r() {
+function br() {
   const e = `${cn()}/mcp`, t = [
     { id: "claude-code", label: "Claude Code", how: "Run in a terminal:", code: `claude mcp add --transport http ${Rt} ${e}` },
     { id: "claude", label: "Claude", how: "In Claude (web or desktop): Settings → Connectors → Add custom connector, then paste this URL:", code: e },
@@ -3028,17 +3028,17 @@ const kt = {
   projects: "Projects and experience in detail",
   questions: "Suggested interview questions",
   gaps: "Growth areas"
-}, vn = /* @__PURE__ */ new Set(["project", "research", "experience"]), br = { backend: "Backend", data: "Data engineering", domain: "Domains", mlops: "MLOps & deployment", vision: "Computer vision", voice: "Voice AI" }, kr = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+}, vn = /* @__PURE__ */ new Set(["project", "research", "experience"]), _r = { backend: "Backend", data: "Data engineering", domain: "Domains", mlops: "MLOps & deployment", vision: "Computer vision", voice: "Voice AI" }, kr = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
 function Li(e) {
   if (/present/i.test(e)) return 1e6;
   const t = [...e.matchAll(/\b(19|20)\d{2}\b/g)].map((r) => +r[0]), n = [...e.toLowerCase().matchAll(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/g)].map((r) => kr.indexOf(r[1]));
   return (t.length ? Math.max(...t) : 0) * 12 + (n.length ? n[n.length - 1] : 0);
 }
-const Ke = (e) => [...new Set(e)], _n = (e, t) => e.summaries[t] ?? e.summaries.engineer ?? e.tagline;
+const Ke = (e) => [...new Set(e)], bn = (e, t) => e.summaries[t] ?? e.summaries.engineer ?? e.tagline;
 function xr(e) {
   return e.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
 }
-function bn(e, t, n = /* @__PURE__ */ new Date()) {
+function _n(e, t, n = /* @__PURE__ */ new Date()) {
   const r = e.subject.name.replace(/[^A-Za-z0-9]+/g, "-"), s = `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}-${String(n.getDate()).padStart(2, "0")}`;
   return `${r}-evidence-dossier-${t}-${s}.pdf`;
 }
@@ -3101,7 +3101,7 @@ function Ar(e, t) {
     }
     case "entity": {
       const a = n.entity.get(t.id);
-      return a ? [{ t: "p", text: `${a.name}: ${_n(a, r)}` }] : [];
+      return a ? [{ t: "p", text: `${a.name}: ${bn(a, r)}` }] : [];
     }
     case "coverage": {
       const a = { t: "h3", text: `Evidence coverage: ${t.analysis.title}` };
@@ -3157,7 +3157,7 @@ function Mr(e, t, n, r) {
   if (!s) return [];
   const a = [
     { t: "h2", text: s.name, meta: [s.role, s.dates].filter(Boolean).join(" · ") },
-    { t: "p", text: _n(s, n) }
+    { t: "p", text: bn(s, n) }
   ];
   s.ownership && a.push({ t: "kv", items: [["Ownership", s.ownership]] });
   const o = qr(e, t, r.claims).map((m) => xn(e, m, r));
@@ -3173,7 +3173,7 @@ function jr(e) {
   const t = /* @__PURE__ */ new Map();
   for (const n of e.skills) {
     if (!(e.statableBySkill.get(n.id) ?? []).some((a) => a.strength === "public_artifact")) continue;
-    const s = e.groups.find((a) => a.id === n.group)?.label ?? br[n.group] ?? n.group;
+    const s = e.groups.find((a) => a.id === n.group)?.label ?? _r[n.group] ?? n.group;
     (t.get(s) ?? t.set(s, []).get(s)).push(n.name);
   }
   return [...t.entries()];
@@ -3216,12 +3216,12 @@ function Tr(e, t, n) {
   }
   const w = kn(e, t, n.persona);
   if (n.sections.projects && w.ids.length && (l.push({ t: "h1", text: xe.projects, lead: w.defaulted ? "You did not open specific projects, so these are the strongest for an applied AI role." : "The work you explored, in the order you explored it." }), w.ids.forEach((u) => l.push(...Mr(e, u, n.persona, r)))), n.sections.questions) {
-    const u = w.ids.flatMap((k) => (e.entity.get(k)?.questions ?? []).slice(0, 2).map((_) => `${ee(e, k)}: ${_}`)), f = t.analyses.flatMap((k) => k.requirements.filter((_) => _.category === "missing" || _.category === "verification").slice(0, 2).map((_) => `${_.label}: what is the closest thing you have done, and how would you close the gap?`)), v = Ke([...u, ...f]);
+    const u = w.ids.flatMap((k) => (e.entity.get(k)?.questions ?? []).slice(0, 2).map((b) => `${ee(e, k)}: ${b}`)), f = t.analyses.flatMap((k) => k.requirements.filter((b) => b.category === "missing" || b.category === "verification").slice(0, 2).map((b) => `${b.label}: what is the closest thing you have done, and how would you close the gap?`)), v = Ke([...u, ...f]);
     v.length && (l.push({ t: "h1", text: xe.questions, lead: "Questions that test the evidence above rather than repeat it." }), l.push({ t: "bullets", items: v }));
   }
   if (n.sections.gaps) {
     l.push({ t: "h1", text: xe.gaps });
-    const u = Ke(t.analyses.flatMap((k) => k.requirements.filter((_) => _.category === "missing").map((_) => `${_.label}: ${_.statement ?? "Not demonstrated in the evidence."}`))), f = u.length ? u : e.gaps.filter((k) => !k.verify).slice(0, 6).map((k) => `${k.name}: ${k.statement}`);
+    const u = Ke(t.analyses.flatMap((k) => k.requirements.filter((b) => b.category === "missing").map((b) => `${b.label}: ${b.statement ?? "Not demonstrated in the evidence."}`))), f = u.length ? u : e.gaps.filter((k) => !k.verify).slice(0, 6).map((k) => `${k.name}: ${k.statement}`);
     l.push({ t: "h3", text: u.length ? "Not yet shown for the roles you checked" : "Not yet part of his work" }, { t: "bullets", items: f });
     const v = Fe(e, "learning");
     v?.takeaway && l.push({ t: "h3", text: "How he closes gaps" }, { t: "p", text: v.takeaway.text.replace(/^For your team: /, "") });
@@ -3229,7 +3229,7 @@ function Tr(e, t, n) {
   return l.push({ t: "h1", text: "About this document", keep: 150 }), l.push({ t: "p", text: `Generated in your browser by Interview My Work on ${a.links.site ?? "the portfolio"} from evidence version ${e.version}. Nothing you typed was uploaded to create it. Every claim links to its source, and the live workspace shows the full evidence trail for each one.`, muted: !0 }), l.push({ t: "links", items: [
     ...a.links.site ? [{ label: "Open Interview My Work", url: `${a.links.site.replace(/\/$/, "")}/#imw=ask` }] : [],
     { label: `Email ${a.first}`, url: `mailto:${a.email}` }
-  ] }), { title: `${a.name}: evidence dossier (${r.label})`, nodes: l, filename: bn(e, n.persona, s) };
+  ] }), { title: `${a.name}: evidence dossier (${r.label})`, nodes: l, filename: _n(e, n.persona, s) };
 }
 const ze = [20, 24, 31], Z = [90, 99, 110], Pi = [222, 227, 232], ge = [22, 117, 94], Rr = [242, 246, 245], lt = { direct: ge, related: [40, 104, 184], verification: [150, 98, 16], missing: [118, 124, 133] }, Lr = { direct: "DIRECT", related: "RELATED", verification: "TO VERIFY", missing: "NOT SHOWN" }, Pr = { direct: "direct evidence", related: "related evidence", verification: "verification required", missing: "not demonstrated" }, Fr = { artifact: ge, self: lt.related }, Gt = 612, Re = 792, L = 56, Lt = 64, Fi = 64, B = Gt - L * 2, Wr = "€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ", Wi = {
   "→": "->",
@@ -3454,7 +3454,7 @@ function Br() {
     },
     questions: { text: "Questions that test the evidence rather than repeat it, including your gaps" },
     gaps: { text: "What he hasn't done yet, and how he closes gaps" }
-  }, y = (f) => f === "qa" ? o.length > 0 : f === "roles" ? n.analyses.length > 0 : !0, w = bn(e, s), u = async () => {
+  }, y = (f) => f === "qa" ? o.length > 0 : f === "roles" ? n.analyses.length > 0 : !0, w = _n(e, s), u = async () => {
     g({ kind: "busy" });
     try {
       const f = Tr(e, n, { persona: s, sections: p }), v = await Hr(f.nodes, { title: f.title, author: e.subject.name, footer: $r(e, s) });
@@ -3485,12 +3485,12 @@ function Br() {
         const v = c[f], k = y(f) && p[f];
         return /* @__PURE__ */ i("li", { class: y(f) ? "" : "is-empty", children: [
           /* @__PURE__ */ i("label", { children: [
-            /* @__PURE__ */ i("input", { type: "checkbox", checked: k, disabled: !y(f), onChange: (_) => d({ ...p, [f]: _.target.checked }) }),
+            /* @__PURE__ */ i("input", { type: "checkbox", checked: k, disabled: !y(f), onChange: (b) => d({ ...p, [f]: b.target.checked }) }),
             /* @__PURE__ */ i("span", { children: [
               /* @__PURE__ */ i("strong", { children: xe[f] }),
               /* @__PURE__ */ i("small", { children: y(f) ? v.text : v.empty }),
               y(f) && v.items && v.items.length > 0 && /* @__PURE__ */ i("span", { class: "imw-export-items", children: [
-                v.items.slice(0, 6).map((_) => /* @__PURE__ */ i("em", { children: _ }, _)),
+                v.items.slice(0, 6).map((b) => /* @__PURE__ */ i("em", { children: b }, b)),
                 v.items.length > 6 && /* @__PURE__ */ i("em", { children: [
                   "+",
                   v.items.length - 6,
@@ -3744,7 +3744,7 @@ function Yr() {
           "Closest target profile: ",
           r.closestRole
         ] }),
-        /* @__PURE__ */ i(bt, { counts: r.counts, compact: !0 }),
+        /* @__PURE__ */ i(_t, { counts: r.counts, compact: !0 }),
         /* @__PURE__ */ i("div", { class: "imw-row", children: [
           /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => l("role"), children: "Open analysis" }),
           /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => a(!o), children: o ? "Restore portfolio" : "Show on portfolio" }),
@@ -3802,9 +3802,9 @@ const Di = [
   { id: "lab", label: "Proof lab", hint: "Replays, break-it tests and live numbers" },
   { id: "brief", label: "Brief", hint: "A 10-minute technical interview brief" },
   { id: "connect", label: "Connect your AI", hint: "Use this evidence from Claude, Cursor or VS Code over MCP" }
-], Xr = /* @__PURE__ */ new Set(["retrieval", "no_evidence", "topic", "topic_answer", "reasoning", "entity", "focused", "skill", "personally", "scale", "challenge", "level", "overview", "shipped", "beyond_wrappers", "evaluation", "strongest"]), Zr = /* @__PURE__ */ new Set(["entity", "claims", "xray", "chart", "trace", "decisions", "failures"]);
+], Xr = /* @__PURE__ */ new Set(["retrieval", "no_evidence", "topic", "entity", "focused", "skill", "personally", "scale", "challenge", "level", "overview", "shipped", "beyond_wrappers", "evaluation", "strongest"]), Zr = /* @__PURE__ */ new Set(["entity", "claims", "xray", "chart", "trace", "decisions", "failures"]);
 function ea({ kb: e, initial: t, register: n }) {
-  const [r, s] = E(!0), [a, o] = E("ask"), [l, p] = E(), [d, m] = E("recruiter"), [g, c] = E(null), [y, w] = E(null), [u, f] = E([]), [v, k] = E([]), [_, b] = E([]), [h, x] = E("checking"), [C, q] = E(!1), A = ye(null), H = ye(null), K = ye(!1), re = ve(($, I) => {
+  const [r, s] = E(!0), [a, o] = E("ask"), [l, p] = E(), [d, m] = E("recruiter"), [g, c] = E(null), [y, w] = E(null), [u, f] = E([]), [v, k] = E([]), [b, _] = E([]), [h, x] = E("checking"), [C, q] = E(!1), A = ye(null), H = ye(null), K = ye(!1), re = ve(($, I) => {
     if (w($), !$) return;
     const X = (U) => `${U.source}|${U.title}|${U.requirements.map((ce) => ce.id).join()}`;
     f((U) => {
@@ -3849,19 +3849,19 @@ function ea({ kb: e, initial: t, register: n }) {
     const I = $.trim();
     if (!I) return;
     J("ask");
-    const X = Date.now(), U = [..._].reverse().find((j) => j.a?.entities.length)?.a?.entities, ce = [..._].reverse().find((j) => j.a), D = _s(e, I, { persona: d, roleId: y?.roleId, lastEntities: U, lastTopic: ce?.a?.topic, lastQuestion: ce?.q, lastIntent: ce?.a?.intent }), Be = ei(I);
+    const X = Date.now(), U = [...b].reverse().find((j) => j.a?.entities.length)?.a?.entities, ce = [...b].reverse().find((j) => j.a), D = bs(e, I, { persona: d, roleId: y?.roleId, lastEntities: U, lastTopic: ce?.a?.topic, lastQuestion: ce?.q, lastIntent: ce?.a?.intent }), Be = ei(I);
     if (D.intent === "jd" || D.intent === "role") {
       const j = D.blocks.find((de) => de.type === "coverage");
       j && j.type === "coverage" && re(j.analysis), Be && G("jd_analyzed", { requirements: j && j.type === "coverage" ? j.analysis.requirements.length : 0 });
     }
     const xt = h === "ready" && Xr.has(D.intent);
-    if (b((j) => [...j, { id: X, q: Be ? "Job description (pasted)" : I, a: xt ? void 0 : D, pending: xt }]), Be && h === "ready" && dn(I).then((j) => {
+    if (_((j) => [...j, { id: X, q: Be ? "Job description (pasted)" : I, a: xt ? void 0 : D, pending: xt }]), Be && h === "ready" && dn(I).then((j) => {
       if (!j.length) return;
       const de = ut(e, I, j), fe = D.blocks.find((Ct) => Ct.type === "coverage");
-      re(de, fe && fe.type === "coverage" ? fe.analysis : void 0), b((Ct) => Ct.map((je) => je.id === X && je.a ? { ...je, a: { ...je.a, blocks: je.a.blocks.map((qt) => qt.type === "coverage" ? { ...qt, analysis: de } : qt), refined: !0 } } : je));
+      re(de, fe && fe.type === "coverage" ? fe.analysis : void 0), _((Ct) => Ct.map((je) => je.id === X && je.a ? { ...je, a: { ...je.a, blocks: je.a.blocks.map((qt) => qt.type === "coverage" ? { ...qt, analysis: de } : qt), refined: !0 } } : je));
     }).catch(() => {
     }), !xt) return;
-    const Sn = _.filter((j) => j.a).slice(-3).map((j) => ({ q: j.q, cites: j.a.basis?.retrieved?.slice(0, 8) ?? [] }));
+    const Sn = b.filter((j) => j.a).slice(-3).map((j) => ({ q: j.q, cites: j.a.basis?.retrieved?.slice(0, 8) ?? [] }));
     let $t;
     try {
       const j = await Ns(e, I, d, Sn, y?.roleId, D.topic), de = D.blocks.filter((fe) => Zr.has(fe.type)).map((fe) => fe.type === "claims" ? { ...fe, title: "Sources", collapsed: !0 } : fe);
@@ -3869,8 +3869,8 @@ function ea({ kb: e, initial: t, register: n }) {
     } catch (j) {
       $t = D, (j.status ?? 0) >= 500 && x("offline");
     }
-    b((j) => j.map((de) => de.id === X ? { ...de, a: $t, pending: !1 } : de));
-  }, [e, d, y, h, _, J, re]), hi = he(() => ({ turns: _, analyses: u, seen: v }), [_, u, v]), Ne = _.filter(($) => $.a).length + u.length, En = he(() => ({
+    _((j) => j.map((de) => de.id === X ? { ...de, a: $t, pending: !1 } : de));
+  }, [e, d, y, h, b, J, re]), hi = he(() => ({ turns: b, analyses: u, seen: v }), [b, u, v]), Ne = b.filter(($) => $.a).length + u.length, En = he(() => ({
     kb: e,
     persona: d,
     setPersona: m,
@@ -3931,13 +3931,13 @@ function ea({ kb: e, initial: t, register: n }) {
       /* @__PURE__ */ i("div", { class: "imw-body", children: [
         /* @__PURE__ */ i("aside", { class: "imw-left", "aria-label": "Context", children: /* @__PURE__ */ i(Yr, {}) }),
         /* @__PURE__ */ i("main", { class: "imw-main", id: "imw-main", children: [
-          a === "ask" && /* @__PURE__ */ i(ar, { turns: _ }),
+          a === "ask" && /* @__PURE__ */ i(ar, { turns: b }),
           a === "role" && /* @__PURE__ */ i(cr, {}),
           a === "xray" && /* @__PURE__ */ i(dr, {}),
           a === "map" && /* @__PURE__ */ i(gr, {}),
           a === "lab" && /* @__PURE__ */ i(er, {}),
           a === "brief" && /* @__PURE__ */ i(wr, {}),
-          a === "connect" && /* @__PURE__ */ i(_r, {}),
+          a === "connect" && /* @__PURE__ */ i(br, {}),
           a === "export" && /* @__PURE__ */ i(Br, {})
         ] }),
         /* @__PURE__ */ i("aside", { class: `imw-right${g ? " has-item" : ""}`, "aria-label": "Evidence", children: /* @__PURE__ */ i(Or, {}) })

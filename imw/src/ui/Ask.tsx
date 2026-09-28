@@ -80,7 +80,7 @@ export function AskView({ turns }: { turns: Turn[] }) {
         {turns.map((t) => (
           <section key={t.id} class="imw-turn" aria-label={`Question: ${t.q}`}>
             <p class="imw-q"><span class="imw-eyebrow">You asked</span>{t.q}</p>
-            {t.pending && <div class="imw-pending" role="status"><span class="imw-pulse" aria-hidden="true" />Retrieving evidence and validating the answer…</div>}
+            {t.pending && <div class="imw-pending" role="status"><span class="imw-pulse" aria-hidden="true" />Writing an answer from the evidence and checking every citation (about 10 seconds)…</div>}
             {t.a && <AnswerView a={t.a} />}
           </section>
         ))}

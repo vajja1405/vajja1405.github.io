@@ -32,7 +32,8 @@ const MODES: { id: Mode; label: string; hint: string }[] = [
 
 // Intents where the model may write the prose. Structured intents (coverage, comparisons,
 // premise checks, refusals) always come from the deterministic engine.
-const MODEL_INTENTS = new Set(['retrieval', 'no_evidence', 'topic', 'topic_answer', 'reasoning', 'entity', 'focused', 'skill', 'personally', 'scale', 'challenge', 'level', 'overview', 'shipped', 'beyond_wrappers', 'evaluation', 'strongest']);
+// Written topic answers (teamwork, why hire, pushback...) are shown instantly and never wait on the model.
+const MODEL_INTENTS = new Set(['retrieval', 'no_evidence', 'topic', 'entity', 'focused', 'skill', 'personally', 'scale', 'challenge', 'level', 'overview', 'shipped', 'beyond_wrappers', 'evaluation', 'strongest']);
 const STRUCTURAL = new Set(['entity', 'claims', 'xray', 'chart', 'trace', 'decisions', 'failures']);
 
 export function App({ kb, initial, register }: { kb: KB; initial: OpenOptions; register: (fn: (o: OpenOptions) => void) => void }) {
