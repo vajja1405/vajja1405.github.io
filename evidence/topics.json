@@ -717,8 +717,8 @@
         ]
       },
       {
-        "label": "Athena · AI Engineering Intern · Jan – May 2024",
-        "text": "Prototyped task-planning, tool-use and prompt-orchestration components for an executive-assistant workflow, with evaluation tests for agent behavior.",
+        "label": "Athena · Data Scientist · Jan 2024 – Feb 2025",
+        "text": "Developed and evaluated LLM-assisted task-planning and delegation workflows for executive assistants, with evaluation tests and failure analysis.",
         "cites": [
           "athena.role",
           "athena.eval"

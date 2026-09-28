@@ -256,21 +256,21 @@
     "kind": "experience",
     "name": "Athena",
     "short": "Athena",
-    "role": "AI Engineering Intern · Remote USA",
-    "tagline": "Task planning and prompt orchestration for delegation workflows",
-    "dates": "Jan – May 2024",
+    "role": "Data Scientist · Remote USA",
+    "tagline": "LLM-assisted task planning, delegation workflows and their evaluation",
+    "dates": "Jan 2024 – Feb 2025",
     "anchor": "#athena",
     "domains": [],
     "links": [],
     "summaries": {
-      "recruiter": "AI engineering internship prototyping agent-style task planning and tool use for executive-assistant workflows.",
-      "engineer": "Prototyped task-planning, tool-use and prompt-orchestration components that turn open-ended requests into structured steps; wrote evaluation tests for agent behavior and workflow reliability and scored instruction quality against a reviewer rubric.",
+      "recruiter": "Data scientist developing and evaluating LLM-assisted task planning and delegation workflows for executive assistants.",
+      "engineer": "Developed and evaluated LLM-assisted task-planning and delegation workflows that turn open-ended requests into structured actions; designed experiments on task decomposition, prompt orchestration and tool-supported workflows; built evaluation tests and analyzed failure modes against a reviewer rubric.",
       "manager": "Worked with product and software engineers, using reviewer feedback to refine prompts.",
       "founder": "Aimed at turning open-ended client requests into structured steps for assistants.",
-      "researcher": "No confirmed numerical improvement is claimed for this role."
+      "researcher": "Reported a 15% gain in reviewer-scored instruction quality; the evaluation and baseline are internal and not public."
     },
     "questions": [],
-    "ownership": "Internship; scope as described on the portfolio."
+    "ownership": "Employment; scope as described on the portfolio."
   },
   {
     "id": "nyc",

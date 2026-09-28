@@ -42,11 +42,11 @@ describe('evidence integrity', () => {
     expect(text).not.toMatch(/\bcontract(s|ed|or)?\b/i);
   });
   it('withdrawn and conflicting statements are not statable', () => {
-    for (const id of ['dia.gpt4o', 'dia.latency_20s', 'citizen.metrics', 'athena.gain', 'edu.ibm'])
+    for (const id of ['dia.gpt4o', 'dia.latency_20s', 'citizen.metrics', 'edu.ibm'])
       expect(isStatable(kb.claim.get(id))).toBe(false);
   });
   it('states confirmed résumé results with their evidence strength', () => {
-    for (const id of ['tifin.gains', 'sssd.metric_values', 'award.hackaroo']) expect(kb.claim.get(id)).toMatchObject({ status: 'verified', strength: 'self_reported' });
+    for (const id of ['tifin.gains', 'athena.gain', 'sssd.metric_values', 'award.hackaroo']) expect(kb.claim.get(id)).toMatchObject({ status: 'verified', strength: 'self_reported' });
     expect(kb.claim.get('qml.speedup')).toMatchObject({ status: 'verified', strength: 'public_artifact' });
     expect(kb.claim.get('award.hackaroo')!.text).toMatch(/2nd place in the AI Agents track/);
   });

@@ -2177,7 +2177,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "AI Engineering Intern at Athena (Jan – May 2024). Prototyped the task-planning, tool-use and prompt-orchestration components that turn an open-ended client request into structured steps an executive assistant can act on.",
+    "text": "Data Scientist at Athena (Jan 2024 – Feb 2025). Developed and evaluated LLM-assisted task-planning and delegation workflows that turn open-ended client requests into structured, delegatable actions, and designed experiments on task decomposition, prompt orchestration and tool-supported workflows.",
     "tags": [
       "agents",
       "tool_calling",
@@ -2186,8 +2186,10 @@
       "workflow_automation"
     ],
     "sources": [
-      "site"
-    ]
+      "site",
+      "rahul_confirmed"
+    ],
+    "note": "Title and dates confirmed by Rahul from his employment records on 2026-09-28."
   },
   {
     "id": "athena.eval",
@@ -2196,7 +2198,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "Wrote evaluation tests for agent behavior and workflow reliability, scored instruction quality against a reviewer rubric, and iterated prompts with product and software engineers.",
+    "text": "Built evaluation tests, analyzed recurring failure modes and reviewer feedback for edge cases, automation candidates and human-escalation points, and iterated prompts and workflow logic with product and software engineers.",
     "tags": [
       "llm_eval",
       "eval_design",
@@ -2205,23 +2207,37 @@
     ],
     "sources": [
       "site",
-      "resume_v2"
+      "rahul_confirmed"
     ]
   },
   {
     "id": "athena.gain",
     "entity": "athena",
     "kind": "metric",
-    "status": "unsupported",
-    "strength": "resume_only",
-    "public_safe": false,
-    "text": "Improved LLM instruction quality 15% on a reviewer-scored rubric across 20+ delegation workflows.",
-    "tags": [],
-    "sources": [
-      "resume_v2",
-      "target_roles"
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Reported at Athena: reviewer-scored LLM instruction quality improved 15% across 20+ executive-assistant workflow types.",
+    "tags": [
+      "llm_eval",
+      "metrics",
+      "eval_design"
     ],
-    "note": "No confirmed numerical improvement for Athena (target roles analysis)."
+    "sources": [
+      "rahul_confirmed"
+    ],
+    "note": "Confirmed by Rahul on 2026-09-23. The evaluation and its baseline are internal and not public.",
+    "metrics": [
+      {
+        "label": "Instruction quality (reviewer rubric)",
+        "value": "+15% (reported)"
+      },
+      {
+        "label": "Workflow types",
+        "value": "20+"
+      }
+    ],
+    "last_verified": "2026-09-28"
   },
   {
     "id": "nyc.forecast",
