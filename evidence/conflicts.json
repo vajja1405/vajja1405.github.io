@@ -14,26 +14,26 @@
   {
     "id": "cf.citizen_metrics",
     "topic": "Citizen Health scale metrics",
-    "site": "No metrics.",
+    "site": "Stated as self-reported figures.",
     "resume": "5,000+ patients, 10,000+ records, 6 provider sources, 300+ case evaluation suite.",
-    "decision": "deprecated: withdrawn as unverified in the target-roles analysis.",
+    "decision": "Resolved 2026-09-28: Rahul confirmed the figures as real and explainable; stated as self-reported.",
     "claims": [
       "citizen.metrics"
     ],
     "label": "Citizen Health scale and team metrics",
-    "open": true
+    "open": false
   },
   {
     "id": "cf.athena_gain",
     "topic": "Athena instruction-quality improvement",
-    "site": "No numbers.",
+    "site": "Stated as a self-reported figure.",
     "resume": "Improved LLM instruction quality 15% across 20+ delegation workflows.",
-    "decision": "unsupported: no confirmed numerical improvement.",
+    "decision": "Resolved 2026-09-28: Rahul confirmed the 15% gain across 20+ workflow types as real; stated as self-reported.",
     "claims": [
       "athena.gain"
     ],
     "label": "Athena instruction-quality improvement",
-    "open": true
+    "open": false
   },
   {
     "id": "cf.dia_gpt4o",

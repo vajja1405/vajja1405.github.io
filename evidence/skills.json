@@ -1253,6 +1253,7 @@
       "aliases": [
         "workflow automation",
         "automation",
+        "n8n",
         "automate",
         "automating",
         "process automation",
@@ -1547,7 +1548,6 @@
       "id": "low_code",
       "name": "Low-code automation platforms",
       "aliases": [
-        "n8n",
         "zapier",
         "uipath",
         "power automate",
@@ -1556,7 +1556,7 @@
       "related": [
         "workflow_automation"
       ],
-      "statement": "n8n, Zapier and UiPath are not established. Automation evidence is code-based (LangChain / LangGraph workflows)."
+      "statement": "Zapier, UiPath and Power Automate are not established. The one low-code workflow is an n8n escalation-routing flow in the drug-interaction project, checked end to end on a local n8n; other automation evidence is code-based (LangChain / LangGraph workflows)."
     },
     {
       "id": "customer_deployments",

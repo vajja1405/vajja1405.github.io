@@ -6,8 +6,8 @@ Items still **open** are never stated by the assistant, the PDF or the MCP serve
 | Topic | Résumé v2 says | What the source shows | Status |
 |---|---|---|---|
 | TIFIN +19% / +24% | "+19% recommendation accuracy, +24% F1" | Confirmed by Rahul; employer baselines are internal | Resolved: `tifin.gains` verified · self-reported |
-| Citizen Health scale | 5,000+ patients, 10,000+ records, 6 sources, 300+ eval cases, 6-person team | Rahul described these as guesses; `CITIZEN_HEALTH_NUMBERS_TO_FIND.md` lists where to find real ones | **Open**: `citizen.metrics` deprecated |
-| Athena +15% | "+15% instruction quality across 20+ workflows" | No figure supplied | **Open**: `athena.gain` unsupported |
+| Citizen Health scale | 5,000+ patients, 10,000+ records, 6 sources, 300+ eval cases, 6-person team | Rahul confirmed on 2026-09-28 that these are real figures he can explain | Resolved: `citizen.metrics` verified · self-reported |
+| Athena +15% | "+15% instruction quality across 20+ workflows" | Rahul confirmed on 2026-09-28 | Resolved: `athena.gain` verified · self-reported |
 | Drug agent "GPT-4o fallback" | 4th severity tier is a GPT-4o fallback | Repo: the 4th tier is `Unknown`; the LLM writes explanations only (hosted Qwen3-4B, config default gpt-4o-mini) | **Open** for the résumé wording; the site states the implemented tiers |
 | Drug agent latency | "20+ s → under 100 ms with Redis" | Repo: hosted check 5.8 s → 0.25 ms; no 20 s baseline anywhere | Resolved: `dia.cache_smoke` states the measured values; `dia.latency_20s` deprecated |
 | Surgical synthesis metrics | PSNR 19–22 dB, SSIM 0.61–0.74 | Confirmed by Rahul; README documents the VAE ceiling (~24–27 dB) above the generator | Resolved: `sssd.metric_values` verified · self-reported, `sssd.vae_ceiling` public |

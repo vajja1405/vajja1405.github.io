@@ -34,7 +34,7 @@ describe('evidence integrity', () => {
   });
   it('no summary, gap or story text quotes a held-back figure', () => {
     const text = JSON.stringify([kb.entities, kb.gaps, kb.decisions, kb.failures, kb.attacks, kb.architectures, kb.roles, kb.topics]);
-    for (const figure of ['5,000+', '10,000+', '300+ case', 'GPT-4o fallback', '20+ seconds', '3rd place'])
+    for (const figure of ['GPT-4o fallback', '20+ seconds', '3rd place'])
       expect(text, figure).not.toContain(figure);
   });
   it("never describes Rahul's roles as contract work", () => {
@@ -42,11 +42,11 @@ describe('evidence integrity', () => {
     expect(text).not.toMatch(/\bcontract(s|ed|or)?\b/i);
   });
   it('withdrawn and conflicting statements are not statable', () => {
-    for (const id of ['dia.gpt4o', 'dia.latency_20s', 'citizen.metrics', 'edu.ibm'])
+    for (const id of ['dia.gpt4o', 'dia.latency_20s', 'edu.ibm'])
       expect(isStatable(kb.claim.get(id))).toBe(false);
   });
   it('states confirmed résumé results with their evidence strength', () => {
-    for (const id of ['tifin.gains', 'athena.gain', 'sssd.metric_values', 'award.hackaroo']) expect(kb.claim.get(id)).toMatchObject({ status: 'verified', strength: 'self_reported' });
+    for (const id of ['tifin.gains', 'athena.gain', 'citizen.metrics', 'sssd.metric_values', 'award.hackaroo']) expect(kb.claim.get(id)).toMatchObject({ status: 'verified', strength: 'self_reported' });
     expect(kb.claim.get('qml.speedup')).toMatchObject({ status: 'verified', strength: 'public_artifact' });
     expect(kb.claim.get('award.hackaroo')!.text).toMatch(/2nd place in the AI Agents track/);
   });

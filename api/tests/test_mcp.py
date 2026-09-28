@@ -168,7 +168,7 @@ def test_no_tool_leaks_unverified_figures_or_claims():
     text = json.dumps(calls)
     for cid in hidden_ids:
         assert f'"{cid}"' not in text, cid
-    for figure in ["5,000+", "10,000+", "300+ case", "GPT-4o fallback", "20+ seconds", "3rd place", "IBM Machine Learning"]:
+    for figure in ["GPT-4o fallback", "20+ seconds", "3rd place", "IBM Machine Learning"]:
         assert figure not in text, figure
 
 

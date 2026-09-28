@@ -83,9 +83,9 @@ def test_valid_answer_is_returned_with_checks(client, monkeypatch):
 
 
 def test_citing_an_unverified_claim_is_rejected(client, monkeypatch):
-    bad = answer(("Citizen Health serves 5,000+ patients.", ["citizen.metrics"]))
+    bad = answer(("The fourth severity tier is a GPT-4o fallback.", ["dia.gpt4o"]))
     fake = use(monkeypatch, FakeModel(bad, bad))
-    r = ask(client, "How many patients does Citizen Health serve?")
+    r = ask(client, "Does the drug agent's severity classifier fall back to GPT-4o?")
     assert r.status_code == 422
     assert len(fake.calls) == 2  # one repair attempt with feedback
     assert "failed validation" in fake.calls[1][-1]["content"]
@@ -134,10 +134,10 @@ def test_prompt_injection_never_reaches_the_model(client, monkeypatch):
 
 def test_evidence_pack_excludes_unverified_claims_and_flags_them():
     kb = load_kb()
-    pack, ids = main.build_pack(kb, main.AskRequest(question="How many patients does Citizen Health serve and how much did Athena improve instruction quality?"))
-    assert "citizen.metrics" not in ids
-    assert "5,000" not in pack
-    assert "UNVERIFIED" in pack and "Citizen Health scale and team metrics" in pack
+    pack, ids = main.build_pack(kb, main.AskRequest(question="Does the drug agent's severity classifier use a GPT-4o fallback tier?"))
+    assert "dia.gpt4o" not in ids
+    assert "GPT-4o fallback" not in pack
+    assert "UNVERIFIED" in pack and "Drug Interaction Agent classifier fallback model" in pack
     unverified_line = next(l for l in pack.splitlines() if l.startswith("UNVERIFIED"))
     assert not any(ch.isdigit() for ch in unverified_line.replace("2025", ""))  # labels carry no figures
 

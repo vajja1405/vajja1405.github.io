@@ -2167,16 +2167,35 @@
     "id": "citizen.metrics",
     "entity": "citizen",
     "kind": "metric",
-    "status": "deprecated",
-    "strength": "resume_only",
-    "public_safe": false,
-    "text": "5,000+ patients, 10,000+ records from 6 provider sources, a 300+ case release evaluation suite, a 6-person team.",
-    "tags": [],
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Reported scale at Citizen Health: 5,000+ patients, 10,000+ medical records from 6 provider sources, a 300+ case release evaluation suite, and a 6-person team.",
+    "tags": [
+      "healthcare",
+      "metrics",
+      "eval_design"
+    ],
     "sources": [
       "resume_v2",
-      "target_roles"
+      "rahul_confirmed"
     ],
-    "note": "Withdrawn as unverified (target roles analysis, 2026-09-22). Must not be stated."
+    "note": "Confirmed by Rahul on 2026-09-28 as real figures he can explain. They come from his employment records and cannot be checked publicly (they had been withdrawn as unverified on 2026-09-22).",
+    "metrics": [
+      {
+        "label": "Patients",
+        "value": "5,000+ (reported)"
+      },
+      {
+        "label": "Medical records",
+        "value": "10,000+"
+      },
+      {
+        "label": "Eval suite",
+        "value": "300+ cases"
+      }
+    ],
+    "last_verified": "2026-09-28"
   },
   {
     "id": "athena.role",
@@ -2809,13 +2828,43 @@
     ]
   },
   {
+    "id": "dia.n8n",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Pharmacist escalations leave the agent as tickets posted to an n8n workflow (webhook, priority branch, notification, reply). An end-to-end check against a local n8n 2.40 routed an urgent ticket to the urgent pharmacist channel and a routine one to the review queue; the notification endpoint was a local stub, not a production paging system.",
+    "tags": [
+      "workflow_automation",
+      "human_in_the_loop",
+      "agents",
+      "rest_api"
+    ],
+    "sources": [
+      "dia_n8n"
+    ],
+    "code": [
+      {
+        "repo": "dia_sep",
+        "path": "integrations/n8n/escalation-routing.json",
+        "label": "n8n workflow"
+      },
+      {
+        "repo": "dia_sep",
+        "path": "agent/tools.py",
+        "label": "Ticket webhook call"
+      }
+    ]
+  },
+  {
     "id": "cliniq.fhir",
     "entity": "cliniq",
     "kind": "metric",
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "FHIR R4 ingestion: 118,868 resources from 109 Synthea synthetic patients, validated and mapped to SNOMED CT, RxNorm and LOINC, with Safe Harbor–style de-identification (0 PHI leaks found), role-based access and a hash-chained audit log. Embedding search recovered only 52% of code-defined patient cohorts (BM25 71%), so cohorts are selected by terminology codes.",
+    "text": "FHIR R4 ingestion: 118,868 resources from 109 Synthea synthetic patients, validated and mapped to SNOMED CT, RxNorm and LOINC, with Safe Harbor–style de-identification (the scanner found 0 identifier leaks in the synthetic records), role-based access and a hash-chained audit log. Embedding search recovered only 52% of code-defined patient cohorts (BM25 71%), so cohorts are selected by terminology codes.",
     "tags": [
       "healthcare",
       "data_quality",

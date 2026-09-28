@@ -43,7 +43,7 @@
     },
     "dia_sep": {
       "name": "drug-interaction-rag-chatbot",
-      "sha": "67a8123ae33cc95216eb88aae399e3c1a4a787ef"
+      "sha": "8448687905091d76fb47e58b7cf66188f85fb3e3"
     },
     "cliniq_sep": {
       "name": "ClinIQ-AI-for-Substance-Abuse-Risk-Detection",
@@ -260,6 +260,13 @@
       "type": "evaluation",
       "title": "Retrieval, rerank-depth and load benchmarks (2026-09-26)",
       "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/67a8123ae33cc95216eb88aae399e3c1a4a787ef/docs/benchmarks/rerank-depth-2026-09-26.json",
+      "public": true
+    },
+    {
+      "id": "dia_n8n",
+      "type": "evaluation",
+      "title": "n8n escalation-routing end-to-end check (2026-09-28)",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/8448687905091d76fb47e58b7cf66188f85fb3e3/integrations/n8n/e2e-2026-09-28.json",
       "public": true
     },
     {
