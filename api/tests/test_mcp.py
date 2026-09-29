@@ -71,7 +71,7 @@ def test_protocol_over_http(server_url, mode):
             names = {t.name for t in tools.tools}
             assert names == TOOLS
             assert all(t.annotations and t.annotations.read_only_hint for t in tools.tools)
-            result = await client.call_tool("get_skill_evidence", {"skill": "Kubernetes"})
+            result = await client.call_tool("get_skill_evidence", {"skill": "dbt"})
             data = result.structured_content or json.loads(result.content[0].text)
             assert data["results"][0]["category"] == "Not currently demonstrated"
             profile = await client.read_resource("rahul://profile")
@@ -87,10 +87,16 @@ def cat(result: dict, requirement: str) -> str:
     return next(r["category"] for r in result["requirements"] if r["requirement"] == requirement)
 
 
-def test_unsupported_skill_is_not_invented():
+def test_partial_skill_is_related_not_claimed():
     r = srv.get_skill_evidence("production Kubernetes")["results"][0]  # the gap, not "production"
+    assert r["category"] == "Related evidence"
+    assert [c["id"] for c in r["evidence"]] == ["dia.gateway"]  # manifests validated in CI, never applied
+    assert "not demonstrated" in r["explanation"] and "Docker" in r["explanation"]
+
+
+def test_unsupported_skill_is_not_invented():
+    r = srv.get_skill_evidence("dbt")["results"][0]
     assert r["category"] == "Not currently demonstrated" and r["evidence"] == []
-    assert "Docker" in r["explanation"]
 
 
 def test_skill_with_direct_evidence():
@@ -109,7 +115,7 @@ def test_job_description_parity_with_browser_engine():
     out = srv.compare_job_description(JD)
     assert cat(out, "Retrieval-augmented generation") == "Direct evidence"
     assert cat(out, "Python") == "Direct evidence"
-    assert cat(out, "Kubernetes / container orchestration") == "Not currently demonstrated"
+    assert cat(out, "Kubernetes / container orchestration") == "Related evidence"
     assert cat(out, "Pinecone") == "Related evidence"
     iac = next(r for r in out["requirements"] if r["requirement"] == "Infrastructure as code")
     assert iac["listed_as"] == "preferred"

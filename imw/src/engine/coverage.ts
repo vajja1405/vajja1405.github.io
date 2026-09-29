@@ -6,6 +6,14 @@ const ENTITY_WEIGHT: Record<string, number> = { public_artifact: 1, self_reporte
 /** Evidence coverage for one concept. Never produces a score, only a category with its evidence. */
 export function coverConcept(kb: KB, id: string, opts: { near?: string; priority?: RequirementCoverage['priority'] } = {}): RequirementCoverage {
   const gap = kb.gap.get(id);
+  // Real but incomplete work counts as related evidence, with the gap statement saying what is missing.
+  const partial = (gap?.partial ?? []).map((cid) => kb.claim.get(cid)).filter((c) => !!c && c.status === 'verified' && c.public_safe);
+  if (gap && partial.length) {
+    return {
+      id, label: gap.name, category: 'related', priority: opts.priority, claims: partial.map((c) => c!.id),
+      entities: uniq(partial.map((c) => c!.entity)), statement: gap.statement,
+    };
+  }
   if (gap) {
     const closest = gap.related.flatMap((r) => kb.statableBySkill.get(r) ?? []);
     return {

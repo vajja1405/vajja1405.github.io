@@ -199,15 +199,21 @@
         "gpt-4o",
         "hugging face",
         "huggingface",
-        "llm apis"
+        "llm apis",
+        "llama",
+        "qwen",
+        "llama 3",
+        "self-hosted llm",
+        "model gateway",
+        "llm gateway",
+        "model routing"
       ],
       "near": [
         "gemini",
         "bedrock",
         "azure openai",
         "cohere",
-        "mistral",
-        "llama"
+        "mistral"
       ],
       "related": [
         "llm"
@@ -271,7 +277,12 @@
         "reranking",
         "re-ranking",
         "hybrid search",
-        "relevance ranking"
+        "relevance ranking",
+        "cross-encoder",
+        "cross encoder",
+        "reranker",
+        "rank fusion",
+        "reciprocal rank fusion"
       ],
       "near": [
         "bm25",
@@ -1075,7 +1086,13 @@
         "observability",
         "model monitoring",
         "drift",
-        "logging"
+        "logging",
+        "prometheus",
+        "grafana",
+        "opentelemetry",
+        "distributed tracing",
+        "tracing",
+        "jaeger"
       ],
       "related": [
         "mlops"
@@ -1093,10 +1110,10 @@
         "ml infrastructure",
         "weights & biases",
         "wandb",
-        "experiment tracking"
+        "experiment tracking",
+        "mlflow"
       ],
       "near": [
-        "mlflow",
         "kubeflow"
       ],
       "related": [
@@ -1375,6 +1392,79 @@
       "related": [
         "etl"
       ]
+    },
+    {
+      "id": "load_testing",
+      "name": "Load & performance testing",
+      "group": "backend",
+      "aliases": [
+        "load testing",
+        "locust",
+        "performance testing",
+        "stress testing",
+        "latency profiling"
+      ],
+      "near": [
+        "k6",
+        "jmeter",
+        "gatling"
+      ],
+      "related": [
+        "testing",
+        "monitoring"
+      ]
+    },
+    {
+      "id": "health_interop",
+      "name": "Healthcare interoperability (FHIR, terminologies)",
+      "group": "domain",
+      "aliases": [
+        "fhir",
+        "fhir r4",
+        "hl7 fhir",
+        "snomed",
+        "snomed ct",
+        "loinc",
+        "terminology mapping",
+        "clinical terminologies",
+        "de-identification",
+        "phi de-identification",
+        "safe harbor",
+        "synthea",
+        "prior authorization"
+      ],
+      "near": [
+        "hl7",
+        "hl7 v2",
+        "cda",
+        "epic",
+        "cerner"
+      ],
+      "related": [
+        "healthcare",
+        "etl",
+        "data_quality"
+      ]
+    },
+    {
+      "id": "model_optimization",
+      "name": "Model optimization (ONNX, quantization)",
+      "group": "mlops",
+      "aliases": [
+        "onnx",
+        "onnx runtime",
+        "onnxruntime",
+        "quantization",
+        "int8",
+        "int8 quantization",
+        "model compression",
+        "model optimization"
+      ],
+      "near": [],
+      "related": [
+        "deployment",
+        "deep_learning"
+      ]
     }
   ],
   "gaps": [
@@ -1394,7 +1484,10 @@
         "docker",
         "deployment"
       ],
-      "statement": "Operating Kubernetes in production is not demonstrated. The drug-interaction project includes Kubernetes manifests (probes, autoscaling, resource limits, a GPU inference deployment) validated against Kubernetes schemas in CI; no cluster was run. Other deployment evidence is Docker, Hugging Face Spaces, and SageMaker / Vertex AI at TIFIN."
+      "statement": "Operating Kubernetes in production is not demonstrated. The drug-interaction project includes Kubernetes manifests (probes, autoscaling, resource limits, a GPU inference deployment) validated against Kubernetes schemas in CI; no cluster was run. Other deployment evidence is Docker, Hugging Face Spaces, and SageMaker / Vertex AI at TIFIN.",
+      "partial": [
+        "dia.gateway"
+      ]
     },
     {
       "id": "iac",
@@ -1411,7 +1504,10 @@
         "deployment",
         "ci_cd"
       ],
-      "statement": "Terraform for an AWS EKS stack (VPC, EKS, GPU node group, container registry) is written and validated in CI in the drug-interaction project but was never applied; operating infrastructure as code for a live system is not demonstrated."
+      "statement": "Terraform for an AWS EKS stack (VPC, EKS, GPU node group, container registry) is written and validated in CI in the drug-interaction project but was never applied; operating infrastructure as code for a live system is not demonstrated.",
+      "partial": [
+        "dia.gateway"
+      ]
     },
     {
       "id": "orchestration",
@@ -1454,7 +1550,6 @@
         "triton",
         "gpu serving",
         "model parallelism",
-        "quantization",
         "distributed training",
         "multi-gpu",
         "multi-node"
@@ -1463,7 +1558,11 @@
         "deployment",
         "deep_learning"
       ],
-      "statement": "Distributed inference or training infrastructure is not demonstrated. Evidence stops at a self-hosted Llama 3.2 behind an OpenAI-compatible gateway on a laptop CPU and ONNX INT8 quantization of a small encoder; vLLM appears only in deployment manifests and was not run."
+      "statement": "Distributed inference or training infrastructure is not demonstrated. Evidence stops at a self-hosted Llama 3.2 behind an OpenAI-compatible gateway on a laptop CPU and ONNX INT8 quantization of a small encoder; vLLM appears only in deployment manifests and was not run.",
+      "partial": [
+        "dia.gateway",
+        "sssd.onnx"
+      ]
     },
     {
       "id": "pretraining",
@@ -1500,7 +1599,12 @@
       "related": [
         "llm_eval"
       ],
-      "statement": "No large human-annotation operation or calibrated judge-agreement study is demonstrated. ClinIQ has the tooling (a labeling workbench with gold items, Cohen's kappa and adjudication, plus an active-learning simulation), but proxy labels stood in for annotators. The voice harness uses an LLM judge plus manual transcript review."
+      "statement": "No large human-annotation operation or calibrated judge-agreement study is demonstrated. ClinIQ and the surgical project have labeling tooling (gold items, Cohen's kappa, adjudication, pre-labels) and one-annotator pilots; a second reviewer for agreement is the next step. The voice harness uses an LLM judge plus manual transcript review.",
+      "partial": [
+        "cliniq.labeling",
+        "cliniq.label_fix",
+        "sssd.box_annotation"
+      ]
     },
     {
       "id": "online_experiments",
@@ -1586,7 +1690,10 @@
       "related": [
         "workflow_automation"
       ],
-      "statement": "Zapier, UiPath and Power Automate are not established. The one low-code workflow is an n8n escalation-routing flow in the drug-interaction project, checked end to end on a local n8n; other automation evidence is code-based (LangChain / LangGraph workflows)."
+      "statement": "Zapier, UiPath and Power Automate are not established. The one low-code workflow is an n8n escalation-routing flow in the drug-interaction project, checked end to end on a local n8n; other automation evidence is code-based (LangChain / LangGraph workflows).",
+      "partial": [
+        "dia.n8n"
+      ]
     },
     {
       "id": "customer_deployments",

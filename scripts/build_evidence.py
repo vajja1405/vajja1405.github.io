@@ -232,6 +232,12 @@ def build() -> tuple[dict, list[str]]:
             if e not in entity_ids:
                 errors.append(f"role {r['id']}: unknown entity {e}")
 
+    claim_status = {c["id"]: (c["status"] == "verified" and c.get("public_safe")) for c in claims}
+    for g in skills_doc["gaps"]:
+        for cid in g.get("partial", []):
+            if not claim_status.get(cid):
+                errors.append(f"gap {g['id']}: partial evidence {cid} is missing or not statable")
+
     for cf in conflicts:
         check_claims(f"conflict {cf['id']}", cf.get("claims"))
         if not isinstance(cf.get("open"), bool):

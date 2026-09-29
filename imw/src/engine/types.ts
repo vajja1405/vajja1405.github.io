@@ -24,7 +24,8 @@ export interface Entity {
 
 export interface Source { id: string; type: string; title: string; url?: string; public: boolean; note?: string }
 export interface Skill { id: string; name: string; group: string; aliases: string[]; near?: string[]; related: string[] }
-export interface Gap { id: string; name: string; aliases: string[]; related: string[]; statement: string; verify?: boolean }
+/** `partial` lists claims showing real but incomplete work (e.g. Terraform written and CI-validated, never applied). */
+export interface Gap { id: string; name: string; aliases: string[]; related: string[]; statement: string; verify?: boolean; partial?: string[] }
 export interface Group { id: string; label: string }
 
 export interface Decision { id: string; entity: string; title: string; choice: string; rationale: string; tradeoff: string; claims: string[]; sources: string[] }

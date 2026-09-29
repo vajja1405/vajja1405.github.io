@@ -218,3 +218,11 @@ def test_labels_are_checked_for_numbers_and_tone():
     r = validate_answer(out, {"voice.harness"}, kb.statable_ids, set(kb.gaps), set(kb.entities), {k: c["text"] for k, c in kb.claims.items()})
     assert not r.ok
     assert any(e.startswith("number") for e in r.errors) and any(e.startswith("tone") for e in r.errors)
+
+
+def test_partial_gaps_count_as_related_evidence():
+    from app.coverage import cover_concept
+    kb = load_kb()
+    iac = cover_concept(kb, "iac")
+    assert iac["category"] == "related" and "dia.gateway" in iac["claims"]
+    assert "never applied" in iac["statement"]

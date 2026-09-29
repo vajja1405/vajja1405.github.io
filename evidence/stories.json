@@ -415,6 +415,40 @@
       "sources": [
         "sssd_repo"
       ]
+    },
+    {
+      "id": "f.cliniq.meth",
+      "entity": "cliniq",
+      "title": "A substring match mislabeled a quarter of the positives",
+      "problem": "ClinIQ's proxy label treated any review containing \"meth\" as substance-use related, so reviews of methylphenidate, sulfamethoxazole and similar drugs were counted as positives.",
+      "detection": "A small human labeling pilot disagreed with the proxy label far more often than expected, and reading the disagreements showed the pattern.",
+      "diagnosis": "\"meth\" was matched as a substring rather than a whole word: 803 of 3,316 proxy-positive reviews (24%) were positive only because of it.",
+      "fix": "The keyword now matches as a whole word in the labels, the loader and the rules baseline, and every offline result (active learning, DistilBERT, bias test, trends) was rerun on the corrected labels.",
+      "prevention": "A unit test pins the whole-word behavior, and the README states which older benchmark numbers still use the original labels.",
+      "measurement": "On the corrected labels the text-only DistilBERT reached F1 0.914 against 0.794 for keyword rules.",
+      "claims": [
+        "cliniq.label_fix",
+        "cliniq.bert"
+      ],
+      "code": [
+        {
+          "repo": "cliniq_sep",
+          "path": "analysis/sud_labels.py",
+          "label": "Whole-word SUD keywords"
+        },
+        {
+          "repo": "cliniq_sep",
+          "path": "tests/test_bert_splits.py",
+          "lines": [
+            85,
+            95
+          ],
+          "label": "test_meth_matches_only_as_a_whole_word"
+        }
+      ],
+      "sources": [
+        "cliniq_label_fix"
+      ]
     }
   ],
   "attacks": [

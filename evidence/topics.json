@@ -412,7 +412,7 @@
       "handle (hard|difficult|complex|technical) (problems|challenges)"
     ],
     "lead": {
-      "text": "He finds the root cause, fixes it, and then adds a check so the problem can't quietly return. Four examples, each with the fix in code:",
+      "text": "He finds the root cause, fixes it, and then adds a check so the problem can't quietly return. Five examples, each with the fix in code:",
       "cites": []
     },
     "points": [
@@ -422,6 +422,13 @@
         "cites": [
           "voice.bargein",
           "voice.playback_state"
+        ]
+      },
+      {
+        "label": "A labeling bug found by reading disagreements",
+        "text": "A labeling pilot disagreed with ClinIQ's proxy labels more than expected; reading the disagreements showed \"meth\" matching inside other drug names, which made 803 of 3,316 proxy positives (24%) wrong. He fixed the match and reran every offline result.",
+        "cites": [
+          "cliniq.label_fix"
         ]
       },
       {
@@ -453,6 +460,7 @@
     },
     "why": "Problem solving is visible in what happens after something breaks. In each example he identified the real cause rather than the symptom, fixed it in code, and added a test, audit or gate to prevent a repeat. The failure write-ups show how each problem was detected and diagnosed.",
     "failures": [
+      "f.cliniq.meth",
       "f.voice.bargein",
       "f.cliniq.revenue",
       "f.sssd.debug"
@@ -753,6 +761,114 @@
     "plain": "Put simply: his AI work has been used by real users inside companies, not only in class projects."
   },
   {
+    "id": "tech_stack",
+    "title": "Tools and tech stack",
+    "match": [
+      "tech(nology)? ?stack",
+      "tools? (does|did|has) (he|rahul) (use|used|work with)",
+      "what tools",
+      "which tools",
+      "tools and technolog",
+      "technolog(y|ies) (does|did|has) (he|rahul)",
+      "what (languages|frameworks|libraries|models|llms) (does|did|has)",
+      "which (models|llms|frameworks|libraries|languages)",
+      "toolkit",
+      "what (is|are) (his|rahul's) (skills|stack|tools)"
+    ],
+    "lead": {
+      "text": "Python first, across the whole AI stack. These are the tools he has used in shipped or published work, grouped by layer:",
+      "cites": []
+    },
+    "points": [
+      {
+        "label": "LLMs and agents",
+        "text": "Claude, the OpenAI Realtime API, Qwen and a self-hosted Llama 3.2, orchestrated with LangChain and LangGraph using tool calling, structured outputs and MCP.",
+        "cites": [
+          "cliniq.claude",
+          "voice.harness",
+          "dia.llm_provider",
+          "dia.gateway",
+          "tifin.agents",
+          "tifin.structured",
+          "imw.mcp"
+        ]
+      },
+      {
+        "label": "Retrieval",
+        "text": "FAISS, pgvector, and BM25 + dense hybrid search with a cross-encoder reranker over sentence-transformer embeddings.",
+        "cites": [
+          "dia.retrieval",
+          "cliniq.pgvector",
+          "dia.hybrid_retrieval"
+        ]
+      },
+      {
+        "label": "Models",
+        "text": "PyTorch, TensorFlow and scikit-learn; DistilBERT fine-tuned with Hugging Face and tracked in Weights & Biases; Stable Diffusion with LoRA; PennyLane and Qiskit.",
+        "cites": [
+          "tifin.frameworks",
+          "cliniq.bert",
+          "sssd.encoder",
+          "sssd.lora",
+          "qml.benchmark"
+        ]
+      },
+      {
+        "label": "MLOps and infrastructure",
+        "text": "Docker, AWS SageMaker, GCP Vertex AI and MLflow; Prometheus, Grafana and OpenTelemetry; Locust load tests; ONNX INT8 export; Kubernetes and Terraform configs validated in CI but not yet applied.",
+        "cites": [
+          "dia.shipped",
+          "tifin.deploy",
+          "tifin.frameworks",
+          "dia.observability",
+          "dia.load_test",
+          "sssd.onnx",
+          "dia.gateway"
+        ]
+      },
+      {
+        "label": "Data",
+        "text": "SQL, PostgreSQL, Snowflake, PySpark and Kafka, plus FHIR R4 with SNOMED CT, RxNorm and LOINC.",
+        "cites": [
+          "cliniq.schema",
+          "tifin.snowflake",
+          "dia.spark",
+          "voice.kafka",
+          "cliniq.fhir"
+        ]
+      },
+      {
+        "label": "Apps and testing",
+        "text": "FastAPI, React and TypeScript, Streamlit, pytest and Playwright.",
+        "cites": [
+          "dia.frontend",
+          "dia.tests",
+          "cliniq.delivery",
+          "cliniq.labeling"
+        ]
+      }
+    ],
+    "takeaway": {
+      "text": "For your team: he can work across everything an AI feature needs, from data and models to the service, interface and monitoring around them.",
+      "cites": []
+    },
+    "why": "The list includes only tools used in work you can open or in his roles, and each group links to where it was used.",
+    "plain": "Put simply: he has used the standard modern AI stack end to end, and every tool here links to where he used it.",
+    "entities": [
+      "dia",
+      "cliniq",
+      "tifin",
+      "sssd",
+      "voice",
+      "qml"
+    ],
+    "followups": [
+      "Show me his strongest RAG work.",
+      "What has he built beyond LLM wrappers?",
+      "Has he used Kubernetes?"
+    ]
+  },
+  {
     "id": "ai_depth",
     "title": "Depth of AI and ML knowledge",
     "match": [
@@ -779,10 +895,11 @@
       },
       {
         "label": "Retrieval",
-        "text": "Exact lookup with a FAISS fallback over sentence embeddings, and pgvector retrieval with an IVFFlat cosine index.",
+        "text": "Exact lookup with a FAISS fallback, pgvector retrieval, and BM25 + dense hybrid search with a cross-encoder reranker that lifted MRR 25% on a 600-query benchmark.",
         "cites": [
           "dia.retrieval",
-          "cliniq.pgvector"
+          "cliniq.pgvector",
+          "dia.hybrid_retrieval"
         ]
       },
       {

@@ -352,6 +352,20 @@
       "title": "Box-annotation A/B pilot (2026-09-29)",
       "url": "https://github.com/vajja1405/SS-SD/blob/daaf20650dfe9e11a5aeb55be8ca7ea309cd12ea/docs/box-annotation-pilot-2026-09-29.json",
       "public": true
+    },
+    {
+      "id": "dia_observability",
+      "type": "repository",
+      "title": "Drug Interaction Agent observability module",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/8448687905091d76fb47e58b7cf66188f85fb3e3/observability.py",
+      "public": true
+    },
+    {
+      "id": "resume_v6",
+      "type": "resume",
+      "title": "Résumé v6 (Sep 28, 2026)",
+      "public": false,
+      "note": "Rahul's current résumé; used for self-reported employment details."
     }
   ],
   "personas": [

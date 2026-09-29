@@ -2027,7 +2027,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "Model work used PyTorch, TensorFlow and scikit-learn.",
+    "text": "Model work used PyTorch, TensorFlow and scikit-learn, with MLflow in the stack.",
     "tags": [
       "deep_learning",
       "classical_ml",
@@ -2035,8 +2035,10 @@
     ],
     "sources": [
       "resume_v2",
+      "resume_v6",
       "site"
-    ]
+    ],
+    "last_verified": "2026-09-29"
   },
   {
     "id": "tifin.gains",
@@ -2816,7 +2818,8 @@
       "monitoring",
       "metrics",
       "deployment",
-      "caching"
+      "caching",
+      "load_testing"
     ],
     "sources": [
       "dia_benchmarks"
@@ -2908,7 +2911,8 @@
       "etl",
       "provenance",
       "embeddings",
-      "metrics"
+      "metrics",
+      "health_interop"
     ],
     "sources": [
       "cliniq_interop"
@@ -2940,7 +2944,8 @@
       "human_in_the_loop",
       "healthcare",
       "safety_testing",
-      "eval_design"
+      "eval_design",
+      "health_interop"
     ],
     "sources": [
       "cliniq_prior_auth"
@@ -3201,7 +3206,8 @@
     "tags": [
       "deep_learning",
       "deployment",
-      "metrics"
+      "metrics",
+      "model_optimization"
     ],
     "sources": [
       "sssd_onnx"
@@ -3259,6 +3265,40 @@
       {
         "label": "Seconds per box, shown vs hidden",
         "value": "2.5 vs 3.7"
+      }
+    ]
+  },
+  {
+    "id": "dia.observability",
+    "entity": "dia",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Observability: the API exposes Prometheus metrics per route and pipeline stage (P50/P95/P99 in Grafana dashboards), with optional OpenTelemetry tracing to Jaeger, run from a docker-compose observability stack.",
+    "tags": [
+      "monitoring",
+      "deployment",
+      "docker"
+    ],
+    "sources": [
+      "dia_observability"
+    ],
+    "last_verified": "2026-09-29",
+    "code": [
+      {
+        "repo": "dia_sep",
+        "path": "observability.py",
+        "lines": [
+          67,
+          92
+        ],
+        "label": "OpenTelemetry tracing setup"
+      },
+      {
+        "repo": "dia_sep",
+        "path": "docker-compose.observability.yml",
+        "label": "Prometheus, Grafana and Jaeger stack"
       }
     ]
   }

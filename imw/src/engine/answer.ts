@@ -356,11 +356,13 @@ function falsePremise(kb: KB, q: string, raw: string, entities: string[], concep
   // "Did he use/build X" where X is a known gap.
   const gapHit = conceptIds.map((id) => kb.gap.get(id)).find((g) => g && !g.verify);
   if (gapHit && /\b(did|does|has|have|is|was)\b/.test(q)) {
-    const closest = gapHit.related.flatMap((r) => kb.statableBySkill.get(r) ?? []);
-    const near = pick(kb, closest, 'engineer', 1, 4);
+    // Partial work (written and tested, never run in production) leads the closest evidence.
+    const partial = (gapHit.partial ?? []).map((id) => kb.claim.get(id)).filter(isStatable);
+    const closest = [...partial, ...gapHit.related.flatMap((r) => kb.statableBySkill.get(r) ?? [])];
+    const near = partial.length ? partial.slice(0, 3) : pick(kb, closest, 'engineer', 1, 4);
     const learning = topicById(kb, 'learning');
     return mk('unsupported_skill', structuredBlocks({
-      lead: `Not yet. ${gapHit.statement}`,
+      lead: `${partial.length ? 'Not in production yet.' : 'Not yet.'} ${gapHit.statement}`,
       points: entityPoints(kb, near, 1),
       takeaway: learning?.takeaway ? `How he would close it: ${learning.takeaway.text.replace(/^For your team: /, '')}` : undefined,
     }), { topic: 'learning', followups: ['How fast does he learn new technology?', 'What is not demonstrated yet?', 'Show me his backend engineering experience.'] });
@@ -471,7 +473,9 @@ function skillAnswer(kb: KB, concepts: { id: string; near?: string }[], persona:
       blocks.push({ type: 'points', items: entityPoints(kb, chosen, 1) });
       sources.push(...ids(chosen));
     } else if (cov.category === 'related') {
-      blocks.push({ type: 'p', lead, text: `Not directly, but he has closely related experience. ${cov.statement ?? ''}`.trim(), cites: cov.claims.slice(0, 1) });
+      // Without `via`, the evidence is partial work on the thing itself (a gap with partial claims).
+      const text = cov.via ? `Not directly, but he has closely related experience. ${cov.statement ?? ''}` : `Partly. ${cov.statement ?? ''}`;
+      blocks.push({ type: 'p', lead, text: text.trim(), cites: cov.claims.slice(0, 1) });
       const chosen = cov.claims.slice(0, 4).map((id) => kb.claim.get(id)!).filter(Boolean);
       blocks.push({ type: 'points', items: entityPoints(kb, chosen, 1) });
       sources.push(...ids(chosen));
@@ -721,7 +725,7 @@ function topicWithConcept(kb: KB, t: Topic, conceptIds: string[], persona: Perso
   const cov = coverConcept(kb, cid);
   const where = listText(cov.entities.slice(0, 3).map((id) => entityName(kb, id)));
   const status = cov.category === 'direct' ? `He already has direct experience with ${cov.label}, in ${where}.`
-    : cov.category === 'related' ? `He has closely related experience: ${cov.statement ?? ''}`.trim()
+    : cov.category === 'related' ? (cov.via ? `He has closely related experience: ${cov.statement ?? ''}` : `Partly. ${cov.statement ?? ''}`).trim()
     : `${cov.label} isn't part of his work yet. ${cov.statement ?? ''}`.trim();
   return writtenAnswer(kb, t, persona, { lead: `${status} On picking it up: the clearest evidence is how many different kinds of systems he has built from scratch, each in a new stack or domain, and each one working, tested and documented.` });
 }

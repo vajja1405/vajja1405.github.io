@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { buildKB, isStatable } from '../src/engine/kb';
 import { answer, answerText, citedIds } from '../src/engine/answer';
 import { analyzeJD, looksLikeJD } from '../src/engine/jd';
-import { roleAnalysis } from '../src/engine/coverage';
+import { coverConcept, roleAnalysis } from '../src/engine/coverage';
 import { HYPE } from '../src/engine/guard';
 import type { Answer, Bundle, PersonaId } from '../src/engine/types';
 
@@ -108,7 +108,7 @@ describe('unsupported skills and false premises', () => {
   it('does not invent Kubernetes experience', () => {
     const a = ask('Does Rahul have production Kubernetes experience?');
     expect(a.intent).toBe('unsupported_skill');
-    expect(answerText(a)).toMatch(/^Not yet\./);
+    expect(answerText(a)).toMatch(/^Not in production yet\./);
     expect(answerText(a)).not.toMatch(/has (production )?kubernetes experience/i);
     expectClean(a);
   });
@@ -202,7 +202,7 @@ describe('roles and job descriptions', () => {
       expect(a.counts.direct, r.id).toBeGreaterThanOrEqual(3);
       for (const g of r.gaps) {
         const req = a.requirements.find((x) => x.id === g)!;
-        expect(['missing', 'verification'], `${r.id}/${g}`).toContain(req.category);
+        expect(kb.gap.get(g)?.partial?.length ? ['related'] : ['missing', 'verification'], `${r.id}/${g}`).toContain(req.category);
       }
     }
   });
@@ -238,8 +238,8 @@ Equal Opportunity Employer`;
     const cat = (id: string) => a.requirements.find((r) => r.id === id)?.category;
     expect(cat('rag')).toBe('direct');
     expect(cat('python')).toBe('direct');
-    expect(cat('kubernetes')).toBe('missing');
-    expect(cat('iac')).toBe('missing');
+    expect(cat('kubernetes')).toBe('related');  // manifests validated in CI, never applied
+    expect(cat('iac')).toBe('related');
     expect(cat('near:pinecone')).toBe('related');
     expect(a.requirements.find((r) => r.id === 'iac')?.priority).toBe('preferred');
     expect(a.notes.join(' ')).toMatch(/5\+ years/);
@@ -254,7 +254,7 @@ Equal Opportunity Employer`;
     const a = analyzeJD(kb, JD, ['COBOL mainframe modernization', 'distributed inference with vLLM', 'Kotlin']);
     expect(a.requirements.find((r) => r.id === 'term:COBOL mainframe modernization')?.category).toBe('missing');
     expect(a.requirements.find((r) => r.id === 'other_languages')?.category).toBe('missing');
-    expect(a.requirements.find((r) => r.id === 'distributed_inference')?.category).toBe('missing');
+    expect(a.requirements.find((r) => r.id === 'distributed_inference')?.category).toBe('related');
   });
 });
 
@@ -342,7 +342,8 @@ describe('conversational answers', () => {
     expectGrounded(a);
   });
   it('says where a named skill stands before answering "can he learn it"', () => {
-    expect(answerText(ask('Can he learn Kubernetes?'))).toMatch(/Kubernetes.*isn't part of his work yet/);
+    expect(answerText(ask('Can he learn Kubernetes?'))).toMatch(/^Partly\. Operating Kubernetes in production is not demonstrated/);
+    expect(answerText(ask('Can he learn dbt?'))).toMatch(/dbt isn't part of his work yet/);
     expect(answerText(ask('Can he learn RAG quickly?'))).toMatch(/already has direct experience/);
   });
   it.each(['What has Rahul actually shipped?', 'Who is Rahul?', 'Is he senior?', 'What are his weaknesses?', 'What has he built beyond LLM wrappers?', 'How does he evaluate AI systems?'])(
@@ -355,5 +356,37 @@ describe('conversational answers', () => {
   it('does not route project questions to topics', () => {
     expect(ask('How did the team build ClinIQ?').topic).toBeUndefined();
     expect(ask('Does he know LangGraph?').intent).toBe('skill');
+  });
+});
+
+describe('September tools in role and job-description coverage', () => {
+  it('counts real but unapplied infrastructure work as related evidence, with the caveat', () => {
+    for (const id of ['iac', 'kubernetes']) {
+      const c = coverConcept(kb, id);
+      expect(c.category, id).toBe('related');
+      expect(c.claims).toContain('dia.gateway');
+      expect(c.statement).toMatch(/never applied|no cluster was run|not demonstrated/);
+    }
+  });
+  it('maps new tools in a job description to direct evidence', () => {
+    const jd = `About the role: we are looking for an ML engineer. Requirements: experience with FHIR, Prometheus and Grafana,
+      ONNX quantization, Locust load testing, MLflow, cross-encoder reranking and Terraform. Nice to have: Kubernetes.`;
+    const a = analyzeJD(kb, jd);
+    const cat = (label: RegExp) => a.requirements.find((r) => label.test(r.label))?.category;
+    expect(cat(/interoperability/i)).toBe('direct');
+    expect(cat(/monitoring/i)).toBe('direct');
+    expect(cat(/model optimization/i)).toBe('direct');
+    expect(cat(/load & performance/i)).toBe('direct');
+    expect(cat(/mlops/i)).toBe('direct');
+    expect(cat(/infrastructure as code/i)).toBe('related');
+    expect(cat(/kubernetes/i)).toBe('related');
+  });
+  it('answers "what tools does he use?" with the grouped tech stack', () => {
+    for (const q of ['What is his tech stack?', 'What tools does he use?', 'Which frameworks has he used?']) {
+      const a = ask(q, 'recruiter');
+      expect(a.topic, q).toBe('tech_stack');
+      expectClean(a);
+      expectGrounded(a);
+    }
   });
 });

@@ -42,6 +42,11 @@ def _title(s: str) -> str:
 
 def cover_concept(kb: KB, cid: str, near: str | None = None, priority: str | None = None) -> dict:
     gap = kb.gaps.get(cid)
+    # Real but incomplete work counts as related evidence, with the gap statement saying what is missing.
+    partial = [kb.claims[p] for p in (gap or {}).get("partial", []) if p in kb.claims and statable(kb.claims[p])]
+    if gap and partial:
+        return {"id": cid, "label": gap["name"], "category": "related", "priority": priority, "claims": [c["id"] for c in partial],
+                "entities": _uniq(c["entity"] for c in partial), "statement": gap["statement"]}
     if gap:
         closest = [c for r in gap["related"] for c in _statable_by_skill(kb, r)]
         return {"id": cid, "label": gap["name"], "category": "verification" if gap.get("verify") else "missing", "priority": priority,
