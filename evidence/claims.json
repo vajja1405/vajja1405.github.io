@@ -1977,7 +1977,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "Supporting Snowflake pipelines handled 5M+ daily data points (portfolio, account, transaction and usage data).",
+    "text": "Supporting Databricks and Snowflake pipelines handled 5M+ daily data points (portfolio, account, transaction and usage data).",
     "tags": [
       "snowflake",
       "etl",
@@ -1985,9 +1985,10 @@
       "fintech"
     ],
     "sources": [
-      "site",
+      "rahul_confirmed",
       "resume_v2",
-      "rahul_confirmed"
+      "resume_v7",
+      "site"
     ],
     "metrics": [
       {
@@ -1995,7 +1996,8 @@
         "value": "5M+"
       }
     ],
-    "note": "Confirmed by Rahul on 2026-09-28."
+    "note": "Confirmed by Rahul on 2026-09-28.",
+    "last_verified": "2026-09-29"
   },
   {
     "id": "tifin.dq",
@@ -2209,7 +2211,8 @@
       "monitoring",
       "regression_testing",
       "etl",
-      "tool_calling"
+      "tool_calling",
+      "production_ops"
     ],
     "sources": [
       "rahul_confirmed"
@@ -2418,16 +2421,18 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "Certifications: AI in Healthcare (Stanford School of Medicine); Supervised ML: Regression & Classification (Stanford Online); Facial Expression Recognition with PyTorch (Coursera); Predictive Modeling & ML with MATLAB (MathWorks); Fraud Detection with ML on GCP Vertex AI (Google Cloud).",
+    "text": "Certifications: AI in Healthcare (Stanford School of Medicine); Supervised ML: Regression & Classification (Stanford Online); Facial Expression Recognition with PyTorch (Coursera); Predictive Modeling & ML with MATLAB (MathWorks); Fraud Detection with ML on GCP Vertex AI (Google Cloud); Claude Certified Architect — Professional (Anthropic, in progress).",
     "tags": [
       "healthcare",
       "vertex_ai",
       "deep_learning"
     ],
     "sources": [
-      "site",
-      "resume_v2"
-    ]
+      "resume_v2",
+      "resume_v7",
+      "site"
+    ],
+    "last_verified": "2026-09-29"
   },
   {
     "id": "edu.ibm",
@@ -2844,7 +2849,7 @@
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "An OpenAI-compatible model gateway routes to a self-hosted Llama 3.2 with API fallback and a circuit breaker; an outage drill kept every request served. Kubernetes manifests and Terraform for AWS EKS are validated in CI but were not applied.",
+    "text": "An OpenAI-compatible model gateway routes to a self-hosted Llama 3.2 (Ollama on a laptop CPU) with API fallback and a circuit breaker; an outage drill kept every request served. Kubernetes manifests and Terraform for AWS EKS are validated in CI but were not applied.",
     "tags": [
       "llm_apis",
       "deployment",
@@ -2852,7 +2857,8 @@
       "monitoring"
     ],
     "sources": [
-      "dia_benchmarks"
+      "dia_benchmarks",
+      "dia_ollama"
     ],
     "code": [
       {
@@ -2864,8 +2870,14 @@
         "repo": "dia_sep",
         "path": "docs/benchmarks/inference-2026-09-26.json",
         "label": "Gateway measurements"
+      },
+      {
+        "repo": "dia_sep",
+        "path": "agent/llm.py",
+        "label": "Ollama and OpenAI-compatible clients"
       }
-    ]
+    ],
+    "last_verified": "2026-09-29"
   },
   {
     "id": "dia.n8n",
@@ -3299,6 +3311,36 @@
         "repo": "dia_sep",
         "path": "docker-compose.observability.yml",
         "label": "Prometheus, Grafana and Jaeger stack"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.ai_assisted",
+    "entity": "cliniq",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Builds with an AI coding assistant (Claude Code) under a written rule: nothing is claimed until a test, a data check or a review supports it, and when a check disagrees with a draft, the draft changes. The ClinIQ write-up documents eight real cases where a check caught a problem and the guard that now prevents it.",
+    "tags": [
+      "ai_assisted_dev",
+      "testing",
+      "eval_design",
+      "error_analysis"
+    ],
+    "sources": [
+      "cliniq_ai_eng"
+    ],
+    "last_verified": "2026-09-29",
+    "code": [
+      {
+        "repo": "cliniq_sep",
+        "path": "docs/ai-assisted-engineering.md",
+        "lines": [
+          1,
+          6
+        ],
+        "label": "AI-assisted engineering: how changes were checked"
       }
     ]
   }

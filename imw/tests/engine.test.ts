@@ -390,3 +390,20 @@ describe('September tools in role and job-description coverage', () => {
     }
   });
 });
+
+describe('the master résumé (v7) and the evidence agree', () => {
+  it('backs résumé skills that recruiters search for', () => {
+    const jd = `About the role: Requirements: experience with Databricks, Ollama, on-call incident response, context engineering
+      and AI-assisted development with Claude Code. Nice to have: Snowflake.`;
+    const a = analyzeJD(kb, jd);
+    const cat = (label: RegExp) => a.requirements.find((r) => label.test(r.label))?.category;
+    expect(cat(/snowflake/i)).toBe('direct');
+    expect(cat(/llm provider/i)).toBe('direct');
+    expect(cat(/on-call/i)).toBe('direct');
+    expect(cat(/prompt engineering/i)).toBe('direct');
+    expect(cat(/ai-assisted/i)).toBe('direct');
+  });
+  it('never says on-call is not evidenced', () => {
+    expect(kb.gap.get('distributed_systems')!.statement).not.toMatch(/on-call responsibility .* not evidenced/);
+  });
+});

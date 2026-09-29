@@ -366,6 +366,27 @@
       "title": "Résumé v6 (Sep 28, 2026)",
       "public": false,
       "note": "Rahul's current résumé; used for self-reported employment details."
+    },
+    {
+      "id": "resume_v7",
+      "type": "resume",
+      "title": "Résumé v7, final master résumé (Sep 29, 2026)",
+      "public": false,
+      "note": "Rahul's final master résumé; the reference for employment details."
+    },
+    {
+      "id": "cliniq_ai_eng",
+      "type": "repository",
+      "title": "ClinIQ: AI-assisted engineering, how changes were checked",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/c5d0f2c273f62edc6dbed24145f00c0b3c576340/docs/ai-assisted-engineering.md",
+      "public": true
+    },
+    {
+      "id": "dia_ollama",
+      "type": "repository",
+      "title": "Drug Interaction Agent LLM clients (Ollama)",
+      "url": "https://github.com/vajja1405/drug-interaction-rag-chatbot/blob/8448687905091d76fb47e58b7cf66188f85fb3e3/agent/llm.py",
+      "public": true
     }
   ],
   "personas": [

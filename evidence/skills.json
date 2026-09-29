@@ -179,7 +179,8 @@
         "prompting",
         "prompt design",
         "prompt orchestration",
-        "prompt optimization"
+        "prompt optimization",
+        "context engineering"
       ],
       "related": [
         "llm"
@@ -206,7 +207,8 @@
         "self-hosted llm",
         "model gateway",
         "llm gateway",
-        "model routing"
+        "model routing",
+        "ollama"
       ],
       "near": [
         "gemini",
@@ -1465,6 +1467,43 @@
         "deployment",
         "deep_learning"
       ]
+    },
+    {
+      "id": "production_ops",
+      "name": "Production monitoring & on-call",
+      "group": "mlops",
+      "aliases": [
+        "on-call",
+        "on call",
+        "incident response",
+        "production support",
+        "production monitoring"
+      ],
+      "near": [],
+      "related": [
+        "monitoring",
+        "deployment"
+      ]
+    },
+    {
+      "id": "ai_assisted_dev",
+      "name": "AI-assisted development (Claude Code)",
+      "group": "backend",
+      "aliases": [
+        "claude code",
+        "ai-assisted development",
+        "ai-assisted engineering",
+        "ai coding assistant",
+        "ai coding assistants",
+        "agentic coding"
+      ],
+      "near": [
+        "cursor",
+        "github copilot"
+      ],
+      "related": [
+        "testing"
+      ]
     }
   ],
   "gaps": [
@@ -1648,7 +1687,6 @@
       "aliases": [
         "distributed systems",
         "high availability",
-        "on-call",
         "sre",
         "site reliability",
         "load balancing",
@@ -1659,7 +1697,7 @@
       "related": [
         "rest_api"
       ],
-      "statement": "Distributed-systems scale, on-call responsibility and authentication design are not evidenced. Backend evidence consists of bounded FastAPI services with rate limits and tests."
+      "statement": "Large-scale distributed systems and authentication design are not evidenced. Backend evidence consists of bounded FastAPI services with rate limits and tests; production operations evidence is on-call incident response for Citizen Health's AI services (self-reported)."
     },
     {
       "id": "other_languages",
