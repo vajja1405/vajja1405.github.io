@@ -1512,7 +1512,7 @@
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "Exploratory temporal analysis found the share of reviews expressing distress rising from 1.7% (2008) to 30.5% (2017). Review trends cannot establish individual linkage or causation.",
+    "text": "Exploratory temporal analysis, recomputed on the corrected labels, found the share of low-rated (3/10 or below) substance-use reviews rising from 2.0% (2008) to 24.8% (2017) while the opioid share fell from 62% to 33%. Review trends cannot establish individual linkage or causation.",
     "tags": [
       "research_methods",
       "healthcare"
@@ -2076,7 +2076,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "AI Engineer at Citizen Health (Jun 2026 – present), building source-grounded retrieval and summarization for a patient-advocacy product serving people with rare and complex conditions.",
+    "text": "AI Engineer at Citizen Health (Jul 2026 – present), building source-grounded retrieval and summarization for a patient-advocacy product serving people with rare and complex conditions.",
     "tags": [
       "rag",
       "provenance",
@@ -2170,7 +2170,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "Reported scale at Citizen Health: 5,000+ patients, 10,000+ medical records from 6 provider sources, a 300+ case release evaluation suite, and a 6-person team.",
+    "text": "Reported scale at Citizen Health: Ari serves 5,000+ patients, and the release evaluation suite has 300+ cases.",
     "tags": [
       "healthcare",
       "metrics",
@@ -2185,10 +2185,6 @@
       {
         "label": "Patients",
         "value": "5,000+ (reported)"
-      },
-      {
-        "label": "Medical records",
-        "value": "10,000+"
       },
       {
         "label": "Eval suite",
@@ -2226,7 +2222,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "Data Scientist at Athena (Jun 2024 – Feb 2025). Developed and evaluated LLM-assisted task-planning and delegation workflows that turn open-ended client requests into structured, delegatable actions, and designed experiments on task decomposition, prompt orchestration and tool-supported workflows.",
+    "text": "Data Scientist at Athena (May 2024 – Feb 2025). Developed and evaluated LLM-assisted task-planning and delegation workflows that turn open-ended client requests into structured, delegatable actions, and designed experiments on task decomposition, prompt orchestration and tool-supported workflows.",
     "tags": [
       "agents",
       "tool_calling",
@@ -2969,7 +2965,7 @@
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "Fine-tuned DistilBERT (Hugging Face Trainer, CPU) to flag substance-use-relevant drug reviews, with runs tracked in Weights & Biases. On the same 600 held-out proxy-labeled reviews, reading review text only, it reached F1 0.873 (precision 0.910, recall 0.840) against 0.762 for keyword rules. With the drug name as an input as well, F1 was 0.932 against 0.841, but the drug name can set the proxy label by itself, so the text-only comparison is the fair one. On a random validation split the text-only F1 was 0.755. Labels are keyword proxies, not clinician adjudication.",
+    "text": "Fine-tuned DistilBERT (Hugging Face Trainer, CPU) to flag substance-use-relevant drug reviews, with runs tracked in Weights & Biases. On the same 600 held-out proxy-labeled reviews (labels corrected on 2026-09-29), reading review text only, it reached F1 0.914 (precision 0.922, recall 0.907) against 0.794 for keyword rules. With the drug name as an input as well, F1 was 0.973 against 0.846, but the drug name can set the proxy label by itself, so the text-only comparison is the fair one. On a random validation split the text-only F1 was 0.834. Labels are keyword proxies, not clinician adjudication.",
     "tags": [
       "nlp",
       "fine_tuning",
@@ -2997,7 +2993,7 @@
     "metrics": [
       {
         "label": "F1, review text only",
-        "value": "0.873 vs 0.762 (rules)"
+        "value": "0.914 vs 0.794 (rules)"
       },
       {
         "label": "Test set",
@@ -3012,7 +3008,7 @@
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "An ML-assisted labeling workbench (React/TypeScript UI, FastAPI, SQLite) serves the review its model is least sure about, shows the model's guess as a pre-label, and checks annotators with hidden gold items, double-labeling (Cohen's kappa) and conflict adjudication; Playwright tests run on Chromium, Firefox and WebKit in CI. In a simulation where proxy labels stand in for annotators (10 seeds, the same 600-review test set), uncertainty sampling reached 95% of full-data average precision with 1,500 labels versus 11,000 for random sampling, 7.3 times fewer. No human labeling time was measured.",
+    "text": "An ML-assisted labeling workbench (React/TypeScript UI, FastAPI, SQLite) serves the review its model is least sure about, shows the model's guess as a pre-label, and checks annotators with hidden gold items, double-labeling (Cohen's kappa) and conflict adjudication; Playwright tests run on Chromium, Firefox and WebKit in CI. In a simulation where proxy labels stand in for annotators (10 seeds, the same 600-review test set), uncertainty sampling reached 95% of full-data average precision with 1,300 labels versus 10,000 for random sampling, 7.7 times fewer (corrected labels). No human labeling time was measured.",
     "tags": [
       "data_labeling",
       "data_quality",
@@ -3045,7 +3041,7 @@
     "metrics": [
       {
         "label": "Labels to 95% of full-data AP",
-        "value": "1,500 vs 11,000 (random)"
+        "value": "1,300 vs 10,000 (random)"
       }
     ]
   },
@@ -3056,7 +3052,7 @@
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "A counterfactual bias test rewrites the 600 test reviews with swapped gender words or an identity statement in front. The text-only DistilBERT failed it: identity statements flipped 2.5–9.0% of predictions against 2.2–2.8% for neutral prefixes. Counterfactual augmentation, with training identities disjoint from the tested ones, cut the worst case to 3.0% with F1 0.871 vs 0.873. It still misses the 2% criterion set before running, because truncating long reviews alone flips about 2%.",
+    "text": "A counterfactual bias test rewrites the 600 test reviews with swapped gender words or an identity statement in front. On the corrected labels the text-only DistilBERT failed it narrowly: the worst identity statement flipped 3.7% of predictions against 2.0% for neutral prefixes. Counterfactual augmentation, with training identities disjoint from the tested ones, cut the worst case to 2.2% with F1 0.911 vs 0.914. It still misses the 2% criterion set before running; truncating long reviews alone flips 1.2–1.5%.",
     "tags": [
       "safety_testing",
       "eval_design",
@@ -3082,7 +3078,85 @@
     "metrics": [
       {
         "label": "Worst identity flip rate",
-        "value": "9.0% to 3.0%"
+        "value": "3.7% to 2.2%"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.labeling_reliability",
+    "entity": "cliniq",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "The labeling workbench treats a retried save as a no-op, returns HTTP 409 with the stored state for conflicting labels or adjudications, and keeps unsaved labels in an on-device outbox with retries; Playwright covers lost responses, offline reloads and 503s on three browsers. Every database path holds one lock after a threaded stress test exposed corrupted reads (it failed 5 of 5 runs without the lock, 0 of 5 with it). With all 46,296 pool reviews in SQLite, fetching the next task takes 14.21 ms at the 95th percentile.",
+    "tags": [
+      "data_labeling",
+      "testing",
+      "fastapi",
+      "frontend"
+    ],
+    "sources": [
+      "cliniq_labeling",
+      "cliniq_benchmark"
+    ],
+    "code": [
+      {
+        "repo": "cliniq_sep",
+        "path": "labeling/workbench.py",
+        "label": "Idempotent saves and locking"
+      },
+      {
+        "repo": "cliniq_sep",
+        "path": "labeling/ui/e2e/reliability.spec.ts",
+        "label": "Fault tests"
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Next task, p95, 46,296 reviews",
+        "value": "14.21 ms"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.label_fix",
+    "entity": "cliniq",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "A single-reviewer labeling pilot (60 reviews, assisted and manual conditions alternating) found that the project's proxy label matched \"meth\" inside unrelated drug names such as methylphenidate and sulfamethoxazole: 803 of 3,316 proxy-positive reviews (24%) were positive only because of it. The keyword now has to match as a whole word, and the active-learning, DistilBERT, bias and trend results were rerun on the corrected labels. In the pilot, suggestions barely changed labeling speed (median 6.6 s assisted vs 7.0 s manual).",
+    "tags": [
+      "data_labeling",
+      "data_quality",
+      "error_analysis",
+      "eval_design"
+    ],
+    "sources": [
+      "cliniq_label_fix",
+      "cliniq_pilot"
+    ],
+    "code": [
+      {
+        "repo": "cliniq_sep",
+        "path": "analysis/sud_labels.py",
+        "label": "Corrected proxy label"
+      },
+      {
+        "repo": "cliniq_sep",
+        "path": "labeling/pilot.py",
+        "label": "Assisted-vs-manual pilot"
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Proxy positives mislabeled",
+        "value": "803 / 3,316"
+      },
+      {
+        "label": "Median seconds per review, assisted vs manual",
+        "value": "6.6 vs 7.0"
       }
     ]
   },
@@ -3148,11 +3222,11 @@
   {
     "id": "sssd.box_annotation",
     "entity": "sssd",
-    "kind": "fact",
+    "kind": "metric",
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "Instrument box annotation for the project's YOLO labeling pipeline. After a few frames of a trial are boxed, a projection learned from the robot's kinematics (tool-tip position, plus the shaft axis when leave-one-frame-out error favours it) pre-labels each instrument in the remaining frames, refitting after every save. It has a React/TypeScript canvas editor, YOLO export in the layout the detector training expects, and a Playwright flow on Chromium, Firefox and WebKit in CI. Pre-label acceptance and time per frame are recorded, but no annotation-study results are reported yet.",
+    "text": "Instrument box annotation for the project's YOLO labeling pipeline. After a few frames of a trial are boxed, a projection learned from the robot's kinematics (tool-tip position, plus the shaft axis when leave-one-frame-out error favours it) pre-labels each instrument in the remaining frames, refitting after every save. It has a React/TypeScript canvas editor, YOLO export in the layout the detector training expects, and a Playwright flow on Chromium, Firefox and WebKit in CI. In a single-annotator A/B pilot on 40 frames from two trials, pre-labels were hidden on alternate frames once the model was ready: hidden pre-labels matched the boxes drawn without them (IoU ≥ 0.5) 11 of 17 times (65%, median centre error 20.6 px), and time per box was 2.5 s with pre-labels shown vs 3.7 s hidden. One annotator and 40 frames give counts and medians, not significance tests.",
     "tags": [
       "data_labeling",
       "computer_vision",
@@ -3162,7 +3236,8 @@
       "research_methods"
     ],
     "sources": [
-      "sssd_boxes"
+      "sssd_boxes",
+      "sssd_box_pilot"
     ],
     "code": [
       {
@@ -3174,6 +3249,16 @@
         "repo": "sssd_sep",
         "path": "annotation_ui/e2e/annotate.spec.ts",
         "label": "Cross-browser test"
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Hidden pre-labels at IoU ≥ 0.5",
+        "value": "11 / 17"
+      },
+      {
+        "label": "Seconds per box, shown vs hidden",
+        "value": "2.5 vs 3.7"
       }
     ]
   }

@@ -15,12 +15,12 @@
     "id": "cf.citizen_metrics",
     "topic": "Citizen Health scale metrics",
     "site": "Stated as self-reported figures.",
-    "resume": "5,000+ patients, 10,000+ records, 6 provider sources, 300+ case evaluation suite.",
+    "resume": "5,000+ patients, 300+ case evaluation suite.",
     "decision": "Resolved 2026-09-28: Rahul confirmed the figures as real and explainable; stated as self-reported.",
     "claims": [
       "citizen.metrics"
     ],
-    "label": "Citizen Health scale and team metrics",
+    "label": "Citizen Health scale metrics",
     "open": false
   },
   {

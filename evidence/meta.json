@@ -47,7 +47,7 @@
     },
     "cliniq_sep": {
       "name": "ClinIQ-AI-for-Substance-Abuse-Risk-Detection",
-      "sha": "d3ebd56dc639625e7c94328061a1abf7cc5b13df"
+      "sha": "c5d0f2c273f62edc6dbed24145f00c0b3c576340"
     },
     "voice_sep": {
       "name": "voice-agent-qa-harness",
@@ -55,7 +55,7 @@
     },
     "sssd_sep": {
       "name": "SS-SD",
-      "sha": "a4b439fa46e2a30e30d89ec607474e7a6a6137d6"
+      "sha": "daaf20650dfe9e11a5aeb55be8ca7ea309cd12ea"
     }
   },
   "sources": [
@@ -286,22 +286,22 @@
     {
       "id": "cliniq_bert",
       "type": "evaluation",
-      "title": "README: fine-tuned DistilBERT, tracked in Weights & Biases (2026-09-28)",
-      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/f39b12b5e62425c05853e7b92ffe2a16532c9448/README.md#fine-tuned-distilbert-tracked-in-weights--biases-september-28-2026",
+      "title": "README: fine-tuned DistilBERT, tracked in Weights & Biases (labels corrected 2026-09-29)",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/c5d0f2c273f62edc6dbed24145f00c0b3c576340/README.md#fine-tuned-distilbert-tracked-in-weights--biases-september-28-2026",
       "public": true
     },
     {
       "id": "cliniq_labeling",
       "type": "evaluation",
       "title": "README: labeling workbench with active learning (2026-09-28)",
-      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/d3ebd56dc639625e7c94328061a1abf7cc5b13df/README.md#labeling-workbench-with-active-learning-september-28-2026",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/c5d0f2c273f62edc6dbed24145f00c0b3c576340/README.md#labeling-workbench-with-active-learning-september-28-2026",
       "public": true
     },
     {
       "id": "cliniq_bias",
       "type": "evaluation",
       "title": "README: counterfactual bias test (2026-09-28)",
-      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/d3ebd56dc639625e7c94328061a1abf7cc5b13df/README.md#counterfactual-bias-test-september-28-2026",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/c5d0f2c273f62edc6dbed24145f00c0b3c576340/README.md#counterfactual-bias-test-september-28-2026",
       "public": true
     },
     {
@@ -315,7 +315,7 @@
       "id": "sssd_boxes",
       "type": "code",
       "title": "README: instrument box annotation with kinematics pre-labels (2026-09-28)",
-      "url": "https://github.com/vajja1405/SS-SD/blob/a4b439fa46e2a30e30d89ec607474e7a6a6137d6/README.md#instrument-box-annotation-with-kinematics-pre-labels-september-28-2026",
+      "url": "https://github.com/vajja1405/SS-SD/blob/daaf20650dfe9e11a5aeb55be8ca7ea309cd12ea/README.md#instrument-box-annotation-with-kinematics-pre-labels-september-28-2026",
       "public": true
     },
     {
@@ -323,6 +323,34 @@
       "type": "evaluation",
       "title": "Encoder ONNX/INT8 optimization run (2026-09-26)",
       "url": "https://github.com/vajja1405/SS-SD/blob/e27fe74e6b9b10cee37ce4363649f43c0f795972/docs/encoder-optimization-2026-09-26.json",
+      "public": true
+    },
+    {
+      "id": "cliniq_label_fix",
+      "type": "evaluation",
+      "title": "README: proxy-label correction (2026-09-29)",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/c5d0f2c273f62edc6dbed24145f00c0b3c576340/README.md#proxy-label-correction-september-29-2026",
+      "public": true
+    },
+    {
+      "id": "cliniq_pilot",
+      "type": "evaluation",
+      "title": "Labeling pilot report (2026-09-29)",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/c5d0f2c273f62edc6dbed24145f00c0b3c576340/outputs/labeling_pilot.json",
+      "public": true
+    },
+    {
+      "id": "cliniq_benchmark",
+      "type": "evaluation",
+      "title": "Labeling workbench load benchmark",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/c5d0f2c273f62edc6dbed24145f00c0b3c576340/outputs/labeling_benchmark.json",
+      "public": true
+    },
+    {
+      "id": "sssd_box_pilot",
+      "type": "evaluation",
+      "title": "Box-annotation A/B pilot (2026-09-29)",
+      "url": "https://github.com/vajja1405/SS-SD/blob/daaf20650dfe9e11a5aeb55be8ca7ea309cd12ea/docs/box-annotation-pilot-2026-09-29.json",
       "public": true
     }
   ],
