@@ -2076,7 +2076,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "AI Engineer at Citizen Health (May 2026 – present), building source-grounded retrieval and summarization for a patient-advocacy product serving people with rare and complex conditions.",
+    "text": "AI Engineer at Citizen Health (Jun 2026 – present), building source-grounded retrieval and summarization for a patient-advocacy product serving people with rare and complex conditions.",
     "tags": [
       "rag",
       "provenance",
@@ -2226,7 +2226,7 @@
     "status": "verified",
     "strength": "self_reported",
     "public_safe": true,
-    "text": "Data Scientist at Athena (Jan 2024 – Feb 2025). Developed and evaluated LLM-assisted task-planning and delegation workflows that turn open-ended client requests into structured, delegatable actions, and designed experiments on task decomposition, prompt orchestration and tool-supported workflows.",
+    "text": "Data Scientist at Athena (Jun 2024 – Feb 2025). Developed and evaluated LLM-assisted task-planning and delegation workflows that turn open-ended client requests into structured, delegatable actions, and designed experiments on task decomposition, prompt orchestration and tool-supported workflows.",
     "tags": [
       "agents",
       "tool_calling",

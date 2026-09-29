@@ -709,7 +709,7 @@
         ]
       },
       {
-        "label": "Citizen Health · AI Engineer · May 2026 – present",
+        "label": "Citizen Health · AI Engineer · Jun 2026 – present",
         "text": "Builds source-grounded retrieval and summarization for a patient-advocacy product, with an evaluation suite that gates every release.",
         "cites": [
           "citizen.role",
@@ -717,7 +717,7 @@
         ]
       },
       {
-        "label": "Athena · Data Scientist · Jan 2024 – Feb 2025",
+        "label": "Athena · Data Scientist · Jun 2024 – Feb 2025",
         "text": "Developed and evaluated LLM-assisted task-planning and delegation workflows for executive assistants, with evaluation tests and failure analysis.",
         "cites": [
           "athena.role",
@@ -848,7 +848,7 @@
       "what (is|does) (he|rahul) (do|doing) (now|today|currently)"
     ],
     "lead": {
-      "text": "He is an AI Engineer at Citizen Health (May 2026 – present), building source-grounded retrieval and summarization for a patient-advocacy product that serves people with rare and complex conditions.",
+      "text": "He is an AI Engineer at Citizen Health (Jun 2026 – present), building source-grounded retrieval and summarization for a patient-advocacy product that serves people with rare and complex conditions.",
       "cites": [
         "citizen.role"
       ]
