@@ -3144,5 +3144,37 @@
         "label": "Measurements"
       }
     ]
+  },
+  {
+    "id": "sssd.box_annotation",
+    "entity": "sssd",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "Instrument box annotation for the project's YOLO labeling pipeline. After a few frames of a trial are boxed, a projection learned from the robot's kinematics (tool-tip position, plus the shaft axis when leave-one-frame-out error favours it) pre-labels each instrument in the remaining frames, refitting after every save. It has a React/TypeScript canvas editor, YOLO export in the layout the detector training expects, and a Playwright flow on Chromium, Firefox and WebKit in CI. Pre-label acceptance and time per frame are recorded, but no annotation-study results are reported yet.",
+    "tags": [
+      "data_labeling",
+      "computer_vision",
+      "frontend",
+      "testing",
+      "fastapi",
+      "research_methods"
+    ],
+    "sources": [
+      "sssd_boxes"
+    ],
+    "code": [
+      {
+        "repo": "sssd_sep",
+        "path": "src/suturing_pipeline/annotation/projection.py",
+        "label": "Kinematics pre-label model"
+      },
+      {
+        "repo": "sssd_sep",
+        "path": "annotation_ui/e2e/annotate.spec.ts",
+        "label": "Cross-browser test"
+      }
+    ]
   }
 ]

@@ -55,7 +55,7 @@
     },
     "sssd_sep": {
       "name": "SS-SD",
-      "sha": "e27fe74e6b9b10cee37ce4363649f43c0f795972"
+      "sha": "a4b439fa46e2a30e30d89ec607474e7a6a6137d6"
     }
   },
   "sources": [
@@ -309,6 +309,13 @@
       "type": "evaluation",
       "title": "Kafka pipeline scaling run (2026-09-26)",
       "url": "https://github.com/vajja1405/voice-agent-qa-harness/blob/013e686b323dbe9d435beb7aff050200c327dd83/docs/pipeline-scaling-2026-09-26.json",
+      "public": true
+    },
+    {
+      "id": "sssd_boxes",
+      "type": "code",
+      "title": "README: instrument box annotation with kinematics pre-labels (2026-09-28)",
+      "url": "https://github.com/vajja1405/SS-SD/blob/a4b439fa46e2a30e30d89ec607474e7a6a6137d6/README.md#instrument-box-annotation-with-kinematics-pre-labels-september-28-2026",
       "public": true
     },
     {
