@@ -47,7 +47,7 @@
     },
     "cliniq_sep": {
       "name": "ClinIQ-AI-for-Substance-Abuse-Risk-Detection",
-      "sha": "f39b12b5e62425c05853e7b92ffe2a16532c9448"
+      "sha": "d3ebd56dc639625e7c94328061a1abf7cc5b13df"
     },
     "voice_sep": {
       "name": "voice-agent-qa-harness",
@@ -288,6 +288,20 @@
       "type": "evaluation",
       "title": "README: fine-tuned DistilBERT, tracked in Weights & Biases (2026-09-28)",
       "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/f39b12b5e62425c05853e7b92ffe2a16532c9448/README.md#fine-tuned-distilbert-tracked-in-weights--biases-september-28-2026",
+      "public": true
+    },
+    {
+      "id": "cliniq_labeling",
+      "type": "evaluation",
+      "title": "README: labeling workbench with active learning (2026-09-28)",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/d3ebd56dc639625e7c94328061a1abf7cc5b13df/README.md#labeling-workbench-with-active-learning-september-28-2026",
+      "public": true
+    },
+    {
+      "id": "cliniq_bias",
+      "type": "evaluation",
+      "title": "README: counterfactual bias test (2026-09-28)",
+      "url": "https://github.com/vajja1405/ClinIQ-AI-for-Substance-Abuse-Risk-Detection/blob/d3ebd56dc639625e7c94328061a1abf7cc5b13df/README.md#counterfactual-bias-test-september-28-2026",
       "public": true
     },
     {

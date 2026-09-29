@@ -2198,6 +2198,28 @@
     "last_verified": "2026-09-28"
   },
   {
+    "id": "citizen.ownership",
+    "entity": "citizen",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "Owns four parts of the production system: the evaluation suite and release gate, the medical-record ingestion pipeline, the agent tool integrations (tool and API actions with a user-confirmation step), and production monitoring with on-call incident response.",
+    "tags": [
+      "healthcare",
+      "agents",
+      "monitoring",
+      "regression_testing",
+      "etl",
+      "tool_calling"
+    ],
+    "sources": [
+      "rahul_confirmed"
+    ],
+    "note": "Confirmed by Rahul on 2026-09-28; employer systems are not public.",
+    "last_verified": "2026-09-28"
+  },
+  {
     "id": "athena.role",
     "entity": "athena",
     "kind": "fact",
@@ -2264,6 +2286,25 @@
         "value": "20+"
       }
     ],
+    "last_verified": "2026-09-28"
+  },
+  {
+    "id": "athena.integration",
+    "entity": "athena",
+    "kind": "fact",
+    "status": "verified",
+    "strength": "self_reported",
+    "public_safe": true,
+    "text": "The LLM task-planning and delegation workflows were integrated into Athena's internal tools and used daily by executive assistants in client work.",
+    "tags": [
+      "workflow_automation",
+      "llm",
+      "deployment"
+    ],
+    "sources": [
+      "rahul_confirmed"
+    ],
+    "note": "Confirmed by Rahul on 2026-09-28; employer systems are not public.",
     "last_verified": "2026-09-28"
   },
   {
@@ -2961,6 +3002,87 @@
       {
         "label": "Test set",
         "value": "600 proxy-labeled reviews"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.labeling",
+    "entity": "cliniq",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "An ML-assisted labeling workbench (React/TypeScript UI, FastAPI, SQLite) serves the review its model is least sure about, shows the model's guess as a pre-label, and checks annotators with hidden gold items, double-labeling (Cohen's kappa) and conflict adjudication; Playwright tests run on Chromium, Firefox and WebKit in CI. In a simulation where proxy labels stand in for annotators (10 seeds, the same 600-review test set), uncertainty sampling reached 95% of full-data average precision with 1,500 labels versus 11,000 for random sampling, 7.3 times fewer. No human labeling time was measured.",
+    "tags": [
+      "data_labeling",
+      "data_quality",
+      "frontend",
+      "fastapi",
+      "testing",
+      "classical_ml",
+      "eval_design"
+    ],
+    "sources": [
+      "cliniq_labeling"
+    ],
+    "code": [
+      {
+        "repo": "cliniq_sep",
+        "path": "labeling/workbench.py",
+        "label": "Queue and quality checks"
+      },
+      {
+        "repo": "cliniq_sep",
+        "path": "labeling/active_learning.py",
+        "label": "Active-learning simulation"
+      },
+      {
+        "repo": "cliniq_sep",
+        "path": "labeling/ui/e2e/workbench.spec.ts",
+        "label": "Cross-browser tests"
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Labels to 95% of full-data AP",
+        "value": "1,500 vs 11,000 (random)"
+      }
+    ]
+  },
+  {
+    "id": "cliniq.bias",
+    "entity": "cliniq",
+    "kind": "metric",
+    "status": "verified",
+    "strength": "public_artifact",
+    "public_safe": true,
+    "text": "A counterfactual bias test rewrites the 600 test reviews with swapped gender words or an identity statement in front. The text-only DistilBERT failed it: identity statements flipped 2.5–9.0% of predictions against 2.2–2.8% for neutral prefixes. Counterfactual augmentation, with training identities disjoint from the tested ones, cut the worst case to 3.0% with F1 0.871 vs 0.873. It still misses the 2% criterion set before running, because truncating long reviews alone flips about 2%.",
+    "tags": [
+      "safety_testing",
+      "eval_design",
+      "error_analysis",
+      "nlp",
+      "healthcare"
+    ],
+    "sources": [
+      "cliniq_bias"
+    ],
+    "code": [
+      {
+        "repo": "cliniq_sep",
+        "path": "analysis/bert_bias.py",
+        "label": "Bias test"
+      },
+      {
+        "repo": "cliniq_sep",
+        "path": "outputs/bert_bias_cda.json",
+        "label": "Results after augmentation"
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Worst identity flip rate",
+        "value": "9.0% to 3.0%"
       }
     ]
   },

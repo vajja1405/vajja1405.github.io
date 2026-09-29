@@ -381,7 +381,10 @@
         "adversarial testing",
         "ai safety",
         "responsible ai",
-        "trust and safety"
+        "trust and safety",
+        "bias testing",
+        "fairness testing",
+        "counterfactual testing"
       ],
       "related": [
         "llm_eval"
@@ -817,7 +820,13 @@
         "integration testing",
         "testing",
         "test automation",
-        "tdd"
+        "tdd",
+        "playwright",
+        "end-to-end testing",
+        "e2e testing",
+        "cross-browser testing",
+        "browser automation",
+        "vitest"
       ],
       "related": [
         "regression_testing",
@@ -943,6 +952,26 @@
       ],
       "related": [
         "etl"
+      ]
+    },
+    {
+      "id": "data_labeling",
+      "name": "ML-assisted labeling & active learning",
+      "group": "data",
+      "aliases": [
+        "active learning",
+        "ml-assisted labeling",
+        "labeling tools",
+        "labeling tooling",
+        "annotation tools",
+        "annotation tooling",
+        "labeling workbench",
+        "pre-labeling",
+        "annotation quality"
+      ],
+      "related": [
+        "data_quality",
+        "classical_ml"
       ]
     },
     {
@@ -1471,7 +1500,7 @@
       "related": [
         "llm_eval"
       ],
-      "statement": "No large human-annotation operation or calibrated judge-agreement study is demonstrated. The voice harness uses an LLM judge plus manual transcript review."
+      "statement": "No large human-annotation operation or calibrated judge-agreement study is demonstrated. ClinIQ has the tooling (a labeling workbench with gold items, Cohen's kappa and adjudication, plus an active-learning simulation), but proxy labels stood in for annotators. The voice harness uses an LLM judge plus manual transcript review."
     },
     {
       "id": "online_experiments",
