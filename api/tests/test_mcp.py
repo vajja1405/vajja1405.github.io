@@ -127,7 +127,10 @@ def test_job_description_parity_with_browser_engine():
 
 def test_requirement_list_maps_unknown_phrases_to_not_demonstrated():
     out = srv.evaluate_requirements(["COBOL mainframe modernization", "Kotlin", "LangGraph"])
-    assert cat(out, "COBOL mainframe modernization") == "Not currently demonstrated"
+    # An unrecognized phrase is listed as not assessed, never reported as a gap; known gaps (Kotlin) still are.
+    assert out["not_assessed"] == ["COBOL mainframe modernization"]
+    assert not any(r["requirement"] == "COBOL mainframe modernization" for r in out["requirements"])
+    assert any("Not assessed: COBOL mainframe modernization" in n for n in out["notes"])
     assert cat(out, "Languages beyond Python / SQL / TypeScript") == "Not currently demonstrated"
     assert cat(out, "LangGraph") == "Direct evidence"
     lg = next(r for r in out["requirements"] if r["requirement"] == "LangGraph")
@@ -151,7 +154,8 @@ def test_qualifications_match_the_browser_engine():
         assert cat(out, name) == "Direct evidence", name
     assert cat(out, "Power BI") == "Related evidence"
     missing = [r["requirement"] for r in out["requirements"] if r["category"] == "Not currently demonstrated"]
-    assert missing == ["quality issue management and warranty data domain knowledge"]
+    assert missing == []
+    assert out["not_assessed"] == ["quality issue management and warranty data domain knowledge"]
     assert not any("hybrid" in r["requirement"].lower() for r in out["requirements"])
     assert any("Work-arrangement" in n for n in out["notes"])
     years = next(r for r in out["requirements"] if r["requirement"].startswith("2 years"))
@@ -161,6 +165,30 @@ def test_qualifications_match_the_browser_engine():
 def test_plural_phrasings_match_known_skills():
     out = srv.evaluate_requirements(["release gates for AI features"])
     assert cat(out, "Regression testing & release gates") == "Direct evidence"
+
+
+def test_requirement_corpus_has_no_false_gaps():
+    # Same corpus and allowed gaps as imw/tests/engine.test.ts ("requirement corpus: no false gaps").
+    from datetime import date
+    from app.coverage import cover_phrase
+    kb = load_kb()
+    phrases = json.loads((Path(__file__).resolve().parents[2] / "imw/tests/corpus.phrases.json").read_text())
+    honest = {"Currently enrolled in a Master's program", "5+ years of experience in data science", "Airflow", "dbt", "Java", "C++",
+              "Scala", "RLHF", "Distributed systems"}
+    wrong = [p for p in phrases if any(c["category"] == "missing" for c in cover_phrase(kb, p, today=date(2026, 9, 30))[0]) != (p in honest)]
+    assert wrong == []
+    grad = cover_phrase(kb, "Degree completed within the past 12 months (May 2025–August 2026 preferred)", today=date(2026, 9, 30))[0]
+    assert [c["category"] for c in grad] == ["direct"] and "May 2026" in grad[0]["statement"]
+    assert cover_phrase(kb, "Minimum 3.0 GPA", today=date(2026, 9, 30))[0][0]["category"] == "verification"
+    assert cover_phrase(kb, "Warranty data domain knowledge")[2] == "Warranty data domain knowledge"
+
+
+def test_skill_lookup_checks_credentials_and_never_invents_gaps():
+    grad = srv.get_skill_evidence("recent graduate")["results"][0]
+    assert grad["category"] == "Direct evidence" and "May 2026" in grad["explanation"]
+    unknown = srv.get_skill_evidence("warranty analytics")["results"][0]
+    assert unknown["category"] == "Not assessed" and unknown["evidence"] == []
+    assert srv.get_skill_evidence("Kotlin")["results"][0]["category"] == "Not currently demonstrated"
 
 
 def test_qualifications_stay_honest():

@@ -252,7 +252,8 @@ Equal Opportunity Employer`;
   });
   it('maps phrases from the API parser through the same ontology', () => {
     const a = analyzeJD(kb, JD, ['COBOL mainframe modernization', 'distributed inference with vLLM', 'Kotlin']);
-    expect(a.requirements.find((r) => r.id === 'term:COBOL mainframe modernization')?.category).toBe('missing');
+    // An unrecognized phrase is listed as not assessed; known gaps (Kotlin) still show as not demonstrated.
+    expect(a.unassessed).toEqual(['COBOL mainframe modernization']);
     expect(a.requirements.find((r) => r.id === 'other_languages')?.category).toBe('missing');
     expect(a.requirements.find((r) => r.id === 'distributed_inference')?.category).toBe('related');
   });
@@ -450,9 +451,11 @@ Work arrangement
     expect(covered(a, 'near:power bi')).toMatchObject({ category: 'related', label: 'Power BI' });
   });
 
-  it('leaves only the real gap, and drops work arrangements with a note', () => {
+  it('marks nothing he has as missing, lists unmatched phrases as not assessed, and drops work arrangements with a note', () => {
     const a = analyzeJD(kb, JD, PHRASES);
-    expect(a.requirements.filter((r) => r.category === 'missing').map((r) => r.label)).toEqual(['quality issue management and warranty data domain knowledge']);
+    expect(a.requirements.filter((r) => r.category === 'missing')).toEqual([]);
+    expect(a.unassessed).toEqual(['quality issue management and warranty data domain knowledge']);
+    expect(a.notes.join(' ')).toMatch(/Not assessed: quality issue management and warranty data domain knowledge\. .*neither confirmed nor ruled out/);
     expect(a.requirements.some((r) => /hybrid|onsite/i.test(r.label))).toBe(false);
     expect(a.notes.join(' ')).toMatch(/Work-arrangement items/);
     expect(a.notes.join(' ')).not.toMatch(/asks for \d+\+ years/);
@@ -492,8 +495,9 @@ Work arrangement
     expect(covered(a, 'prescriptive')!.claims).toContain('tifin.gains');
     const lead = jdBlocks(a)[0];
     expect(lead.type === 'p' && lead.text).toMatch(/^Of the \d+ requirements in this description, \d+ have direct evidence/);
-    expect(lead.type === 'p' && lead.text).toMatch(/Not currently demonstrated: .*warranty claims data/);
-    expect(covered(a, 'term:warranty claims data')!.statement).toBe('Not shown in his projects or roles so far.');
+    expect(lead.type === 'p' && lead.text).toMatch(/Nothing in it is marked as not demonstrated\. \d+ phrases were not assessed/);
+    expect(a.unassessed).toContain('warranty claims data');
+    expect(a.requirements.some((r) => r.id.startsWith('term:'))).toBe(false);
   });
 
   it('matches plural phrasings of known skills', () => {
@@ -504,5 +508,55 @@ Work arrangement
 
   it('names the distributed-systems gap without on-call, which he does', () => {
     expect(kb.gap.get('distributed_systems')!.name).not.toMatch(/on-call/i);
+  });
+});
+
+// Sep 30, 2026: "Degree completed within the past 12 months" was marked "not demonstrated" although his M.S. is from
+// May 2026. A 150-phrase corpus of real job-description wording now guards the whole class of false gaps.
+describe('requirement corpus: no false gaps', () => {
+  const TODAY = new Date(2026, 8, 30);
+  const phrases: string[] = JSON.parse(readFileSync(new URL('./corpus.phrases.json', import.meta.url), 'utf8'));
+  // The only phrases allowed to come back "not demonstrated": each is absent from résumé v7 and the evidence.
+  const HONEST_GAPS = new Set(['Currently enrolled in a Master\'s program', '5+ years of experience in data science', 'Airflow', 'dbt',
+    'Java', 'C++', 'Scala', 'RLHF', 'Distributed systems']);
+
+  it('never reports a gap outside the known, honest ones', () => {
+    const wrong = phrases.filter((p) => coverPhrase(kb, p, 'required', TODAY).covs.some((c) => c.category === 'missing') !== HONEST_GAPS.has(p));
+    expect(wrong).toEqual([]);
+  });
+
+  it('credits graduation timing against the completion dates', () => {
+    for (const p of ['Degree completed within the past 12 months (May 2025–August 2026 preferred)', 'Graduated between December 2024 and August 2026',
+      'Recent graduates are encouraged to apply', 'New grad (Class of 2025 or 2026)', 'Must be graduating by June 2026', 'Spring 2026 graduates']) {
+      const c = coverPhrase(kb, p, 'required', TODAY).covs;
+      expect(c.map((x) => x.category), p).toEqual(['direct']);
+      expect(c[0].statement, p).toMatch(/M\.S\. in Computer Science .* in May 2026/);
+    }
+    const old = coverPhrase(kb, 'Degree completed between January 2020 and December 2023', 'required', TODAY).covs[0];
+    expect(old).toMatchObject({ category: 'missing' });
+    expect(old.statement).toMatch(/May 2025 \(B\.S\.\) and May 2026 \(M\.S\.\), outside the window/);
+    expect(coverPhrase(kb, 'Degree completed within the past 12 months', 'required', new Date(2028, 0, 15)).covs[0].category).toBe('missing');
+  });
+
+  it('is honest about enrollment and GPA, and reads entry-level year ranges', () => {
+    expect(coverPhrase(kb, 'Currently enrolled in a Master\'s program', 'required', TODAY).covs[0].statement).toBe('He completed his M.S. in May 2026, so he is not currently enrolled.');
+    expect(coverPhrase(kb, 'Minimum 3.0 GPA', 'required', TODAY).covs[0]).toMatchObject({ category: 'verification' });
+    expect(coverPhrase(kb, '0-2 years of industry experience', 'required', TODAY).covs[0]).toMatchObject({ category: 'direct', id: 'years:0' });
+  });
+
+  it('maps soft skills and common wording to his evidence, not to lookalikes', () => {
+    const ids = (p: string) => coverPhrase(kb, p, 'required', TODAY).covs.map((c) => c.id);
+    expect(ids('Strong communication skills')).toEqual(['stakeholder']);
+    expect(ids('Strong problem-solving and analytical skills')).toContain('problem_solving');
+    expect(ids('Self-starter who can work independently')).toContain('ownership');
+    expect(ids('Curiosity and eagerness to learn')).toContain('learning_agility');
+    expect(ids('Hypothesis testing')).toEqual(['statistics']);
+    expect(ids('Exploratory data analysis')).toEqual(['data_analysis']);
+    expect(coverPhrase(kb, 'A/B testing and experimentation', 'required', TODAY).covs[0]).toMatchObject({ category: 'related' });
+  });
+
+  it('lists phrases it cannot match instead of calling them gaps', () => {
+    const r = coverPhrase(kb, 'Warranty data domain knowledge', 'required', TODAY);
+    expect(r).toEqual({ covs: [], logistics: false, unmatched: 'Warranty data domain knowledge' });
   });
 });

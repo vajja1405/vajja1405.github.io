@@ -9,7 +9,9 @@ from __future__ import annotations
 import re
 
 from .kb import KB, normalize, statable
-from .quals import LOGISTICS, LOGISTICS_NOTE, qualifications
+from datetime import date
+
+from .quals import LOGISTICS, LOGISTICS_NOTE, UNASSESSED_NOTE, qualifications
 
 CATEGORY_LABEL = {
     "direct": "Direct evidence",
@@ -149,7 +151,7 @@ def _heading(line: str) -> str | None:
     return None
 
 
-def analyze_jd(kb: KB, text: str, extra_phrases: list[str] | None = None) -> dict:
+def analyze_jd(kb: KB, text: str, extra_phrases: list[str] | None = None, today: date | None = None) -> dict:
     section, found, lines = "mentioned", {}, []
     for raw in text.splitlines():
         if not raw.strip():
@@ -195,14 +197,16 @@ def analyze_jd(kb: KB, text: str, extra_phrases: list[str] | None = None) -> dic
 
     # Free text outside a requirements section needs extra context before a degree or a year count counts.
     for raw, sec in lines:
-        for cov in qualifications(kb, raw, "mentioned" if sec == "skip" else sec, strict=sec == "mentioned"):
+        for cov in qualifications(kb, raw, "mentioned" if sec == "skip" else sec, strict=sec == "mentioned", today=today):
             push(cov)
-    logistics = False
+    logistics, unassessed = False, []
     for phrase in extra_phrases or []:
-        covs, logi = cover_phrase(kb, phrase, "preferred" if HEAD_PREF.search(normalize(phrase)) else "required")
+        covs, logi, unmatched = cover_phrase(kb, phrase, "preferred" if HEAD_PREF.search(normalize(phrase)) else "required", today=today)
         for cov in covs:
             push(cov)
         logistics = logistics or logi
+        if unmatched and unmatched not in unassessed:
+            unassessed.append(unmatched)
 
     notes = []
     level = kb.raw["subject"]["level_note"]
@@ -211,22 +215,25 @@ def analyze_jd(kb: KB, text: str, extra_phrases: list[str] | None = None) -> dic
         notes.append(f"The description asks for {asked}+ years. {level}")
     elif sen:
         notes.append(f'The description uses the word "{sen.group(1)}". {level}')
+    if unassessed:
+        notes.append(UNASSESSED_NOTE(unassessed))
     if logistics:
         notes.append(LOGISTICS_NOTE)
     if not reqs:
         notes.append("No recognizable technical requirements were found. Try passing the requirements section.")
-    return summarize(kb, "Job description", reqs, source="jd", notes=notes,
+    return summarize(kb, "Job description", reqs, source="jd", notes=notes, unassessed=unassessed,
                      closestRole=closest["title"] if closest else None, roleId=closest["id"] if closest else None)
 
 
-def cover_phrase(kb: KB, phrase: str, priority: str = "required") -> tuple[list[dict], bool]:
-    """One requirement phrase (from the API parser or an MCP client): degrees and years first, then skills and gaps.
-    A work-arrangement phrase with nothing else in it is dropped rather than reported as a missing skill."""
+def cover_phrase(kb: KB, phrase: str, priority: str = "required", today: date | None = None) -> tuple[list[dict], bool, str | None]:
+    """One requirement phrase (from the API parser or an MCP client): credentials first, then skills and gaps.
+    A work-arrangement phrase is dropped with a note. A phrase that matches nothing is returned as unmatched:
+    failing to recognize a phrase is not evidence that Rahul lacks it, so it is never reported as a gap."""
     p = phrase.strip()[:160]
-    covs = qualifications(kb, p, priority)
+    covs = qualifications(kb, p, priority, today=today)
     covs += [cover_concept(kb, cid, near=term if kind == "near" else None, priority=priority) for cid, kind, term in kb.concepts(p)]
     if covs:
-        return covs, False
+        return covs, False, None
     if LOGISTICS.search(p):
-        return [], True
-    return ([cover_concept(kb, p, priority=priority)] if len(p) > 2 else []), False
+        return [], True, None
+    return [], False, (p if len(p) > 2 else None)

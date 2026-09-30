@@ -16,12 +16,18 @@
         {
           "level": "master",
           "claim": "edu.ms",
-          "short": "an M.S. in Computer Science with an AI emphasis (UMKC, 2026)"
+          "short": "an M.S. in Computer Science with an AI emphasis (UMKC, 2026)",
+          "date": "2026-05",
+          "when": "May 2026",
+          "abbr": "M.S."
         },
         {
           "level": "bachelor",
           "claim": "edu.bs",
-          "short": "a B.S. in Computer Science (UMKC, 2025)"
+          "short": "a B.S. in Computer Science (UMKC, 2025)",
+          "date": "2025-05",
+          "when": "May 2025",
+          "abbr": "B.S."
         }
       ],
       "fields": "Computer Science",

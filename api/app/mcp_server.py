@@ -14,7 +14,7 @@ from mcp.server.mcpserver import MCPServer
 from mcp.types import ToolAnnotations
 
 from .coverage import CATEGORY_LABEL, analyze_jd, cover_concept, cover_phrase, find_role, role_analysis, summarize
-from .quals import LOGISTICS_NOTE
+from .quals import LOGISTICS_NOTE, UNASSESSED_NOTE
 from .kb import KB, find_entities, load_kb, normalize, statable
 
 SITE = "https://vajja1405.github.io/"
@@ -106,6 +106,7 @@ def _coverage_view(kb: KB, analysis: dict) -> dict[str, Any]:
         "requirements": [req(r) for r in analysis["requirements"]],
         "strongest_evidence_from": [kb.entities[e["id"]]["name"] for e in analysis["entities"][:4]],
         "notes": analysis.get("notes", []),
+        "not_assessed": analysis.get("unassessed", []),
         "closest_target_profile": analysis.get("closestRole"),
         "policy": POLICY,
         "view_on_site": f"{SITE}#imw=role:{analysis['roleId']}" if analysis.get("roleId") and analysis.get("source") == "role" else SITE,
@@ -136,7 +137,11 @@ def get_skill_evidence(
     kb = _kb()
     hits = kb.concepts(skill)
     if not hits:
-        cov = [cover_concept(kb, skill.strip())]
+        cov, _, unmatched = cover_phrase(kb, skill)  # degrees, graduation dates and years of experience
+        if not cov:
+            return {"results": [{"skill": skill.strip(), "category": "Not assessed", "evidence": [],
+                                 "explanation": "This doesn't match anything in the evidence database, so it is neither confirmed nor ruled out. "
+                                                "Use search_evidence, or ask Rahul directly."}], "policy": POLICY}
     else:
         # The specific thing asked about (a gap or a named tool) comes before generic words like "production".
         hits = sorted(hits, key=lambda h: {"gap": 0, "near": 1, "skill": 2}[h[1]])
@@ -173,16 +178,18 @@ def evaluate_requirements(
 ) -> dict[str, Any]:
     """Classify requirement phrases you already extracted against Rahul's evidence (direct, related, verification, missing)."""
     kb = _kb()
-    reqs, seen, logistics = [], set(), False
+    reqs, seen, logistics, unassessed = [], set(), False, []
     for phrase in requirements:
-        covs, logi = cover_phrase(kb, phrase.strip()[:120])
+        covs, logi, unmatched = cover_phrase(kb, phrase.strip()[:120])
         logistics = logistics or logi
+        if unmatched:
+            unassessed.append(unmatched)
         for c in covs:
             if c["id"] not in seen:
                 seen.add(c["id"])
                 reqs.append(c)
-    notes = [LOGISTICS_NOTE] if logistics else []
-    return _coverage_view(kb, summarize(kb, role_title or "Requirements", reqs, source="requirements", notes=notes))
+    notes = ([UNASSESSED_NOTE(unassessed)] if unassessed else []) + ([LOGISTICS_NOTE] if logistics else [])
+    return _coverage_view(kb, summarize(kb, role_title or "Requirements", reqs, source="requirements", notes=notes, unassessed=unassessed))
 
 
 @mcp.tool(title="Evidence for a target role", annotations=READ_ONLY)

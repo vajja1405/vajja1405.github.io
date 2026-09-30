@@ -3,7 +3,7 @@ import type { KB } from './kb';
 import { findConcepts } from './retrieve';
 import { coverConcept, summarize } from './coverage';
 import { normalize } from './text';
-import { LOGISTICS, LOGISTICS_NOTE, qualifications } from './quals';
+import { LOGISTICS, LOGISTICS_NOTE, UNASSESSED_NOTE, qualifications } from './quals';
 
 type Section = 'required' | 'preferred' | 'mentioned' | 'skip';
 
@@ -82,7 +82,7 @@ export function parseJD(kb: KB, text: string): JDParse {
 }
 
 /** Coverage analysis for a pasted job description. Extra phrases (e.g. from the API parser) are mapped the same way. */
-export function analyzeJD(kb: KB, text: string, extraPhrases: string[] = []): CoverageAnalysis {
+export function analyzeJD(kb: KB, text: string, extraPhrases: string[] = [], today: Date = new Date()): CoverageAnalysis {
   const parsed = parseJD(kb, text);
   const reqs: RequirementCoverage[] = [];
   const seen = new Set<string>();
@@ -96,39 +96,44 @@ export function analyzeJD(kb: KB, text: string, extraPhrases: string[] = []): Co
   }
   const push = (cov: RequirementCoverage) => { if (!seen.has(cov.id)) { seen.add(cov.id); reqs.push(cov); } };
   // Free text outside a requirements section needs extra context before a degree or a year count counts.
-  for (const q of parsed.quals) qualifications(kb, q.text, q.priority === 'skip' ? 'mentioned' : q.priority, q.priority === 'mentioned').forEach(push);
+  for (const q of parsed.quals) qualifications(kb, q.text, q.priority === 'skip' ? 'mentioned' : q.priority, q.priority === 'mentioned', today).forEach(push);
   let logistics = false;
+  const unassessed: string[] = [];
   for (const phrase of extraPhrases) {
-    const r = coverPhrase(kb, phrase, HEAD_PREF.test(normalize(phrase)) ? 'preferred' : 'required');
+    const r = coverPhrase(kb, phrase, HEAD_PREF.test(normalize(phrase)) ? 'preferred' : 'required', today);
     r.covs.forEach(push);
     logistics ||= r.logistics;
+    if (r.unmatched && !unassessed.includes(r.unmatched)) unassessed.push(r.unmatched);
   }
 
   const notes: string[] = [];
   const asked = Math.max(0, ...reqs.filter((r) => r.id.startsWith('years:')).map((r) => Number(r.id.slice(6))));
   if (asked > (kb.subject.credentials?.experience.years ?? 2)) notes.push(`The description asks for ${asked}+ years. ${kb.subject.level_note}`);
   else if (parsed.seniority) notes.push(`The description uses the word "${parsed.seniority}". ${kb.subject.level_note}`);
+  if (unassessed.length) notes.push(UNASSESSED_NOTE(unassessed));
   if (logistics) notes.push(LOGISTICS_NOTE);
   if (!reqs.length) notes.push('No recognizable technical requirements were found. Try pasting the requirements section.');
 
   return summarize(kb, 'Your job description', reqs, {
-    source: 'jd', notes,
+    source: 'jd', notes, unassessed,
     closestRole: parsed.closestRole ? kb.role.get(parsed.closestRole)?.title : undefined,
     roleId: parsed.closestRole,
   });
 }
 
 /**
- * One requirement phrase (from the API parser or an MCP client): degrees and years first, then skills and gaps.
- * A work-arrangement phrase with nothing else in it is dropped rather than reported as a missing skill.
+ * One requirement phrase (from the API parser or an MCP client): credentials first, then skills and gaps.
+ * A work-arrangement phrase is dropped with a note. A phrase that matches nothing is returned as `unmatched`:
+ * failing to recognize a phrase is not evidence that Rahul lacks it, so it is never reported as a gap.
  */
-export function coverPhrase(kb: KB, phrase: string, priority: 'required' | 'preferred' = 'required'): { covs: RequirementCoverage[]; logistics: boolean } {
+export function coverPhrase(kb: KB, phrase: string, priority: 'required' | 'preferred' = 'required', today: Date = new Date()):
+  { covs: RequirementCoverage[]; logistics: boolean; unmatched?: string } {
   const p = phrase.trim().slice(0, 160);
-  const covs = qualifications(kb, p, priority);
+  const covs = qualifications(kb, p, priority, false, today);
   for (const h of findConcepts(kb, p)) covs.push(coverConcept(kb, h.id, { near: h.near ? h.term.toLowerCase() : undefined, priority }));
   if (covs.length) return { covs, logistics: false };
   if (LOGISTICS.test(p)) return { covs: [], logistics: true };
-  return { covs: p.length > 2 ? [coverConcept(kb, p, { priority })] : [], logistics: false };
+  return { covs: [], logistics: false, unmatched: p.length > 2 ? p : undefined };
 }
 
 export const looksLikeJD = (s: string) =>

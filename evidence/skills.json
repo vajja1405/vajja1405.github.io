@@ -284,7 +284,13 @@
         "cross encoder",
         "reranker",
         "rank fusion",
-        "reciprocal rank fusion"
+        "reciprocal rank fusion",
+        "search and ranking",
+        "search & ranking",
+        "ranking",
+        "ranking models",
+        "search systems",
+        "search"
       ],
       "near": [
         "bm25",
@@ -582,6 +588,54 @@
       ]
     },
     {
+      "id": "statistics",
+      "name": "Statistics & statistical analysis",
+      "group": "ml",
+      "aliases": [
+        "statistics",
+        "statistical",
+        "statistical analysis",
+        "statistical modeling",
+        "statistical modelling",
+        "statistical methods",
+        "probability",
+        "hypothesis testing",
+        "significance testing",
+        "confidence intervals",
+        "regression analysis",
+        "inferential statistics",
+        "descriptive statistics"
+      ],
+      "related": [
+        "classical_ml",
+        "metrics"
+      ]
+    },
+    {
+      "id": "data_analysis",
+      "name": "Data analysis & EDA",
+      "group": "data",
+      "aliases": [
+        "exploratory data analysis",
+        "eda",
+        "exploratory analysis",
+        "data analysis",
+        "data analytics",
+        "analyze data",
+        "analyse data",
+        "analyzing data",
+        "data exploration",
+        "insights",
+        "actionable insights",
+        "data-driven insights",
+        "business insights"
+      ],
+      "related": [
+        "sql",
+        "dashboards"
+      ]
+    },
+    {
       "id": "prescriptive",
       "name": "Prescriptive & decision-support modeling",
       "group": "ml",
@@ -733,7 +787,15 @@
       "name": "Python",
       "group": "backend",
       "aliases": [
-        "python"
+        "python",
+        "pandas",
+        "numpy",
+        "scipy",
+        "jupyter",
+        "jupyter notebooks",
+        "notebooks",
+        "matplotlib",
+        "seaborn"
       ],
       "related": []
     },
@@ -768,7 +830,7 @@
     },
     {
       "id": "rest_api",
-      "name": "REST APIs & backend services",
+      "name": "Backend services, APIs & system design",
       "group": "backend",
       "aliases": [
         "rest",
@@ -783,7 +845,12 @@
         "web services",
         "api design",
         "backend services",
-        "service design"
+        "service design",
+        "system design",
+        "systems design",
+        "software architecture",
+        "architecture design",
+        "api architecture"
       ],
       "near": [
         "graphql",
@@ -845,7 +912,12 @@
       ],
       "near": [
         "mysql",
-        "sql server"
+        "sql server",
+        "mongodb",
+        "dynamodb",
+        "cassandra",
+        "nosql",
+        "nosql databases"
       ],
       "related": [
         "sql"
@@ -965,7 +1037,11 @@
       "name": "Snowflake",
       "group": "data",
       "aliases": [
-        "snowflake"
+        "snowflake",
+        "data warehouse",
+        "data warehouses",
+        "data warehousing",
+        "cloud data warehouse"
       ],
       "near": [
         "bigquery",
@@ -1019,7 +1095,13 @@
         "pre-processing",
         "data preprocessing",
         "data preparation",
-        "data wrangling"
+        "data wrangling",
+        "large datasets",
+        "large data sets",
+        "large-scale data",
+        "big data",
+        "high-volume data",
+        "massive datasets"
       ],
       "related": [
         "data_quality",
@@ -1039,7 +1121,9 @@
         "entity resolution",
         "data integrity",
         "data cleaning",
-        "data cleansing"
+        "data cleansing",
+        "data governance",
+        "data stewardship"
       ],
       "related": [
         "etl"
@@ -1367,7 +1451,7 @@
     },
     {
       "id": "stakeholder",
-      "name": "Cross-functional collaboration",
+      "name": "Communication & cross-functional collaboration",
       "group": "domain",
       "aliases": [
         "stakeholder",
@@ -1377,10 +1461,110 @@
         "collaboration",
         "product managers",
         "customer-facing",
-        "communicate"
+        "communicate",
+        "communication",
+        "communication skills",
+        "communicator",
+        "verbal communication",
+        "written communication",
+        "presentation skills",
+        "presentations",
+        "presenting",
+        "present findings",
+        "data storytelling",
+        "storytelling",
+        "non-technical stakeholders",
+        "non-technical audiences",
+        "explain technical concepts",
+        "team player",
+        "teamwork",
+        "work with teams",
+        "partner with",
+        "interpersonal"
       ],
       "related": [
         "product_judgment"
+      ]
+    },
+    {
+      "id": "problem_solving",
+      "name": "Problem solving & analytical rigor",
+      "group": "domain",
+      "aliases": [
+        "problem solving",
+        "problem-solving",
+        "problem solver",
+        "analytical skills",
+        "analytical thinking",
+        "analytical mindset",
+        "analytical",
+        "critical thinking",
+        "attention to detail",
+        "detail-oriented",
+        "detail oriented",
+        "first-principles",
+        "first principles",
+        "structured thinking",
+        "quantitative reasoning"
+      ],
+      "related": [
+        "error_analysis",
+        "research_methods"
+      ]
+    },
+    {
+      "id": "ownership",
+      "name": "Ownership & self-direction",
+      "group": "domain",
+      "aliases": [
+        "ownership",
+        "ownership mindset",
+        "take ownership",
+        "end-to-end ownership",
+        "self-starter",
+        "self starter",
+        "self-motivated",
+        "self-directed",
+        "work independently",
+        "independently",
+        "independent worker",
+        "autonomy",
+        "fast-paced",
+        "fast paced",
+        "ambiguity",
+        "ambiguous",
+        "startup environment",
+        "bias for action",
+        "proactive",
+        "accountability"
+      ],
+      "related": [
+        "deployment",
+        "production_ops"
+      ]
+    },
+    {
+      "id": "learning_agility",
+      "name": "Learning new tools and domains quickly",
+      "group": "domain",
+      "aliases": [
+        "fast learner",
+        "quick learner",
+        "learn quickly",
+        "learning agility",
+        "eager to learn",
+        "eagerness to learn",
+        "curiosity",
+        "curious",
+        "growth mindset",
+        "continuous learning",
+        "willingness to learn",
+        "learn new technologies",
+        "adaptability",
+        "adaptable"
+      ],
+      "related": [
+        "research_methods"
       ]
     },
     {
@@ -1436,7 +1620,8 @@
         "hallucination",
         "hallucinations",
         "faithfulness",
-        "factuality"
+        "factuality",
+        "data lineage"
       ],
       "related": [
         "rag",
@@ -1771,7 +1956,11 @@
       "related": [
         "research_methods"
       ],
-      "statement": "Online A/B experiments and causal inference are not demonstrated."
+      "statement": "Controlled comparisons are demonstrated offline: assisted versus manual labeling pilots in two projects. Online A/B testing and causal inference on live traffic are not demonstrated.",
+      "partial": [
+        "sssd.box_annotation",
+        "cliniq.label_fix"
+      ]
     },
     {
       "id": "edge_cv",
@@ -1789,7 +1978,10 @@
       "related": [
         "computer_vision"
       ],
-      "statement": "Real-time edge deployment and object-detection ownership are not demonstrated."
+      "statement": "Object detection appears as box annotation for the surgical project's YOLO labeling pipeline. Training detectors and real-time or edge deployment are not demonstrated.",
+      "partial": [
+        "sssd.box_annotation"
+      ]
     },
     {
       "id": "distributed_systems",
@@ -1918,7 +2110,10 @@
       "related": [
         "semantic_search"
       ],
-      "statement": "Large-scale ranking evaluation and online search experiments are not demonstrated."
+      "statement": "Ranking quality is measured offline (MRR on a 600-query benchmark for the drug-interaction retriever). Large-scale online ranking experiments are not demonstrated.",
+      "partial": [
+        "dia.hybrid_retrieval"
+      ]
     },
     {
       "id": "sota_scale",

@@ -68,7 +68,8 @@ export interface Topic {
 
 /** Degrees and years of experience, checked against job-description qualifications (engine/quals.ts). */
 export interface Credentials {
-  degrees: { level: 'bachelor' | 'master' | 'phd' | 'mba'; claim: string; short: string }[];
+  /** `date` is the completion month (YYYY-MM); `when` and `abbr` are its display forms. */
+  degrees: { level: 'bachelor' | 'master' | 'phd' | 'mba'; claim: string; short: string; date: string; when: string; abbr: string }[];
   fields: string;
   experience: { years: number; claims: string[]; summary: string };
 }
@@ -148,4 +149,6 @@ export interface CoverageAnalysis {
   entities: { id: string; score: number; requirements: string[] }[];
   notes: string[];
   closestRole?: string;
+  /** Requirement phrases that matched nothing in the evidence database: listed for the reader, never counted as gaps. */
+  unassessed?: string[];
 }

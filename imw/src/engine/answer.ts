@@ -379,6 +379,7 @@ export function jdBlocks(analysis: CoverageAnalysis): Block[] {
     `Of the ${has(n, 'requirement', 'requirements')} in this description, ${has(c.direct, 'has', 'have')} direct evidence${c.related ? ` and ${has(c.related, 'has', 'have')} related evidence` : ''}.`,
     c.verification ? `${has(c.verification, 'needs', 'need')} verification.` : '',
     missing.length ? `Not currently demonstrated: ${missing.join('; ')}.` : 'Nothing in it is marked as not demonstrated.',
+    analysis.unassessed?.length ? `${has(analysis.unassessed.length, 'phrase was', 'phrases were')} not assessed (see the note below).` : '',
   ];
   const blocks: Block[] = [{ type: 'p', lead: true, text: parts.filter(Boolean).join(' ') }, { type: 'coverage', analysis }];
   analysis.notes.forEach((note) => blocks.push({ type: 'note', tone: 'warn', text: note }));
