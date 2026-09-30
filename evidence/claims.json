@@ -482,7 +482,8 @@
     "tags": [
       "caching",
       "rest_api",
-      "research_methods"
+      "research_methods",
+      "code_quality"
     ],
     "sources": [
       "dia_readme"
@@ -594,7 +595,8 @@
     "text": "The repository has 41 pytest tests (API, classifier, hosting limits, medication review, cache repairs, retriever and Spark preprocessing) and 7 frontend tests. They check software behaviour, not medical accuracy. GitHub Actions runs classifier tests on pull requests and the integration suite on pushes to main.",
     "tags": [
       "testing",
-      "ci_cd"
+      "ci_cd",
+      "code_quality"
     ],
     "sources": [
       "dia_repo",
@@ -1114,7 +1116,8 @@
     "text": "26 offline tests run in GitHub Actions CI. No CI job places calls or spends LLM credits; the strict evidence audit runs only on manual dispatch.",
     "tags": [
       "testing",
-      "ci_cd"
+      "ci_cd",
+      "code_quality"
     ],
     "sources": [
       "voice_repo",
@@ -1452,7 +1455,8 @@
       "docker",
       "ci_cd",
       "testing",
-      "deployment"
+      "deployment",
+      "code_quality"
     ],
     "sources": [
       "cliniq_readme",
@@ -1745,7 +1749,8 @@
     "text": "Used SHAP and Grad-CAM to inspect model behaviour and investigate errors. The findings were published as a research paper and poster.",
     "tags": [
       "xai",
-      "research_methods"
+      "research_methods",
+      "documentation"
     ],
     "sources": [
       "qml_repo",
@@ -1763,7 +1768,8 @@
     "text": "Added benchmark_audit.py, which requires paired run metadata before it will compute any runtime ratio (with offline tests).",
     "tags": [
       "research_methods",
-      "testing"
+      "testing",
+      "code_quality"
     ],
     "sources": [
       "qml_repo"
@@ -1982,7 +1988,8 @@
       "snowflake",
       "etl",
       "sql",
-      "fintech"
+      "fintech",
+      "databricks"
     ],
     "sources": [
       "rahul_confirmed",
@@ -2323,7 +2330,8 @@
       "dashboards",
       "feature_engineering",
       "model_comparison",
-      "etl"
+      "etl",
+      "documentation"
     ],
     "sources": [
       "nyc_repo",
@@ -2499,7 +2507,8 @@
       "regression_testing",
       "safety_testing",
       "testing",
-      "ci_cd"
+      "ci_cd",
+      "code_quality"
     ],
     "sources": [
       "imw_repo"
@@ -3326,7 +3335,8 @@
       "ai_assisted_dev",
       "testing",
       "eval_design",
-      "error_analysis"
+      "error_analysis",
+      "documentation"
     ],
     "sources": [
       "cliniq_ai_eng"

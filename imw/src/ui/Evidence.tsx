@@ -112,7 +112,7 @@ function ReqCard() {
       <h3 class="imw-card-title">{r.label}</h3>
       {r.priority && <p class="imw-help">Listed as {r.priority} in the description.</p>}
       {r.statement && <p>{r.statement}</p>}
-      {r.category === 'direct' && r.strength === 'self_reported' && <p class="imw-note">Supported by self-reported employment experience; no public artifact.</p>}
+      {r.category === 'direct' && r.strength === 'self_reported' && <p class="imw-note">Supported by self-reported {r.id.startsWith('degree:') ? 'education history' : 'employment experience'}; no public artifact.</p>}
       {via && r.category === 'related' && <p class="imw-help">Related through: {via}</p>}
       <ClaimList ids={r.claims.slice(0, 8)} title={r.category === 'missing' ? 'Closest evidence' : 'Evidence'} compact />
       {pending.length ? <p class="imw-note is-warn">{pending.length} related statement{pending.length > 1 ? 's are' : ' is'} awaiting verification and not used here.</p> : null}

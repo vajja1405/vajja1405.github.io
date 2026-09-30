@@ -135,6 +135,41 @@ def test_requirement_list_maps_unknown_phrases_to_not_demonstrated():
     assert lg.get("note") is None and "Drug Interaction Agent" in lg["evidence_from"]
 
 
+def test_qualifications_match_the_browser_engine():
+    # Sep 29, 2026: a pasted Data Scientist description showed degrees and years Rahul has as "not demonstrated".
+    out = srv.evaluate_requirements([
+        "Bachelor's degree in quantitative field", "2 years of experience as a Data Scientist", "predictive and prescriptive modeling",
+        "preprocessing structured and unstructured data", "technical documentation", "AI/ML solution development",
+        "quality issue management and warranty data domain knowledge", "Master's or PhD degree (preferred)",
+        "scalable, repeatable code", "hybrid onsite 3 days per week", "Databricks", "Power BI"])
+    assert cat(out, "Bachelor's degree in quantitative field") == "Direct evidence"
+    assert cat(out, "2 years of experience as a Data Scientist") == "Direct evidence"
+    assert cat(out, "Master's or PhD") == "Direct evidence"
+    for name in ["Classical ML (scikit-learn)", "ETL / data pipelines", "NLP & text classification", "Technical documentation & write-ups",
+                 "Deploying AI applications & models", "Production-quality, reproducible code", "Databricks"]:
+        assert cat(out, name) == "Direct evidence", name
+    assert cat(out, "Power BI") == "Related evidence"
+    missing = [r["requirement"] for r in out["requirements"] if r["category"] == "Not currently demonstrated"]
+    assert missing == ["quality issue management and warranty data domain knowledge"]
+    assert not any("hybrid" in r["requirement"].lower() for r in out["requirements"])
+    assert any("Work-arrangement" in n for n in out["notes"])
+    years = next(r for r in out["requirements"] if r["requirement"].startswith("2 years"))
+    assert "Data Scientist at Athena" in years["explanation"] and years["claim_ids"] == ["citizen.role", "tifin.role", "athena.role"]
+
+
+def test_qualifications_stay_honest():
+    out = srv.evaluate_requirements(["PhD in Machine Learning", "5+ years of professional experience", "3+ years building ML systems",
+                                     "Bachelor's degree in Nursing", "Proficiency in MS Office"])
+    assert cat(out, "PhD in Machine Learning") == "Not currently demonstrated"
+    assert cat(out, "5+ years of professional experience") == "Not currently demonstrated"
+    assert cat(out, "3+ years building ML systems") == "Related evidence"
+    assert cat(out, "Bachelor's degree in Nursing") == "Related evidence"
+    assert not any(r["requirement"].startswith(("Master", "Bachelor's or")) for r in out["requirements"])
+    jd = srv.compare_job_description("About the company\nFounded 45 years ago.\nRequirements:\n- 5+ years of experience with Python and SQL\n- Hybrid, 3 days per week")
+    assert any("asks for 5+ years" in n for n in jd["notes"])
+    assert not any(r["requirement"].startswith("45") for r in jd["requirements"])
+
+
 def test_role_evidence():
     out = srv.get_role_evidence("AI Evaluation Engineer")
     # The agent trajectory evaluation (Sep 2026) made the drug project the strongest evaluation evidence.

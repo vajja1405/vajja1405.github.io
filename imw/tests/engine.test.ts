@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { buildKB, isStatable } from '../src/engine/kb';
 import { answer, answerText, citedIds } from '../src/engine/answer';
-import { analyzeJD, looksLikeJD } from '../src/engine/jd';
+import { analyzeJD, coverPhrase, looksLikeJD } from '../src/engine/jd';
 import { coverConcept, roleAnalysis } from '../src/engine/coverage';
 import { HYPE } from '../src/engine/guard';
 import type { Answer, Bundle, PersonaId } from '../src/engine/types';
@@ -405,5 +405,88 @@ describe('the master résumé (v7) and the evidence agree', () => {
   });
   it('never says on-call is not evidenced', () => {
     expect(kb.gap.get('distributed_systems')!.statement).not.toMatch(/on-call responsibility .* not evidenced/);
+  });
+});
+
+// A recruiter pasted a Data Scientist description and saw ten qualifications Rahul holds marked "not demonstrated"
+// (Sep 29, 2026): degrees, years of experience and plain-English skill phrasings were read as unknown terms.
+describe('job-description qualifications', () => {
+  const JD = `Data Scientist, Warranty Analytics
+About the role
+We are looking for a Data Scientist to join our quality analytics team. Founded 45 years ago, our team holds PhDs from top universities.
+Responsibilities
+- Develop predictive and prescriptive models on warranty claims data
+- Preprocess structured and unstructured data, including technician notes
+- Write technical documentation for models and pipelines
+- Build AI/ML solutions with Databricks and Power BI dashboards
+- Write scalable, repeatable code
+Qualifications
+- Bachelor's degree in a quantitative field (Statistics, Mathematics, Computer Science or Engineering)
+- 2 years of experience as a Data Scientist
+- Quality issue management and warranty data domain knowledge
+Preferred
+- Master's or PhD degree
+Work arrangement
+- Hybrid, onsite 3 days per week`;
+  // What the API parser extracted from the real description.
+  const PHRASES = ["Bachelor's degree in quantitative field", '2 years of experience as a Data Scientist', 'predictive and prescriptive modeling',
+    'preprocessing structured and unstructured data', 'technical documentation', 'AI/ML solution development',
+    'quality issue management and warranty data domain knowledge', "Master's or PhD degree (preferred)", 'scalable, repeatable code',
+    'hybrid onsite 3 days per week'];
+  const covered = (a: ReturnType<typeof analyzeJD>, id: string) => a.requirements.find((r) => r.id === id);
+
+  it.each([[[]], [PHRASES]])('credits the degrees, experience and skills he has (%#)', (extra) => {
+    const a = analyzeJD(kb, JD, extra as string[]);
+    const bachelor = covered(a, 'degree:bachelor')!;
+    expect(bachelor.category).toBe('direct');
+    expect(bachelor.claims).toEqual(['edu.bs', 'edu.ms']);
+    expect(bachelor.statement).toMatch(/B\.S\. in Computer Science/);
+    expect(covered(a, 'degree:master+phd')).toMatchObject({ category: 'direct', priority: 'preferred', claims: ['edu.ms'] });
+    const years = covered(a, 'years:2')!;
+    expect(years.category).toBe('direct');
+    expect(years.statement).toMatch(/Data Scientist at Athena/);
+    expect(years.entities).toEqual(['citizen', 'tifin', 'athena']);
+    for (const id of ['classical_ml', 'etl', 'nlp', 'documentation', 'deployment', 'code_quality', 'databricks']) expect(covered(a, id)?.category, id).toBe('direct');
+    expect(covered(a, 'near:power bi')).toMatchObject({ category: 'related', label: 'Power BI' });
+  });
+
+  it('leaves only the real gap, and drops work arrangements with a note', () => {
+    const a = analyzeJD(kb, JD, PHRASES);
+    expect(a.requirements.filter((r) => r.category === 'missing').map((r) => r.label)).toEqual(['quality issue management and warranty data domain knowledge']);
+    expect(a.requirements.some((r) => /hybrid|onsite/i.test(r.label))).toBe(false);
+    expect(a.notes.join(' ')).toMatch(/Work-arrangement items/);
+    expect(a.notes.join(' ')).not.toMatch(/asks for \d+\+ years/);
+  });
+
+  it('ignores company history and team bios', () => {
+    const a = analyzeJD(kb, JD);
+    expect(covered(a, 'years:45')).toBeUndefined();
+    expect(a.requirements.some((r) => r.id === 'degree:phd')).toBe(false);
+  });
+
+  it('is honest about degrees and years he does not have', () => {
+    const cov = (p: string) => coverPhrase(kb, p).covs[0];
+    expect(cov('PhD in Machine Learning')).toMatchObject({ category: 'missing', claims: ['edu.ms'] });
+    expect(cov('PhD in Machine Learning').statement).toMatch(/does not hold a PhD/);
+    expect(cov('MBA required').category).toBe('missing');
+    expect(cov('MBA or MS in a technical field').category).toBe('direct');
+    expect(cov("Bachelor's degree in Nursing")).toMatchObject({ category: 'related' });
+    expect(cov('BS/MS in Computer Science or related field')).toMatchObject({ id: 'degree:bachelor+master', category: 'direct' });
+    expect(cov('1+ year of Python').category).toBe('direct');
+    expect(cov('3+ years of experience building ML systems').category).toBe('related');
+    expect(cov('5+ years of professional experience').category).toBe('missing');
+    expect(cov('Three to five years of industry experience').id).toBe('years:3');
+    const senior = analyzeJD(kb, 'Requirements:\n- 5+ years of experience with Python and SQL');
+    expect(senior.notes.join(' ')).toMatch(/asks for 5\+ years/);
+  });
+
+  it('does not read MS Office or hybrid search as a degree or a work arrangement', () => {
+    expect(coverPhrase(kb, 'Proficiency in MS Office and Excel').covs.some((r) => r.id.startsWith('degree:'))).toBe(false);
+    expect(coverPhrase(kb, 'hybrid search with BM25 and embeddings').covs.map((r) => r.id)).toContain('semantic_search');
+    expect(coverPhrase(kb, 'Must be willing to relocate to Detroit')).toEqual({ covs: [], logistics: true });
+  });
+
+  it('names the distributed-systems gap without on-call, which he does', () => {
+    expect(kb.gap.get('distributed_systems')!.name).not.toMatch(/on-call/i);
   });
 });

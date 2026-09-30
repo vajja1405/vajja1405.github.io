@@ -1,28 +1,28 @@
-var An = Object.defineProperty;
-var In = (e, t, n) => t in e ? An(e, t, { enumerable: !0, configurable: !0, writable: !0, value: n }) : e[t] = n;
-var ui = (e, t, n) => In(e, typeof t != "symbol" ? t + "" : t, n);
-var gt, R, Hi, ke, pi, Ni, Bi, Et, nt, Ve, Oi, Qt, Wt, Dt, zi, ct = {}, dt = [], Mn = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i, wt = Array.isArray;
+var jn = Object.defineProperty;
+var Tn = (e, t, n) => t in e ? jn(e, t, { enumerable: !0, configurable: !0, writable: !0, value: n }) : e[t] = n;
+var mi = (e, t, n) => Tn(e, typeof t != "symbol" ? t + "" : t, n);
+var wt, R, Bi, ke, fi, zi, Ui, St, st, Ve, Vi, Kt, Wt, Ht, Gi, dt = {}, ht = [], Rn = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i, yt = Array.isArray;
 function we(e, t) {
   for (var n in t) e[n] = t[n];
   return e;
 }
-function Kt(e) {
+function Yt(e) {
   e && e.parentNode && e.parentNode.removeChild(e);
 }
-function jn(e, t, n) {
+function Ln(e, t, n) {
   var r, s, a, o = {};
   for (a in t) a == "key" ? r = t[a] : a == "ref" ? s = t[a] : o[a] = t[a];
-  if (arguments.length > 2 && (o.children = arguments.length > 3 ? gt.call(arguments, 2) : n), typeof e == "function" && e.defaultProps != null) for (a in e.defaultProps) o[a] === void 0 && (o[a] = e.defaultProps[a]);
-  return st(e, o, r, s, null);
+  if (arguments.length > 2 && (o.children = arguments.length > 3 ? wt.call(arguments, 2) : n), typeof e == "function" && e.defaultProps != null) for (a in e.defaultProps) o[a] === void 0 && (o[a] = e.defaultProps[a]);
+  return rt(e, o, r, s, null);
 }
-function st(e, t, n, r, s) {
-  var a = { type: e, props: t, key: n, ref: r, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: s ?? ++Hi, __i: -1, __u: 0 };
+function rt(e, t, n, r, s) {
+  var a = { type: e, props: t, key: n, ref: r, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: s ?? ++Bi, __i: -1, __u: 0 };
   return s == null && R.vnode != null && R.vnode(a), a;
 }
 function oe(e) {
   return e.children;
 }
-function rt(e, t) {
+function at(e, t) {
   this.props = e, this.context = t;
 }
 function Ie(e, t) {
@@ -30,42 +30,42 @@ function Ie(e, t) {
   for (var n; t < e.__k.length; t++) if ((n = e.__k[t]) != null && n.__e != null) return n.__e;
   return typeof e.type == "function" ? Ie(e) : null;
 }
-function Tn(e) {
+function Pn(e) {
   if (e.__P && e.__d) {
     var t = e.__v, n = t.__e, r = [], s = [], a = we({}, t);
-    a.__v = t.__v + 1, R.vnode && R.vnode(a), Jt(e.__P, a, t, e.__n, e.__P.namespaceURI, 32 & t.__u ? [n] : null, r, n ?? Ie(t), !!(32 & t.__u), s), a.__v = t.__v, a.__.__k[a.__i] = a, Ki(r, a, s), t.__e = t.__ = null, a.__e != n && Ui(a);
+    a.__v = t.__v + 1, R.vnode && R.vnode(a), Jt(e.__P, a, t, e.__n, e.__P.namespaceURI, 32 & t.__u ? [n] : null, r, n ?? Ie(t), !!(32 & t.__u), s), a.__v = t.__v, a.__.__k[a.__i] = a, Xi(r, a, s), t.__e = t.__ = null, a.__e != n && Qi(a);
   }
 }
-function Ui(e) {
+function Qi(e) {
   if ((e = e.__) != null && e.__c != null) return e.__e = e.__c.base = null, e.__k.some(function(t) {
     if (t != null && t.__e != null) return e.__e = e.__c.base = t.__e;
-  }), Ui(e);
+  }), Qi(e);
 }
-function Ht(e) {
-  (!e.__d && (e.__d = !0) && ke.push(e) && !ht.__r++ || pi != R.debounceRendering) && ((pi = R.debounceRendering) || Ni)(ht);
+function Nt(e) {
+  (!e.__d && (e.__d = !0) && ke.push(e) && !ut.__r++ || fi != R.debounceRendering) && ((fi = R.debounceRendering) || zi)(ut);
 }
-function ht() {
+function ut() {
   try {
-    for (var e, t = 1; ke.length; ) ke.length > t && ke.sort(Bi), e = ke.shift(), t = ke.length, Tn(e);
+    for (var e, t = 1; ke.length; ) ke.length > t && ke.sort(Ui), e = ke.shift(), t = ke.length, Pn(e);
   } finally {
-    ke.length = ht.__r = 0;
+    ke.length = ut.__r = 0;
   }
 }
-function Vi(e, t, n, r, s, a, o, l, p, c, m) {
-  var g, d, y, w, u, f, v = r && r.__k || dt, k = t.length;
-  for (p = Rn(n, t, v, p, k), g = 0; g < k; g++) (y = n.__k[g]) != null && (d = y.__i != -1 && v[y.__i] || ct, y.__i = g, f = Jt(e, y, d, s, a, o, l, p, c, m), w = y.__e, y.ref && d.ref != y.ref && (d.ref && Yt(d.ref, null, y), m.push(y.ref, y.__c || w, y)), u == null && w != null && (u = w), 4 & y.__u ? (p = Gi(y, p, e), d.__e && (d.__e = null)) : typeof y.type == "function" && f !== void 0 ? p = f : w && (p = w.nextSibling), y.__u &= -7);
-  return n.__e = u, p;
+function Ki(e, t, n, r, s, a, o, l, u, d, f) {
+  var g, c, w, y, p, m, v = r && r.__k || ht, k = t.length;
+  for (u = Fn(n, t, v, u, k), g = 0; g < k; g++) (w = n.__k[g]) != null && (c = w.__i != -1 && v[w.__i] || dt, w.__i = g, m = Jt(e, w, c, s, a, o, l, u, d, f), y = w.__e, w.ref && c.ref != w.ref && (c.ref && Xt(c.ref, null, w), f.push(w.ref, w.__c || y, w)), p == null && y != null && (p = y), 4 & w.__u ? (u = Yi(w, u, e), c.__e && (c.__e = null)) : typeof w.type == "function" && m !== void 0 ? u = m : y && (u = y.nextSibling), w.__u &= -7);
+  return n.__e = p, u;
 }
-function Rn(e, t, n, r, s) {
-  var a, o, l, p, c, m = n.length, g = m, d = 0;
-  for (e.__k = new Array(s), a = 0; a < s; a++) (o = t[a]) != null && typeof o != "boolean" && typeof o != "function" ? (typeof o == "string" || typeof o == "number" || typeof o == "bigint" || o.constructor == String ? o = e.__k[a] = st(null, o, null, null, null) : wt(o) ? o = e.__k[a] = st(oe, { children: o }, null, null, null) : o.constructor === void 0 && o.__b > 0 ? o = e.__k[a] = st(o.type, o.props, o.key, o.ref ? o.ref : null, o.__v) : e.__k[a] = o, p = a + d, o.__ = e, o.__b = e.__b + 1, l = null, (c = o.__i = Ln(o, n, p, g)) != -1 && (g--, (l = n[c]) && (l.__u |= 2)), l == null || l.__v == null ? (c == -1 && (s > m ? d-- : s < m && d++), typeof o.type != "function" && (o.__u |= 4)) : c != p && (c == p - 1 ? d-- : c == p + 1 ? d++ : (c > p ? d-- : d++, o.__u |= 4))) : e.__k[a] = null;
-  if (g) for (a = 0; a < m; a++) (l = n[a]) != null && (2 & l.__u) == 0 && (l.__e == r && (r = Ie(l)), Yi(l, l));
+function Fn(e, t, n, r, s) {
+  var a, o, l, u, d, f = n.length, g = f, c = 0;
+  for (e.__k = new Array(s), a = 0; a < s; a++) (o = t[a]) != null && typeof o != "boolean" && typeof o != "function" ? (typeof o == "string" || typeof o == "number" || typeof o == "bigint" || o.constructor == String ? o = e.__k[a] = rt(null, o, null, null, null) : yt(o) ? o = e.__k[a] = rt(oe, { children: o }, null, null, null) : o.constructor === void 0 && o.__b > 0 ? o = e.__k[a] = rt(o.type, o.props, o.key, o.ref ? o.ref : null, o.__v) : e.__k[a] = o, u = a + c, o.__ = e, o.__b = e.__b + 1, l = null, (d = o.__i = Dn(o, n, u, g)) != -1 && (g--, (l = n[d]) && (l.__u |= 2)), l == null || l.__v == null ? (d == -1 && (s > f ? c-- : s < f && c++), typeof o.type != "function" && (o.__u |= 4)) : d != u && (d == u - 1 ? c-- : d == u + 1 ? c++ : (d > u ? c-- : c++, o.__u |= 4))) : e.__k[a] = null;
+  if (g) for (a = 0; a < f; a++) (l = n[a]) != null && (2 & l.__u) == 0 && (l.__e == r && (r = Ie(l)), en(l, l));
   return r;
 }
-function Gi(e, t, n) {
+function Yi(e, t, n) {
   var r, s;
   if (typeof e.type == "function") {
-    for (r = e.__k, s = 0; r && s < r.length; s++) r[s] && (r[s].__ = e, t = Gi(r[s], t, n));
+    for (r = e.__k, s = 0; r && s < r.length; s++) r[s] && (r[s].__ = e, t = Yi(r[s], t, n));
     return t;
   }
   e.__e != t && (t && e.type && !t.parentNode && (t = Ie(e)), t = n.insertBefore(e.__e, t || null));
@@ -74,25 +74,25 @@ function Gi(e, t, n) {
   while (t != null && t.nodeType == 8);
   return t;
 }
-function Ln(e, t, n, r) {
-  var s, a, o, l = e.key, p = e.type, c = t[n], m = c != null && (2 & c.__u) == 0;
-  if (c === null && l == null || m && l == c.key && p == c.type) return n;
-  if (r > (m ? 1 : 0)) {
-    for (s = n - 1, a = n + 1; s >= 0 || a < t.length; ) if ((c = t[o = s >= 0 ? s-- : a++]) != null && (2 & c.__u) == 0 && l == c.key && p == c.type) return o;
+function Dn(e, t, n, r) {
+  var s, a, o, l = e.key, u = e.type, d = t[n], f = d != null && (2 & d.__u) == 0;
+  if (d === null && l == null || f && l == d.key && u == d.type) return n;
+  if (r > (f ? 1 : 0)) {
+    for (s = n - 1, a = n + 1; s >= 0 || a < t.length; ) if ((d = t[o = s >= 0 ? s-- : a++]) != null && (2 & d.__u) == 0 && l == d.key && u == d.type) return o;
   }
   return -1;
 }
-function mi(e, t, n) {
-  t[0] == "-" ? e.setProperty(t, n ?? "") : e[t] = n == null ? "" : typeof n != "number" || Mn.test(t) ? n : n + "px";
+function gi(e, t, n) {
+  t[0] == "-" ? e.setProperty(t, n ?? "") : e[t] = n == null ? "" : typeof n != "number" || Rn.test(t) ? n : n + "px";
 }
 function Xe(e, t, n, r, s) {
   var a, o;
   e: if (t == "style") if (typeof n == "string") e.style.cssText = n;
   else {
-    if (typeof r == "string" && (e.style.cssText = r = ""), r) for (t in r) n && t in n || mi(e.style, t, "");
-    if (n) for (t in n) r && n[t] == r[t] || mi(e.style, t, n[t]);
+    if (typeof r == "string" && (e.style.cssText = r = ""), r) for (t in r) n && t in n || gi(e.style, t, "");
+    if (n) for (t in n) r && n[t] == r[t] || gi(e.style, t, n[t]);
   }
-  else if (t[0] == "o" && t[1] == "n") a = t != (t = t.replace(Oi, "$1")), o = t.toLowerCase(), t = o in e || t == "onFocusOut" || t == "onFocusIn" ? o.slice(2) : t.slice(2), e.l || (e.l = {}), e.l[t + a] = n, n ? r ? n[Ve] = r[Ve] : (n[Ve] = Qt, e.addEventListener(t, a ? Dt : Wt, a)) : e.removeEventListener(t, a ? Dt : Wt, a);
+  else if (t[0] == "o" && t[1] == "n") a = t != (t = t.replace(Vi, "$1")), o = t.toLowerCase(), t = o in e || t == "onFocusOut" || t == "onFocusIn" ? o.slice(2) : t.slice(2), e.l || (e.l = {}), e.l[t + a] = n, n ? r ? n[Ve] = r[Ve] : (n[Ve] = Kt, e.addEventListener(t, a ? Ht : Wt, a)) : e.removeEventListener(t, a ? Ht : Wt, a);
   else {
     if (s == "http://www.w3.org/2000/svg") t = t.replace(/xlink(H|:h)/, "h").replace(/sName$/, "s");
     else if (t != "width" && t != "height" && t != "href" && t != "list" && t != "form" && t != "tabIndex" && t != "download" && t != "rowSpan" && t != "colSpan" && t != "role" && t != "popover" && t in e) try {
@@ -103,57 +103,57 @@ function Xe(e, t, n, r, s) {
     typeof n == "function" || (n == null || n === !1 && t[4] != "-" ? e.removeAttribute(t) : e.setAttribute(t, t == "popover" && n == 1 ? "" : n));
   }
 }
-function fi(e) {
+function wi(e) {
   return function(t) {
     if (this.l) {
       var n = this.l[t.type + e];
-      if (t[nt] == null) t[nt] = Qt++;
-      else if (t[nt] < n[Ve]) return;
+      if (t[st] == null) t[st] = Kt++;
+      else if (t[st] < n[Ve]) return;
       return n(R.event ? R.event(t) : t);
     }
   };
 }
-function Jt(e, t, n, r, s, a, o, l, p, c) {
-  var m, g, d, y, w, u, f, v, k, _, b, h, x, C, q, A, H = t.type;
+function Jt(e, t, n, r, s, a, o, l, u, d) {
+  var f, g, c, w, y, p, m, v, k, b, _, h, x, C, E, A, H = t.type;
   if (t.constructor !== void 0) return null;
-  128 & n.__u && (p = !!(32 & n.__u), a = [l = t.__e = n.__e]), (m = R.__b) && m(t);
+  128 & n.__u && (u = !!(32 & n.__u), a = [l = t.__e = n.__e]), (f = R.__b) && f(t);
   e: if (typeof H == "function") {
     g = o.length;
     try {
-      if (k = t.props, _ = H.prototype && H.prototype.render, b = (m = H.contextType) && r[m.__c], h = m ? b ? b.props.value : m.__ : r, n.__c ? v = (d = t.__c = n.__c).__ = d.__E : (_ ? t.__c = d = new H(k, h) : (t.__c = d = new rt(k, h), d.constructor = H, d.render = Fn), b && b.sub(d), d.state || (d.state = {}), d.__n = r, y = d.__d = !0, d.__h = [], d._sb = []), _ && d.__s == null && (d.__s = d.state), _ && H.getDerivedStateFromProps != null && (d.__s == d.state && (d.__s = we({}, d.__s)), we(d.__s, H.getDerivedStateFromProps(k, d.__s))), w = d.props, u = d.state, d.__v = t, y) _ && H.getDerivedStateFromProps == null && d.componentWillMount != null && d.componentWillMount(), _ && d.componentDidMount != null && d.__h.push(d.componentDidMount);
+      if (k = t.props, b = H.prototype && H.prototype.render, _ = (f = H.contextType) && r[f.__c], h = f ? _ ? _.props.value : f.__ : r, n.__c ? v = (c = t.__c = n.__c).__ = c.__E : (b ? t.__c = c = new H(k, h) : (t.__c = c = new at(k, h), c.constructor = H, c.render = Hn), _ && _.sub(c), c.state || (c.state = {}), c.__n = r, w = c.__d = !0, c.__h = [], c._sb = []), b && c.__s == null && (c.__s = c.state), b && H.getDerivedStateFromProps != null && (c.__s == c.state && (c.__s = we({}, c.__s)), we(c.__s, H.getDerivedStateFromProps(k, c.__s))), y = c.props, p = c.state, c.__v = t, w) b && H.getDerivedStateFromProps == null && c.componentWillMount != null && c.componentWillMount(), b && c.componentDidMount != null && c.__h.push(c.componentDidMount);
       else {
-        if (_ && H.getDerivedStateFromProps == null && k !== w && d.componentWillReceiveProps != null && d.componentWillReceiveProps(k, h), t.__v == n.__v || !d.__e && d.shouldComponentUpdate != null && d.shouldComponentUpdate(k, d.__s, h) === !1) {
-          t.__v != n.__v && (d.props = k, d.state = d.__s, d.__d = !1), t.__e = n.__e, t.__k = n.__k, t.__k.some(function(K) {
+        if (b && H.getDerivedStateFromProps == null && k !== y && c.componentWillReceiveProps != null && c.componentWillReceiveProps(k, h), t.__v == n.__v || !c.__e && c.shouldComponentUpdate != null && c.shouldComponentUpdate(k, c.__s, h) === !1) {
+          t.__v != n.__v && (c.props = k, c.state = c.__s, c.__d = !1), t.__e = n.__e, t.__k = n.__k, t.__k.some(function(K) {
             K && (K.__ = t);
-          }), dt.push.apply(d.__h, d._sb), d._sb = [], d.__h.length && o.push(d), l = Ie(n);
+          }), ht.push.apply(c.__h, c._sb), c._sb = [], c.__h.length && o.push(c), l = Ie(n);
           break e;
         }
-        d.componentWillUpdate != null && d.componentWillUpdate(k, d.__s, h), _ && d.componentDidUpdate != null && d.__h.push(function() {
-          d.componentDidUpdate(w, u, f);
+        c.componentWillUpdate != null && c.componentWillUpdate(k, c.__s, h), b && c.componentDidUpdate != null && c.__h.push(function() {
+          c.componentDidUpdate(y, p, m);
         });
       }
-      if (d.context = h, d.props = k, d.__P = e, d.__e = !1, x = R.__r, C = 0, _) d.state = d.__s, d.__d = !1, x && x(t), m = d.render(d.props, d.state, d.context), dt.push.apply(d.__h, d._sb), d._sb = [];
+      if (c.context = h, c.props = k, c.__P = e, c.__e = !1, x = R.__r, C = 0, b) c.state = c.__s, c.__d = !1, x && x(t), f = c.render(c.props, c.state, c.context), ht.push.apply(c.__h, c._sb), c._sb = [];
       else do
-        d.__d = !1, x && x(t), m = d.render(d.props, d.state, d.context), d.state = d.__s;
-      while (d.__d && ++C < 25);
-      d.state = d.__s, d.getChildContext != null && (r = we(we({}, r), d.getChildContext())), _ && !y && d.getSnapshotBeforeUpdate != null && (f = d.getSnapshotBeforeUpdate(w, u)), q = m != null && m.type === oe && m.key == null ? Ji(m.props.children) : m, l = Vi(e, wt(q) ? q : [q], t, n, r, s, a, o, l, p, c), d.base = t.__e, t.__u &= -161, d.__h.length && o.push(d), v && (d.__E = d.__ = null);
+        c.__d = !1, x && x(t), f = c.render(c.props, c.state, c.context), c.state = c.__s;
+      while (c.__d && ++C < 25);
+      c.state = c.__s, c.getChildContext != null && (r = we(we({}, r), c.getChildContext())), b && !w && c.getSnapshotBeforeUpdate != null && (m = c.getSnapshotBeforeUpdate(y, p)), E = f != null && f.type === oe && f.key == null ? Zi(f.props.children) : f, l = Ki(e, yt(E) ? E : [E], t, n, r, s, a, o, l, u, d), c.base = t.__e, t.__u &= -161, c.__h.length && o.push(c), v && (c.__E = c.__ = null);
     } catch (K) {
-      if (o.length = g, t.__v = null, p || a != null) {
+      if (o.length = g, t.__v = null, u || a != null) {
         if (K.then) {
-          for (t.__u |= p ? 160 : 128; l && l.nodeType == 8 && l.nextSibling; ) l = l.nextSibling;
+          for (t.__u |= u ? 160 : 128; l && l.nodeType == 8 && l.nextSibling; ) l = l.nextSibling;
           a != null && (a[a.indexOf(l)] = null), t.__e = l;
-        } else if (a != null) for (A = a.length; A--; ) Kt(a[A]);
+        } else if (a != null) for (A = a.length; A--; ) Yt(a[A]);
       } else t.__e = n.__e;
-      t.__k == null && (t.__k = n.__k || []), K.then || Qi(t), R.__e(K, t, n);
+      t.__k == null && (t.__k = n.__k || []), K.then || Ji(t), R.__e(K, t, n);
     }
-  } else a == null && t.__v == n.__v ? (t.__k = n.__k, t.__e = n.__e) : l = t.__e = Pn(n.__e, t, n, r, s, a, o, p, c);
-  return (m = R.diffed) && m(t), 128 & t.__u ? void 0 : l;
+  } else a == null && t.__v == n.__v ? (t.__k = n.__k, t.__e = n.__e) : l = t.__e = Wn(n.__e, t, n, r, s, a, o, u, d);
+  return (f = R.diffed) && f(t), 128 & t.__u ? void 0 : l;
 }
-function Qi(e) {
-  e && (e.__c && (e.__c.__e = !0), e.__k && e.__k.some(Qi));
+function Ji(e) {
+  e && (e.__c && (e.__c.__e = !0), e.__k && e.__k.some(Ji));
 }
-function Ki(e, t, n) {
-  for (var r = 0; r < n.length; r++) Yt(n[r], n[++r], n[++r]);
+function Xi(e, t, n) {
+  for (var r = 0; r < n.length; r++) Xt(n[r], n[++r], n[++r]);
   R.__c && R.__c(t, e), e.some(function(s) {
     try {
       e = s.__h, s.__h = [], e.some(function(a) {
@@ -164,14 +164,14 @@ function Ki(e, t, n) {
     }
   });
 }
-function Ji(e) {
-  return typeof e != "object" || e == null || e.__b > 0 ? e : wt(e) ? e.map(Ji) : e.constructor !== void 0 ? null : we({}, e);
+function Zi(e) {
+  return typeof e != "object" || e == null || e.__b > 0 ? e : yt(e) ? e.map(Zi) : e.constructor !== void 0 ? null : we({}, e);
 }
-function Pn(e, t, n, r, s, a, o, l, p) {
-  var c, m, g, d, y, w, u, f = n.props || ct, v = t.props, k = t.type;
+function Wn(e, t, n, r, s, a, o, l, u) {
+  var d, f, g, c, w, y, p, m = n.props || dt, v = t.props, k = t.type;
   if (k == "svg" ? s = "http://www.w3.org/2000/svg" : k == "math" ? s = "http://www.w3.org/1998/Math/MathML" : s || (s = "http://www.w3.org/1999/xhtml"), a != null) {
-    for (c = 0; c < a.length; c++) if ((y = a[c]) && "setAttribute" in y == !!k && (k ? y.localName == k : y.nodeType == 3)) {
-      e = y, a[c] = null;
+    for (d = 0; d < a.length; d++) if ((w = a[d]) && "setAttribute" in w == !!k && (k ? w.localName == k : w.nodeType == 3)) {
+      e = w, a[d] = null;
       break;
     }
   }
@@ -179,18 +179,18 @@ function Pn(e, t, n, r, s, a, o, l, p) {
     if (k == null) return document.createTextNode(v);
     e = document.createElementNS(s, k, v.is && v), l && (R.__m && R.__m(t, a), l = !1), a = null;
   }
-  if (k == null) f === v || l && e.data == v || (e.data = v);
+  if (k == null) m === v || l && e.data == v || (e.data = v);
   else {
-    if (a = k == "textarea" && v.defaultValue != null ? null : a && gt.call(e.childNodes), !l && a != null) for (f = {}, c = 0; c < e.attributes.length; c++) f[(y = e.attributes[c]).name] = y.value;
-    for (c in f) y = f[c], c == "dangerouslySetInnerHTML" ? g = y : c == "children" || c in v || c == "value" && "defaultValue" in v || c == "checked" && "defaultChecked" in v || Xe(e, c, null, y, s);
-    for (c in v) y = v[c], c == "children" ? d = y : c == "dangerouslySetInnerHTML" ? m = y : c == "value" ? w = y : c == "checked" ? u = y : l && typeof y != "function" || f[c] === y || Xe(e, c, y, f[c], s);
-    if (m) l || g && (m.__html == g.__html || m.__html == e.innerHTML) || (e.innerHTML = m.__html), t.__k = [];
-    else if (g && (e.innerHTML = ""), Vi(t.type == "template" ? e.content : e, wt(d) ? d : [d], t, n, r, k == "foreignObject" ? "http://www.w3.org/1999/xhtml" : s, a, o, a ? a[0] : n.__k && Ie(n, 0), l, p), a != null) for (c = a.length; c--; ) Kt(a[c]);
-    l && k != "textarea" || (c = "value", k == "progress" && w == null ? e.removeAttribute("value") : w != null && (w !== e[c] || k == "progress" && !w || k == "option" && w != f[c]) && Xe(e, c, w, f[c], s), c = "checked", u != null && u != e[c] && Xe(e, c, u, f[c], s));
+    if (a = k == "textarea" && v.defaultValue != null ? null : a && wt.call(e.childNodes), !l && a != null) for (m = {}, d = 0; d < e.attributes.length; d++) m[(w = e.attributes[d]).name] = w.value;
+    for (d in m) w = m[d], d == "dangerouslySetInnerHTML" ? g = w : d == "children" || d in v || d == "value" && "defaultValue" in v || d == "checked" && "defaultChecked" in v || Xe(e, d, null, w, s);
+    for (d in v) w = v[d], d == "children" ? c = w : d == "dangerouslySetInnerHTML" ? f = w : d == "value" ? y = w : d == "checked" ? p = w : l && typeof w != "function" || m[d] === w || Xe(e, d, w, m[d], s);
+    if (f) l || g && (f.__html == g.__html || f.__html == e.innerHTML) || (e.innerHTML = f.__html), t.__k = [];
+    else if (g && (e.innerHTML = ""), Ki(t.type == "template" ? e.content : e, yt(c) ? c : [c], t, n, r, k == "foreignObject" ? "http://www.w3.org/1999/xhtml" : s, a, o, a ? a[0] : n.__k && Ie(n, 0), l, u), a != null) for (d = a.length; d--; ) Yt(a[d]);
+    l && k != "textarea" || (d = "value", k == "progress" && y == null ? e.removeAttribute("value") : y != null && (y !== e[d] || k == "progress" && !y || k == "option" && y != m[d]) && Xe(e, d, y, m[d], s), d = "checked", p != null && p != e[d] && Xe(e, d, p, m[d], s));
   }
   return e;
 }
-function Yt(e, t, n) {
+function Xt(e, t, n) {
   try {
     if (typeof e == "function") {
       var r = typeof e.__u == "function";
@@ -200,9 +200,9 @@ function Yt(e, t, n) {
     R.__e(s, n);
   }
 }
-function Yi(e, t, n) {
+function en(e, t, n) {
   var r, s;
-  if (R.unmount && R.unmount(e), (r = e.ref) && (r.current && r.current != e.__e || Yt(r, null, t)), (r = e.__c) != null) {
+  if (R.unmount && R.unmount(e), (r = e.ref) && (r.current && r.current != e.__e || Xt(r, null, t)), (r = e.__c) != null) {
     if (r.componentWillUnmount) try {
       r.componentWillUnmount();
     } catch (a) {
@@ -210,17 +210,17 @@ function Yi(e, t, n) {
     }
     r.base = r.__P = r.__n = null;
   }
-  if (r = e.__k) for (s = 0; s < r.length; s++) r[s] && Yi(r[s], t, n || typeof e.type != "function");
-  n || Kt(e.__e), e.__c = e.__ = e.__e = void 0;
+  if (r = e.__k) for (s = 0; s < r.length; s++) r[s] && en(r[s], t, n || typeof e.type != "function");
+  n || Yt(e.__e), e.__c = e.__ = e.__e = void 0;
 }
-function Fn(e, t, n) {
+function Hn(e, t, n) {
   return this.constructor(e, n);
 }
-function Wn(e, t, n) {
+function Nn(e, t, n) {
   var r, s, a, o;
-  t == document && (t = document.documentElement), R.__ && R.__(e, t), s = (r = !1) ? null : t.__k, a = [], o = [], Jt(t, e = t.__k = jn(oe, null, [e]), s || ct, ct, t.namespaceURI, s ? null : t.firstChild ? gt.call(t.childNodes) : null, a, s ? s.__e : t.firstChild, r, o), Ki(a, e, o), e.props.children = null;
+  t == document && (t = document.documentElement), R.__ && R.__(e, t), s = (r = !1) ? null : t.__k, a = [], o = [], Jt(t, e = t.__k = Ln(oe, null, [e]), s || dt, dt, t.namespaceURI, s ? null : t.firstChild ? wt.call(t.childNodes) : null, a, s ? s.__e : t.firstChild, r, o), Xi(a, e, o), e.props.children = null;
 }
-function Dn(e) {
+function On(e) {
   function t(n) {
     var r, s;
     return this.getChildContext || (r = /* @__PURE__ */ new Set(), (s = {})[t.__c] = this, this.getChildContext = function() {
@@ -229,7 +229,7 @@ function Dn(e) {
       r = null;
     }, this.shouldComponentUpdate = function(a) {
       this.props.value != a.value && r.forEach(function(o) {
-        o.__e = !0, Ht(o);
+        o.__e = !0, Nt(o);
       });
     }, this.sub = function(a) {
       r.add(a);
@@ -239,199 +239,199 @@ function Dn(e) {
       };
     }), n.children;
   }
-  return t.__c = "__cC" + zi++, t.__ = e, t.Provider = t.__l = (t.Consumer = function(n, r) {
+  return t.__c = "__cC" + Gi++, t.__ = e, t.Provider = t.__l = (t.Consumer = function(n, r) {
     return n.children(r);
   }).contextType = t, t;
 }
-gt = dt.slice, R = { __e: function(e, t, n, r) {
+wt = ht.slice, R = { __e: function(e, t, n, r) {
   for (var s, a, o; t = t.__; ) if ((s = t.__c) && !s.__) try {
     if ((a = s.constructor) && a.getDerivedStateFromError != null && (s.setState(a.getDerivedStateFromError(e)), o = s.__d), s.componentDidCatch != null && (s.componentDidCatch(e, r || {}), o = s.__d), o) return s.__E = s;
   } catch (l) {
     e = l;
   }
   throw e;
-} }, Hi = 0, rt.prototype.setState = function(e, t) {
+} }, Bi = 0, at.prototype.setState = function(e, t) {
   var n;
-  n = this.__s != null && this.__s != this.state ? this.__s : this.__s = we({}, this.state), typeof e == "function" && (e = e(we({}, n), this.props)), e && we(n, e), e != null && this.__v && (t && this._sb.push(t), Ht(this));
-}, rt.prototype.forceUpdate = function(e) {
-  this.__v && (this.__e = !0, e && this.__h.push(e), Ht(this));
-}, rt.prototype.render = oe, ke = [], Ni = typeof Promise == "function" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, Bi = function(e, t) {
+  n = this.__s != null && this.__s != this.state ? this.__s : this.__s = we({}, this.state), typeof e == "function" && (e = e(we({}, n), this.props)), e && we(n, e), e != null && this.__v && (t && this._sb.push(t), Nt(this));
+}, at.prototype.forceUpdate = function(e) {
+  this.__v && (this.__e = !0, e && this.__h.push(e), Nt(this));
+}, at.prototype.render = oe, ke = [], zi = typeof Promise == "function" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, Ui = function(e, t) {
   return e.__v.__b - t.__v.__b;
-}, ht.__r = 0, Et = Math.random().toString(8), nt = "__d" + Et, Ve = "__a" + Et, Oi = /(PointerCapture)$|Capture$/i, Qt = 0, Wt = fi(!1), Dt = fi(!0), zi = 0;
-var Hn = 0;
+}, ut.__r = 0, St = Math.random().toString(8), st = "__d" + St, Ve = "__a" + St, Vi = /(PointerCapture)$|Capture$/i, Kt = 0, Wt = wi(!1), Ht = wi(!0), Gi = 0;
+var Bn = 0;
 function i(e, t, n, r, s, a) {
   t || (t = {});
-  var o, l, p = t;
-  if ("ref" in p) for (l in p = {}, t) l == "ref" ? o = t[l] : p[l] = t[l];
-  var c = { type: e, props: p, key: n, ref: o, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: --Hn, __i: -1, __u: 0, __source: s, __self: a };
-  if (typeof e == "function" && (o = e.defaultProps)) for (l in o) p[l] === void 0 && (p[l] = o[l]);
-  return R.vnode && R.vnode(c), c;
+  var o, l, u = t;
+  if ("ref" in u) for (l in u = {}, t) l == "ref" ? o = t[l] : u[l] = t[l];
+  var d = { type: e, props: u, key: n, ref: o, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: --Bn, __i: -1, __u: 0, __source: s, __self: a };
+  if (typeof e == "function" && (o = e.defaultProps)) for (l in o) u[l] === void 0 && (u[l] = o[l]);
+  return R.vnode && R.vnode(d), d;
 }
-var Me, P, St, gi, Ge = 0, Xi = [], W = R, wi = W.__b, yi = W.__r, vi = W.diffed, _i = W.__c, bi = W.unmount, ki = W.__;
-function Ye(e, t) {
-  W.__h && W.__h(P, e, Ge || t), Ge = 0;
+var Me, P, At, yi, Ge = 0, tn = [], D = R, vi = D.__b, bi = D.__r, _i = D.diffed, ki = D.__c, xi = D.unmount, $i = D.__;
+function Je(e, t) {
+  D.__h && D.__h(P, e, Ge || t), Ge = 0;
   var n = P.__H || (P.__H = { __: [], __h: [] });
   return e >= n.__.length && n.__.push({}), n.__[e];
 }
-function E(e) {
-  return Ge = 1, Nn(Zi, e);
+function q(e) {
+  return Ge = 1, zn(nn, e);
 }
-function Nn(e, t, n) {
-  var r = Ye(Me++, 2);
-  if (r.t = e, !r.__c && (r.__ = [Zi(void 0, t), function(l) {
-    var p = r.__N ? r.__N[0] : r.__[0], c = r.t(p, l);
-    p !== c && (r.__N = [c, r.__[1]], r.__c.setState({}));
+function zn(e, t, n) {
+  var r = Je(Me++, 2);
+  if (r.t = e, !r.__c && (r.__ = [nn(void 0, t), function(l) {
+    var u = r.__N ? r.__N[0] : r.__[0], d = r.t(u, l);
+    u !== d && (r.__N = [d, r.__[1]], r.__c.setState({}));
   }], r.__c = P, !P.__f)) {
-    var s = function(l, p, c) {
+    var s = function(l, u, d) {
       if (!r.__c.__H) return !0;
-      var m = !1, g = r.__c.props !== l;
-      if (r.__c.__H.__.some(function(y) {
-        if (y.__N) {
-          m = !0;
-          var w = y.__[0];
-          y.__ = y.__N, y.__N = void 0, w !== y.__[0] && (g = !0);
+      var f = !1, g = r.__c.props !== l;
+      if (r.__c.__H.__.some(function(w) {
+        if (w.__N) {
+          f = !0;
+          var y = w.__[0];
+          w.__ = w.__N, w.__N = void 0, y !== w.__[0] && (g = !0);
         }
       }), a) {
-        var d = a.call(this, l, p, c);
-        return m ? d || g : d;
+        var c = a.call(this, l, u, d);
+        return f ? c || g : c;
       }
-      return !m || g;
+      return !f || g;
     };
     P.__f = !0;
     var a = P.shouldComponentUpdate, o = P.componentWillUpdate;
-    P.componentWillUpdate = function(l, p, c) {
+    P.componentWillUpdate = function(l, u, d) {
       if (this.__e) {
-        var m = a;
-        a = void 0, s(l, p, c), a = m;
+        var f = a;
+        a = void 0, s(l, u, d), a = f;
       }
-      o && o.call(this, l, p, c);
+      o && o.call(this, l, u, d);
     }, P.shouldComponentUpdate = s;
   }
   return r.__N || r.__;
 }
 function z(e, t) {
-  var n = Ye(Me++, 3);
-  !W.__s && Xt(n.__H, t) && (n.__ = e, n.u = t, P.__H.__h.push(n));
+  var n = Je(Me++, 3);
+  !D.__s && Zt(n.__H, t) && (n.__ = e, n.u = t, P.__H.__h.push(n));
 }
-function Bn(e, t) {
-  var n = Ye(Me++, 4);
-  !W.__s && Xt(n.__H, t) && (n.__ = e, n.u = t, P.__h.push(n));
+function Un(e, t) {
+  var n = Je(Me++, 4);
+  !D.__s && Zt(n.__H, t) && (n.__ = e, n.u = t, P.__h.push(n));
 }
 function ye(e) {
-  return Ge = 5, he(function() {
+  return Ge = 5, ue(function() {
     return { current: e };
   }, []);
 }
-function he(e, t) {
-  var n = Ye(Me++, 7);
-  return Xt(n.__H, t) && (n.__ = e(), n.__H = t, n.__h = e), n.__;
+function ue(e, t) {
+  var n = Je(Me++, 7);
+  return Zt(n.__H, t) && (n.__ = e(), n.__H = t, n.__h = e), n.__;
 }
 function ve(e, t) {
-  return Ge = 8, he(function() {
+  return Ge = 8, ue(function() {
     return e;
   }, t);
 }
-function On(e) {
-  var t = P.context[e.__c], n = Ye(Me++, 9);
+function Vn(e) {
+  var t = P.context[e.__c], n = Je(Me++, 9);
   return n.c = e, t ? (n.__ == null && (n.__ = !0, t.sub(P)), t.props.value) : e.__;
 }
-function zn() {
-  for (var e; e = Xi.shift(); ) {
+function Gn() {
+  for (var e; e = tn.shift(); ) {
     var t = e.__H;
     if (e.__P && t) try {
-      t.__h.some(at), t.__h.some(Nt), t.__h = [];
+      t.__h.some(ot), t.__h.some(Ot), t.__h = [];
     } catch (n) {
-      t.__h = [], W.__e(n, e.__v);
+      t.__h = [], D.__e(n, e.__v);
     }
   }
 }
-W.__b = function(e) {
-  P = null, wi && wi(e);
-}, W.__ = function(e, t) {
-  e && t.__k && t.__k.__m && (e.__m = t.__k.__m), ki && ki(e, t);
-}, W.__r = function(e) {
-  yi && yi(e), Me = 0;
+D.__b = function(e) {
+  P = null, vi && vi(e);
+}, D.__ = function(e, t) {
+  e && t.__k && t.__k.__m && (e.__m = t.__k.__m), $i && $i(e, t);
+}, D.__r = function(e) {
+  bi && bi(e), Me = 0;
   var t = (P = e.__c).__H;
-  t && (St === P ? (t.__h = [], P.__h = [], t.__.some(function(n) {
+  t && (At === P ? (t.__h = [], P.__h = [], t.__.some(function(n) {
     n.__N && (n.__ = n.__N), n.u = n.__N = void 0;
-  })) : (t.__h.some(at), t.__h.some(Nt), t.__h = [], Me = 0)), St = P;
-}, W.diffed = function(e) {
-  vi && vi(e);
+  })) : (t.__h.some(ot), t.__h.some(Ot), t.__h = [], Me = 0)), At = P;
+}, D.diffed = function(e) {
+  _i && _i(e);
   var t = e.__c;
-  t && t.__H && (t.__H.__h.length && (Xi.push(t) !== 1 && gi === W.requestAnimationFrame || ((gi = W.requestAnimationFrame) || Un)(zn)), t.__H.__.some(function(n) {
+  t && t.__H && (t.__H.__h.length && (tn.push(t) !== 1 && yi === D.requestAnimationFrame || ((yi = D.requestAnimationFrame) || Qn)(Gn)), t.__H.__.some(function(n) {
     n.u && (n.__H = n.u, n.u = void 0);
-  })), St = P = null;
-}, W.__c = function(e, t) {
+  })), At = P = null;
+}, D.__c = function(e, t) {
   t.some(function(n) {
     try {
-      n.__h.some(at), n.__h = n.__h.filter(function(r) {
-        return !r.__ || Nt(r);
+      n.__h.some(ot), n.__h = n.__h.filter(function(r) {
+        return !r.__ || Ot(r);
       });
     } catch (r) {
       t.some(function(s) {
         s.__h && (s.__h = []);
-      }), t = [], W.__e(r, n.__v);
+      }), t = [], D.__e(r, n.__v);
     }
-  }), _i && _i(e, t);
-}, W.unmount = function(e) {
-  bi && bi(e);
+  }), ki && ki(e, t);
+}, D.unmount = function(e) {
+  xi && xi(e);
   var t, n = e.__c;
   n && n.__H && (n.__H.__.some(function(r) {
     try {
-      at(r);
+      ot(r);
     } catch (s) {
       t = s;
     }
-  }), n.__H = void 0, t && W.__e(t, n.__v));
+  }), n.__H = void 0, t && D.__e(t, n.__v));
 };
-var xi = typeof requestAnimationFrame == "function";
-function Un(e) {
+var Ci = typeof requestAnimationFrame == "function";
+function Qn(e) {
   var t, n = function() {
-    clearTimeout(r), xi && cancelAnimationFrame(t), setTimeout(e);
+    clearTimeout(r), Ci && cancelAnimationFrame(t), setTimeout(e);
   }, r = setTimeout(n, 35);
-  xi && (t = requestAnimationFrame(n));
+  Ci && (t = requestAnimationFrame(n));
 }
-function at(e) {
+function ot(e) {
   var t = P, n = e.__c;
   typeof n == "function" && (e.__c = void 0, n()), P = t;
 }
-function Nt(e) {
+function Ot(e) {
   var t = P;
   e.__c = e.__(), P = t;
 }
-function Xt(e, t) {
+function Zt(e, t) {
   return !e || e.length !== t.length || t.some(function(n, r) {
     return n !== e[r];
   });
 }
-function Zi(e, t) {
+function nn(e, t) {
   return typeof t == "function" ? t(e) : t;
 }
-function ue(e) {
+function le(e) {
   return e.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/[’‘`]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, "-").replace(/\s+/g, " ").trim();
 }
-const Vn = new Set(
+const Kn = new Set(
   "a an and are as at be been but by can could did do does for from had has have he her his how i if in into is it its me my of on or our rahul rahuls show tell that the their them there these they this to was we were what when where which who why will with would you your about any some his him he s do does did project projects work".split(" ")
 );
-function en(e) {
-  return ue(e).replace(/[^a-z0-9+#/. -]/g, " ").split(/[\s/]+/).map((t) => t.replace(/^[.-]+|[.-]+$/g, "")).filter((t) => t.length > 1 && !Vn.has(t)).map(Gn);
+function sn(e) {
+  return le(e).replace(/[^a-z0-9+#/. -]/g, " ").split(/[\s/]+/).map((t) => t.replace(/^[.-]+|[.-]+$/g, "")).filter((t) => t.length > 1 && !Kn.has(t)).map(Yn);
 }
-function Gn(e) {
+function Yn(e) {
   if (e.length <= 4) return e;
   for (const t of ["ations", "ation", "ings", "ing", "ers", "ed", "es", "ly", "s"])
     if (e.endsWith(t) && e.length - t.length >= 4) return e.slice(0, -t.length);
   return e;
 }
-const F = (e) => !!e && e.status === "verified" && e.public_safe, Qn = (e) => e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-function Kn(e) {
-  return new RegExp(`(?<![a-z0-9])${Qn(e)}(?![a-z0-9+#])`, "g");
+const F = (e) => !!e && e.status === "verified" && e.public_safe, Jn = (e) => e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+function Xn(e) {
+  return new RegExp(`(?<![a-z0-9])${Jn(e)}(?![a-z0-9+#])`, "g");
 }
-function Jn(e) {
+function Zn(e) {
   const t = e;
   t.claim = new Map(e.claims.map((s) => [s.id, s])), t.entity = new Map(e.entities.map((s) => [s.id, s])), t.skill = new Map(e.skills.map((s) => [s.id, s])), t.gap = new Map(e.gaps.map((s) => [s.id, s])), t.role = new Map(e.roles.map((s) => [s.id, s])), t.archByEntity = new Map(e.architectures.map((s) => [s.entity, s]));
   const n = [], r = (s, a) => {
-    const o = ue(s);
-    o && n.push({ term: o, ref: { ...a, term: s }, re: Kn(o) });
+    const o = le(s);
+    o && n.push({ term: o, ref: { ...a, term: s }, re: Xn(o) });
   };
   for (const s of e.skills)
     r(s.name, { id: s.id, kind: "skill", near: !1 }), s.aliases.forEach((a) => r(a, { id: s.id, kind: "skill", near: !1 })), (s.near || []).forEach((a) => r(a, { id: s.id, kind: "skill", near: !0 }));
@@ -445,28 +445,28 @@ function Jn(e) {
       for (const a of s.tags) (t.pendingBySkill.get(a) ?? t.pendingBySkill.set(a, []).get(a)).push(s);
   return t;
 }
-async function Yn(e) {
+async function es(e) {
   const t = await fetch(e);
   if (!t.ok) throw new Error(`evidence ${t.status}`);
-  return Jn(await t.json());
+  return Zn(await t.json());
 }
-const ee = (e, t) => e.entity.get(t)?.short ?? t, yt = (e, t) => e.skill.get(t)?.name ?? e.gap.get(t)?.name ?? t;
-function vt(e, t) {
-  const n = ue(t), r = [], s = /* @__PURE__ */ new Map();
+const ee = (e, t) => e.entity.get(t)?.short ?? t, vt = (e, t) => e.skill.get(t)?.name ?? e.gap.get(t)?.name ?? t;
+function bt(e, t) {
+  const n = le(t), r = [], s = /* @__PURE__ */ new Map();
   for (const a of e.aliases) {
     a.re.lastIndex = 0;
     let o;
     for (; o = a.re.exec(n); ) {
-      const l = o.index, p = l + o[0].length;
-      if (r.some(([g, d]) => l < d && p > g)) continue;
-      r.push([l, p]);
-      const c = a.ref.near ? `near:${a.ref.term}` : a.ref.id, m = s.get(c);
-      m ? m.count++ : s.set(c, { ...a.ref, count: 1, index: l });
+      const l = o.index, u = l + o[0].length;
+      if (r.some(([g, c]) => l < c && u > g)) continue;
+      r.push([l, u]);
+      const d = a.ref.near ? `near:${a.ref.term}` : a.ref.id, f = s.get(d);
+      f ? f.count++ : s.set(d, { ...a.ref, count: 1, index: l });
     }
   }
   return [...s.values()].sort((a, o) => a.index - o.index);
 }
-const Xn = {
+const ts = {
   dia: ["drug interaction", "drug-interaction", "drug agent", "interaction agent", "medication review", "medication app", "medication-label", "label review", "rxnorm", "dailymed", "drug app"],
   voice: ["voice harness", "voice-agent", "voice agent qa", "qa harness", "voice qa", "pretty good ai", "synthetic patient", "voice project", "phone agent", "harness", "barge-in", "barge in"],
   cliniq: ["cliniq", "clin iq", "substance", "research-a-thon", "nsf"],
@@ -479,61 +479,61 @@ const Xn = {
   dac: ["data analytics club", "student club", "vice president"],
   education: ["degree", "masters", "master's", "education", "university", "umkc", "certification", "certifications", "certificate"],
   imw: ["interview my work", "this assistant", "this tool", "this chatbot", "this workspace", "you built", "how do you work", "how were you built", "this system"]
-}, At = Object.entries(Xn).map(
+}, It = Object.entries(ts).map(
   ([e, t]) => [e, new RegExp(`(?<![a-z0-9])(${t.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`)]
 );
-function tn(e) {
-  const t = ue(e);
-  return At.filter(([, n]) => n.test(t)).map(([n]) => n).sort((n, r) => t.search(At.find(([s]) => s === n)[1]) - t.search(At.find(([s]) => s === r)[1]));
+function rn(e) {
+  const t = le(e);
+  return It.filter(([, n]) => n.test(t)).map(([n]) => n).sort((n, r) => t.search(It.find(([s]) => s === n)[1]) - t.search(It.find(([s]) => s === r)[1]));
 }
-const $i = /* @__PURE__ */ new WeakMap();
-function Zn(e) {
-  let t = $i.get(e);
+const Ei = /* @__PURE__ */ new WeakMap();
+function is(e) {
+  let t = Ei.get(e);
   if (t) return t;
   const n = e.claims.filter(F).map((s) => {
     const a = [e.entity.get(s.entity)?.name ?? "", ...s.tags.map((o) => e.skill.get(o)?.name ?? "")].join(" ");
-    return { claim: s, toks: en(`${s.text} ${a}`) };
+    return { claim: s, toks: sn(`${s.text} ${a}`) };
   }), r = /* @__PURE__ */ new Map();
   for (const s of n) new Set(s.toks).forEach((a) => r.set(a, (r.get(a) ?? 0) + 1));
-  return t = { docs: n, df: r, avg: n.reduce((s, a) => s + a.toks.length, 0) / Math.max(1, n.length) }, $i.set(e, t), t;
+  return t = { docs: n, df: r, avg: n.reduce((s, a) => s + a.toks.length, 0) / Math.max(1, n.length) }, Ei.set(e, t), t;
 }
-function nn(e, t, n = {}) {
-  const r = Zn(e), s = [...new Set(en(t))], a = new Set(n.concepts ?? vt(e, t).filter((g) => g.kind === "skill").map((g) => g.id)), o = new Set(n.entities ?? tn(t)), l = r.docs.length, p = 1.2, c = 0.75, m = [];
+function an(e, t, n = {}) {
+  const r = is(e), s = [...new Set(sn(t))], a = new Set(n.concepts ?? bt(e, t).filter((g) => g.kind === "skill").map((g) => g.id)), o = new Set(n.entities ?? rn(t)), l = r.docs.length, u = 1.2, d = 0.75, f = [];
   for (const g of r.docs) {
-    let d = 0;
-    for (const y of s) {
-      const w = g.toks.filter((v) => v === y).length;
-      if (!w) continue;
-      const u = r.df.get(y) ?? 0, f = Math.log(1 + (l - u + 0.5) / (u + 0.5));
-      d += f * (w * (p + 1) / (w + p * (1 - c + c * g.toks.length / r.avg)));
+    let c = 0;
+    for (const w of s) {
+      const y = g.toks.filter((v) => v === w).length;
+      if (!y) continue;
+      const p = r.df.get(w) ?? 0, m = Math.log(1 + (l - p + 0.5) / (p + 0.5));
+      c += m * (y * (u + 1) / (y + u * (1 - d + d * g.toks.length / r.avg)));
     }
-    for (const y of g.claim.tags) a.has(y) && (d += 2.5);
-    o.has(g.claim.entity) && (d += 3), g.claim.kind === "limitation" && (d *= 0.8), d > 0 && m.push({ claim: g.claim, score: d });
+    for (const w of g.claim.tags) a.has(w) && (c += 2.5);
+    o.has(g.claim.entity) && (c += 3), g.claim.kind === "limitation" && (c *= 0.8), c > 0 && f.push({ claim: g.claim, score: c });
   }
-  return m.sort((g, d) => d.score - g.score).slice(0, n.limit ?? 12);
+  return f.sort((g, c) => c.score - g.score).slice(0, n.limit ?? 12);
 }
-const Ci = { public_artifact: 1, self_reported: 0.8 };
-function le(e, t, n = {}) {
-  const r = e.gap.get(t), s = (r?.partial ?? []).map((p) => e.claim.get(p)).filter((p) => !!p && p.status === "verified" && p.public_safe);
+const qi = { public_artifact: 1, self_reported: 0.8 };
+function ce(e, t, n = {}) {
+  const r = e.gap.get(t), s = (r?.partial ?? []).map((u) => e.claim.get(u)).filter((u) => !!u && u.status === "verified" && u.public_safe);
   if (r && s.length)
     return {
       id: t,
       label: r.name,
       category: "related",
       priority: n.priority,
-      claims: s.map((p) => p.id),
-      entities: Oe(s.map((p) => p.entity)),
+      claims: s.map((u) => u.id),
+      entities: Be(s.map((u) => u.entity)),
       statement: r.statement
     };
   if (r) {
-    const p = r.related.flatMap((c) => e.statableBySkill.get(c) ?? []);
+    const u = r.related.flatMap((d) => e.statableBySkill.get(d) ?? []);
     return {
       id: t,
       label: r.name,
       category: r.verify ? "verification" : "missing",
       priority: n.priority,
       claims: [],
-      entities: Oe(p.map((c) => c.entity)).slice(0, 4),
+      entities: Be(u.map((d) => d.entity)).slice(0, 4),
       statement: r.statement,
       via: r.related[0]
     };
@@ -550,45 +550,45 @@ function le(e, t, n = {}) {
       entities: [],
       statement: "The evidence database has nothing that addresses this requirement."
     };
-  const o = e.statableBySkill.get(t) ?? [], l = (e.pendingBySkill.get(t) ?? []).map((p) => p.id);
+  const o = e.statableBySkill.get(t) ?? [], l = (e.pendingBySkill.get(t) ?? []).map((u) => u.id);
   if (n.near)
     return {
       id: `near:${n.near}`,
-      label: Mt(n.near),
+      label: jt(n.near),
       term: n.near,
       category: o.length ? "related" : "missing",
       priority: n.priority,
-      claims: o.slice(0, 6).map((p) => p.id),
-      entities: Oe(o.map((p) => p.entity)),
+      claims: o.slice(0, 6).map((u) => u.id),
+      entities: Be(o.map((u) => u.entity)),
       via: t,
-      statement: o.length ? `${Mt(n.near)} itself is not demonstrated. The closest evidence is ${a.name.toLowerCase()}.` : `${Mt(n.near)} is not demonstrated.`
+      statement: o.length ? `${jt(n.near)} itself is not demonstrated. The closest evidence is ${a.name.toLowerCase()}.` : `${jt(n.near)} is not demonstrated.`
     };
   if (o.length) {
-    const p = o.some((c) => c.strength === "public_artifact");
+    const u = o.some((d) => d.strength === "public_artifact");
     return {
       id: t,
       label: a.name,
       category: "direct",
       priority: n.priority,
-      claims: It(o).map((c) => c.id),
-      entities: Oe(It(o).map((c) => c.entity)),
-      strength: p ? "artifact" : "self_reported",
+      claims: Mt(o).map((d) => d.id),
+      entities: Be(Mt(o).map((d) => d.entity)),
+      strength: u ? "artifact" : "self_reported",
       pending: l
     };
   }
-  for (const p of a.related) {
-    const c = e.statableBySkill.get(p) ?? [];
-    if (c.length)
+  for (const u of a.related) {
+    const d = e.statableBySkill.get(u) ?? [];
+    if (d.length)
       return {
         id: t,
         label: a.name,
         category: "related",
         priority: n.priority,
-        via: p,
-        claims: It(c).slice(0, 6).map((m) => m.id),
-        entities: Oe(c.map((m) => m.entity)),
+        via: u,
+        claims: Mt(d).slice(0, 6).map((f) => f.id),
+        entities: Be(d.map((f) => f.entity)),
         pending: l,
-        statement: `No direct evidence for ${a.name.toLowerCase()}. The closest is ${yt(e, p).toLowerCase()}.`
+        statement: `No direct evidence for ${a.name.toLowerCase()}. The closest is ${vt(e, u).toLowerCase()}.`
       };
   }
   return l.length ? {
@@ -610,18 +610,18 @@ function le(e, t, n = {}) {
     statement: `${a.name} is not currently demonstrated in the portfolio.`
   };
 }
-function It(e) {
-  return [...e].sort((t, n) => (Ci[n.strength] ?? 0) - (Ci[t.strength] ?? 0) || (t.kind === "limitation" ? 1 : 0) - (n.kind === "limitation" ? 1 : 0));
+function Mt(e) {
+  return [...e].sort((t, n) => (qi[n.strength] ?? 0) - (qi[t.strength] ?? 0) || (t.kind === "limitation" ? 1 : 0) - (n.kind === "limitation" ? 1 : 0));
 }
-function Zt(e, t, n, r = {}) {
+function ei(e, t, n, r = {}) {
   const s = { direct: 0, related: 0, verification: 0, missing: 0 };
-  n.forEach((p) => s[p.category]++);
+  n.forEach((u) => s[u.category]++);
   const a = /* @__PURE__ */ new Map();
-  for (const p of n)
-    if (!(p.category !== "direct" && p.category !== "related"))
-      for (const c of p.entities) {
-        const m = a.get(c) ?? { score: 0, requirements: [] };
-        m.score += (p.category === "direct" ? 1 : 0.4) * (c === "imw" ? 0.4 : 1), m.requirements.push(p.id), a.set(c, m);
+  for (const u of n)
+    if (!(u.category !== "direct" && u.category !== "related"))
+      for (const d of u.entities) {
+        const f = a.get(d) ?? { score: 0, requirements: [] };
+        f.score += (u.category === "direct" ? 1 : 0.4) * (d === "imw" ? 0.4 : 1), f.requirements.push(u.id), a.set(d, f);
       }
   const o = ["direct", "related", "verification", "missing"], l = { required: 0, preferred: 1, mentioned: 2, undefined: 1 };
   return {
@@ -629,101 +629,156 @@ function Zt(e, t, n, r = {}) {
     source: "role",
     notes: [],
     ...r,
-    requirements: [...n].sort((p, c) => o.indexOf(p.category) - o.indexOf(c.category) || l[String(p.priority)] - l[String(c.priority)]),
+    requirements: [...n].sort((u, d) => o.indexOf(u.category) - o.indexOf(d.category) || l[String(u.priority)] - l[String(d.priority)]),
     counts: s,
-    entities: [...a.entries()].map(([p, c]) => ({ id: p, ...c })).filter((p) => e.entity.has(p.id)).sort((p, c) => c.score - p.score)
+    entities: [...a.entries()].map(([u, d]) => ({ id: u, ...d })).filter((u) => e.entity.has(u.id)).sort((u, d) => d.score - u.score)
   };
 }
 function Ce(e, t) {
   const n = e.role.get(t);
   if (!n) throw new Error(`unknown role ${t}`);
-  const r = [...n.requirements.map((a) => le(e, a)), ...n.gaps.map((a) => le(e, a))], s = [n.level_note, e.subject.level_note].filter(Boolean);
-  return Zt(e, n.title, r, { source: "role", roleId: t, notes: s });
+  const r = [...n.requirements.map((a) => ce(e, a)), ...n.gaps.map((a) => ce(e, a))], s = [n.level_note, e.subject.level_note].filter(Boolean);
+  return ei(e, n.title, r, { source: "role", roleId: t, notes: s });
 }
 const ie = {
   direct: "Direct evidence",
   related: "Related evidence",
   verification: "Verification required",
   missing: "Not currently demonstrated"
-}, Oe = (e) => [...new Set(e)], Mt = (e) => e.replace(/\b[a-z]/g, (t) => t.toUpperCase()), es = /(benefit|perk|what we offer|compensation|salary|pay range|equal opportunit|\beeo\b|about (us|the company|the team|our)|who we are|our (values|mission|culture)|why join|accommodation|privacy notice|disclaimer)/, sn = /(preferred|nice to have|nice-to-have|bonus|pluses|a plus|desired|good to have)/, ts = /(requirement|qualification|what you('|’)ll need|what you need|must have|must-have|you have|you bring|what we('|’)re looking for|minimum|basic|skills|experience|about you)/, is = /(responsibilit|what you('|’)ll do|what you will do|the role|your impact|day to day|in this role)/;
-function ns(e) {
+}, Be = (e) => [...new Set(e)], ns = /* @__PURE__ */ new Set(["ai", "bi", "ml", "aws", "gcp", "sql", "api", "asr", "tts", "sse", "ec2", "s3", "hl7", "cda", "k6", "gpu", "etl"]), jt = (e) => e.replace(/\b[a-z][a-z0-9]*/g, (t) => ns.has(t) ? t.toUpperCase() : t.charAt(0).toUpperCase() + t.slice(1)), Ze = { bachelor: 1, master: 2, phd: 3, mba: 0 }, Si = { bachelor: "Bachelor's", master: "Master's", phd: "PhD", mba: "MBA" }, ss = [
+  ["bachelor", /\bbachelor|\b(?:b\.s\.?|b\.sc\.?|bsc|b\.a\.|b\.tech|btech|b\.e\.)(?![a-z])|\b(?:bs|ba)(?=\s*(?:\/|or\b|in\b|degree\b|,))|\b(?:undergraduate|college|university|4-year|four-year) degree/i],
+  ["master", /\bmaster'?s\b|\bmasters\b|\bmaster of\b|\bmaster degree|\b(?:m\.s\.?|m\.sc\.?|msc|m\.tech|mtech|m\.eng\.?|meng)(?![a-z])|(?<![a-z])ms(?=\s*(?:\/|or\b|in\b|degree\b|,|$))|\b(?:graduate|advanced|post-?graduate) degree/i],
+  ["phd", /\bph\.? ?d\b|\bdoctorate\b|\bdoctoral\b/i],
+  ["mba", /\bmba\b/i]
+], rs = /\b(?:degree|bachelor'?s?|master'?s?|ph\.? ?d|doctorate|bs|ms|ba|b\.s\.?|m\.s\.?|bsc|msc)\s+(?:degree\s+)?in\s+(.+)/i, as = /computer|computing|quantitative|\bstem\b|technical|math|statistic|data|machine learning|artificial intelligence|\bai\b|information|software|engineering|analytics|related|relevant|equivalent|similar/i, os = /[,;:(]|\s(?:or|and|such as|e\.g|including|preferred|required|with|from|plus)\b/i, ls = /\bdegree\b|\brequired\b|\bpreferred\b|\bor equivalent\b|\brelated field\b|\bminimum\b/i, cs = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 }, ds = /\b(\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)\s*\+?\s*(?:(?:-|to)\s*(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)\s*\+?\s*)?(?:years?|yrs?)\b/i, hs = /experien|professional|industry|hands-on|track record|working|background|building|developing|shipping|\bas an? /i, us = /\b(?:hybrid|on-?site|in[- ]office|in[- ]person|remote|days? (?:a|per) week|relocat\w*|visa|sponsorship|work authori[sz]ation|authori[sz]ed to work|citizenship|security clearance|clearance|background check|drug (?:test|screen)\w*|travel|salary|compensation|pay range|benefits|401\(?k\)?|pto|paid time off|shifts?|commute|time ?zones?|full[- ]time|part[- ]time|location)\b/i, ps = "Work-arrangement items (location, schedule, travel, authorization) are not skills, so they are left out of this comparison. Ask Rahul about them directly.", ms = (e) => e.replace(/[’‘`]/g, "'").replace(/[–—]/g, "-").replace(/\s+/g, " ").trim(), fs = (e) => e.charAt(0).toUpperCase() + e.slice(1), gs = (e) => [...new Set(e)];
+function ws(e) {
+  return e.length < 2 ? e.join("") : `${e.slice(0, -1).join(", ")} or ${e[e.length - 1]}`;
+}
+function ys(e) {
+  const t = ss.filter(([, n]) => n.test(e)).map(([n]) => n);
+  return t.length > 1 ? t.filter((n) => n !== "mba") : t;
+}
+function vs(e, t, n) {
+  const r = ys(t), s = e.subject.credentials;
+  if (!r.length || !s) return null;
+  const o = t.match(rs)?.[1] ?? "", l = o.split(os)[0].replace(/^(?:a|an|the)\s+/i, "").split(" ").slice(0, 5).join(" ").trim(), u = r[r.length - 1], d = `${ws(r.map((m) => Si[m]))}${u === "phd" || u === "mba" ? "" : " degree"}${l ? ` in ${l}` : ""}`, f = Math.min(...r.map((m) => Ze[m])), g = [...s.degrees].sort((m, v) => Ze[m.level] - Ze[v.level]), c = f > 0 ? g.filter((m) => Ze[m.level] >= f) : [], w = { id: `degree:${r.join("+")}`, label: d, priority: n, entities: ["education"], strength: "self_reported" };
+  if (c.length) {
+    const m = `Holds ${g.slice().reverse().map((k) => k.short).join(" and ")}.`, v = !!l && !as.test(o);
+    return {
+      ...w,
+      category: v ? "related" : "direct",
+      claims: c.map((k) => k.claim),
+      statement: v ? `${m} Both are in ${s.fields}; the description names a different field.` : m
+    };
+  }
+  const y = g[g.length - 1], p = r.map((m) => m === "phd" ? "a PhD" : m === "mba" ? "an MBA" : Si[m]).join(" or ");
+  return { ...w, category: "missing", claims: [y.claim], statement: `His highest degree is ${y.short}; he does not hold ${p}.` };
+}
+function bs(e, t, n) {
+  const r = t.match(ds), s = e.subject.credentials?.experience;
+  if (!r || !s) return null;
+  const a = Number(r[1]) || cs[r[1].toLowerCase()] || 0;
+  if (a < 1 || a > 29) return null;
+  const o = fs(t.slice(r.index).split(/[.;(]|,\s/)[0].slice(0, 70).trim()), l = s.years, u = a <= l ? "direct" : a === l + 1 ? "related" : "missing", d = `${l}+ years of professional ML and data-science experience`, f = u === "direct" ? `${d}: ${s.summary}.` : u === "related" ? `${d}, close to the ${a}+ asked for. Roles: ${s.summary}.` : `${d}, short of the ${a}+ years asked for. Roles: ${s.summary}.`, g = gs(s.claims.map((c) => e.claim.get(c)?.entity).filter((c) => !!c));
+  return { id: `years:${a}`, label: o, category: u, priority: n, claims: [...s.claims], entities: g, strength: "self_reported", statement: f };
+}
+function on(e, t, n, r = !1) {
+  const s = [];
+  for (const a of ms(t).split(/;\s|\.\s+(?=[A-Z])/)) {
+    if (!r || ls.test(a)) {
+      const o = vs(e, a, n);
+      o && s.push(o);
+    }
+    if (!r || hs.test(a)) {
+      const o = bs(e, a, n);
+      o && s.push(o);
+    }
+  }
+  return s;
+}
+const _s = /(benefit|perk|what we offer|compensation|salary|pay range|equal opportunit|\beeo\b|about (us|the company|the team|our)|who we are|our (values|mission|culture)|why join|accommodation|privacy notice|disclaimer)/, ti = /(preferred|nice to have|nice-to-have|bonus|pluses|a plus|desired|good to have)/, ks = /(requirement|qualification|what you('|’)ll need|what you need|must have|must-have|you have|you bring|what we('|’)re looking for|minimum|basic|skills|experience|about you)/, xs = /(responsibilit|what you('|’)ll do|what you will do|the role|your impact|day to day|in this role)/;
+function $s(e) {
   const t = e.trim();
   if (/^([-*•·▪◦]|\d+[.)])\s/.test(t)) return null;
-  const n = ue(t).replace(/^#+\s*/, ""), r = n.split(" ").length;
-  return n.length > 0 && n.length < 70 && (/[:：]$/.test(n) || /^#/.test(t) || r <= 5 && !/[.,;]/.test(n)) ? es.test(n) ? "skip" : sn.test(n) ? "preferred" : ts.test(n) ? "required" : is.test(n) ? "mentioned" : null : null;
+  const n = le(t).replace(/^#+\s*/, ""), r = n.split(" ").length;
+  return n.length > 0 && n.length < 70 && (/[:：]$/.test(n) || /^#/.test(t) || r <= 5 && !/[.,;]/.test(n)) ? _s.test(n) ? "skip" : ti.test(n) ? "preferred" : ks.test(n) ? "required" : xs.test(n) ? "mentioned" : null : null;
 }
-function ss(e, t) {
+function Cs(e, t) {
   const n = t.split(/\r?\n/);
   let r = "mentioned";
-  const s = /* @__PURE__ */ new Map(), a = { required: 3, preferred: 2, mentioned: 1, skip: 0 };
-  for (const d of n) {
-    if (!d.trim()) continue;
-    const y = ns(d);
+  const s = /* @__PURE__ */ new Map(), a = [], o = { required: 3, preferred: 2, mentioned: 1, skip: 0 };
+  for (const w of n) {
+    if (!w.trim()) continue;
+    const y = $s(w);
     if (y) {
       r = y;
       continue;
     }
     if (r === "skip") continue;
-    const w = sn.test(ue(d)) ? "preferred" : r;
-    for (const u of vt(e, d)) {
-      const f = u.near ? `near:${u.term.toLowerCase()}` : u.id, v = s.get(f);
-      v ? (v.count += u.count, a[w] > a[v.priority] && (v.priority = w)) : s.set(f, { id: u.id, near: u.near ? u.term.toLowerCase() : void 0, priority: w, count: u.count });
+    const p = ti.test(le(w)) ? "preferred" : r;
+    a.push({ text: w, priority: p });
+    for (const m of bt(e, w)) {
+      const v = m.near ? `near:${m.term.toLowerCase()}` : m.id, k = s.get(v);
+      k ? (k.count += m.count, o[p] > o[k.priority] && (k.priority = p)) : s.set(v, { id: m.id, near: m.near ? m.term.toLowerCase() : void 0, priority: p, count: m.count });
     }
   }
-  const o = ue(t), l = [...o.matchAll(/(\d{1,2})\s*\+?\s*(?:-\s*\d{1,2}\s*)?(?:years|yrs)/g)].map((d) => Number(d[1])).filter((d) => d > 0 && d < 30), p = o.match(/\b(senior|staff|principal|lead|head of|director|manager)\b/), c = new Set([...s.values()].filter((d) => !d.near && e.skill.has(d.id)).map((d) => d.id));
-  let m, g = 0;
-  for (const d of e.roles) {
-    const y = d.requirements.filter((w) => c.has(w)).length / d.requirements.length;
-    y > g && (g = y, m = d.id);
+  const l = le(t), u = [...l.matchAll(/(\d{1,2})\s*\+?\s*(?:-\s*\d{1,2}\s*)?(?:years|yrs)/g)].map((w) => Number(w[1])).filter((w) => w > 0 && w < 30), d = l.match(/\b(senior|staff|principal|lead|head of|director|manager)\b/), f = new Set([...s.values()].filter((w) => !w.near && e.skill.has(w.id)).map((w) => w.id));
+  let g, c = 0;
+  for (const w of e.roles) {
+    const y = w.requirements.filter((p) => f.has(p)).length / w.requirements.length;
+    y > c && (c = y, g = w.id);
   }
   return {
     concepts: [...s.values()],
-    years: l.length ? Math.max(...l) : void 0,
-    seniority: p?.[1],
-    closestRole: g >= 0.25 ? m : void 0
+    quals: a,
+    years: u.length ? Math.max(...u) : void 0,
+    seniority: d?.[1],
+    closestRole: c >= 0.25 ? g : void 0
   };
 }
-function ut(e, t, n = []) {
-  const r = ss(e, t), s = [], a = /* @__PURE__ */ new Set(), o = { required: 0, preferred: 1, mentioned: 2 }, l = [...r.concepts].sort((c, m) => o[c.priority] - o[m.priority] || m.count - c.count).slice(0, 26);
+function pt(e, t, n = []) {
+  const r = Cs(e, t), s = [], a = /* @__PURE__ */ new Set(), o = { required: 0, preferred: 1, mentioned: 2 }, l = [...r.concepts].sort((c, w) => o[c.priority] - o[w.priority] || w.count - c.count).slice(0, 26);
   for (const c of l) {
-    const m = le(e, c.id, { near: c.near, priority: c.priority === "skip" ? "mentioned" : c.priority });
-    a.has(m.id) || (a.add(m.id), s.push(m));
+    const w = ce(e, c.id, { near: c.near, priority: c.priority === "skip" ? "mentioned" : c.priority });
+    a.has(w.id) || (a.add(w.id), s.push(w));
   }
+  const u = (c) => {
+    a.has(c.id) || (a.add(c.id), s.push(c));
+  };
+  for (const c of r.quals) on(e, c.text, c.priority === "skip" ? "mentioned" : c.priority, c.priority === "mentioned").forEach(u);
+  let d = !1;
   for (const c of n) {
-    const m = vt(e, c);
-    if (m.length)
-      for (const g of m) {
-        const d = le(e, g.id, { near: g.near ? g.term.toLowerCase() : void 0, priority: "required" });
-        a.has(d.id) || (a.add(d.id), s.push(d));
-      }
-    else if (c.trim().length > 2) {
-      const g = le(e, c.trim(), { priority: "required" });
-      a.has(g.id) || (a.add(g.id), s.push(g));
-    }
+    const w = Es(e, c, ti.test(le(c)) ? "preferred" : "required");
+    w.covs.forEach(u), d || (d = w.logistics);
   }
-  const p = [];
-  return r.years && r.years >= 3 ? p.push(`The description asks for ${r.years}+ years. ${e.subject.level_note}`) : r.seniority && p.push(`The description uses the word "${r.seniority}". ${e.subject.level_note}`), s.length || p.push("No recognizable technical requirements were found. Try pasting the requirements section."), Zt(e, "Your job description", s, {
+  const f = [], g = Math.max(0, ...s.filter((c) => c.id.startsWith("years:")).map((c) => Number(c.id.slice(6))));
+  return g > (e.subject.credentials?.experience.years ?? 2) ? f.push(`The description asks for ${g}+ years. ${e.subject.level_note}`) : r.seniority && f.push(`The description uses the word "${r.seniority}". ${e.subject.level_note}`), d && f.push(ps), s.length || f.push("No recognizable technical requirements were found. Try pasting the requirements section."), ei(e, "Your job description", s, {
     source: "jd",
-    notes: p,
+    notes: f,
     closestRole: r.closestRole ? e.role.get(r.closestRole)?.title : void 0,
     roleId: r.closestRole
   });
 }
-const ei = (e) => e.length > 280 && /(responsibilit|requirement|qualification|you will|you'll|experience with|years of|we are looking|about the role|nice to have|preferred)/i.test(e), rn = /\b(perfect (fit|candidate|match)|ideal candidate|exceptional|outstanding|top candidate|rock ?star|world[- ]class|genius|best candidate|excellent fit|great fit|strong fit|perfect|10\s?\/\s?10|\d{1,3}\s?%\s?(match|fit)|match score|fit score|highly recommend|must hire|unmatched|brilliant|superstar)\b/i, rs = /(ignore (all |any |your |the )?(previous|prior|above|earlier) (instructions|prompts?|rules)|system prompt|developer (message|prompt)|you are now|pretend (to be|you are)|act as (a|an|if)|jailbreak|reveal (your|the) (prompt|instructions|rules)|print (your|the) (instructions|prompt)|disregard (your|the|all)|override (your|the) (rules|instructions)|\bdan mode\b)/i, as = /(\b(rate|score|rank)\b.*\b(him|rahul|candidate)\b|\bout of (10|ten|100)\b|percent(age)? (match|fit)|%\s?(match|fit)|match (score|percentage)|fit score)/i, os = /\b(weather|joke|poem|recipe|song|lyrics|stock price|bitcoin|politic|election|horoscope|translate this|write (me )?(an? )?(essay|story|cover letter)|capital of|who won the)\b/i, ls = (e) => [...new Set(e)], cs = /(how (can|could|do|would) you (say|know|tell|claim|conclude)|what makes you (say|think)|why (do|would) you (say|think)|prove (it|that|this)|how (does|do|did) (that|this|it) (make sense|prove|show|follow|answer|mean)|how (that|this|it) makes? sense|(that|this|it) (doesn'?t|does not|didn'?t) make (any )?sense|makes? no sense|what('?s| is) the (evidence|proof|reasoning|logic)|explain (that|this|why|your reasoning|how)|\bhow so\b|^really\b|are you sure|i don'?t (get|understand|buy|see)|not convinced|so what|why does (that|this) matter|^why\??$|^but (how|why|what)\b)/, qi = /* @__PURE__ */ new Map(), ds = (e) => {
-  let t = qi.get(e.id);
-  return t || qi.set(e.id, t = e.match.map((n) => new RegExp(n, "i"))), t;
+function Es(e, t, n = "required") {
+  const r = t.trim().slice(0, 160), s = on(e, r, n);
+  for (const a of bt(e, r)) s.push(ce(e, a.id, { near: a.near ? a.term.toLowerCase() : void 0, priority: n }));
+  return s.length ? { covs: s, logistics: !1 } : us.test(r) ? { covs: [], logistics: !0 } : { covs: r.length > 2 ? [ce(e, r, { priority: n })] : [], logistics: !1 };
+}
+const ii = (e) => e.length > 280 && /(responsibilit|requirement|qualification|you will|you'll|experience with|years of|we are looking|about the role|nice to have|preferred)/i.test(e), ln = /\b(perfect (fit|candidate|match)|ideal candidate|exceptional|outstanding|top candidate|rock ?star|world[- ]class|genius|best candidate|excellent fit|great fit|strong fit|perfect|10\s?\/\s?10|\d{1,3}\s?%\s?(match|fit)|match score|fit score|highly recommend|must hire|unmatched|brilliant|superstar)\b/i, qs = /(ignore (all |any |your |the )?(previous|prior|above|earlier) (instructions|prompts?|rules)|system prompt|developer (message|prompt)|you are now|pretend (to be|you are)|act as (a|an|if)|jailbreak|reveal (your|the) (prompt|instructions|rules)|print (your|the) (instructions|prompt)|disregard (your|the|all)|override (your|the) (rules|instructions)|\bdan mode\b)/i, Ss = /(\b(rate|score|rank)\b.*\b(him|rahul|candidate)\b|\bout of (10|ten|100)\b|percent(age)? (match|fit)|%\s?(match|fit)|match (score|percentage)|fit score)/i, As = /\b(weather|joke|poem|recipe|song|lyrics|stock price|bitcoin|politic|election|horoscope|translate this|write (me )?(an? )?(essay|story|cover letter)|capital of|who won the)\b/i, Is = (e) => [...new Set(e)], Ms = /(how (can|could|do|would) you (say|know|tell|claim|conclude)|what makes you (say|think)|why (do|would) you (say|think)|prove (it|that|this)|how (does|do|did) (that|this|it) (make sense|prove|show|follow|answer|mean)|how (that|this|it) makes? sense|(that|this|it) (doesn'?t|does not|didn'?t) make (any )?sense|makes? no sense|what('?s| is) the (evidence|proof|reasoning|logic)|explain (that|this|why|your reasoning|how)|\bhow so\b|^really\b|are you sure|i don'?t (get|understand|buy|see)|not convinced|so what|why does (that|this) matter|^why\??$|^but (how|why|what)\b)/, Ai = /* @__PURE__ */ new Map(), js = (e) => {
+  let t = Ai.get(e.id);
+  return t || Ai.set(e.id, t = e.match.map((n) => new RegExp(n, "i"))), t;
 };
-function hs(e, t) {
-  const n = ue(t);
+function Ts(e, t) {
+  const n = le(t);
   let r, s = 0;
   for (const a of e.topics ?? []) {
-    const o = ds(a).reduce((l, p) => l + (p.test(n) ? 1 : 0), 0);
+    const o = js(a).reduce((l, u) => l + (u.test(n) ? 1 : 0), 0);
     o > s && (r = a, s = o);
   }
   return r;
 }
 const Fe = (e, t) => t ? e.topics?.find((n) => n.id === t) : void 0;
-function us(e, t) {
+function Rs(e, t) {
   const n = (r) => Fe(e, r);
   return {
     points: t.points ?? n(t.points_from)?.points ?? [],
@@ -736,15 +791,15 @@ function us(e, t) {
 function se(e) {
   const t = [{ type: "p", text: e.lead, cites: e.leadCites?.length ? e.leadCites : void 0, lead: !0 }];
   e.points.length && t.push({ type: "points", items: e.points }), e.extra?.length && t.push(...e.extra), e.takeaway && t.push({ type: "takeaway", text: e.takeaway, cites: e.takeawayCites });
-  const n = e.sources ?? ls([...e.leadCites ?? [], ...e.points.flatMap((r) => r.cites), ...e.takeawayCites ?? []]);
+  const n = e.sources ?? Is([...e.leadCites ?? [], ...e.points.flatMap((r) => r.cites), ...e.takeawayCites ?? []]);
   return n.length && t.push({ type: "claims", title: "Sources", ids: n, collapsed: !0 }), t;
 }
-function an(e, t, n) {
+function cn(e, t, n) {
   return { blocks: t, followups: n.followups ?? [], actions: n.actions ?? [], engine: "evidence", intent: e, entities: n.entities ?? [], topic: n.topic };
 }
-const ps = (e, t) => t.map((n) => e.entity.get(n)).filter((n) => !!n && n.kind !== "education").slice(0, 2).map((n) => ({ kind: "anchor", label: `See ${n.short} on the portfolio`, target: n.anchor }));
+const Ls = (e, t) => t.map((n) => e.entity.get(n)).filter((n) => !!n && n.kind !== "education").slice(0, 2).map((n) => ({ kind: "anchor", label: `See ${n.short} on the portfolio`, target: n.anchor }));
 function Qe(e, t, n, r = {}) {
-  const s = us(e, t), a = n === "recruiter" || n === "founder" ? [] : s.failures.filter((p) => e.failures.some((c) => c.id === p)), o = r.challenged && r.again ? s.plain ?? `Put simply: ${s.takeaway?.text.replace(/^(For your team|Bottom line): /, "") ?? t.lead.text}` : r.challenged && s.why ? `Fair question. ${s.why}` : r.lead ?? t.lead.text, l = se({
+  const s = Rs(e, t), a = n === "recruiter" || n === "founder" ? [] : s.failures.filter((u) => e.failures.some((d) => d.id === u)), o = r.challenged && r.again ? s.plain ?? `Put simply: ${s.takeaway?.text.replace(/^(For your team|Bottom line): /, "") ?? t.lead.text}` : r.challenged && s.why ? `Fair question. ${s.why}` : r.lead ?? t.lead.text, l = se({
     lead: o,
     leadCites: r.challenged ? [] : t.lead.cites,
     points: s.points,
@@ -752,14 +807,14 @@ function Qe(e, t, n, r = {}) {
     takeawayCites: s.takeaway?.cites,
     extra: a.length ? [{ type: "failures", ids: a.slice(0, 2) }] : []
   });
-  return an(r.challenged ? "reasoning" : "topic_answer", l, {
+  return cn(r.challenged ? "reasoning" : "topic_answer", l, {
     entities: t.entities,
     topic: t.id,
-    actions: t.actions ?? ps(e, t.entities),
+    actions: t.actions ?? Ls(e, t.entities),
     followups: t.followups
   });
 }
-function ms(e, t, n) {
+function Ps(e, t, n) {
   const r = n.entities?.map((l) => e.entity.get(l)).find(Boolean), s = r ? (e.statableByEntity.get(r.id) ?? []).filter((l) => l.kind !== "limitation").slice(0, 2) : [], a = [
     { label: "What the answer rests on", text: "Only verified evidence: public code, data, recordings and papers, plus his employment history, with each item labelled by how it can be checked.", cites: [] }
   ];
@@ -768,14 +823,14 @@ function ms(e, t, n) {
     lead: n.question ? `Fair question. The previous answer was about "${n.question}". Here is the reasoning behind it:` : "Fair question. Here is the reasoning:",
     points: a
   });
-  return an("reasoning", o, {
+  return cn("reasoning", o, {
     entities: r ? [r.id] : [],
     followups: ["How does he work in a team?", "What has Rahul actually shipped?", "Why should we hire Rahul?"]
   });
 }
-function fs(e, t) {
+function Fs(e, t) {
   const n = /* @__PURE__ */ new Set(["python", "metrics", "healthcare", "fintech", "product_judgment", "testing"]), r = t.tags.find((s) => !n.has(s)) ?? t.tags[0];
-  return r ? yt(e, r) : e.entity.get(t.entity)?.short ?? "Evidence";
+  return r ? vt(e, r) : e.entity.get(t.entity)?.short ?? "Evidence";
 }
 function Ke(e, t, n = 2) {
   const r = /* @__PURE__ */ new Map();
@@ -785,14 +840,14 @@ function Ke(e, t, n = 2) {
   }
   return [...r.entries()].map(([s, a]) => {
     const o = e.entity.get(s);
-    return { label: o ? o.kind === "experience" && o.role ? `${o.short} · ${o.role.split(" · ")[0]}` : o.name : s, text: a.map((p) => p.text).join(" "), cites: a.map((p) => p.id) };
+    return { label: o ? o.kind === "experience" && o.role ? `${o.short} · ${o.role.split(" · ")[0]}` : o.name : s, text: a.map((u) => u.text).join(" "), cites: a.map((u) => u.id) };
   });
 }
-function on(e, t) {
-  return t.filter(F).map((n) => ({ label: fs(e, n), text: n.text, cites: [n.id] }));
+function dn(e, t) {
+  return t.filter(F).map((n) => ({ label: Fs(e, n), text: n.text, cites: [n.id] }));
 }
 const T = (e, t) => t.test(e), Q = (e) => [...new Set(e)];
-function Ei(e, t) {
+function Ii(e, t) {
   let n = e.strength === "public_artifact" ? 1 : 0.6;
   const r = new Set(e.tags), s = !!e.code?.length;
   switch (t) {
@@ -815,15 +870,15 @@ function Ei(e, t) {
   return n;
 }
 function ae(e, t, n, r = 3, s = 9) {
-  const a = [...t].filter(F).sort((p, c) => Ei(c, n) - Ei(p, n)), o = /* @__PURE__ */ new Map(), l = [];
-  for (const p of a) {
-    const c = o.get(p.entity) ?? 0;
-    if (!(c >= r || l.includes(p)) && (o.set(p.entity, c + 1), l.push(p), l.length >= s))
+  const a = [...t].filter(F).sort((u, d) => Ii(d, n) - Ii(u, n)), o = /* @__PURE__ */ new Map(), l = [];
+  for (const u of a) {
+    const d = o.get(u.entity) ?? 0;
+    if (!(d >= r || l.includes(u)) && (o.set(u.entity, d + 1), l.push(u), l.length >= s))
       break;
   }
   return l;
 }
-function ti(e, t) {
+function ni(e, t) {
   return Q(t.flatMap((n) => e.statableBySkill.get(n) ?? []));
 }
 function Ae(e, t) {
@@ -832,18 +887,18 @@ function Ae(e, t) {
 function N(e) {
   return e.map((t) => t.id);
 }
-function ii(e) {
+function si(e) {
   return { kind: "anchor", label: `Jump to ${e.short} on the portfolio`, target: e.anchor };
 }
-function We(e, t, n = {}) {
+function De(e, t, n = {}) {
   const r = e.entity.get(t);
   if (!r) return [];
   const s = [];
-  n.xray !== !1 && e.archByEntity.has(t) && s.push({ kind: "mode", label: `X-Ray ${r.short}`, target: "xray", arg: t }), s.push(ii(r));
+  n.xray !== !1 && e.archByEntity.has(t) && s.push({ kind: "mode", label: `X-Ray ${r.short}`, target: "xray", arg: t }), s.push(si(r));
   for (const a of r.links.slice(0, 2)) s.push({ kind: "url", label: a.label, target: a.url });
   return s;
 }
-function O(e, t, n = []) {
+function B(e, t, n = []) {
   const r = e.entity.get(t);
   if (!r) return [];
   const s = r.short, a = [
@@ -856,7 +911,7 @@ function O(e, t, n = []) {
     ["personally", `What did Rahul personally do on ${s}?`],
     ["scale", `How would ${s} scale?`]
   ], o = e.archByEntity.has(t);
-  return a.filter(([l]) => !n.includes(l)).filter(([l]) => l === "architecture" ? o : !0).filter(([l]) => l === "failure" ? e.failures.some((p) => p.entity === t) || Ae(e, t).length > 0 : !0).filter(([l]) => l === "why" ? e.decisions.some((p) => p.entity === t) : !0).map(([, l]) => l).slice(0, 5);
+  return a.filter(([l]) => !n.includes(l)).filter(([l]) => l === "architecture" ? o : !0).filter(([l]) => l === "failure" ? e.failures.some((u) => u.entity === t) || Ae(e, t).length > 0 : !0).filter(([l]) => l === "why" ? e.decisions.some((u) => u.entity === t) : !0).map(([, l]) => l).slice(0, 5);
 }
 const _t = [
   "What has Rahul actually shipped?",
@@ -878,10 +933,10 @@ function S(e, t, n = {}) {
     topic: n.topic
   };
 }
-function ni(e) {
+function ri(e) {
   return Q(e.blocks.flatMap((t) => t.type === "claims" ? t.ids : t.type === "p" || t.type === "takeaway" ? t.cites ?? [] : t.type === "points" ? t.items.flatMap((n) => n.cites) : []));
 }
-function gs(e) {
+function Ds(e) {
   return e.blocks.map((t) => {
     switch (t.type) {
       case "p":
@@ -902,18 +957,18 @@ function gs(e) {
   }).join(`
 `);
 }
-function ws(e, t) {
-  const n = ni(t);
+function Ws(e, t) {
+  const n = ri(t);
   return t.basis = {
     retrieved: t.basis?.retrieved ?? n,
     checks: [
       { label: "Only verified, public-safe claims cited", ok: n.every((r) => F(e.claim.get(r))) },
-      { label: "No fit scores, rankings or praise", ok: !rn.test(gs(t)) },
+      { label: "No fit scores, rankings or praise", ok: !ln.test(Ds(t)) },
       { label: "Every cited claim links to a source", ok: n.every((r) => (e.claim.get(r)?.sources.length ?? 0) > 0) }
     ]
   }, t;
 }
-const ys = [
+const Hs = [
   [/applied (ai|ml|machine learning)|ai product engineer/, "applied_ai"],
   [/(llm|genai|gen ai|generative ai) (app(lication)? )?(engineer|developer)|llm application/, "llm_app"],
   [/(ai |llm |model )?(evaluation|evals?|quality) engineer|ai evaluation|llm evaluation role/, "ai_eval"],
@@ -936,76 +991,76 @@ const ys = [
   [/(machine learning|\bml\b) engineer|\bmle\b/, "mle"],
   [/\bai engineer\b|\bai\/ml engineer\b/, "applied_ai"]
 ];
-function vs(e) {
-  const t = ue(e);
-  return ys.find(([n]) => n.test(t))?.[1];
+function Ns(e) {
+  const t = le(e);
+  return Hs.find(([n]) => n.test(t))?.[1];
 }
-function _s(e, t, n) {
-  return ws(e, bs(e, t, n));
+function Os(e, t, n) {
+  return Ws(e, Bs(e, t, n));
 }
-function bs(e, t, n) {
-  const r = t.trim(), s = ue(r), a = n.persona;
-  if (!s) return ks(e);
-  if (rs.test(r))
+function Bs(e, t, n) {
+  const r = t.trim(), s = le(r), a = n.persona;
+  if (!s) return zs(e);
+  if (qs.test(r))
     return S("injection", [
       { type: "p", text: "I can't change my instructions or reveal configuration. I only answer questions about Rahul's work, from a verified evidence database." }
     ], { followups: _t.slice(0, 4) });
-  if (ei(r)) return Ss(e, r);
-  if (as.test(s)) {
-    const f = Fe(e, "why_hire"), v = "I won't put a number on a person, because a score hides the evidence you actually need. Here is the case instead, point by point:";
-    if (f) return { ...Qe(e, f, a, { lead: v }), intent: "no_scores", actions: [{ kind: "mode", label: "Check against your job description", target: "role", arg: "jd" }] };
+  if (ii(r)) return Ys(e, r);
+  if (Ss.test(s)) {
+    const m = Fe(e, "why_hire"), v = "I won't put a number on a person, because a score hides the evidence you actually need. Here is the case instead, point by point:";
+    if (m) return { ...Qe(e, m, a, { lead: v }), intent: "no_scores", actions: [{ kind: "mode", label: "Check against your job description", target: "role", arg: "jd" }] };
   }
-  const o = tn(r), l = vt(e, r), p = Q(l.map((f) => f.id));
-  if (os.test(s) && !o.length && !l.length)
+  const o = rn(r), l = bt(e, r), u = Q(l.map((m) => m.id));
+  if (As.test(s) && !o.length && !l.length)
     return S("off_topic", [{ type: "p", text: "That's outside what I can help with. I answer questions about Rahul's projects, engineering decisions, experience, and how his evidence maps to a role." }]);
-  if (T(s, /\b(contact|email|reach (him|rahul|out)|get in touch|linkedin|resume|cv|available|availability|open to (work|roles|opportunities)|job search|start date)\b/)) return xs(e);
-  const c = hs(e, r);
-  if (cs.test(s) && (c || !o.length && !l.length)) {
-    const f = c ?? Fe(e, n.lastTopic);
-    return f ? Qe(e, f, a, { challenged: !0, again: n.lastIntent === "reasoning" && n.lastTopic === f.id }) : ms(e, a, { question: n.lastQuestion, entities: n.lastEntities });
+  if (T(s, /\b(contact|email|reach (him|rahul|out)|get in touch|linkedin|resume|cv|available|availability|open to (work|roles|opportunities)|job search|start date)\b/)) return Us(e);
+  const d = Ts(e, r);
+  if (Ms.test(s) && (d || !o.length && !l.length)) {
+    const m = d ?? Fe(e, n.lastTopic);
+    return m ? Qe(e, m, a, { challenged: !0, again: n.lastIntent === "reasoning" && n.lastTopic === m.id }) : Ps(e, a, { question: n.lastQuestion, entities: n.lastEntities });
   }
-  const m = Es(e, s, r, o, p, a);
-  if (m) return m;
-  const g = vs(s);
-  if (g && T(s, /(interviewer|interview questions|would .* ask)/)) return Mi(e, g);
-  if (g && T(s, /challenge/)) return ji(e, g);
-  if (g && T(s, /(evaluat|assess|\bfit\b|suit|qualif|match|candidate|\brole\b|position|\bjob\b|hire)/)) return Si(e, g);
+  const f = Ks(e, s, r, o, u, a);
+  if (f) return f;
+  const g = Ns(s);
+  if (g && T(s, /(interviewer|interview questions|would .* ask)/)) return Ri(e, g);
+  if (g && T(s, /challenge/)) return Li(e, g);
+  if (g && T(s, /(evaluat|assess|\bfit\b|suit|qualif|match|candidate|\brole\b|position|\bjob\b|hire)/)) return Mi(e, g);
   if (n.roleId && T(s, /(this role|the role|this evidence|for this|^challenge)/))
-    return T(s, /challenge/) ? ji(e, n.roleId) : T(s, /(interview|ask)/) ? Mi(e, n.roleId) : Si(e, n.roleId);
+    return T(s, /challenge/) ? Li(e, n.roleId) : T(s, /(interview|ask)/) ? Ri(e, n.roleId) : Mi(e, n.roleId);
   if (T(s, /(evaluate (him|rahul)|evaluate me|for a role|for my role|role fit|fit for (a|the|my)|map to (a|my) role)/))
     return S(
       "role_prompt",
       [{ type: "p", text: "Choose a role or paste a job description, and I will classify each requirement as direct evidence, related evidence, verification required, or not currently demonstrated." }],
       { actions: [{ kind: "mode", label: "Select a role", target: "role" }, { kind: "mode", label: "Paste a job description", target: "role", arg: "jd" }], followups: ["Evaluate Rahul for an Applied AI Engineer role", "Evaluate Rahul for an ML Engineer role", "Evaluate Rahul for an LLM Application Engineer role"] }
     );
-  if (T(s, /\b(compare|versus|vs\.?|difference between|differ)\b/) && o.length >= 2) return Ai(e, o.slice(0, 2), a);
+  if (T(s, /\b(compare|versus|vs\.?|difference between|differ)\b/) && o.length >= 2) return ji(e, o.slice(0, 2), a);
   if (T(s, /\b(compare|versus|vs\.?)\b/) && o.length === 1 && n.lastEntities?.length) {
-    const f = n.lastEntities.find((v) => v !== o[0]);
-    if (f) return Ai(e, [f, o[0]], a);
+    const m = n.lastEntities.find((v) => v !== o[0]);
+    if (m) return ji(e, [m, o[0]], a);
   }
-  if (T(s, /(who is (rahul|he)|about rahul|about him|overview|summari[sz]e|introduce|strongest (evidence|work) overall|most impressive|best work|in a nutshell|tl;?dr|tell me about (rahul|him)$)/)) return Ws(e);
-  if (c && o.every((f) => c.entities.includes(f))) return Ps(e, c, l.map((f) => f.id), a);
+  if (T(s, /(who is (rahul|he)|about rahul|about him|overview|summari[sz]e|introduce|strongest (evidence|work) overall|most impressive|best work|in a nutshell|tl;?dr|tell me about (rahul|him)$)/)) return ar(e);
+  if (d && o.every((m) => d.entities.includes(m))) return sr(e, d, l.map((m) => m.id), a);
   if (s.match(/which (project|experience|work|one)s? (best )?(prove|show|demonstrate|is (the )?(strongest|best) (evidence )?for)s?/) || T(s, /(strongest|best) (evidence|proof|project) (for|of)/)) {
-    const f = l.filter((_) => _.kind === "skill").map((_) => _.id), v = Ze(s), k = f.length ? f : v;
-    if (k.length) return Ii(e, k, a, s);
+    const m = l.filter((b) => b.kind === "skill").map((b) => b.id), v = et(s), k = m.length ? m : v;
+    if (k.length) return Ti(e, k, a, s);
   }
-  if (T(s, /\b(strongest|best)\b/) && Ze(s).length) return Ii(e, Ze(s), a, s);
-  if (T(s, /(does (he|rahul) (have|know|use)|has (he|rahul) (used|worked|built|done|shipped|deployed)|experience (with|in|using)|worked with|familiar with|any (experience|evidence)|can (he|rahul)|where did (he|rahul) use|where has (he|rahul) used|is there evidence)/) && l.length) return Bt(e, l.map((f) => ({ id: f.id, near: f.near ? f.term.toLowerCase() : void 0 })), a, s);
-  const w = o[0] ?? (T(s, /\b(it|this|that|the project)\b/) ? n.lastEntities?.[0] : void 0);
-  if (w) return As(e, w, s, a);
-  if (T(s, /(senior|years of experience|how experienced|junior|entry[- ]level|level)/)) return Rs();
-  if (T(s, /(fail|broke|bug|hardest|didn'?t work|mistake|wrong|lesson|debug|went wrong|problem (he|rahul) (found|fixed))/)) return Is(e, a, T(s, /\b(more|all|other)\b/));
-  if (T(s, /(beyond (llm |gpt |api )?wrapper|not just (a |an )?(llm |gpt )?wrapper|more than (an? )?(llm |api )?wrapper|non-llm|without (an )?llm|deterministic|real engineering)/)) return Ms(e, a);
-  if (T(s, /(shipped|deployed|in production|live (app|demo)|released|actually built|actually made)/)) return js(e);
-  if (T(s, /(gap|missing|not demonstrated|weakness|weak spot|doesn'?t have|lacks?|what can'?t)/)) return Ts(e);
-  if (T(s, /(personally|himself|his own|individual contribution)/)) return S("personally", [{ type: "p", text: "Ask about a specific project or role. Ownership is recorded per item:" }, ...e.entities.filter((f) => f.ownership && f.kind !== "education").slice(0, 7).map((f) => ({ type: "p", text: `${f.short}: ${f.ownership}` }))]);
-  const u = Ze(s);
-  return u.length ? Ls(e, s, u, a) : l.length ? Bt(e, l.map((f) => ({ id: f.id, near: f.near ? f.term.toLowerCase() : void 0 })), a, s) : Fs(e, r, a);
+  if (T(s, /\b(strongest|best)\b/) && et(s).length) return Ti(e, et(s), a, s);
+  if (T(s, /(does (he|rahul) (have|know|use)|has (he|rahul) (used|worked|built|done|shipped|deployed)|experience (with|in|using)|worked with|familiar with|any (experience|evidence)|can (he|rahul)|where did (he|rahul) use|where has (he|rahul) used|is there evidence)/) && l.length) return Bt(e, l.map((m) => ({ id: m.id, near: m.near ? m.term.toLowerCase() : void 0 })), a, s);
+  const y = o[0] ?? (T(s, /\b(it|this|that|the project)\b/) ? n.lastEntities?.[0] : void 0);
+  if (y) return Js(e, y, s, a);
+  if (T(s, /(senior|years of experience|how experienced|junior|entry[- ]level|level)/)) return ir();
+  if (T(s, /(fail|broke|bug|hardest|didn'?t work|mistake|wrong|lesson|debug|went wrong|problem (he|rahul) (found|fixed))/)) return Xs(e, a, T(s, /\b(more|all|other)\b/));
+  if (T(s, /(beyond (llm |gpt |api )?wrapper|not just (a |an )?(llm |gpt )?wrapper|more than (an? )?(llm |api )?wrapper|non-llm|without (an )?llm|deterministic|real engineering)/)) return Zs(e, a);
+  if (T(s, /(shipped|deployed|in production|live (app|demo)|released|actually built|actually made)/)) return er(e);
+  if (T(s, /(gap|missing|not demonstrated|weakness|weak spot|doesn'?t have|lacks?|what can'?t)/)) return tr(e);
+  if (T(s, /(personally|himself|his own|individual contribution)/)) return S("personally", [{ type: "p", text: "Ask about a specific project or role. Ownership is recorded per item:" }, ...e.entities.filter((m) => m.ownership && m.kind !== "education").slice(0, 7).map((m) => ({ type: "p", text: `${m.short}: ${m.ownership}` }))]);
+  const p = et(s);
+  return p.length ? nr(e, s, p, a) : l.length ? Bt(e, l.map((m) => ({ id: m.id, near: m.near ? m.term.toLowerCase() : void 0 })), a, s) : rr(e, r, a);
 }
-function ks(e) {
+function zs(e) {
   return S("help", [{ type: "p", text: `Ask about ${e.subject.first}'s projects, engineering decisions, experience, or how his background maps to a role. Every answer links to the evidence behind it.` }]);
 }
-function xs(e) {
+function Us(e) {
   return S("contact", [{ type: "p", lead: !0, text: `${e.subject.name} is open to full-time AI / ML engineering roles in the US. Email is the fastest way to reach him, and his LinkedIn and GitHub are linked below.` }], {
     actions: [
       { kind: "url", label: "Email Rahul", target: `mailto:${e.subject.email}` },
@@ -1016,53 +1071,53 @@ function xs(e) {
     followups: ["Why should we hire Rahul?", "What has Rahul actually shipped?", "How does he work in a team?"]
   });
 }
-const $s = /(\$?\d{1,3}(?:,\d{3})+\+?|\$?\d+(?:\.\d+)?\s?(?:%|×|ms\b|m\b|million\b|k\b)|\b\d+(?:\.\d+)?x\b|\b\d{3,}\b)/gi, Cs = /\b(gpt-?[345](\.\d)?o?|chatgpt|gpt|claude|llama ?\d*|gemini|bert|mistral|qwen|stable diffusion|whisper)\b/, qs = /\b(train(ed)?|pre-?train(ed)?|create(d)?|invent(ed)?|develop(ed)? (the )?(model|llm)|build (the )?model|built (the )?model|fine-?tune(d)? (gpt|claude|llama))\b/;
-function Es(e, t, n, r, s, a) {
+const Vs = /(\$?\d{1,3}(?:,\d{3})+\+?|\$?\d+(?:\.\d+)?\s?(?:%|×|ms\b|m\b|million\b|k\b)|\b\d+(?:\.\d+)?x\b|\b\d{3,}\b)/gi, Gs = /\b(gpt-?[345](\.\d)?o?|chatgpt|gpt|claude|llama ?\d*|gemini|bert|mistral|qwen|stable diffusion|whisper)\b/, Qs = /\b(train(ed)?|pre-?train(ed)?|create(d)?|invent(ed)?|develop(ed)? (the )?(model|llm)|build (the )?model|built (the )?model|fine-?tune(d)? (gpt|claude|llama))\b/;
+function Ks(e, t, n, r, s, a) {
   if (!(/^(did|does|has|have|is|was|were|can|could|do)\b|\?$/.test(t) || /\b(did|has) (he|rahul)\b/.test(t))) return null;
-  const l = t.match(Cs)?.[0];
-  if (l && qs.test(t) && !/stable diffusion/.test(l)) {
-    const m = e.gap.get("pretraining"), g = ae(e, ti(e, ["llm_apis"]), "engineer", 1, 4);
+  const l = t.match(Gs)?.[0];
+  if (l && Qs.test(t) && !/stable diffusion/.test(l)) {
+    const f = e.gap.get("pretraining"), g = ae(e, ni(e, ["llm_apis"]), "engineer", 1, 4);
     return S("false_premise", [
       { type: "p", text: `No. Nothing in the evidence supports that premise. ${l.toUpperCase()} is a third-party model; the portfolio shows Rahul integrating hosted models through APIs, not training foundation models.` },
-      { type: "gaps", items: [{ id: m.id, name: m.name, statement: m.statement, closest: ["sssd"] }] },
+      { type: "gaps", items: [{ id: f.id, name: f.name, statement: f.statement, closest: ["sssd"] }] },
       { type: "claims", title: "What the evidence does show", ids: N(g) }
     ], { followups: ["What models has Rahul fine-tuned?", "Show me his strongest RAG work.", "What is not demonstrated yet?"] });
   }
   if (/\b(lead|led|manage[ds]?|managing|supervis\w*)\b.*\b(team|engineers|people|reports|org)\b/.test(t) && !/club/.test(t)) {
-    const m = Fe(e, "leadership");
-    if (m) return { ...Qe(e, m, a, { lead: "He hasn't managed a team of engineers yet. He has led people and led technical work end to end, which is the foundation for it:" }), intent: "false_premise" };
+    const f = Fe(e, "leadership");
+    if (f) return { ...Qe(e, f, a, { lead: "He hasn't managed a team of engineers yet. He has led people and led technical work end to end, which is the foundation for it:" }), intent: "false_premise" };
   }
-  const p = /minute|scale|100x|10x/.test(t) ? [] : n.match($s) ?? [];
-  if (p.length) {
-    const m = p[0].replace(/\s/g, ""), g = m.replace(/^\$/, "").replace(/[%x×]$/i, ""), d = e.claims.filter((w) => F(w) && w.text.replace(/\s/g, "").includes(g)), y = e.claims.filter((w) => !F(w) && w.text.replace(/\s/g, "").includes(g));
-    if (d.length) {
-      const w = /patient records|patients|ehr/.test(t) && d.some((u) => /not clinical ehr records/i.test(u.text));
+  const u = /minute|scale|100x|10x/.test(t) ? [] : n.match(Vs) ?? [];
+  if (u.length) {
+    const f = u[0].replace(/\s/g, ""), g = f.replace(/^\$/, "").replace(/[%x×]$/i, ""), c = e.claims.filter((y) => F(y) && y.text.replace(/\s/g, "").includes(g)), w = e.claims.filter((y) => !F(y) && y.text.replace(/\s/g, "").includes(g));
+    if (c.length) {
+      const y = /patient records|patients|ehr/.test(t) && c.some((p) => /not clinical ehr records/i.test(p.text));
       return S("figure_check", [
-        { type: "p", text: w ? `Not quite. ${m} refers to public drug-review rows, not patient records:` : `Here is what the verified evidence says about ${m}:`, cites: N(d.slice(0, 1)) },
-        { type: "claims", ids: N(d.slice(0, 3)) }
-      ], { entities: Q(d.map((u) => u.entity)), followups: O(e, d[0].entity) });
+        { type: "p", text: y ? `Not quite. ${f} refers to public drug-review rows, not patient records:` : `Here is what the verified evidence says about ${f}:`, cites: N(c.slice(0, 1)) },
+        { type: "claims", ids: N(c.slice(0, 3)) }
+      ], { entities: Q(c.map((p) => p.entity)), followups: B(e, c[0].entity) });
     }
-    if (y.length)
+    if (w.length)
       return S("figure_check", [
-        { type: "p", text: `That figure is not verified, so I won't state it as fact. ${y[0].note ?? ""}` },
+        { type: "p", text: `That figure is not verified, so I won't state it as fact. ${w[0].note ?? ""}` },
         { type: "note", tone: "warn", text: 'It appears only in a source marked "verification required", "unsupported" or "deprecated" in the evidence database.' }
-      ], { entities: Q(y.map((w) => w.entity)) });
+      ], { entities: Q(w.map((y) => y.entity)) });
     if (r.length || s.length)
-      return S("figure_check", [{ type: "p", text: `${m} does not appear anywhere in the verified evidence, so I can't confirm it.` }], { entities: r });
+      return S("figure_check", [{ type: "p", text: `${f} does not appear anywhere in the verified evidence, so I can't confirm it.` }], { entities: r });
   }
-  const c = s.map((m) => e.gap.get(m)).find((m) => m && !m.verify);
-  if (c && /\b(did|does|has|have|is|was)\b/.test(t)) {
-    const m = (c.partial ?? []).map((w) => e.claim.get(w)).filter(F), g = [...m, ...c.related.flatMap((w) => e.statableBySkill.get(w) ?? [])], d = m.length ? m.slice(0, 3) : ae(e, g, "engineer", 1, 4), y = Fe(e, "learning");
+  const d = s.map((f) => e.gap.get(f)).find((f) => f && !f.verify);
+  if (d && /\b(did|does|has|have|is|was)\b/.test(t)) {
+    const f = (d.partial ?? []).map((y) => e.claim.get(y)).filter(F), g = [...f, ...d.related.flatMap((y) => e.statableBySkill.get(y) ?? [])], c = f.length ? f.slice(0, 3) : ae(e, g, "engineer", 1, 4), w = Fe(e, "learning");
     return S("unsupported_skill", se({
-      lead: `${m.length ? "Not in production yet." : "Not yet."} ${c.statement}`,
-      points: Ke(e, d, 1),
-      takeaway: y?.takeaway ? `How he would close it: ${y.takeaway.text.replace(/^For your team: /, "")}` : void 0
+      lead: `${f.length ? "Not in production yet." : "Not yet."} ${d.statement}`,
+      points: Ke(e, c, 1),
+      takeaway: w?.takeaway ? `How he would close it: ${w.takeaway.text.replace(/^For your team: /, "")}` : void 0
     }), { topic: "learning", followups: ["How fast does he learn new technology?", "What is not demonstrated yet?", "Show me his backend engineering experience."] });
   }
   return null;
 }
-function Ss(e, t) {
-  const n = ut(e, t), r = n.counts, s = [
+function Ys(e, t) {
+  const n = pt(e, t), r = n.counts, s = [
     { type: "p", text: `I found ${n.requirements.length} requirements. ${r.direct} have direct evidence, ${r.related} related evidence, ${r.verification} need verification, and ${r.missing} are not currently demonstrated.` },
     { type: "coverage", analysis: n }
   ];
@@ -1071,9 +1126,9 @@ function Ss(e, t) {
     followups: ["What is the strongest evidence for this role?", "Challenge this evidence", "What is not demonstrated yet?"]
   });
 }
-function Si(e, t, n) {
+function Mi(e, t, n) {
   const r = Ce(e, t), s = r.counts, a = r.entities.slice(0, 3).map((l) => ee(e, l.id)), o = [
-    { type: "p", text: `Evidence coverage for ${r.title}: ${s.direct} requirements with direct evidence, ${s.related} with related evidence, ${s.verification} needing verification, and ${s.missing} not currently demonstrated. The strongest evidence comes from ${si(a)}.` },
+    { type: "p", text: `Evidence coverage for ${r.title}: ${s.direct} requirements with direct evidence, ${s.related} with related evidence, ${s.verification} needing verification, and ${s.missing} not currently demonstrated. The strongest evidence comes from ${ai(a)}.` },
     { type: "coverage", analysis: r }
   ];
   return r.notes.forEach((l) => o.push({ type: "note", tone: "info", text: l })), S("role", o, {
@@ -1086,129 +1141,129 @@ function Si(e, t, n) {
     followups: [`Challenge the evidence for ${r.title}`, `What would an interviewer ask for ${r.title}?`, "What is not demonstrated yet?"]
   });
 }
-function Ai(e, [t, n], r) {
-  const s = e.entity.get(t), a = e.entity.get(n), o = (y, w) => ({ label: y, values: [w(t), w(n)] }), l = (y) => Q((e.statableByEntity.get(y) ?? []).flatMap((w) => w.tags)).filter((w) => !["python", "healthcare", "fintech", "product_judgment"].includes(w)).slice(0, 6).map((w) => yt(e, w)).join(", ") || "—", p = (y) => (e.statableByEntity.get(y) ?? []).find((w) => w.tags.some((u) => ["eval_design", "llm_eval", "regression_testing"].includes(u)) && w.kind !== "limitation")?.text ?? "—", c = (y) => {
-    const w = (e.statableByEntity.get(y) ?? []).find((u) => u.metrics?.length);
-    return w ? w.metrics.map((u) => `${u.label}: ${u.value}`).join(" · ") : "—";
-  }, m = (y) => Ae(e, y)[0]?.text.replace(/^Limits:\s*/, "") ?? "—", g = (y) => (e.statableByEntity.get(y) ?? []).some((w) => w.tags.includes("deployment")) ? "Yes" : "No public deployment", d = Q([t, n].flatMap((y) => (e.statableByEntity.get(y) ?? []).filter((w) => w.metrics?.length || w.kind === "limitation").slice(0, 3)));
+function ji(e, [t, n], r) {
+  const s = e.entity.get(t), a = e.entity.get(n), o = (w, y) => ({ label: w, values: [y(t), y(n)] }), l = (w) => Q((e.statableByEntity.get(w) ?? []).flatMap((y) => y.tags)).filter((y) => !["python", "healthcare", "fintech", "product_judgment"].includes(y)).slice(0, 6).map((y) => vt(e, y)).join(", ") || "—", u = (w) => (e.statableByEntity.get(w) ?? []).find((y) => y.tags.some((p) => ["eval_design", "llm_eval", "regression_testing"].includes(p)) && y.kind !== "limitation")?.text ?? "—", d = (w) => {
+    const y = (e.statableByEntity.get(w) ?? []).find((p) => p.metrics?.length);
+    return y ? y.metrics.map((p) => `${p.label}: ${p.value}`).join(" · ") : "—";
+  }, f = (w) => Ae(e, w)[0]?.text.replace(/^Limits:\s*/, "") ?? "—", g = (w) => (e.statableByEntity.get(w) ?? []).some((y) => y.tags.includes("deployment")) ? "Yes" : "No public deployment", c = Q([t, n].flatMap((w) => (e.statableByEntity.get(w) ?? []).filter((y) => y.metrics?.length || y.kind === "limitation").slice(0, 3)));
   return S("compare", [
     { type: "p", text: `${s.short} vs ${a.short}, compared on the same evidence fields.` },
     { type: "compare", entities: [t, n], rows: [
-      o("What it is", (y) => e.entity.get(y).tagline),
-      o("When", (y) => e.entity.get(y).dates),
+      o("What it is", (w) => e.entity.get(w).tagline),
+      o("When", (w) => e.entity.get(w).dates),
       o("Demonstrates", l),
-      o("Evaluation evidence", p),
-      o("Measured results", c),
+      o("Evaluation evidence", u),
+      o("Measured results", d),
       o("Deployed", g),
-      o("Main limitation", m),
-      o("Ownership", (y) => e.entity.get(y).ownership || "—")
+      o("Main limitation", f),
+      o("Ownership", (w) => e.entity.get(w).ownership || "—")
     ] },
-    { type: "claims", title: "Evidence used", ids: N(ae(e, d, r, 3, 6)) }
-  ], { entities: [t, n], actions: [...We(e, t).slice(0, 1), ...We(e, n).slice(0, 1)], followups: [...O(e, t).slice(0, 2), ...O(e, n).slice(0, 2)] });
+    { type: "claims", title: "Evidence used", ids: N(ae(e, c, r, 3, 6)) }
+  ], { entities: [t, n], actions: [...De(e, t).slice(0, 1), ...De(e, n).slice(0, 1)], followups: [...B(e, t).slice(0, 2), ...B(e, n).slice(0, 2)] });
 }
-function Ii(e, t, n, r) {
+function Ti(e, t, n, r) {
   const s = /* @__PURE__ */ new Map();
-  for (const d of ti(e, t)) {
-    const y = s.get(d.entity) ?? { s: 0, claims: [] };
-    y.s += (d.strength === "public_artifact" ? 1 : 0.7) + (d.code?.length ? 0.4 : 0) + (d.kind === "metric" ? 0.2 : 0), y.claims.push(d), s.set(d.entity, y);
+  for (const c of ni(e, t)) {
+    const w = s.get(c.entity) ?? { s: 0, claims: [] };
+    w.s += (c.strength === "public_artifact" ? 1 : 0.7) + (c.code?.length ? 0.4 : 0) + (c.kind === "metric" ? 0.2 : 0), w.claims.push(c), s.set(c.entity, w);
   }
-  const a = [...s.entries()].filter(([d]) => d !== "imw").sort((d, y) => y[1].s - d[1].s);
-  if (!a.length) return Bt(e, t.map((d) => ({ id: d })), n, r);
-  const [o, l] = a[0], p = e.entity.get(o), c = yt(e, t[0]), m = ae(e, l.claims, n, 5, 5), g = a[1] ? ` ${ee(e, a[1][0])} is next.` : "";
+  const a = [...s.entries()].filter(([c]) => c !== "imw").sort((c, w) => w[1].s - c[1].s);
+  if (!a.length) return Bt(e, t.map((c) => ({ id: c })), n, r);
+  const [o, l] = a[0], u = e.entity.get(o), d = vt(e, t[0]), f = ae(e, l.claims, n, 5, 5), g = a[1] ? ` ${ee(e, a[1][0])} is next.` : "";
   return S("strongest", se({
-    lead: `His strongest ${c} work is ${p.name}.${g}`,
-    points: on(e, m),
+    lead: `His strongest ${d} work is ${u.name}.${g}`,
+    points: dn(e, f),
     extra: e.archByEntity.has(o) ? [{ type: "xray", arch: e.archByEntity.get(o).id }] : []
-  }), { entities: [o], actions: We(e, o), followups: O(e, o) });
+  }), { entities: [o], actions: De(e, o), followups: B(e, o) });
 }
 function Bt(e, t, n, r) {
-  const s = [], a = [], o = [], l = [], p = /* @__PURE__ */ new Set();
-  for (const m of t.slice(0, 3)) {
-    const g = le(e, m.id, { near: m.near });
-    if (p.has(g.id)) continue;
-    p.add(g.id);
-    const d = g.entities.map((w) => ee(e, w)), y = !s.length;
+  const s = [], a = [], o = [], l = [], u = /* @__PURE__ */ new Set();
+  for (const f of t.slice(0, 3)) {
+    const g = ce(e, f.id, { near: f.near });
+    if (u.has(g.id)) continue;
+    u.add(g.id);
+    const c = g.entities.map((y) => ee(e, y)), w = !s.length;
     if (g.category === "direct") {
-      const w = ae(e, g.claims.map((u) => e.claim.get(u)), n, 2, 5);
-      s.push({ type: "p", lead: y, text: `Yes. He has used ${g.label} in ${si(d.slice(0, 4))}.`, cites: g.claims.slice(0, 2) }), s.push({ type: "points", items: Ke(e, w, 1) }), l.push(...N(w));
+      const y = ae(e, g.claims.map((p) => e.claim.get(p)), n, 2, 5);
+      s.push({ type: "p", lead: w, text: `Yes. He has used ${g.label} in ${ai(c.slice(0, 4))}.`, cites: g.claims.slice(0, 2) }), s.push({ type: "points", items: Ke(e, y, 1) }), l.push(...N(y));
     } else if (g.category === "related") {
-      const w = g.via ? `Not directly, but he has closely related experience. ${g.statement ?? ""}` : `Partly. ${g.statement ?? ""}`;
-      s.push({ type: "p", lead: y, text: w.trim(), cites: g.claims.slice(0, 1) });
-      const u = g.claims.slice(0, 4).map((f) => e.claim.get(f)).filter(Boolean);
-      s.push({ type: "points", items: Ke(e, u, 1) }), l.push(...N(u));
-    } else g.category === "verification" ? s.push({ type: "p", lead: y, text: `${ie.verification}: ${g.statement ?? ""}` }) : (y && s.push({ type: "p", lead: y, text: `Not yet: ${g.label} isn't part of his work so far. Here is the closest experience, and how he tends to pick up new tools:` }), s.push({ type: "gaps", items: [{ id: g.id, name: g.label, statement: g.statement ?? "", closest: g.entities }] }));
-    if (a.push(...g.entities), /where/.test(r)) for (const w of g.entities.slice(0, 3)) {
-      const u = e.entity.get(w);
-      u && o.push(ii(u));
+      const y = g.via ? `Not directly, but he has closely related experience. ${g.statement ?? ""}` : `Partly. ${g.statement ?? ""}`;
+      s.push({ type: "p", lead: w, text: y.trim(), cites: g.claims.slice(0, 1) });
+      const p = g.claims.slice(0, 4).map((m) => e.claim.get(m)).filter(Boolean);
+      s.push({ type: "points", items: Ke(e, p, 1) }), l.push(...N(p));
+    } else g.category === "verification" ? s.push({ type: "p", lead: w, text: `${ie.verification}: ${g.statement ?? ""}` }) : (w && s.push({ type: "p", lead: w, text: `Not yet: ${g.label} isn't part of his work so far. Here is the closest experience, and how he tends to pick up new tools:` }), s.push({ type: "gaps", items: [{ id: g.id, name: g.label, statement: g.statement ?? "", closest: g.entities }] }));
+    if (a.push(...g.entities), /where/.test(r)) for (const y of g.entities.slice(0, 3)) {
+      const p = e.entity.get(y);
+      p && o.push(si(p));
     }
   }
   l.length && s.push({ type: "claims", title: "Sources", ids: Q(l), collapsed: !0 });
-  const c = Q(a)[0];
-  return S("skill", s, { entities: Q(a), actions: o.length ? o : c ? We(e, c) : [], followups: c ? O(e, c).slice(0, 3).concat(["What is not demonstrated yet?"]) : _t.slice(0, 4) });
+  const d = Q(a)[0];
+  return S("skill", s, { entities: Q(a), actions: o.length ? o : d ? De(e, d) : [], followups: d ? B(e, d).slice(0, 3).concat(["What is not demonstrated yet?"]) : _t.slice(0, 4) });
 }
-function As(e, t, n, r) {
-  const s = e.entity.get(t), a = e.statableByEntity.get(t) ?? [], o = e.archByEntity.get(t), l = e.failures.filter((w) => w.entity === t), p = e.decisions.filter((w) => w.entity === t), c = We(e, t);
+function Js(e, t, n, r) {
+  const s = e.entity.get(t), a = e.statableByEntity.get(t) ?? [], o = e.archByEntity.get(t), l = e.failures.filter((y) => y.entity === t), u = e.decisions.filter((y) => y.entity === t), d = De(e, t);
   if (T(n, /(architect|how does it work|how it works|components?|diagram|x-?ray|system design|pipeline|stack)/) && o)
     return S("architecture", [
       { type: "p", text: `${o.note} Select any component to see its purpose, inputs and outputs, why it exists, and the claim that supports it.` },
       { type: "xray", arch: o.id }
-    ], { entities: [t], actions: c, followups: O(e, t, ["architecture"]) });
-  if (T(n, /\b(why|decision|decide|tradeoff|trade-off|chose|choice|designed this way)\b/) && p.length)
-    return S("decisions", [{ type: "decisions", ids: p.map((w) => w.id) }], { entities: [t], actions: c, followups: O(e, t, ["why"]) });
+    ], { entities: [t], actions: d, followups: B(e, t, ["architecture"]) });
+  if (T(n, /\b(why|decision|decide|tradeoff|trade-off|chose|choice|designed this way)\b/) && u.length)
+    return S("decisions", [{ type: "decisions", ids: u.map((y) => y.id) }], { entities: [t], actions: d, followups: B(e, t, ["why"]) });
   if (T(n, /(fail|broke|bug|wrong|didn'?t work|mistake|issue|weakness|limitation|risk|what went)/)) {
-    const w = Ae(e, t), u = [];
-    return l.length && u.push({ type: "failures", ids: l.map((f) => f.id) }), w.length && u.push({ type: "claims", title: "Stated limitations", ids: N(w) }), u.length || u.push({ type: "p", text: `The evidence database records no specific failure case for ${s.short}.` }), S("failures", u, { entities: [t], actions: [...e.attacks.some((f) => f.entity === t) ? [{ kind: "mode", label: "Try to break it", target: "lab", arg: t }] : [], ...c], followups: O(e, t, ["failure"]) });
+    const y = Ae(e, t), p = [];
+    return l.length && p.push({ type: "failures", ids: l.map((m) => m.id) }), y.length && p.push({ type: "claims", title: "Stated limitations", ids: N(y) }), p.length || p.push({ type: "p", text: `The evidence database records no specific failure case for ${s.short}.` }), S("failures", p, { entities: [t], actions: [...e.attacks.some((m) => m.entity === t) ? [{ kind: "mode", label: "Try to break it", target: "lab", arg: t }] : [], ...d], followups: B(e, t, ["failure"]) });
   }
   if (T(n, /(evaluat|tested|test |tests|metric|measure|benchmark|accura|result|validat|how good|how well)/)) {
-    const w = a.filter((v) => v.tags.some((k) => ["eval_design", "llm_eval", "regression_testing", "metrics", "testing", "model_comparison"].includes(k))), u = [{ type: "claims", ids: N(ae(e, w, "researcher", 7, 7)) }];
-    t === "cliniq" && u.push({ type: "chart", chart: "cliniq" }), t === "voice" && u.push({ type: "chart", chart: "voice_quality" });
-    const f = e.traces.find((v) => v.entity === t);
-    return f && u.push({ type: "trace", id: f.id }), S("evaluation", u, { entities: [t], actions: [{ kind: "mode", label: "Open the proof lab", target: "lab", arg: t }, ...c], followups: O(e, t, ["evaluation"]) });
+    const y = a.filter((v) => v.tags.some((k) => ["eval_design", "llm_eval", "regression_testing", "metrics", "testing", "model_comparison"].includes(k))), p = [{ type: "claims", ids: N(ae(e, y, "researcher", 7, 7)) }];
+    t === "cliniq" && p.push({ type: "chart", chart: "cliniq" }), t === "voice" && p.push({ type: "chart", chart: "voice_quality" });
+    const m = e.traces.find((v) => v.entity === t);
+    return m && p.push({ type: "trace", id: m.id }), S("evaluation", p, { entities: [t], actions: [{ kind: "mode", label: "Open the proof lab", target: "lab", arg: t }, ...d], followups: B(e, t, ["evaluation"]) });
   }
   if (T(n, /(code|repo|github|source|implementation|where is|show me where|file)/)) {
-    const w = a.filter((u) => u.code?.length);
+    const y = a.filter((p) => p.code?.length);
     return S("code", [
       { type: "p", text: `Code links are pinned to a specific commit, so line numbers do not drift.${s.repo ? "" : " This is employment work, so no source code is public."}` },
-      { type: "claims", ids: N(ae(e, w, "engineer", 8, 8)) }
-    ], { entities: [t], actions: c, followups: O(e, t, ["code"]) });
+      { type: "claims", ids: N(ae(e, y, "engineer", 8, 8)) }
+    ], { entities: [t], actions: d, followups: B(e, t, ["code"]) });
   }
   if (T(n, /(challenge|interviewer|push back|poke holes|skeptic|critic|what would .* ask)/)) {
-    const w = Ae(e, t), u = [{ type: "p", text: `Questions an interviewer could reasonably press on for ${s.short}:` }];
-    return s.questions.forEach((f) => u.push({ type: "p", text: `• ${f}` })), w.length && u.push({ type: "claims", title: "Limitations the evidence already states", ids: N(w) }), p.length && u.push({ type: "decisions", ids: p.slice(0, 2).map((f) => f.id) }), S("challenge", u, { entities: [t], actions: c, followups: O(e, t, ["challenge"]) });
+    const y = Ae(e, t), p = [{ type: "p", text: `Questions an interviewer could reasonably press on for ${s.short}:` }];
+    return s.questions.forEach((m) => p.push({ type: "p", text: `• ${m}` })), y.length && p.push({ type: "claims", title: "Limitations the evidence already states", ids: N(y) }), u.length && p.push({ type: "decisions", ids: u.slice(0, 2).map((m) => m.id) }), S("challenge", p, { entities: [t], actions: d, followups: B(e, t, ["challenge"]) });
   }
   if (T(n, /(personally|himself|his (own )?(part|role|contribution)|ownership|individual|solo|team)/))
     return S("personally", [
       { type: "p", text: s.ownership || "The portfolio does not break down individual contributions for this item." },
       { type: "claims", ids: N(ae(e, a, r, 4, 4)) }
-    ], { entities: [t], actions: c, followups: O(e, t, ["personally"]) });
+    ], { entities: [t], actions: d, followups: B(e, t, ["personally"]) });
   if (T(n, /(scale|scaling|100x|10x|more users|production traffic|load|million)/)) {
-    const w = a.filter((f) => f.tags.some((v) => ["rate_limiting", "caching", "deployment", "docker", "monitoring"].includes(v))), u = ["distributed_systems", "kubernetes"].map((f) => e.gap.get(f));
+    const y = a.filter((m) => m.tags.some((v) => ["rate_limiting", "caching", "deployment", "docker", "monitoring"].includes(v))), p = ["distributed_systems", "kubernetes"].map((m) => e.gap.get(m));
     return S("scale", [
       { type: "p", text: `What is implemented today for ${s.short}:` },
-      w.length ? { type: "claims", ids: N(w.slice(0, 5)) } : { type: "p", text: "No scaling-related controls are recorded for this item." },
-      { type: "gaps", items: u.map((f) => ({ id: f.id, name: f.name, statement: f.statement, closest: [] })) },
+      y.length ? { type: "claims", ids: N(y.slice(0, 5)) } : { type: "p", text: "No scaling-related controls are recorded for this item." },
+      { type: "gaps", items: p.map((m) => ({ id: m.id, name: m.name, statement: m.statement, closest: [] })) },
       { type: "note", tone: "info", text: "A 100× scaling plan would be a design discussion, not built work. The portfolio does not claim it was implemented." }
-    ], { entities: [t], actions: c, followups: O(e, t, ["scale"]) });
+    ], { entities: [t], actions: d, followups: B(e, t, ["scale"]) });
   }
   if (n.length > 70) {
-    const w = nn(e, n, { entities: [t], limit: 8 }).map((f) => f.claim).filter((f) => f.entity === t), u = Ae(e, t).filter((f) => !w.includes(f));
-    if (w.length)
+    const y = an(e, n, { entities: [t], limit: 8 }).map((m) => m.claim).filter((m) => m.entity === t), p = Ae(e, t).filter((m) => !y.includes(m));
+    if (y.length)
       return S("focused", [
-        { type: "p", text: `The evidence most relevant to this question about ${s.short}:`, cites: N(w.slice(0, 2)) },
-        { type: "claims", ids: N(w.slice(0, 5)) },
-        ...u.length ? [{ type: "claims", title: "Stated limitations", ids: N(u.slice(0, 2)) }] : []
-      ], { entities: [t], actions: c, followups: O(e, t) });
+        { type: "p", text: `The evidence most relevant to this question about ${s.short}:`, cites: N(y.slice(0, 2)) },
+        { type: "claims", ids: N(y.slice(0, 5)) },
+        ...p.length ? [{ type: "claims", title: "Stated limitations", ids: N(p.slice(0, 2)) }] : []
+      ], { entities: [t], actions: d, followups: B(e, t) });
   }
-  const m = s.summaries[r] ?? s.tagline, g = ae(e, a, r, r === "recruiter" ? 4 : 5, r === "recruiter" ? 4 : 5), d = [];
-  if (r === "engineer" && o && d.push({ type: "xray", arch: o.id }), r === "researcher") {
-    const w = Ae(e, t);
-    w.length && d.push({ type: "claims", title: "Stated limitations", ids: N(w) });
+  const f = s.summaries[r] ?? s.tagline, g = ae(e, a, r, r === "recruiter" ? 4 : 5, r === "recruiter" ? 4 : 5), c = [];
+  if (r === "engineer" && o && c.push({ type: "xray", arch: o.id }), r === "researcher") {
+    const y = Ae(e, t);
+    y.length && c.push({ type: "claims", title: "Stated limitations", ids: N(y) });
   }
-  r === "manager" && s.ownership && d.push({ type: "note", tone: "info", text: `Ownership: ${s.ownership}` });
-  const y = [{ type: "entity", id: t }, ...se({ lead: m, leadCites: N(g.slice(0, 2)), points: on(e, g), extra: d })];
-  return S("entity", y, { entities: [t], actions: c, followups: O(e, t) });
+  r === "manager" && s.ownership && c.push({ type: "note", tone: "info", text: `Ownership: ${s.ownership}` });
+  const w = [{ type: "entity", id: t }, ...se({ lead: f, leadCites: N(g.slice(0, 2)), points: dn(e, g), extra: c })];
+  return S("entity", w, { entities: [t], actions: d, followups: B(e, t) });
 }
-function Is(e, t, n = !1) {
+function Xs(e, t, n = !1) {
   const s = n ? e.failures.map((a) => a.id) : {
     engineer: ["f.voice.bargein", "f.voice.artifacts", "f.cliniq.embedding"],
     recruiter: ["f.voice.bargein", "f.cliniq.embedding"],
@@ -1225,7 +1280,7 @@ function Is(e, t, n = !1) {
     followups: ["Show me the barge-in fix in code", "Show more failure cases", "How does he evaluate AI systems?"]
   });
 }
-function Ms(e, t) {
+function Zs(e, t) {
   const r = [
     ["dia.no_llm_review", "Deterministic label review, no LLM"],
     ["dia.four_tier", "A four-tier severity classifier"],
@@ -1243,7 +1298,7 @@ function Ms(e, t) {
     takeaway: "For your team: he knows when not to use an LLM, and how to engineer the parts around one, which is what keeps AI systems reliable."
   }), { entities: Q(r.map(([s]) => e.claim.get(s).entity)), actions: [{ kind: "mode", label: "X-Ray the Drug Interaction Agent", target: "xray", arg: "dia" }], followups: ["Why keep label review free of an LLM?", "Show me the barge-in fix in code", "Show the architecture of ClinIQ"] });
 }
-function js(e, t) {
+function er(e, t) {
   return S("shipped", se({
     lead: "He has shipped AI both in production at work and as public, live systems you can try right now:",
     points: [
@@ -1260,7 +1315,7 @@ function js(e, t) {
     followups: ["What did Rahul personally do on TIFIN?", "Show the architecture of the Drug Interaction Agent", "How was ClinIQ evaluated?"]
   });
 }
-function Ts(e) {
+function tr(e) {
   return S("gaps", se({
     lead: "Honest answer: his gaps are large-scale infrastructure and formal people management, which is typical at his career stage, and each one sits next to experience he can build on:",
     points: [],
@@ -1269,7 +1324,7 @@ function Ts(e) {
     takeawayCites: ["voice.harness", "sssd.encoder", "qml.benchmark"]
   }), { topic: "learning", followups: ["How fast does he learn new technology?", "Evaluate Rahul for an MLOps Engineer role", "Why should we hire Rahul?"] });
 }
-function Rs(e) {
+function ir(e) {
   return S("level", se({
     lead: "Early-career, with real production experience: he has worked on production AI at TIFIN and now at Citizen Health, and holds an M.S. in Computer Science.",
     points: [
@@ -1281,7 +1336,7 @@ function Rs(e) {
     takeaway: "He fits AI / ML engineer roles at the early-career level, and the work itself (production deployment, evaluation and end-to-end systems) is what those roles ask for. For senior roles, the difference is years of ownership rather than the kind of work."
   }), { followups: ["What has Rahul actually shipped?", "Why should we hire Rahul?", "Evaluate Rahul for a Machine Learning Engineer I role"] });
 }
-const ln = [
+const hn = [
   [
     /\b(rag|retrieval|vector|embedding|semantic search|grounded)/,
     ["rag", "vector_db", "semantic_search", "embeddings", "provenance"],
@@ -1355,25 +1410,25 @@ const ln = [
     "For your team: experience shipping AI under enterprise compliance controls."
   ]
 ];
-function Ze(e) {
-  return ln.find(([t]) => t.test(e))?.[1] ?? [];
+function et(e) {
+  return hn.find(([t]) => t.test(e))?.[1] ?? [];
 }
-function Ls(e, t, n, r) {
-  const [, , s, a] = ln.find(([c]) => c.test(t)), o = ae(e, ti(e, n), r, r === "recruiter" ? 2 : 3, r === "recruiter" ? 6 : 9), l = Q(o.map((c) => c.entity)), p = [];
-  return n.includes("eval_design") && r !== "recruiter" && p.push({ type: "chart", chart: "cliniq" }), n.includes("rag") && l.includes("dia") && r === "engineer" && p.push({ type: "xray", arch: "arch.dia" }), n.includes("voice_ai") && p.push({ type: "trace", id: "t.voice.emergency" }), S("topic", se({ lead: s, points: Ke(e, o, r === "recruiter" ? 1 : 2), extra: p, takeaway: a }), {
+function nr(e, t, n, r) {
+  const [, , s, a] = hn.find(([d]) => d.test(t)), o = ae(e, ni(e, n), r, r === "recruiter" ? 2 : 3, r === "recruiter" ? 6 : 9), l = Q(o.map((d) => d.entity)), u = [];
+  return n.includes("eval_design") && r !== "recruiter" && u.push({ type: "chart", chart: "cliniq" }), n.includes("rag") && l.includes("dia") && r === "engineer" && u.push({ type: "xray", arch: "arch.dia" }), n.includes("voice_ai") && u.push({ type: "trace", id: "t.voice.emergency" }), S("topic", se({ lead: s, points: Ke(e, o, r === "recruiter" ? 1 : 2), extra: u, takeaway: a }), {
     entities: l,
-    actions: l.slice(0, 3).map((c) => ii(e.entity.get(c))),
-    followups: l[0] ? O(e, l[0]).slice(0, 3).concat(l[1] ? [`Compare ${ee(e, l[0])} and ${ee(e, l[1])}`] : []) : _t.slice(0, 4)
+    actions: l.slice(0, 3).map((d) => si(e.entity.get(d))),
+    followups: l[0] ? B(e, l[0]).slice(0, 3).concat(l[1] ? [`Compare ${ee(e, l[0])} and ${ee(e, l[1])}`] : []) : _t.slice(0, 4)
   });
 }
-function Ps(e, t, n, r) {
+function sr(e, t, n, r) {
   const s = t.id === "learning" ? n[0] : void 0;
   if (!s) return Qe(e, t, r);
-  const a = le(e, s), o = si(a.entities.slice(0, 3).map((p) => ee(e, p))), l = a.category === "direct" ? `He already has direct experience with ${a.label}, in ${o}.` : a.category === "related" ? (a.via ? `He has closely related experience: ${a.statement ?? ""}` : `Partly. ${a.statement ?? ""}`).trim() : `${a.label} isn't part of his work yet. ${a.statement ?? ""}`.trim();
+  const a = ce(e, s), o = ai(a.entities.slice(0, 3).map((u) => ee(e, u))), l = a.category === "direct" ? `He already has direct experience with ${a.label}, in ${o}.` : a.category === "related" ? (a.via ? `He has closely related experience: ${a.statement ?? ""}` : `Partly. ${a.statement ?? ""}`).trim() : `${a.label} isn't part of his work yet. ${a.statement ?? ""}`.trim();
   return Qe(e, t, r, { lead: `${l} On picking it up: the clearest evidence is how many different kinds of systems he has built from scratch, each in a new stack or domain, and each one working, tested and documented.` });
 }
-function Fs(e, t, n) {
-  const r = nn(e, t, { limit: 8 });
+function rr(e, t, n) {
+  const r = an(e, t, { limit: 8 });
   if (!r.length || r[0].score < 2)
     return S("no_evidence", [
       { type: "p", lead: !0, text: "I don't have evidence that answers that directly. I can speak to his projects, experience, technical skills, and how he works with people. For example:" }
@@ -1382,10 +1437,10 @@ function Fs(e, t, n) {
   return S(
     "retrieval",
     se({ lead: "Here is what his work shows on that:", points: Ke(e, s) }),
-    { entities: Q(s.map((o) => o.entity)), actions: We(e, a), followups: O(e, a).slice(0, 3), basis: { retrieved: r.map((o) => o.claim.id) } }
+    { entities: Q(s.map((o) => o.entity)), actions: De(e, a), followups: B(e, a).slice(0, 3), basis: { retrieved: r.map((o) => o.claim.id) } }
   );
 }
-function Ws(e, t) {
+function ar(e, t) {
   const n = [
     { label: "Current role · Citizen Health", text: "Builds source-grounded retrieval and summarization for a patient-advocacy product, with each statement linked to its medical record and every release gated by evaluation.", cites: ["citizen.role", "citizen.source_linked", "citizen.release_eval"] },
     { label: "Production AI · TIFIN", text: "LangGraph advisor workflows with tool calling and structured outputs. The AI capabilities reached 40,000+ users, models improved recommendation accuracy by 19% and F1 by 24%, and a 65% reduction in manual effort was reported.", cites: ["tifin.agents", "tifin.structured", "tifin.reach", "tifin.gains", "tifin.effort"] },
@@ -1405,85 +1460,85 @@ function Ws(e, t) {
     followups: ["Why should we hire Rahul?", "How does he work in a team?", "What has Rahul actually shipped?"]
   });
 }
-function Mi(e, t) {
+function Ri(e, t) {
   const n = Ce(e, t), r = n.entities.slice(0, 3).map((o) => e.entity.get(o.id)).filter(Boolean), s = [{ type: "p", text: `Questions worth asking for ${n.title}, grounded in the evidence an interviewer would see:` }];
   for (const o of r) o.questions.slice(0, 2).forEach((l) => s.push({ type: "p", text: `• ${o.short}: ${l}` }));
   return n.requirements.filter((o) => o.category === "missing").slice(0, 2).forEach((o) => s.push({ type: "p", text: `• Gap: ${o.label}. How would you close it in your first months?` })), S("role_questions", s, { entities: r.map((o) => o.id), actions: [{ kind: "mode", label: "10-minute technical brief", target: "brief", arg: t }], followups: [`Challenge the evidence for ${n.title}`] });
 }
-function ji(e, t) {
+function Li(e, t) {
   const n = Ce(e, t), r = n.entities.slice(0, 3).map((l) => l.id), s = r.flatMap((l) => Ae(e, l)).slice(0, 4), a = n.requirements.filter((l) => l.category === "direct" && l.strength === "self_reported").map((l) => l.label), o = [
     { type: "p", text: `The weakest points in the evidence for ${n.title}:` },
     { type: "gaps", items: n.requirements.filter((l) => l.category === "missing" || l.category === "verification").map((l) => ({ id: l.id, name: l.label, statement: l.statement ?? "", closest: l.entities.slice(0, 3) })) }
   ];
   return a.length && o.push({ type: "note", tone: "warn", text: `Supported only by self-reported employment experience (no public artifact): ${a.join(", ")}.` }), s.length && o.push({ type: "claims", title: "Limitations stated in the strongest projects", ids: N(s) }), n.notes.forEach((l) => o.push({ type: "note", tone: "info", text: l })), S("challenge", o, { entities: r, followups: [`What would an interviewer ask for ${n.title}?`, "What failure did he find and fix?"] });
 }
-function si(e) {
+function ai(e) {
   return e.length <= 1 ? e[0] ?? "the portfolio" : `${e.slice(0, -1).join(", ")} and ${e[e.length - 1]}`;
 }
-const Ds = "https://astra6-interview-my-work.hf.space";
-function cn() {
-  return (document.querySelector('meta[name="imw-api"]')?.content || Ds).replace(/\/$/, "");
+const or = "https://astra6-interview-my-work.hf.space";
+function un() {
+  return (document.querySelector('meta[name="imw-api"]')?.content || or).replace(/\/$/, "");
 }
-async function pt(e, t) {
+async function mt(e, t) {
   const n = new AbortController(), r = setTimeout(() => n.abort(), t.timeout);
   try {
-    const s = await fetch(cn() + e, { ...t, signal: n.signal, headers: { "Content-Type": "application/json", ...t.headers || {} } });
+    const s = await fetch(un() + e, { ...t, signal: n.signal, headers: { "Content-Type": "application/json", ...t.headers || {} } });
     if (!s.ok) throw Object.assign(new Error(`HTTP ${s.status}`), { status: s.status });
     return await s.json();
   } finally {
     clearTimeout(r);
   }
 }
-async function Hs(e) {
+async function lr(e) {
   e("checking");
   const t = (n) => e(n?.ai_enabled ? "ready" : "offline");
   try {
-    t(await pt("/api/health", { method: "GET", timeout: 4e3 }));
+    t(await mt("/api/health", { method: "GET", timeout: 4e3 }));
     return;
   } catch {
   }
   e("waking");
   try {
-    t(await pt("/api/health", { method: "GET", timeout: 45e3 }));
+    t(await mt("/api/health", { method: "GET", timeout: 45e3 }));
   } catch {
     e("offline");
   }
 }
-async function Ns(e, t, n, r, s, a) {
-  const o = await pt("/api/ask", {
+async function cr(e, t, n, r, s, a) {
+  const o = await mt("/api/ask", {
     method: "POST",
     timeout: 3e4,
     body: JSON.stringify({ question: t, persona: n, history: r.slice(-3), role: s ?? null, topic: a ?? null })
-  }), l = o.sentences.flatMap((d) => d.cites), p = [...o.sentences.map((d) => `${d.label ?? ""} ${d.text}`), o.hypothetical ?? ""].join(" ");
-  if (!o.sentences.length || l.some((d) => !F(e.claim.get(d))) || rn.test(p))
+  }), l = o.sentences.flatMap((c) => c.cites), u = [...o.sentences.map((c) => `${c.label ?? ""} ${c.text}`), o.hypothetical ?? ""].join(" ");
+  if (!o.sentences.length || l.some((c) => !F(e.claim.get(c))) || ln.test(u))
     throw new Error("model answer failed client validation");
-  const c = [];
-  if (o.sentences.some((d) => d.kind === "point" && d.label)) {
-    const d = o.sentences.filter((u) => u.kind === "lead"), y = o.sentences.filter((u) => u.kind === "point"), w = o.sentences.filter((u) => u.kind === "takeaway");
-    d.length && c.push({ type: "p", lead: !0, text: d.map((u) => u.text.trim()).join(" "), cites: [...new Set(d.flatMap((u) => u.cites))] }), c.push({ type: "points", items: y.map((u) => ({ label: (u.label || "").trim() || "Evidence", text: u.text.trim(), cites: u.cites })) }), w.length && c.push({ type: "takeaway", text: w.map((u) => u.text.trim()).join(" "), cites: [...new Set(w.flatMap((u) => u.cites))] });
+  const d = [];
+  if (o.sentences.some((c) => c.kind === "point" && c.label)) {
+    const c = o.sentences.filter((p) => p.kind === "lead"), w = o.sentences.filter((p) => p.kind === "point"), y = o.sentences.filter((p) => p.kind === "takeaway");
+    c.length && d.push({ type: "p", lead: !0, text: c.map((p) => p.text.trim()).join(" "), cites: [...new Set(c.flatMap((p) => p.cites))] }), d.push({ type: "points", items: w.map((p) => ({ label: (p.label || "").trim() || "Evidence", text: p.text.trim(), cites: p.cites })) }), y.length && d.push({ type: "takeaway", text: y.map((p) => p.text.trim()).join(" "), cites: [...new Set(y.flatMap((p) => p.cites))] });
   } else {
-    let d = { text: "", cites: [] };
-    for (const y of o.sentences)
-      d.text += (d.text ? " " : "") + y.text.trim(), d.cites.push(...y.cites), d.text.length > 320 && (c.push({ type: "p", text: d.text, cites: [...new Set(d.cites)], lead: !c.length }), d = { text: "", cites: [] });
-    d.text && c.push({ type: "p", text: d.text, cites: [...new Set(d.cites)], lead: !c.length });
+    let c = { text: "", cites: [] };
+    for (const w of o.sentences)
+      c.text += (c.text ? " " : "") + w.text.trim(), c.cites.push(...w.cites), c.text.length > 320 && (d.push({ type: "p", text: c.text, cites: [...new Set(c.cites)], lead: !d.length }), c = { text: "", cites: [] });
+    c.text && d.push({ type: "p", text: c.text, cites: [...new Set(c.cites)], lead: !d.length });
   }
-  o.hypothetical && c.push({ type: "note", tone: "info", text: `Hypothetical, not implemented: ${o.hypothetical}` });
-  const g = (o.gaps ?? []).map((d) => e.gap.get(d)).filter(Boolean);
-  return g.length && c.push({ type: "gaps", items: g.map((d) => ({ id: d.id, name: d.name, statement: d.statement, closest: [] })) }), {
-    blocks: c,
+  o.hypothetical && d.push({ type: "note", tone: "info", text: `Hypothetical, not implemented: ${o.hypothetical}` });
+  const g = (o.gaps ?? []).map((c) => e.gap.get(c)).filter(Boolean);
+  return g.length && d.push({ type: "gaps", items: g.map((c) => ({ id: c.id, name: c.name, statement: c.statement, closest: [] })) }), {
+    blocks: d,
     followups: (o.followups ?? []).slice(0, 4),
     actions: [],
     engine: "model",
     intent: "model",
-    entities: (o.entities ?? []).filter((d) => e.entity.has(d)),
+    entities: (o.entities ?? []).filter((c) => e.entity.has(c)),
     basis: { retrieved: o.retrieved ?? [...new Set(l)], checks: o.checks, model: o.model }
   };
 }
-async function dn(e) {
-  const t = await pt("/api/jd", { method: "POST", timeout: 25e3, body: JSON.stringify({ text: e.slice(0, 12e3) }) });
+async function pn(e) {
+  const t = await mt("/api/jd", { method: "POST", timeout: 25e3, body: JSON.stringify({ text: e.slice(0, 12e3) }) });
   return Array.isArray(t.requirements) ? t.requirements.filter((n) => typeof n == "string").slice(0, 30) : [];
 }
-const hn = Dn(null), M = () => On(hn), qe = () => typeof matchMedia < "u" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+const mn = On(null), M = () => Vn(mn), Ee = () => typeof matchMedia < "u" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 function G(e, t = {}) {
   try {
     window.dispatchEvent(new CustomEvent("imw:event", { detail: { name: e, ...t } }));
@@ -1491,80 +1546,80 @@ function G(e, t = {}) {
   }
 }
 let Le = null;
-const Ot = [], mt = /* @__PURE__ */ new Set(), V = (e, t, n) => {
+const zt = [], ft = /* @__PURE__ */ new Set(), V = (e, t, n) => {
   const r = document.createElement(e);
   return r.className = t, n && (r.textContent = n), r;
 };
-function Bs(e, t, n) {
-  zt();
+function dr(e, t, n) {
+  Ut();
   const r = new Map(t.entities.map((v) => [v.id, v.score])), s = (v) => t.requirements.filter((k) => (k.category === "direct" || k.category === "related") && k.entities.includes(v)), a = document.getElementById("work"), o = a ? [...a.querySelectorAll(":scope > article.project")] : [];
   if (o.length && a) {
     Le = { parent: a, order: [...a.children], numbers: o.map((h) => [h.querySelector(".project-number"), h.querySelector(".project-number")?.textContent ?? ""]) };
-    const v = (h) => e.entities.find((x) => x.anchor === `#${h.id}`)?.id ?? "", k = new Map(o.map((h) => [h, h.getBoundingClientRect()])), _ = [...o].sort((h, x) => (r.get(v(x)) ?? 0) - (r.get(v(h)) ?? 0)), b = a.querySelector(":scope > .research");
-    if (_.forEach((h, x) => {
-      a.insertBefore(h, b);
+    const v = (h) => e.entities.find((x) => x.anchor === `#${h.id}`)?.id ?? "", k = new Map(o.map((h) => [h, h.getBoundingClientRect()])), b = [...o].sort((h, x) => (r.get(v(x)) ?? 0) - (r.get(v(h)) ?? 0)), _ = a.querySelector(":scope > .research");
+    if (b.forEach((h, x) => {
+      a.insertBefore(h, _);
       const C = h.querySelector(".project-number");
       C && (C.textContent = `${String(x + 1).padStart(2, "0")} —`);
-    }), !qe())
-      for (const h of _) {
-        const x = k.get(h), C = h.getBoundingClientRect(), q = x.top - C.top;
-        q && h.animate([{ transform: `translateY(${q}px)` }, { transform: "none" }], { duration: 700, easing: "cubic-bezier(.2,.8,.2,1)" });
+    }), !Ee())
+      for (const h of b) {
+        const x = k.get(h), C = h.getBoundingClientRect(), E = x.top - C.top;
+        E && h.animate([{ transform: `translateY(${E}px)` }, { transform: "none" }], { duration: 700, easing: "cubic-bezier(.2,.8,.2,1)" });
       }
   }
   for (const v of e.entities) {
     if (v.id === "imw" || v.kind === "education") continue;
     const k = document.querySelector(v.anchor);
     if (!k || k.id === "work" || k.id === "experience") continue;
-    const _ = s(v.id);
-    if (k.classList.add(_.length ? "imw-lens-hit" : "imw-lens-dim"), mt.add(k), _.length) {
-      const b = V("div", "imw-lens-tag");
-      b.append(V("span", "imw-lens-tag-label", `✦ Evidence for ${t.title}`)), _.slice(0, 6).forEach((h) => b.append(V("span", `imw-lens-chip is-${h.category}`, h.label))), k.prepend(b), Ot.push(b);
+    const b = s(v.id);
+    if (k.classList.add(b.length ? "imw-lens-hit" : "imw-lens-dim"), ft.add(k), b.length) {
+      const _ = V("div", "imw-lens-tag");
+      _.append(V("span", "imw-lens-tag-label", `✦ Evidence for ${t.title}`)), b.slice(0, 6).forEach((h) => _.append(V("span", `imw-lens-chip is-${h.category}`, h.label))), k.prepend(_), zt.push(_);
     }
   }
   const l = t.requirements.filter((v) => v.category === "direct").flatMap((v) => [v.label, ...e.skill.get(v.id)?.aliases ?? []]).map((v) => v.toLowerCase());
   document.querySelectorAll("#skills .skill").forEach((v) => {
     const k = v.textContent?.toLowerCase() ?? "";
-    v.classList.add(l.some((_) => _.length > 2 && k.includes(_)) ? "imw-lens-hit" : "imw-lens-dim"), mt.add(v);
+    v.classList.add(l.some((b) => b.length > 2 && k.includes(b)) ? "imw-lens-hit" : "imw-lens-dim"), ft.add(v);
   });
-  const p = V("div", "imw-lens-bar");
-  p.setAttribute("role", "region"), p.setAttribute("aria-label", "Role lens");
-  const c = V("div", "imw-lens-head");
-  c.append(V("span", "imw-lens-mark", "✦"), V("strong", "", `Viewing as: ${t.title}`));
-  const m = V("div", "imw-lens-counts");
-  ["direct", "related", "verification", "missing"].forEach((v) => m.append(V("span", `is-${v}`, `${t.counts[v]} ${ie[v].toLowerCase()}`)));
-  const g = t.requirements.filter((v) => v.category === "missing").map((v) => v.label), d = V("div", "imw-lens-missing", g.length ? `Not demonstrated: ${g.slice(0, 4).join(", ")}${g.length > 4 ? "…" : ""}` : "Every listed requirement has at least related evidence."), y = V("div", "imw-lens-actions"), w = V("button", "imw-lens-btn", "Open analysis"), u = V("button", "imw-lens-btn is-primary", "Restore portfolio");
-  w.onclick = () => n.reopen(), u.onclick = () => {
-    zt(), n.restore();
-  }, y.append(w, u);
-  const f = V("div", "imw-lens-mid");
-  f.append(m, d), p.append(c, f, y), document.body.append(p), Ot.push(p), document.documentElement.classList.add("imw-lens"), requestAnimationFrame(() => (a ?? document.body).scrollIntoView({ behavior: qe() ? "auto" : "smooth", block: "start" })), u.focus({ preventScroll: !0 });
+  const u = V("div", "imw-lens-bar");
+  u.setAttribute("role", "region"), u.setAttribute("aria-label", "Role lens");
+  const d = V("div", "imw-lens-head");
+  d.append(V("span", "imw-lens-mark", "✦"), V("strong", "", `Viewing as: ${t.title}`));
+  const f = V("div", "imw-lens-counts");
+  ["direct", "related", "verification", "missing"].forEach((v) => f.append(V("span", `is-${v}`, `${t.counts[v]} ${ie[v].toLowerCase()}`)));
+  const g = t.requirements.filter((v) => v.category === "missing").map((v) => v.label), c = V("div", "imw-lens-missing", g.length ? `Not demonstrated: ${g.slice(0, 4).join(", ")}${g.length > 4 ? "…" : ""}` : "Every listed requirement has at least related evidence."), w = V("div", "imw-lens-actions"), y = V("button", "imw-lens-btn", "Open analysis"), p = V("button", "imw-lens-btn is-primary", "Restore portfolio");
+  y.onclick = () => n.reopen(), p.onclick = () => {
+    Ut(), n.restore();
+  }, w.append(y, p);
+  const m = V("div", "imw-lens-mid");
+  m.append(f, c), u.append(d, m, w), document.body.append(u), zt.push(u), document.documentElement.classList.add("imw-lens"), requestAnimationFrame(() => (a ?? document.body).scrollIntoView({ behavior: Ee() ? "auto" : "smooth", block: "start" })), p.focus({ preventScroll: !0 });
 }
-function zt() {
-  Ot.splice(0).forEach((e) => e.remove()), mt.forEach((e) => e.classList.remove("imw-lens-hit", "imw-lens-dim")), mt.clear(), Le && (Le.order.forEach((e) => Le.parent.appendChild(e)), Le.numbers.forEach(([e, t]) => {
+function Ut() {
+  zt.splice(0).forEach((e) => e.remove()), ft.forEach((e) => e.classList.remove("imw-lens-hit", "imw-lens-dim")), ft.clear(), Le && (Le.order.forEach((e) => Le.parent.appendChild(e)), Le.numbers.forEach(([e, t]) => {
     e && (e.textContent = t);
   }), Le = null), document.documentElement.classList.remove("imw-lens");
 }
-let _e = null;
-function Os(e, t) {
+let be = null;
+function hr(e, t) {
   const n = document.querySelector(e);
   if (!n) {
     t();
     return;
   }
-  n.scrollIntoView({ behavior: qe() ? "auto" : "smooth", block: "start" }), n.classList.add("imw-flash"), setTimeout(() => n.classList.remove("imw-flash"), 2400), n.hasAttribute("tabindex") || n.setAttribute("tabindex", "-1"), n.focus({ preventScroll: !0 }), _e?.remove(), _e = V("button", "imw-return", "✦ Back to Interview My Work"), _e.onclick = () => {
-    _e?.remove(), _e = null, t();
-  }, document.body.append(_e), setTimeout(() => {
-    _e?.remove(), _e = null;
+  n.scrollIntoView({ behavior: Ee() ? "auto" : "smooth", block: "start" }), n.classList.add("imw-flash"), setTimeout(() => n.classList.remove("imw-flash"), 2400), n.hasAttribute("tabindex") || n.setAttribute("tabindex", "-1"), n.focus({ preventScroll: !0 }), be?.remove(), be = V("button", "imw-return", "✦ Back to Interview My Work"), be.onclick = () => {
+    be?.remove(), be = null, t();
+  }, document.body.append(be), setTimeout(() => {
+    be?.remove(), be = null;
   }, 2e4);
 }
-function un(e) {
+function fn(e) {
   return e.status === "verified" ? e.strength === "public_artifact" ? "Verified · public artifact" : "Verified · self-reported" : { verification_required: "Verification required", unsupported: "Unsupported", deprecated: "Withdrawn" }[e.status] ?? e.status;
 }
-function ft(e) {
+function gt(e) {
   return e.status === "verified" ? e.strength === "public_artifact" ? "st-artifact" : "st-self" : e.status === "verification_required" ? "st-pending" : "st-no";
 }
 const Pe = ({ cls: e, label: t }) => /* @__PURE__ */ i("i", { class: `imw-dot ${e}`, "aria-hidden": t ? void 0 : "true", "aria-label": t });
-function De({ refs: e, max: t = 4 }) {
+function We({ refs: e, max: t = 4 }) {
   return e?.length ? /* @__PURE__ */ i("ul", { class: "imw-code", children: e.slice(0, t).map((n) => /* @__PURE__ */ i("li", { children: /* @__PURE__ */ i("a", { href: n.url, target: "_blank", rel: "noopener", children: [
     /* @__PURE__ */ i("span", { class: "imw-code-label", children: n.label }),
     /* @__PURE__ */ i("span", { class: "imw-code-path", children: [
@@ -1573,18 +1628,18 @@ function De({ refs: e, max: t = 4 }) {
     ] })
   ] }) }, n.url)) }) : null;
 }
-function zs({ id: e, compact: t }) {
+function ur({ id: e, compact: t }) {
   const { kb: n, setInspect: r, inspect: s } = M(), a = n.claim.get(e);
   if (!a) return null;
   const o = n.entity.get(a.entity), l = s?.kind === "claim" && s.id === e;
   return /* @__PURE__ */ i("li", { class: `imw-claim${l ? " is-on" : ""}`, children: [
     /* @__PURE__ */ i("button", { class: "imw-claim-btn", onClick: () => r({ kind: "claim", id: e }), "aria-label": `View evidence: ${a.text}`, children: [
-      /* @__PURE__ */ i(Pe, { cls: ft(a) }),
+      /* @__PURE__ */ i(Pe, { cls: gt(a) }),
       /* @__PURE__ */ i("span", { class: "imw-claim-text", children: a.text })
     ] }),
     !t && /* @__PURE__ */ i("div", { class: "imw-claim-meta", children: [
       /* @__PURE__ */ i("span", { children: o?.short }),
-      /* @__PURE__ */ i("span", { class: `imw-st ${ft(a)}`, children: un(a) }),
+      /* @__PURE__ */ i("span", { class: `imw-st ${gt(a)}`, children: fn(a) }),
       a.code?.length ? /* @__PURE__ */ i("a", { href: a.code[0].url, target: "_blank", rel: "noopener", class: "imw-mini-link", children: "Code ↗" }) : null,
       /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => r({ kind: "claim", id: e }), children: "Evidence" })
     ] })
@@ -1593,14 +1648,14 @@ function zs({ id: e, compact: t }) {
 function ne({ ids: e, title: t, compact: n }) {
   return e.length ? /* @__PURE__ */ i("div", { class: "imw-claims", children: [
     t && /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: t }),
-    /* @__PURE__ */ i("ul", { children: e.map((r) => /* @__PURE__ */ i(zs, { id: r, compact: n }, r)) })
+    /* @__PURE__ */ i("ul", { children: e.map((r) => /* @__PURE__ */ i(ur, { id: r, compact: n }, r)) })
   ] }) : null;
 }
-function ot({ a: e }) {
+function lt({ a: e }) {
   const { go: t, jump: n, ask: r, toggleLens: s, coverage: a, kb: o } = M();
   if (e.kind === "url") {
-    const p = e.target.startsWith("mailto:") || e.target.includes("linkedin");
-    return /* @__PURE__ */ i("a", { class: "imw-btn", href: e.target, target: e.target.startsWith("mailto:") ? void 0 : "_blank", rel: "noopener", onClick: () => p && G("contact_clicked_from_ai"), children: [
+    const u = e.target.startsWith("mailto:") || e.target.includes("linkedin");
+    return /* @__PURE__ */ i("a", { class: "imw-btn", href: e.target, target: e.target.startsWith("mailto:") ? void 0 : "_blank", rel: "noopener", onClick: () => u && G("contact_clicked_from_ai"), children: [
       e.label,
       " ",
       /* @__PURE__ */ i("span", { "aria-hidden": "true", children: "↗" })
@@ -1617,83 +1672,83 @@ function ot({ a: e }) {
     e.kind === "anchor" ? /* @__PURE__ */ i("span", { "aria-hidden": "true", children: " ↓" }) : null
   ] });
 }
-const Ee = { direct: "cat-direct", related: "cat-related", verification: "cat-pending", missing: "cat-missing" };
+const qe = { direct: "cat-direct", related: "cat-related", verification: "cat-pending", missing: "cat-missing" };
 function $e({ children: e }) {
   return /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: e });
 }
-function Us({ id: e }) {
+function pr({ id: e }) {
   const { kb: t, setInspect: n } = M(), r = t.entity.get(e);
   return r ? /* @__PURE__ */ i("button", { class: "imw-chip", onClick: () => n({ kind: "entity", id: e }), children: r.short }) : null;
 }
-const et = ["direct", "related", "verification", "missing"], Vs = { direct: "direct", related: "related", verification: "to verify", missing: "not shown" };
-function bt({ counts: e, compact: t }) {
-  const n = et.reduce((r, s) => r + e[s], 0) || 1;
+const tt = ["direct", "related", "verification", "missing"], mr = { direct: "direct", related: "related", verification: "to verify", missing: "not shown" };
+function kt({ counts: e, compact: t }) {
+  const n = tt.reduce((r, s) => r + e[s], 0) || 1;
   return /* @__PURE__ */ i("div", { class: `imw-covbar${t ? " is-compact" : ""}`, children: [
-    /* @__PURE__ */ i("div", { class: "imw-covbar-track", role: "img", "aria-label": et.map((r) => `${e[r]} ${ie[r]}`).join(", "), children: et.filter((r) => e[r]).map((r) => /* @__PURE__ */ i("span", { class: `imw-covbar-seg ${Ee[r]}`, style: { flexGrow: e[r] / n }, title: `${e[r]} · ${ie[r]}` }, r)) }),
-    /* @__PURE__ */ i("ul", { class: "imw-covbar-legend", children: et.map((r) => /* @__PURE__ */ i("li", { children: [
-      /* @__PURE__ */ i("i", { class: `imw-cat-dot ${Ee[r]}`, "aria-hidden": "true" }),
+    /* @__PURE__ */ i("div", { class: "imw-covbar-track", role: "img", "aria-label": tt.map((r) => `${e[r]} ${ie[r]}`).join(", "), children: tt.filter((r) => e[r]).map((r) => /* @__PURE__ */ i("span", { class: `imw-covbar-seg ${qe[r]}`, style: { flexGrow: e[r] / n }, title: `${e[r]} · ${ie[r]}` }, r)) }),
+    /* @__PURE__ */ i("ul", { class: "imw-covbar-legend", children: tt.map((r) => /* @__PURE__ */ i("li", { children: [
+      /* @__PURE__ */ i("i", { class: `imw-cat-dot ${qe[r]}`, "aria-hidden": "true" }),
       /* @__PURE__ */ i("b", { children: e[r] }),
       " ",
-      t ? Vs[r] : ie[r]
+      t ? mr[r] : ie[r]
     ] }, r)) })
   ] });
 }
-function pn({ analysis: e, max: t = 16 }) {
-  const { kb: n, setInspect: r } = M(), [s, a] = E(null), o = e.requirements.slice(0, t), l = e.entities.slice(0, 7).map((_) => _.id), p = 26, c = 18, m = 640, g = c * 2 + Math.max(o.length, l.length) * p, d = (_) => c + (_ + 0.5) * p * (Math.max(o.length, l.length) / Math.max(l.length, 1)), y = (_) => c + (_ + 0.5) * p, w = 232, u = 408, f = o.flatMap(
-    (_, b) => _.category === "direct" || _.category === "related" ? _.entities.filter((h) => l.includes(h)).slice(0, 3).map((h) => ({ r: _.id, e: h, cat: _.category, y1: y(b), y2: d(l.indexOf(h)) })) : []
-  ), v = (_, b) => !s || s === _ || s === b, k = !qe();
+function gn({ analysis: e, max: t = 16 }) {
+  const { kb: n, setInspect: r } = M(), [s, a] = q(null), o = e.requirements.slice(0, t), l = e.entities.slice(0, 7).map((b) => b.id), u = 26, d = 18, f = 640, g = d * 2 + Math.max(o.length, l.length) * u, c = (b) => d + (b + 0.5) * u * (Math.max(o.length, l.length) / Math.max(l.length, 1)), w = (b) => d + (b + 0.5) * u, y = 232, p = 408, m = o.flatMap(
+    (b, _) => b.category === "direct" || b.category === "related" ? b.entities.filter((h) => l.includes(h)).slice(0, 3).map((h) => ({ r: b.id, e: h, cat: b.category, y1: w(_), y2: c(l.indexOf(h)) })) : []
+  ), v = (b, _) => !s || s === b || s === _, k = !Ee();
   return /* @__PURE__ */ i("figure", { class: "imw-map", children: [
-    /* @__PURE__ */ i("svg", { viewBox: `0 0 ${m} ${g}`, role: "group", "aria-label": "Requirement to evidence map", class: k ? "is-anim" : "", children: [
-      f.map((_, b) => /* @__PURE__ */ i(
+    /* @__PURE__ */ i("svg", { viewBox: `0 0 ${f} ${g}`, role: "group", "aria-label": "Requirement to evidence map", class: k ? "is-anim" : "", children: [
+      m.map((b, _) => /* @__PURE__ */ i(
         "path",
         {
-          d: `M${w},${_.y1} C${w + 90},${_.y1} ${u - 90},${_.y2} ${u},${_.y2}`,
-          class: `imw-link ${_.cat === "direct" ? "is-direct" : "is-related"}${v(_.r, _.e) ? " is-lit" : " is-dim"}`,
-          style: { animationDelay: `${Math.min(b * 25, 700)}ms` }
-        },
-        b
-      )),
-      o.map((_, b) => /* @__PURE__ */ i(
-        "g",
-        {
-          class: `imw-map-req ${Ee[_.category]}${s && s !== _.id ? " is-dim" : ""}`,
-          tabIndex: 0,
-          role: "button",
-          "aria-label": `${_.label}: ${ie[_.category]}`,
-          onMouseEnter: () => a(_.id),
-          onMouseLeave: () => a(null),
-          onFocus: () => a(_.id),
-          onBlur: () => a(null),
-          onClick: () => r({ kind: "req", req: _ }),
-          onKeyDown: (h) => (h.key === "Enter" || h.key === " ") && (h.preventDefault(), r({ kind: "req", req: _ })),
-          children: [
-            /* @__PURE__ */ i("rect", { x: 0, y: y(b) - p / 2, width: w + 6, height: p, class: "imw-hit" }),
-            /* @__PURE__ */ i("text", { x: w - 12, y: y(b) + 4, "text-anchor": "end", children: Gs(_.label, 30) }),
-            /* @__PURE__ */ i("circle", { cx: w, cy: y(b), r: 4.5 })
-          ]
-        },
-        _.id
-      )),
-      l.map((_, b) => /* @__PURE__ */ i(
-        "g",
-        {
-          class: `imw-map-ent${s && s !== _ && !f.some((h) => h.e === _ && h.r === s) ? " is-dim" : ""}`,
-          tabIndex: 0,
-          role: "button",
-          "aria-label": n.entity.get(_)?.name,
-          onMouseEnter: () => a(_),
-          onMouseLeave: () => a(null),
-          onFocus: () => a(_),
-          onBlur: () => a(null),
-          onClick: () => r({ kind: "entity", id: _ }),
-          onKeyDown: (h) => (h.key === "Enter" || h.key === " ") && (h.preventDefault(), r({ kind: "entity", id: _ })),
-          children: [
-            /* @__PURE__ */ i("rect", { x: u - 6, y: d(b) - p / 2, width: m - u + 6, height: p, class: "imw-hit" }),
-            /* @__PURE__ */ i("circle", { cx: u, cy: d(b), r: 5.5 }),
-            /* @__PURE__ */ i("text", { x: u + 14, y: d(b) + 4, children: n.entity.get(_)?.short })
-          ]
+          d: `M${y},${b.y1} C${y + 90},${b.y1} ${p - 90},${b.y2} ${p},${b.y2}`,
+          class: `imw-link ${b.cat === "direct" ? "is-direct" : "is-related"}${v(b.r, b.e) ? " is-lit" : " is-dim"}`,
+          style: { animationDelay: `${Math.min(_ * 25, 700)}ms` }
         },
         _
+      )),
+      o.map((b, _) => /* @__PURE__ */ i(
+        "g",
+        {
+          class: `imw-map-req ${qe[b.category]}${s && s !== b.id ? " is-dim" : ""}`,
+          tabIndex: 0,
+          role: "button",
+          "aria-label": `${b.label}: ${ie[b.category]}`,
+          onMouseEnter: () => a(b.id),
+          onMouseLeave: () => a(null),
+          onFocus: () => a(b.id),
+          onBlur: () => a(null),
+          onClick: () => r({ kind: "req", req: b }),
+          onKeyDown: (h) => (h.key === "Enter" || h.key === " ") && (h.preventDefault(), r({ kind: "req", req: b })),
+          children: [
+            /* @__PURE__ */ i("rect", { x: 0, y: w(_) - u / 2, width: y + 6, height: u, class: "imw-hit" }),
+            /* @__PURE__ */ i("text", { x: y - 12, y: w(_) + 4, "text-anchor": "end", children: fr(b.label, 30) }),
+            /* @__PURE__ */ i("circle", { cx: y, cy: w(_), r: 4.5 })
+          ]
+        },
+        b.id
+      )),
+      l.map((b, _) => /* @__PURE__ */ i(
+        "g",
+        {
+          class: `imw-map-ent${s && s !== b && !m.some((h) => h.e === b && h.r === s) ? " is-dim" : ""}`,
+          tabIndex: 0,
+          role: "button",
+          "aria-label": n.entity.get(b)?.name,
+          onMouseEnter: () => a(b),
+          onMouseLeave: () => a(null),
+          onFocus: () => a(b),
+          onBlur: () => a(null),
+          onClick: () => r({ kind: "entity", id: b }),
+          onKeyDown: (h) => (h.key === "Enter" || h.key === " ") && (h.preventDefault(), r({ kind: "entity", id: b })),
+          children: [
+            /* @__PURE__ */ i("rect", { x: p - 6, y: c(_) - u / 2, width: f - p + 6, height: u, class: "imw-hit" }),
+            /* @__PURE__ */ i("circle", { cx: p, cy: c(_), r: 5.5 }),
+            /* @__PURE__ */ i("text", { x: p + 14, y: c(_) + 4, children: n.entity.get(b)?.short })
+          ]
+        },
+        b
       ))
     ] }),
     /* @__PURE__ */ i("figcaption", { class: "imw-help", children: [
@@ -1702,16 +1757,16 @@ function pn({ analysis: e, max: t = 16 }) {
     ] })
   ] });
 }
-const Gs = (e, t) => e.length > t ? e.slice(0, t - 1) + "…" : e, Ti = [
+const fr = (e, t) => e.length > t ? e.slice(0, t - 1) + "…" : e, Pi = [
   { key: "precision", label: "Precision", cls: "viz-1" },
   { key: "recall", label: "Recall", cls: "viz-2" },
   { key: "f1", label: "F1", cls: "viz-3" }
 ];
-function mn() {
-  const { kb: e } = M(), t = e.datasets.cliniq_confusion, [n, r] = E(null), [s, a] = E(!1), o = he(() => t.methods.map((f) => {
-    const v = f.tp / (f.tp + f.fp), k = f.tp / (f.tp + f.fn);
-    return { ...f, precision: v, recall: k, f1: 2 * v * k / (v + k) };
-  }), [t]), l = 560, p = 230, c = 36, m = 30, g = 12, d = (l - c - 12) / o.length, y = 22, w = 2, u = (f) => g + (1 - f) * (p - g - m);
+function wn() {
+  const { kb: e } = M(), t = e.datasets.cliniq_confusion, [n, r] = q(null), [s, a] = q(!1), o = ue(() => t.methods.map((m) => {
+    const v = m.tp / (m.tp + m.fp), k = m.tp / (m.tp + m.fn);
+    return { ...m, precision: v, recall: k, f1: 2 * v * k / (v + k) };
+  }), [t]), l = 560, u = 230, d = 36, f = 30, g = 12, c = (l - d - 12) / o.length, w = 22, y = 2, p = (m) => g + (1 - m) * (u - g - f);
   return /* @__PURE__ */ i("figure", { class: "imw-chart", children: [
     /* @__PURE__ */ i("div", { class: "imw-chart-head", children: [
       /* @__PURE__ */ i("strong", { children: [
@@ -1731,77 +1786,77 @@ function mn() {
         /* @__PURE__ */ i("th", { children: "FN" }),
         /* @__PURE__ */ i("th", { children: "TN" })
       ] }) }),
-      /* @__PURE__ */ i("tbody", { children: o.map((f) => /* @__PURE__ */ i("tr", { children: [
-        /* @__PURE__ */ i("th", { children: f.label }),
-        /* @__PURE__ */ i("td", { children: f.precision.toFixed(3) }),
-        /* @__PURE__ */ i("td", { children: f.recall.toFixed(3) }),
-        /* @__PURE__ */ i("td", { children: f.f1.toFixed(3) }),
-        /* @__PURE__ */ i("td", { children: f.tp }),
-        /* @__PURE__ */ i("td", { children: f.fp }),
-        /* @__PURE__ */ i("td", { children: f.fn }),
-        /* @__PURE__ */ i("td", { children: f.tn })
-      ] }, f.id)) })
+      /* @__PURE__ */ i("tbody", { children: o.map((m) => /* @__PURE__ */ i("tr", { children: [
+        /* @__PURE__ */ i("th", { children: m.label }),
+        /* @__PURE__ */ i("td", { children: m.precision.toFixed(3) }),
+        /* @__PURE__ */ i("td", { children: m.recall.toFixed(3) }),
+        /* @__PURE__ */ i("td", { children: m.f1.toFixed(3) }),
+        /* @__PURE__ */ i("td", { children: m.tp }),
+        /* @__PURE__ */ i("td", { children: m.fp }),
+        /* @__PURE__ */ i("td", { children: m.fn }),
+        /* @__PURE__ */ i("td", { children: m.tn })
+      ] }, m.id)) })
     ] }) : /* @__PURE__ */ i("div", { class: "imw-chart-plot", onMouseLeave: () => r(null), children: [
-      /* @__PURE__ */ i("svg", { viewBox: `0 0 ${l} ${p}`, role: "img", "aria-label": "Precision, recall and F1 for rules, embedding and LLM plus RAG detectors", children: [
-        [0, 0.25, 0.5, 0.75, 1].map((f) => /* @__PURE__ */ i("g", { class: "imw-grid", children: [
-          /* @__PURE__ */ i("line", { x1: c, x2: l - 8, y1: u(f), y2: u(f) }),
-          /* @__PURE__ */ i("text", { x: c - 6, y: u(f) + 4, "text-anchor": "end", children: f.toFixed(2) })
-        ] }, f)),
-        o.map((f, v) => {
-          const k = c + v * d + (d - (y * 3 + w * 2)) / 2;
+      /* @__PURE__ */ i("svg", { viewBox: `0 0 ${l} ${u}`, role: "img", "aria-label": "Precision, recall and F1 for rules, embedding and LLM plus RAG detectors", children: [
+        [0, 0.25, 0.5, 0.75, 1].map((m) => /* @__PURE__ */ i("g", { class: "imw-grid", children: [
+          /* @__PURE__ */ i("line", { x1: d, x2: l - 8, y1: p(m), y2: p(m) }),
+          /* @__PURE__ */ i("text", { x: d - 6, y: p(m) + 4, "text-anchor": "end", children: m.toFixed(2) })
+        ] }, m)),
+        o.map((m, v) => {
+          const k = d + v * c + (c - (w * 3 + y * 2)) / 2;
           return /* @__PURE__ */ i("g", { children: [
-            Ti.map((_, b) => {
-              const h = f[_.key], x = k + b * (y + w);
+            Pi.map((b, _) => {
+              const h = m[b.key], x = k + _ * (w + y);
               return /* @__PURE__ */ i(
                 "path",
                 {
-                  class: `imw-bar ${_.cls}`,
-                  d: Qs(x, u(h), y, u(0) - u(h)),
-                  onMouseEnter: () => r({ x: (x + y / 2) / l, y: u(h) / p, text: `${f.label} · ${_.label} ${h.toFixed(3)}` })
+                  class: `imw-bar ${b.cls}`,
+                  d: gr(x, p(h), w, p(0) - p(h)),
+                  onMouseEnter: () => r({ x: (x + w / 2) / l, y: p(h) / u, text: `${m.label} · ${b.label} ${h.toFixed(3)}` })
                 },
-                _.key
+                b.key
               );
             }),
-            /* @__PURE__ */ i("text", { class: "imw-axis-label", x: c + v * d + d / 2, y: p - 10, "text-anchor": "middle", children: f.label })
-          ] }, f.id);
+            /* @__PURE__ */ i("text", { class: "imw-axis-label", x: d + v * c + c / 2, y: u - 10, "text-anchor": "middle", children: m.label })
+          ] }, m.id);
         })
       ] }),
       n && /* @__PURE__ */ i("div", { class: "imw-tip", style: { left: `${n.x * 100}%`, top: `${n.y * 100}%` }, children: n.text })
     ] }),
-    /* @__PURE__ */ i("ul", { class: "imw-legend-row", children: Ti.map((f) => /* @__PURE__ */ i("li", { children: [
-      /* @__PURE__ */ i("i", { class: `imw-swatch ${f.cls}`, "aria-hidden": "true" }),
-      f.label
-    ] }, f.key)) }),
+    /* @__PURE__ */ i("ul", { class: "imw-legend-row", children: Pi.map((m) => /* @__PURE__ */ i("li", { children: [
+      /* @__PURE__ */ i("i", { class: `imw-swatch ${m.cls}`, "aria-hidden": "true" }),
+      m.label
+    ] }, m.key)) }),
     /* @__PURE__ */ i("figcaption", { class: "imw-help", children: [
       "Rules have the best F1 (0.854). The embedding detector reaches recall 1.000 by flagging 595 of 600 reviews. ",
       t.caveat
     ] })
   ] });
 }
-function Qs(e, t, n, r) {
+function gr(e, t, n, r) {
   const s = Math.min(4, r / 2, n / 2);
   return r <= 0 ? "" : `M${e},${t + r} V${t + s} Q${e},${t} ${e + s},${t} H${e + n - s} Q${e + n},${t} ${e + n},${t + s} V${t + r} Z`;
 }
-function ri() {
-  const { kb: e } = M(), t = e.datasets.voice_quality, n = [...t.rows].sort((d, y) => y[3] - d[3]), [r, s] = E(null), a = 560, o = 20, l = 150, p = 40, c = n.length * o + 24, m = (d) => l + d / 60 * (a - l - p), g = n.reduce((d, y) => d + y[3], 0) / n.length;
+function oi() {
+  const { kb: e } = M(), t = e.datasets.voice_quality, n = [...t.rows].sort((c, w) => w[3] - c[3]), [r, s] = q(null), a = 560, o = 20, l = 150, u = 40, d = n.length * o + 24, f = (c) => l + c / 60 * (a - l - u), g = n.reduce((c, w) => c + w[3], 0) / n.length;
   return /* @__PURE__ */ i("figure", { class: "imw-chart", children: [
     /* @__PURE__ */ i("div", { class: "imw-chart-head", children: /* @__PURE__ */ i("strong", { children: "Mid-call silence per recorded call (%)" }) }),
     /* @__PURE__ */ i("div", { class: "imw-chart-plot", onMouseLeave: () => s(null), children: [
-      /* @__PURE__ */ i("svg", { viewBox: `0 0 ${a} ${c}`, role: "img", "aria-label": `Mid-call silence per call; average ${g.toFixed(1)} percent`, children: [
-        [0, 20, 40, 60].map((d) => /* @__PURE__ */ i("g", { class: "imw-grid", children: [
-          /* @__PURE__ */ i("line", { x1: m(d), x2: m(d), y1: 0, y2: c - 18 }),
-          /* @__PURE__ */ i("text", { x: m(d), y: c - 4, "text-anchor": "middle", children: d })
-        ] }, d)),
-        n.map((d, y) => {
-          const w = y * o + 3;
-          return /* @__PURE__ */ i("g", { onMouseEnter: () => s({ y: (w + o / 2) / c, text: `${d[0]} · silence ${d[3]}% · talk-over ${d[2]}% · longest gap ${d[4]}s` }), children: [
-            /* @__PURE__ */ i("rect", { class: "imw-hit", x: 0, y: w - 2, width: a, height: o }),
-            /* @__PURE__ */ i("text", { class: "imw-axis-label", x: l - 8, y: w + 11, "text-anchor": "end", children: d[0].replace(/_/g, " ") }),
-            /* @__PURE__ */ i("path", { class: "imw-bar viz-1", d: Ks(l, w + 2, m(d[3]) - l, o - 8) })
-          ] }, d[0]);
+      /* @__PURE__ */ i("svg", { viewBox: `0 0 ${a} ${d}`, role: "img", "aria-label": `Mid-call silence per call; average ${g.toFixed(1)} percent`, children: [
+        [0, 20, 40, 60].map((c) => /* @__PURE__ */ i("g", { class: "imw-grid", children: [
+          /* @__PURE__ */ i("line", { x1: f(c), x2: f(c), y1: 0, y2: d - 18 }),
+          /* @__PURE__ */ i("text", { x: f(c), y: d - 4, "text-anchor": "middle", children: c })
+        ] }, c)),
+        n.map((c, w) => {
+          const y = w * o + 3;
+          return /* @__PURE__ */ i("g", { onMouseEnter: () => s({ y: (y + o / 2) / d, text: `${c[0]} · silence ${c[3]}% · talk-over ${c[2]}% · longest gap ${c[4]}s` }), children: [
+            /* @__PURE__ */ i("rect", { class: "imw-hit", x: 0, y: y - 2, width: a, height: o }),
+            /* @__PURE__ */ i("text", { class: "imw-axis-label", x: l - 8, y: y + 11, "text-anchor": "end", children: c[0].replace(/_/g, " ") }),
+            /* @__PURE__ */ i("path", { class: "imw-bar viz-1", d: wr(l, y + 2, f(c[3]) - l, o - 8) })
+          ] }, c[0]);
         }),
-        /* @__PURE__ */ i("line", { class: "imw-ref", x1: m(g), x2: m(g), y1: 0, y2: c - 18 }),
-        /* @__PURE__ */ i("text", { class: "imw-ref-label", x: m(g) + 4, y: 10, children: [
+        /* @__PURE__ */ i("line", { class: "imw-ref", x1: f(g), x2: f(g), y1: 0, y2: d - 18 }),
+        /* @__PURE__ */ i("text", { class: "imw-ref-label", x: f(g) + 4, y: 10, children: [
           "avg ",
           g.toFixed(1),
           "%"
@@ -1815,138 +1870,138 @@ function ri() {
     ] })
   ] });
 }
-function Ks(e, t, n, r) {
+function wr(e, t, n, r) {
   const s = Math.min(4, r / 2, n / 2);
   return n <= 0 ? "" : `M${e},${t} H${e + n - s} Q${e + n},${t} ${e + n},${t + s} V${t + r - s} Q${e + n},${t + r} ${e + n - s},${t + r} H${e} Z`;
 }
-const jt = 198, tt = 96, ze = 174, be = 56, Te = 28, Ri = (e, t) => e.length > t ? e.slice(0, t - 1) + "…" : e;
-function fn({ arch: e, selected: t, onSelect: n, scan: r = !0 }) {
-  const s = ye(null), [a, o] = E(!1), [l, p] = E(!1);
-  Bn(() => {
-    const u = s.current;
-    if (!u) return;
-    const f = new ResizeObserver(([v]) => o(v.contentRect.width < 560));
-    return f.observe(u), () => f.disconnect();
+const Tt = 198, it = 96, ze = 174, _e = 56, Te = 28, Fi = (e, t) => e.length > t ? e.slice(0, t - 1) + "…" : e;
+function yn({ arch: e, selected: t, onSelect: n, scan: r = !0 }) {
+  const s = ye(null), [a, o] = q(!1), [l, u] = q(!1);
+  Un(() => {
+    const p = s.current;
+    if (!p) return;
+    const m = new ResizeObserver(([v]) => o(v.contentRect.width < 560));
+    return m.observe(p), () => m.disconnect();
   }, []), z(() => {
-    if (!r || qe()) return;
-    p(!0);
-    const u = setTimeout(() => p(!1), 1300);
-    return () => clearTimeout(u);
+    if (!r || Ee()) return;
+    u(!0);
+    const p = setTimeout(() => u(!1), 1300);
+    return () => clearTimeout(p);
   }, [e.id, r]);
-  const c = Math.max(...e.nodes.map((u) => u.col)) + 1, m = Math.max(...e.nodes.map((u) => u.row)) + 1, g = Te * 2 + c * jt - (jt - ze), d = Te * 2 + m * tt - (tt - be) + (e.lanes.length ? 14 : 0), y = (u) => {
-    const f = e.nodes.find((v) => v.id === u);
-    return { x: Te + f.col * jt, y: Te + (e.lanes.length ? 14 : 0) + f.row * tt };
-  }, w = (u, f) => {
-    (u.key === "Enter" || u.key === " ") && (u.preventDefault(), n(f));
+  const d = Math.max(...e.nodes.map((p) => p.col)) + 1, f = Math.max(...e.nodes.map((p) => p.row)) + 1, g = Te * 2 + d * Tt - (Tt - ze), c = Te * 2 + f * it - (it - _e) + (e.lanes.length ? 14 : 0), w = (p) => {
+    const m = e.nodes.find((v) => v.id === p);
+    return { x: Te + m.col * Tt, y: Te + (e.lanes.length ? 14 : 0) + m.row * it };
+  }, y = (p, m) => {
+    (p.key === "Enter" || p.key === " ") && (p.preventDefault(), n(m));
   };
   if (a) {
-    const u = new Map(e.nodes.map((_) => [_.id, 0]));
-    e.edges.forEach(([, _]) => u.set(_, (u.get(_) ?? 0) + 1));
-    const f = (_, b) => _.col - b.col || _.row - b.row, v = e.nodes.filter((_) => !u.get(_.id)).sort(f), k = [];
+    const p = new Map(e.nodes.map((b) => [b.id, 0]));
+    e.edges.forEach(([, b]) => p.set(b, (p.get(b) ?? 0) + 1));
+    const m = (b, _) => b.col - _.col || b.row - _.row, v = e.nodes.filter((b) => !p.get(b.id)).sort(m), k = [];
     for (; v.length; ) {
-      const _ = v.shift();
-      k.push(_);
-      const b = e.edges.filter(([h]) => h === _.id).map(([, h]) => h).filter((h) => (u.set(h, u.get(h) - 1), u.get(h) === 0)).map((h) => e.nodes.find((x) => x.id === h)).sort(f);
-      v.unshift(...b);
+      const b = v.shift();
+      k.push(b);
+      const _ = e.edges.filter(([h]) => h === b.id).map(([, h]) => h).filter((h) => (p.set(h, p.get(h) - 1), p.get(h) === 0)).map((h) => e.nodes.find((x) => x.id === h)).sort(m);
+      v.unshift(..._);
     }
-    return e.nodes.forEach((_) => {
-      k.includes(_) || k.push(_);
-    }), /* @__PURE__ */ i("div", { ref: s, class: "imw-arch-stack", children: k.map((_, b) => /* @__PURE__ */ i("div", { class: "imw-arch-step", children: [
-      b > 0 && /* @__PURE__ */ i("span", { class: "imw-arch-arrow", "aria-hidden": "true", children: "↓" }),
-      /* @__PURE__ */ i("button", { class: `imw-arch-card${t === _.id ? " is-on" : ""}`, onClick: () => n(_.id), "aria-pressed": t === _.id, children: [
-        /* @__PURE__ */ i("strong", { children: _.label }),
-        /* @__PURE__ */ i("small", { children: _.sub })
+    return e.nodes.forEach((b) => {
+      k.includes(b) || k.push(b);
+    }), /* @__PURE__ */ i("div", { ref: s, class: "imw-arch-stack", children: k.map((b, _) => /* @__PURE__ */ i("div", { class: "imw-arch-step", children: [
+      _ > 0 && /* @__PURE__ */ i("span", { class: "imw-arch-arrow", "aria-hidden": "true", children: "↓" }),
+      /* @__PURE__ */ i("button", { class: `imw-arch-card${t === b.id ? " is-on" : ""}`, onClick: () => n(b.id), "aria-pressed": t === b.id, children: [
+        /* @__PURE__ */ i("strong", { children: b.label }),
+        /* @__PURE__ */ i("small", { children: b.sub })
       ] })
-    ] }, _.id)) });
+    ] }, b.id)) });
   }
-  return /* @__PURE__ */ i("div", { ref: s, class: `imw-arch${l ? " is-scanning" : ""}`, children: /* @__PURE__ */ i("svg", { viewBox: `0 0 ${g} ${d}`, role: "group", "aria-label": `${e.title} architecture`, children: [
+  return /* @__PURE__ */ i("div", { ref: s, class: `imw-arch${l ? " is-scanning" : ""}`, children: /* @__PURE__ */ i("svg", { viewBox: `0 0 ${g} ${c}`, role: "group", "aria-label": `${e.title} architecture`, children: [
     /* @__PURE__ */ i("defs", { children: /* @__PURE__ */ i("marker", { id: `ah-${e.id}`, viewBox: "0 0 8 8", refX: "7", refY: "4", markerWidth: "7", markerHeight: "7", orient: "auto-start-reverse", children: /* @__PURE__ */ i("path", { d: "M0,0 L8,4 L0,8 z", class: "imw-arrowhead" }) }) }),
-    e.lanes.map((u) => /* @__PURE__ */ i("text", { class: "imw-lane", x: Te, y: Te + u.row * tt + 6, children: u.label.toUpperCase() }, u.row)),
-    e.edges.map(([u, f]) => {
-      const v = y(u), k = y(f);
-      let _;
+    e.lanes.map((p) => /* @__PURE__ */ i("text", { class: "imw-lane", x: Te, y: Te + p.row * it + 6, children: p.label.toUpperCase() }, p.row)),
+    e.edges.map(([p, m]) => {
+      const v = w(p), k = w(m);
+      let b;
       if (k.x > v.x) {
-        const h = v.x + ze, x = v.y + be / 2, C = k.x - 4, q = k.y + be / 2, A = (h + C) / 2;
-        _ = `M${h},${x} C${A},${x} ${A},${q} ${C},${q}`;
+        const h = v.x + ze, x = v.y + _e / 2, C = k.x - 4, E = k.y + _e / 2, A = (h + C) / 2;
+        b = `M${h},${x} C${A},${x} ${A},${E} ${C},${E}`;
       } else if (k.x < v.x) {
-        const h = v.x, x = v.y + be / 2, C = k.x + ze + 4, q = k.y + be / 2, A = (h + C) / 2;
-        _ = `M${h},${x} C${A},${x} ${A},${q} ${C},${q}`;
+        const h = v.x, x = v.y + _e / 2, C = k.x + ze + 4, E = k.y + _e / 2, A = (h + C) / 2;
+        b = `M${h},${x} C${A},${x} ${A},${E} ${C},${E}`;
       } else {
-        const h = k.y > v.y, x = v.x + ze / 2, C = h ? v.y + be : v.y, q = h ? k.y - 4 : k.y + be + 4;
-        _ = `M${x},${C} L${x},${q}`;
+        const h = k.y > v.y, x = v.x + ze / 2, C = h ? v.y + _e : v.y, E = h ? k.y - 4 : k.y + _e + 4;
+        b = `M${x},${C} L${x},${E}`;
       }
-      return /* @__PURE__ */ i("path", { d: _, class: `imw-edge${t === u || t === f ? " is-on" : ""}`, "marker-end": `url(#ah-${e.id})` }, u + f);
+      return /* @__PURE__ */ i("path", { d: b, class: `imw-edge${t === p || t === m ? " is-on" : ""}`, "marker-end": `url(#ah-${e.id})` }, p + m);
     }),
-    e.nodes.map((u) => {
-      const f = y(u.id);
+    e.nodes.map((p) => {
+      const m = w(p.id);
       return /* @__PURE__ */ i(
         "g",
         {
-          class: `imw-node${t === u.id ? " is-on" : ""}`,
-          transform: `translate(${f.x},${f.y})`,
+          class: `imw-node${t === p.id ? " is-on" : ""}`,
+          transform: `translate(${m.x},${m.y})`,
           tabIndex: 0,
           role: "button",
-          "aria-pressed": t === u.id,
-          "aria-label": `${u.label}. ${u.sub}`,
-          style: { animationDelay: `${u.col * 120}ms` },
-          onClick: () => n(u.id),
-          onKeyDown: (v) => w(v, u.id),
+          "aria-pressed": t === p.id,
+          "aria-label": `${p.label}. ${p.sub}`,
+          style: { animationDelay: `${p.col * 120}ms` },
+          onClick: () => n(p.id),
+          onKeyDown: (v) => y(v, p.id),
           children: [
-            /* @__PURE__ */ i("rect", { width: ze, height: be, rx: 4 }),
-            /* @__PURE__ */ i("text", { x: 12, y: 24, class: "imw-node-label", children: Ri(u.label, 22) }),
-            /* @__PURE__ */ i("text", { x: 12, y: 42, class: "imw-node-sub", children: Ri(u.sub, 25) })
+            /* @__PURE__ */ i("rect", { width: ze, height: _e, rx: 4 }),
+            /* @__PURE__ */ i("text", { x: 12, y: 24, class: "imw-node-label", children: Fi(p.label, 22) }),
+            /* @__PURE__ */ i("text", { x: 12, y: 42, class: "imw-node-sub", children: Fi(p.sub, 25) })
           ]
         },
-        u.id
+        p.id
       );
     }),
-    l && /* @__PURE__ */ i("rect", { class: "imw-scan", x: 0, y: 0, width: 3, height: d })
+    l && /* @__PURE__ */ i("rect", { class: "imw-scan", x: 0, y: 0, width: 3, height: c })
   ] }) });
 }
-const gn = (e) => {
+const vn = (e) => {
   const t = new URL(["..", "..", "evidence", "dist", e].join("/"), import.meta.url), n = new URL(import.meta.url).searchParams.get("v");
   return n && t.searchParams.set("v", n), t.href;
 };
-function wn({ id: e, compact: t }) {
-  const { kb: n, go: r } = M(), s = n.traces.find((g) => g.id === e), [a, o] = E(t ? 0 : 1 / 0), l = ye();
+function bn({ id: e, compact: t }) {
+  const { kb: n, go: r } = M(), s = n.traces.find((g) => g.id === e), [a, o] = q(t ? 0 : 1 / 0), l = ye();
   if (z(() => () => clearInterval(l.current), []), !s) return null;
-  if (s.dataset === "dia_regression") return /* @__PURE__ */ i(Js, {});
-  const p = t ? s.steps.slice(0, 4) : s.steps, c = () => {
-    if (G("replay_played", { trace: s.id }), qe()) {
+  if (s.dataset === "dia_regression") return /* @__PURE__ */ i(yr, {});
+  const u = t ? s.steps.slice(0, 4) : s.steps, d = () => {
+    if (G("replay_played", { trace: s.id }), Ee()) {
       o(1 / 0);
       return;
     }
     o(0), clearInterval(l.current);
     let g = 0;
     l.current = window.setInterval(() => {
-      g++, o(g), g >= p.length && clearInterval(l.current);
+      g++, o(g), g >= u.length && clearInterval(l.current);
     }, 520);
-  }, m = a === 1 / 0 ? p.length : a;
+  }, f = a === 1 / 0 ? u.length : a;
   return /* @__PURE__ */ i("figure", { class: `imw-trace${t ? " is-compact" : ""}`, children: [
     /* @__PURE__ */ i("div", { class: "imw-chart-head", children: [
       /* @__PURE__ */ i("strong", { children: s.title }),
       /* @__PURE__ */ i("div", { class: "imw-row", children: [
-        /* @__PURE__ */ i("button", { class: "imw-btn", onClick: c, "aria-label": `Replay ${s.title}`, children: "▶ Replay" }),
+        /* @__PURE__ */ i("button", { class: "imw-btn", onClick: d, "aria-label": `Replay ${s.title}`, children: "▶ Replay" }),
         t && /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => r("lab", s.id), children: "Open in proof lab →" })
       ] })
     ] }),
     /* @__PURE__ */ i("p", { class: "imw-help", children: s.summary }),
-    /* @__PURE__ */ i("ol", { class: "imw-steps", "aria-live": "polite", children: p.map((g, d) => /* @__PURE__ */ i("li", { class: `imw-step is-${g.kind}${d < m ? " is-shown" : ""}`, "aria-hidden": d >= m, children: [
+    /* @__PURE__ */ i("ol", { class: "imw-steps", "aria-live": "polite", children: u.map((g, c) => /* @__PURE__ */ i("li", { class: `imw-step is-${g.kind}${c < f ? " is-shown" : ""}`, "aria-hidden": c >= f, children: [
       /* @__PURE__ */ i("span", { class: "imw-step-kind", children: g.label }),
       g.quote ? /* @__PURE__ */ i("q", { children: g.quote }) : /* @__PURE__ */ i("span", { children: g.body }),
       g.status && /* @__PURE__ */ i("span", { class: `imw-verdict is-${g.status}`, children: g.status === "pass" ? "✓ PASS" : g.status === "fail" ? "✕ FAIL" : "! REVIEW" })
-    ] }, d)) }),
-    t && s.steps.length > p.length && /* @__PURE__ */ i("p", { class: "imw-help", children: [
-      s.steps.length - p.length,
+    ] }, c)) }),
+    t && s.steps.length > u.length && /* @__PURE__ */ i("p", { class: "imw-help", children: [
+      s.steps.length - u.length,
       " more steps in the full replay."
     ] })
   ] });
 }
-function Js() {
-  const { kb: e } = M(), t = e.datasets.dia_regression, [n, r] = E(t.rows.length), s = ye();
+function yr() {
+  const { kb: e } = M(), t = e.datasets.dia_regression, [n, r] = q(t.rows.length), s = ye();
   z(() => () => clearInterval(s.current), []);
   const a = () => {
-    if (G("replay_played", { trace: "t.dia.regression" }), qe()) {
+    if (G("replay_played", { trace: "t.dia.regression" }), Ee()) {
       r(t.rows.length);
       return;
     }
@@ -1971,13 +2026,13 @@ function Js() {
         /* @__PURE__ */ i("th", { children: "Conf." }),
         /* @__PURE__ */ i("th", {})
       ] }) }),
-      /* @__PURE__ */ i("tbody", { children: t.rows.map((l, p) => /* @__PURE__ */ i("tr", { class: p < n ? "is-done" : "is-wait", children: [
+      /* @__PURE__ */ i("tbody", { children: t.rows.map((l, u) => /* @__PURE__ */ i("tr", { class: u < n ? "is-done" : "is-wait", children: [
         /* @__PURE__ */ i("th", { scope: "row", children: l[0] }),
         /* @__PURE__ */ i("td", { children: l[1] }),
-        /* @__PURE__ */ i("td", { children: p < n ? l[2] : "…" }),
+        /* @__PURE__ */ i("td", { children: u < n ? l[2] : "…" }),
         /* @__PURE__ */ i("td", { children: l[3] }),
         /* @__PURE__ */ i("td", { children: l[4].toFixed(2) }),
-        /* @__PURE__ */ i("td", { children: p < n ? l[1] === l[2] ? /* @__PURE__ */ i("span", { class: "imw-verdict is-pass", children: "✓" }) : /* @__PURE__ */ i("span", { class: "imw-verdict is-fail", children: "✕" }) : "" })
+        /* @__PURE__ */ i("td", { children: u < n ? l[1] === l[2] ? /* @__PURE__ */ i("span", { class: "imw-verdict is-pass", children: "✓" }) : /* @__PURE__ */ i("span", { class: "imw-verdict is-fail", children: "✕" }) : "" })
       ] }, l[0])) })
     ] }) }),
     /* @__PURE__ */ i("p", { class: "imw-note is-warn", children: [
@@ -1986,8 +2041,8 @@ function Js() {
     ] })
   ] });
 }
-function yn({ id: e }) {
-  const { kb: t, go: n } = M(), r = t.attacks.find((l) => l.id === e), [s, a] = E(!1);
+function _n({ id: e }) {
+  const { kb: t, go: n } = M(), r = t.attacks.find((l) => l.id === e), [s, a] = q(!1);
   if (!r) return null;
   const o = { held: "✓ Held", flagged: "! Flagged for review", fixed: "✓ Fixed" }[r.result];
   return /* @__PURE__ */ i("article", { class: `imw-attack is-${r.result}${s ? " is-open" : ""}`, children: [
@@ -2007,23 +2062,23 @@ function yn({ id: e }) {
         /* @__PURE__ */ i("dt", { children: "What protects it" }),
         /* @__PURE__ */ i("dd", { children: r.protection })
       ] }),
-      /* @__PURE__ */ i(De, { refs: r.code }),
+      /* @__PURE__ */ i(We, { refs: r.code }),
       r.trace && /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => n("lab", r.trace), children: "▶ Replay the recorded run" })
     ] })
   ] });
 }
-function Ys(e, t, n, r, s, a, o) {
-  const l = e / (e + n), p = t / (t + r), c = s * a * l, m = s * (1 - a) * p, g = c + m;
-  return { trueAlerts: c, falseAlerts: m, missed: s * a * (1 - l), reviews: g, hours: g * o / 60, precision: g ? c / g : null };
+function vr(e, t, n, r, s, a, o) {
+  const l = e / (e + n), u = t / (t + r), d = s * a * l, f = s * (1 - a) * u, g = d + f;
+  return { trueAlerts: d, falseAlerts: f, missed: s * a * (1 - l), reviews: g, hours: g * o / 60, precision: g ? d / g : null };
 }
-function Xs() {
-  const { kb: e } = M(), t = e.datasets.cliniq_confusion, [n, r] = E(1e4), [s, a] = E(5), [o, l] = E(3), p = he(() => t.methods.map((g) => ({ m: g, r: Ys(g.tp, g.fp, g.fn, g.tn, n, s / 100, o) })), [t, n, s, o]), c = Math.max(...p.map((g) => g.r.hours), 1), m = (g) => g.toLocaleString(void 0, { maximumFractionDigits: 0 });
+function br() {
+  const { kb: e } = M(), t = e.datasets.cliniq_confusion, [n, r] = q(1e4), [s, a] = q(5), [o, l] = q(3), u = ue(() => t.methods.map((g) => ({ m: g, r: vr(g.tp, g.fp, g.fn, g.tn, n, s / 100, o) })), [t, n, s, o]), d = Math.max(...u.map((g) => g.r.hours), 1), f = (g) => g.toLocaleString(void 0, { maximumFractionDigits: 0 });
   return /* @__PURE__ */ i("div", { class: "imw-workload", children: [
     /* @__PURE__ */ i("div", { class: "imw-sliders", children: [
       /* @__PURE__ */ i("label", { children: [
         /* @__PURE__ */ i("span", { children: [
           "Reviews per month ",
-          /* @__PURE__ */ i("b", { children: m(n) })
+          /* @__PURE__ */ i("b", { children: f(n) })
         ] }),
         /* @__PURE__ */ i("input", { type: "range", min: 1e3, max: 1e5, step: 1e3, value: n, onInput: (g) => r(+g.target.value) })
       ] }),
@@ -2054,15 +2109,15 @@ function Xs() {
         /* @__PURE__ */ i("th", { children: "Expected precision" }),
         /* @__PURE__ */ i("th", { children: "Reviewer hours" })
       ] }) }),
-      /* @__PURE__ */ i("tbody", { children: p.map(({ m: g, r: d }) => /* @__PURE__ */ i("tr", { children: [
+      /* @__PURE__ */ i("tbody", { children: u.map(({ m: g, r: c }) => /* @__PURE__ */ i("tr", { children: [
         /* @__PURE__ */ i("th", { scope: "row", children: g.label }),
-        /* @__PURE__ */ i("td", { children: m(d.reviews) }),
-        /* @__PURE__ */ i("td", { children: m(d.trueAlerts) }),
-        /* @__PURE__ */ i("td", { children: m(d.missed) }),
-        /* @__PURE__ */ i("td", { children: d.precision === null ? "—" : d.precision.toFixed(2) }),
+        /* @__PURE__ */ i("td", { children: f(c.reviews) }),
+        /* @__PURE__ */ i("td", { children: f(c.trueAlerts) }),
+        /* @__PURE__ */ i("td", { children: f(c.missed) }),
+        /* @__PURE__ */ i("td", { children: c.precision === null ? "—" : c.precision.toFixed(2) }),
         /* @__PURE__ */ i("td", { class: "imw-barcell", children: [
-          /* @__PURE__ */ i("span", { class: "imw-inline-bar viz-2", style: { width: `${d.hours / c * 100}%` }, "aria-hidden": "true" }),
-          /* @__PURE__ */ i("b", { children: m(d.hours) })
+          /* @__PURE__ */ i("span", { class: "imw-inline-bar viz-2", style: { width: `${c.hours / d * 100}%` }, "aria-hidden": "true" }),
+          /* @__PURE__ */ i("b", { children: f(c.hours) })
         ] })
       ] }, g.id)) })
     ] }) }),
@@ -2075,10 +2130,10 @@ function Xs() {
     /* @__PURE__ */ i(ne, { ids: ["cliniq.workload"], compact: !0 })
   ] });
 }
-function Zs() {
-  const [e, t] = E(null);
+function _r() {
+  const [e, t] = q(null);
   if (z(() => {
-    fetch(gn("evaluation-report.json")).then((s) => s.ok ? s.json() : null).then(t).catch(() => t(null));
+    fetch(vn("evaluation-report.json")).then((s) => s.ok ? s.json() : null).then(t).catch(() => t(null));
   }, []), !e) return null;
   const n = e.suites.reduce((s, a) => s + a.passed, 0), r = e.suites.reduce((s, a) => s + a.total, 0);
   return /* @__PURE__ */ i("section", { class: "imw-lab-section", children: [
@@ -2105,8 +2160,8 @@ function Zs() {
     ] }, s.name)) })
   ] });
 }
-function er() {
-  const { kb: e, modeArg: t } = M(), n = e.traces.find((o) => o.id === t)?.id ?? "t.voice.emergency", [r, s] = E(n);
+function kr() {
+  const { kb: e, modeArg: t } = M(), n = e.traces.find((o) => o.id === t)?.id ?? "t.voice.emergency", [r, s] = q(n);
   z(() => {
     e.traces.some((o) => o.id === t) && s(t);
   }, [t]);
@@ -2120,67 +2175,67 @@ function er() {
     /* @__PURE__ */ i("section", { class: "imw-lab-section", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Replay a recorded run" }),
       /* @__PURE__ */ i("div", { class: "imw-seg is-scroll", role: "tablist", "aria-label": "Recorded runs", children: e.traces.map((o) => /* @__PURE__ */ i("button", { role: "tab", "aria-selected": r === o.id, class: r === o.id ? "is-on" : "", onClick: () => s(o.id), children: o.title }, o.id)) }),
-      /* @__PURE__ */ i(wn, { id: r }, r)
+      /* @__PURE__ */ i(bn, { id: r }, r)
     ] }),
     /* @__PURE__ */ i("section", { class: "imw-lab-section", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Try to break it" }),
       /* @__PURE__ */ i("p", { class: "imw-help", children: "Adversarial and edge cases, what the system did, and the test that keeps it that way." }),
-      /* @__PURE__ */ i("div", { class: "imw-attack-grid", children: a.map((o) => /* @__PURE__ */ i(yn, { id: o.id }, o.id)) })
+      /* @__PURE__ */ i("div", { class: "imw-attack-grid", children: a.map((o) => /* @__PURE__ */ i(_n, { id: o.id }, o.id)) })
     ] }),
     /* @__PURE__ */ i("section", { class: "imw-lab-section", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Run the numbers · ClinIQ review workload" }),
-      /* @__PURE__ */ i(Xs, {})
+      /* @__PURE__ */ i(br, {})
     ] }),
     /* @__PURE__ */ i("section", { class: "imw-lab-section", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Measured from the audio · Voice QA Harness" }),
-      /* @__PURE__ */ i(ri, {})
+      /* @__PURE__ */ i(oi, {})
     ] }),
-    /* @__PURE__ */ i(Zs, {})
+    /* @__PURE__ */ i(_r, {})
   ] });
 }
-function tr({ a: e }) {
-  const { setInspect: t, ask: n } = M(), r = ni(e), s = (a) => r.indexOf(a) + 1;
+function xr({ a: e }) {
+  const { setInspect: t, ask: n } = M(), r = ri(e), s = (a) => r.indexOf(a) + 1;
   return /* @__PURE__ */ i("div", { class: "imw-answer", children: [
     /* @__PURE__ */ i("div", { class: "imw-answer-head", children: [
       /* @__PURE__ */ i("span", { class: `imw-engine is-${e.engine}`, children: e.engine === "model" ? "Claude · validated" : "Evidence engine" }),
       /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => t({ kind: "basis", retrieved: e.basis?.retrieved ?? [], checks: e.basis?.checks, model: e.basis?.model, engine: e.engine }), children: "Why this answer?" }),
       e.refined && /* @__PURE__ */ i("span", { class: "imw-help", children: "Requirements refined by AI parsing" })
     ] }),
-    e.blocks.map((a, o) => /* @__PURE__ */ i(nr, { b: a, num: s }, o)),
-    e.actions.length > 0 && /* @__PURE__ */ i("div", { class: "imw-actions", children: e.actions.map((a, o) => /* @__PURE__ */ i(ot, { a }, o)) }),
+    e.blocks.map((a, o) => /* @__PURE__ */ i(Cr, { b: a, num: s }, o)),
+    e.actions.length > 0 && /* @__PURE__ */ i("div", { class: "imw-actions", children: e.actions.map((a, o) => /* @__PURE__ */ i(lt, { a }, o)) }),
     e.followups.length > 0 && /* @__PURE__ */ i("div", { class: "imw-followups", "aria-label": "Suggested follow-up questions", children: e.followups.map((a) => /* @__PURE__ */ i("button", { class: "imw-chip", onClick: () => n(a), children: a }, a)) })
   ] });
 }
-const ir = (e) => {
+const $r = (e) => {
   const t = e.replace(/^Bottom line: /, "");
   return t.charAt(0).toUpperCase() + t.slice(1);
 };
-function Tt({ ids: e, num: t }) {
+function Rt({ ids: e, num: t }) {
   const { kb: n, setInspect: r } = M();
   return e?.length ? /* @__PURE__ */ i(oe, { children: e.map((s) => /* @__PURE__ */ i("button", { class: "imw-cite", onClick: () => r({ kind: "claim", id: s }), "aria-label": `Source ${t(s)}: ${n.claim.get(s)?.text ?? s}`, children: t(s) }, s)) }) : null;
 }
-function nr({ b: e, num: t }) {
+function Cr({ b: e, num: t }) {
   const n = M(), { kb: r, setInspect: s, go: a } = n;
   switch (e.type) {
     case "p":
       return /* @__PURE__ */ i("p", { class: `imw-p${e.lead ? " is-lead" : ""}`, children: [
         e.text,
-        /* @__PURE__ */ i(Tt, { ids: e.cites, num: t })
+        /* @__PURE__ */ i(Rt, { ids: e.cites, num: t })
       ] });
     case "points":
       return /* @__PURE__ */ i("ol", { class: "imw-points", children: e.items.map((o) => /* @__PURE__ */ i("li", { children: [
         /* @__PURE__ */ i("strong", { children: o.label }),
         /* @__PURE__ */ i("span", { children: [
           o.text,
-          /* @__PURE__ */ i(Tt, { ids: o.cites, num: t })
+          /* @__PURE__ */ i(Rt, { ids: o.cites, num: t })
         ] })
       ] }, o.label)) });
     case "takeaway":
       return /* @__PURE__ */ i("div", { class: "imw-takeaway", children: [
         /* @__PURE__ */ i("span", { class: "imw-eyebrow", children: "Bottom line" }),
         /* @__PURE__ */ i("p", { children: [
-          ir(e.text),
-          /* @__PURE__ */ i(Tt, { ids: e.cites, num: t })
+          $r(e.text),
+          /* @__PURE__ */ i(Rt, { ids: e.cites, num: t })
         ] })
       ] });
     case "note":
@@ -2210,8 +2265,8 @@ function nr({ b: e, num: t }) {
     }
     case "coverage":
       return /* @__PURE__ */ i("div", { class: "imw-coverage-inline", children: [
-        /* @__PURE__ */ i(bt, { counts: e.analysis.counts }),
-        /* @__PURE__ */ i(pn, { analysis: e.analysis, max: 12 }),
+        /* @__PURE__ */ i(kt, { counts: e.analysis.counts }),
+        /* @__PURE__ */ i(gn, { analysis: e.analysis, max: 12 }),
         /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => {
           n.setCoverage(e.analysis), a("role");
         }, children: "Open the full analysis →" })
@@ -2219,14 +2274,14 @@ function nr({ b: e, num: t }) {
     case "xray": {
       const o = r.architectures.find((l) => l.id === e.arch);
       return o ? /* @__PURE__ */ i("div", { class: "imw-xray-inline", children: [
-        /* @__PURE__ */ i(fn, { arch: o, scan: !1, onSelect: (l) => s({ kind: "node", arch: o.id, node: l }) }),
+        /* @__PURE__ */ i(yn, { arch: o, scan: !1, onSelect: (l) => s({ kind: "node", arch: o.id, node: l }) }),
         /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => a("xray", o.entity), children: "Open X-Ray view →" })
       ] }) : null;
     }
     case "failures":
-      return /* @__PURE__ */ i("div", { class: "imw-stack", children: e.ids.map((o) => /* @__PURE__ */ i(ai, { id: o }, o)) });
+      return /* @__PURE__ */ i("div", { class: "imw-stack", children: e.ids.map((o) => /* @__PURE__ */ i(li, { id: o }, o)) });
     case "decisions":
-      return /* @__PURE__ */ i("div", { class: "imw-stack", children: e.ids.map((o) => /* @__PURE__ */ i(oi, { id: o }, o)) });
+      return /* @__PURE__ */ i("div", { class: "imw-stack", children: e.ids.map((o) => /* @__PURE__ */ i(ci, { id: o }, o)) });
     case "compare":
       return /* @__PURE__ */ i("div", { class: "imw-table-wrap", children: /* @__PURE__ */ i("table", { class: "imw-table imw-compare", children: [
         /* @__PURE__ */ i("thead", { children: /* @__PURE__ */ i("tr", { children: [
@@ -2235,7 +2290,7 @@ function nr({ b: e, num: t }) {
         ] }) }),
         /* @__PURE__ */ i("tbody", { children: e.rows.map((o) => /* @__PURE__ */ i("tr", { children: [
           /* @__PURE__ */ i("th", { scope: "row", children: o.label }),
-          o.values.map((l, p) => /* @__PURE__ */ i("td", { children: l }, p))
+          o.values.map((l, u) => /* @__PURE__ */ i("td", { children: l }, u))
         ] }, o.label)) })
       ] }) });
     case "gaps":
@@ -2245,17 +2300,17 @@ function nr({ b: e, num: t }) {
         /* @__PURE__ */ i("p", { children: o.statement }),
         o.closest.length > 0 && /* @__PURE__ */ i("div", { class: "imw-row", children: [
           /* @__PURE__ */ i("span", { class: "imw-help", children: "Closest:" }),
-          o.closest.map((l) => /* @__PURE__ */ i(Us, { id: l }, l))
+          o.closest.map((l) => /* @__PURE__ */ i(pr, { id: l }, l))
         ] })
       ] }, o.id)) });
     case "chart":
-      return e.chart === "cliniq" ? /* @__PURE__ */ i(mn, {}) : /* @__PURE__ */ i(ri, {});
+      return e.chart === "cliniq" ? /* @__PURE__ */ i(wn, {}) : /* @__PURE__ */ i(oi, {});
     case "trace":
-      return /* @__PURE__ */ i(wn, { id: e.id, compact: !0 });
+      return /* @__PURE__ */ i(bn, { id: e.id, compact: !0 });
   }
 }
-function ai({ id: e, open: t = !1 }) {
-  const { kb: n } = M(), r = n.failures.find((l) => l.id === e), [s, a] = E(t);
+function li({ id: e, open: t = !1 }) {
+  const { kb: n } = M(), r = n.failures.find((l) => l.id === e), [s, a] = q(t);
   if (!r) return null;
   const o = [["Problem", r.problem], ["Detection", r.detection], ["Diagnosis", r.diagnosis], ["Fix", r.fix], ["Prevention", r.prevention], ["Measured", r.measurement]];
   return /* @__PURE__ */ i("article", { class: `imw-story${s ? " is-open" : ""}`, children: [
@@ -2268,16 +2323,16 @@ function ai({ id: e, open: t = !1 }) {
       /* @__PURE__ */ i("span", { class: "imw-help", children: s ? "Hide" : "Problem → detection → fix → prevention" })
     ] }),
     s && /* @__PURE__ */ i("div", { class: "imw-story-body", children: [
-      /* @__PURE__ */ i("ol", { class: "imw-flow", children: o.map(([l, p]) => /* @__PURE__ */ i("li", { children: [
+      /* @__PURE__ */ i("ol", { class: "imw-flow", children: o.map(([l, u]) => /* @__PURE__ */ i("li", { children: [
         /* @__PURE__ */ i("strong", { children: l }),
-        /* @__PURE__ */ i("span", { children: p })
+        /* @__PURE__ */ i("span", { children: u })
       ] }, l)) }),
-      /* @__PURE__ */ i(De, { refs: r.code }),
+      /* @__PURE__ */ i(We, { refs: r.code }),
       /* @__PURE__ */ i(ne, { ids: r.claims, title: "Evidence", compact: !0 })
     ] })
   ] });
 }
-function oi({ id: e }) {
+function ci({ id: e }) {
   const { kb: t } = M(), n = t.decisions.find((r) => r.id === e);
   return n ? /* @__PURE__ */ i("article", { class: "imw-story is-open", children: [
     /* @__PURE__ */ i("div", { class: "imw-story-head is-static", children: [
@@ -2297,18 +2352,18 @@ function oi({ id: e }) {
     ] })
   ] }) : null;
 }
-function sr({ analysis: e }) {
+function Er({ analysis: e }) {
   const { kb: t, setInspect: n } = M();
   return /* @__PURE__ */ i("div", { class: "imw-reqgroups", children: ["direct", "related", "verification", "missing"].map((s) => {
     const a = e.requirements.filter((o) => o.category === s);
     return a.length ? /* @__PURE__ */ i("section", { children: [
-      /* @__PURE__ */ i("h4", { class: `imw-cat ${Ee[s]}`, children: [
+      /* @__PURE__ */ i("h4", { class: `imw-cat ${qe[s]}`, children: [
         ie[s],
         " · ",
         a.length
       ] }),
       /* @__PURE__ */ i("ul", { class: "imw-reqs", children: a.map((o) => /* @__PURE__ */ i("li", { children: /* @__PURE__ */ i("button", { class: "imw-req-btn", onClick: () => n({ kind: "req", req: o }), children: [
-        /* @__PURE__ */ i("i", { class: `imw-cat-dot ${Ee[o.category]}`, "aria-hidden": "true" }),
+        /* @__PURE__ */ i("i", { class: `imw-cat-dot ${qe[o.category]}`, "aria-hidden": "true" }),
         /* @__PURE__ */ i("span", { children: [
           o.label,
           o.priority === "preferred" ? /* @__PURE__ */ i("em", { children: " · preferred" }) : null,
@@ -2319,7 +2374,7 @@ function sr({ analysis: e }) {
     ] }, s) : null;
   }) });
 }
-const rr = [
+const qr = [
   { q: "What has Rahul actually shipped?" },
   { q: "Show me his strongest RAG work." },
   { q: "How does he evaluate AI systems?" },
@@ -2329,17 +2384,17 @@ const rr = [
   { q: "Evaluate Rahul for a role", mode: "role" },
   { q: "Paste a job description", mode: "jd" }
 ];
-function ar({ turns: e }) {
-  const { kb: t, ask: n, go: r, persona: s, setPersona: a } = M(), [o, l] = E(""), p = ye(null), c = ye(null), m = e[e.length - 1];
+function Sr({ turns: e }) {
+  const { kb: t, ask: n, go: r, persona: s, setPersona: a } = M(), [o, l] = q(""), u = ye(null), d = ye(null), f = e[e.length - 1];
   z(() => {
-    c.current?.querySelector(".imw-turn:last-child")?.scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-  }, [e.length, m?.pending]);
+    d.current?.querySelector(".imw-turn:last-child")?.scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }, [e.length, f?.pending]);
   const g = () => {
-    const w = o.trim();
-    w && (l(""), p.current && (p.current.style.height = "auto"), n(w));
-  }, d = ei(o), y = t.claims.reduce((w, u) => w + (F(u) ? u.code?.length ?? 0 : 0), 0);
+    const y = o.trim();
+    y && (l(""), u.current && (u.current.style.height = "auto"), n(y));
+  }, c = ii(o), w = t.claims.reduce((y, p) => y + (F(p) ? p.code?.length ?? 0 : 0), 0);
   return /* @__PURE__ */ i("div", { class: "imw-ask", children: [
-    /* @__PURE__ */ i("div", { class: "imw-log", ref: c, children: [
+    /* @__PURE__ */ i("div", { class: "imw-log", ref: d, children: [
       e.length === 0 && /* @__PURE__ */ i("div", { class: "imw-welcome", children: [
         /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "✦ Interview My Work" }),
         /* @__PURE__ */ i("h3", { "data-autofocus": !0, tabIndex: -1, children: "Ask about my projects, engineering decisions, experience, or how my background maps to a role." }),
@@ -2350,7 +2405,7 @@ function ar({ turns: e }) {
             /* @__PURE__ */ i("dd", { children: "verified claims" })
           ] }),
           /* @__PURE__ */ i("div", { children: [
-            /* @__PURE__ */ i("dt", { children: y }),
+            /* @__PURE__ */ i("dt", { children: w }),
             /* @__PURE__ */ i("dd", { children: "pinned code links" })
           ] }),
           /* @__PURE__ */ i("div", { children: [
@@ -2366,69 +2421,69 @@ function ar({ turns: e }) {
           "Who's asking? ",
           /* @__PURE__ */ i("span", { class: "imw-help", children: "(optional)" })
         ] }),
-        /* @__PURE__ */ i("div", { class: "imw-personas is-inline", role: "radiogroup", "aria-label": "Who is asking", children: t.personas.map((w) => /* @__PURE__ */ i("button", { role: "radio", "aria-checked": s === w.id, class: s === w.id ? "is-on" : "", onClick: () => a(w.id), children: w.label }, w.id)) }),
+        /* @__PURE__ */ i("div", { class: "imw-personas is-inline", role: "radiogroup", "aria-label": "Who is asking", children: t.personas.map((y) => /* @__PURE__ */ i("button", { role: "radio", "aria-checked": s === y.id, class: s === y.id ? "is-on" : "", onClick: () => a(y.id), children: y.label }, y.id)) }),
         /* @__PURE__ */ i("p", { class: "imw-help", children: [
           "Prefer your own assistant? ",
           /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => r("connect"), children: "Connect Claude, Cursor or VS Code to this evidence →" })
         ] }),
         /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Start with" }),
-        /* @__PURE__ */ i("div", { class: "imw-starters", children: rr.map((w, u) => /* @__PURE__ */ i("button", { onClick: () => {
-          G("starter_question_selected", { index: u }), w.mode ? r("role", w.mode === "jd" ? "jd" : void 0) : n(w.q);
+        /* @__PURE__ */ i("div", { class: "imw-starters", children: qr.map((y, p) => /* @__PURE__ */ i("button", { onClick: () => {
+          G("starter_question_selected", { index: p }), y.mode ? r("role", y.mode === "jd" ? "jd" : void 0) : n(y.q);
         }, children: [
-          /* @__PURE__ */ i("span", { class: "imw-starter-n", children: String(u + 1).padStart(2, "0") }),
-          /* @__PURE__ */ i("span", { children: w.q })
-        ] }, w.q)) })
+          /* @__PURE__ */ i("span", { class: "imw-starter-n", children: String(p + 1).padStart(2, "0") }),
+          /* @__PURE__ */ i("span", { children: y.q })
+        ] }, y.q)) })
       ] }),
-      e.map((w) => /* @__PURE__ */ i("section", { class: "imw-turn", "aria-label": `Question: ${w.q}`, children: [
+      e.map((y) => /* @__PURE__ */ i("section", { class: "imw-turn", "aria-label": `Question: ${y.q}`, children: [
         /* @__PURE__ */ i("p", { class: "imw-q", children: [
           /* @__PURE__ */ i("span", { class: "imw-eyebrow", children: "You asked" }),
-          w.q
+          y.q
         ] }),
-        w.pending && /* @__PURE__ */ i("div", { class: "imw-pending", role: "status", children: [
+        y.pending && /* @__PURE__ */ i("div", { class: "imw-pending", role: "status", children: [
           /* @__PURE__ */ i("span", { class: "imw-pulse", "aria-hidden": "true" }),
           "Writing an answer from the evidence and checking every citation (about 10 seconds)…"
         ] }),
-        w.a && /* @__PURE__ */ i(tr, { a: w.a })
-      ] }, w.id)),
-      e.some((w) => w.a) && !m?.pending && /* @__PURE__ */ i("p", { class: "imw-keep", children: [
+        y.a && /* @__PURE__ */ i(xr, { a: y.a })
+      ] }, y.id)),
+      e.some((y) => y.a) && !f?.pending && /* @__PURE__ */ i("p", { class: "imw-keep", children: [
         "Want to keep this? ",
         /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => r("export"), children: "Download your questions and answers as a PDF →" })
       ] })
     ] }),
-    /* @__PURE__ */ i("form", { class: "imw-composer", onSubmit: (w) => {
-      w.preventDefault(), g();
+    /* @__PURE__ */ i("form", { class: "imw-composer", onSubmit: (y) => {
+      y.preventDefault(), g();
     }, children: [
-      d && /* @__PURE__ */ i("p", { class: "imw-jd-hint", children: "This looks like a job description. Sending it runs an evidence-coverage analysis." }),
+      c && /* @__PURE__ */ i("p", { class: "imw-jd-hint", children: "This looks like a job description. Sending it runs an evidence-coverage analysis." }),
       /* @__PURE__ */ i("label", { class: "sr-only", for: "imw-q", children: "Ask a question or paste a job description" }),
       /* @__PURE__ */ i(
         "textarea",
         {
           id: "imw-q",
-          ref: p,
+          ref: u,
           rows: 1,
           value: o,
           placeholder: "Ask a question, or paste a job description…",
           maxLength: 12e3,
-          onInput: (w) => {
-            const u = w.target;
-            l(u.value), u.style.height = "auto", u.style.height = `${Math.min(u.scrollHeight, 180)}px`;
+          onInput: (y) => {
+            const p = y.target;
+            l(p.value), p.style.height = "auto", p.style.height = `${Math.min(p.scrollHeight, 180)}px`;
           },
-          onKeyDown: (w) => {
-            w.key === "Enter" && !w.shiftKey && (w.preventDefault(), g());
+          onKeyDown: (y) => {
+            y.key === "Enter" && !y.shiftKey && (y.preventDefault(), g());
           }
         }
       ),
-      /* @__PURE__ */ i("button", { type: "submit", class: "imw-send", disabled: !o.trim(), children: d ? "Analyze" : "Ask" })
+      /* @__PURE__ */ i("button", { type: "submit", class: "imw-send", disabled: !o.trim(), children: c ? "Analyze" : "Ask" })
     ] })
   ] });
 }
-function or(e) {
+function Ar(e) {
   const t = location.origin + location.pathname;
   if (e.source === "role" && e.roleId) return `${t}#imw=role:${e.roleId}`;
   const n = e.requirements.map((r) => r.id).filter((r) => !r.startsWith("term:")).join(",");
   return `${t}#imw=role:${encodeURIComponent(`jd~${n}`)}`;
 }
-function lr(e, t) {
+function Ir(e, t) {
   const n = [`# Evidence coverage: ${e.title}`, `Candidate: ${t}`, ""];
   for (const r of ["direct", "related", "verification", "missing"]) {
     const s = e.requirements.filter((a) => a.category === r);
@@ -2437,37 +2492,37 @@ function lr(e, t) {
   return e.notes.length && n.push(...e.notes.map((r) => `> ${r}`), ""), n.push("Generated by Interview My Work from verified evidence. No fit score is computed."), n.join(`
 `);
 }
-function cr() {
-  const { kb: e, coverage: t, setCoverage: n, modeArg: r, api: s, toggleLens: a, ask: o, go: l } = M(), [p, c] = E(r === "jd" ? "jd" : "role"), [m, g] = E(""), [d, y] = E(!1), [w, u] = E("");
+function Mr() {
+  const { kb: e, coverage: t, setCoverage: n, modeArg: r, api: s, toggleLens: a, ask: o, go: l } = M(), [u, d] = q(r === "jd" ? "jd" : "role"), [f, g] = q(""), [c, w] = q(!1), [y, p] = q("");
   z(() => {
     if (!r) return;
     if (r === "jd") {
-      c("jd");
+      d("jd");
       return;
     }
     const h = decodeURIComponent(r);
     if (e.role.has(h)) n(Ce(e, h));
     else if (h.startsWith("jd~")) {
-      const C = h.slice(3).split(",").filter(Boolean).map((q) => q.startsWith("near:") ? le(e, e.skills.find((A) => A.near?.includes(q.slice(5)))?.id ?? q, { near: q.slice(5) }) : le(e, q));
-      n(Zt(e, "Shared job description", C, { source: "jd" }));
+      const C = h.slice(3).split(",").filter(Boolean).map((E) => E.startsWith("near:") ? ce(e, e.skills.find((A) => A.near?.includes(E.slice(5)))?.id ?? E, { near: E.slice(5) }) : ce(e, E));
+      n(ei(e, "Shared job description", C, { source: "jd" }));
     }
   }, [r]);
-  const f = (h) => {
+  const m = (h) => {
     h && (n(Ce(e, h)), G("role_selected", { role: h }));
   }, v = () => {
-    if (m.trim().length < 40) return;
-    const h = ut(e, m);
-    n(h), G("jd_analyzed", { requirements: h.requirements.length }), s === "ready" && (y(!0), dn(m).then((x) => {
-      x.length && n(ut(e, m, x), h);
+    if (f.trim().length < 40) return;
+    const h = pt(e, f);
+    n(h), G("jd_analyzed", { requirements: h.requirements.length }), s === "ready" && (w(!0), pn(f).then((x) => {
+      x.length && n(pt(e, f, x), h);
     }).catch(() => {
-    }).finally(() => y(!1)));
+    }).finally(() => w(!1)));
   }, k = async (h) => {
     if (t)
       try {
-        await navigator.clipboard.writeText(h === "link" ? or(t) : lr(t, e.subject.name)), u(h), setTimeout(() => u(""), 2e3);
+        await navigator.clipboard.writeText(h === "link" ? Ar(t) : Ir(t, e.subject.name)), p(h), setTimeout(() => p(""), 2e3);
       } catch {
       }
-  }, _ = e.roles.filter((h) => h.priority).sort((h, x) => h.priority - x.priority), b = [["strong", "Strong fit"], ["adjacent", "Adjacent"], ["stretch", "Stretch"]];
+  }, b = e.roles.filter((h) => h.priority).sort((h, x) => h.priority - x.priority), _ = [["strong", "Strong fit"], ["adjacent", "Adjacent"], ["stretch", "Stretch"]];
   return /* @__PURE__ */ i("div", { class: "imw-view", children: [
     /* @__PURE__ */ i("header", { class: "imw-view-head", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Evaluate against a role" }),
@@ -2475,19 +2530,19 @@ function cr() {
       /* @__PURE__ */ i("p", { class: "imw-help", children: "Each requirement is classified as direct evidence, related evidence, verification required, or not currently demonstrated. There is no match percentage." })
     ] }),
     /* @__PURE__ */ i("div", { class: "imw-seg", role: "tablist", "aria-label": "Input", children: [
-      /* @__PURE__ */ i("button", { role: "tab", "aria-selected": p === "role", class: p === "role" ? "is-on" : "", onClick: () => c("role"), children: "Select a role" }),
-      /* @__PURE__ */ i("button", { role: "tab", "aria-selected": p === "jd", class: p === "jd" ? "is-on" : "", onClick: () => c("jd"), children: "Paste a job description" })
+      /* @__PURE__ */ i("button", { role: "tab", "aria-selected": u === "role", class: u === "role" ? "is-on" : "", onClick: () => d("role"), children: "Select a role" }),
+      /* @__PURE__ */ i("button", { role: "tab", "aria-selected": u === "jd", class: u === "jd" ? "is-on" : "", onClick: () => d("jd"), children: "Paste a job description" })
     ] }),
-    p === "role" ? /* @__PURE__ */ i("div", { class: "imw-rolepick", children: [
-      /* @__PURE__ */ i("div", { class: "imw-role-cards", children: _.map((h) => /* @__PURE__ */ i("button", { class: t?.roleId === h.id && t.source === "role" ? "is-on" : "", onClick: () => f(h.id), children: [
+    u === "role" ? /* @__PURE__ */ i("div", { class: "imw-rolepick", children: [
+      /* @__PURE__ */ i("div", { class: "imw-role-cards", children: b.map((h) => /* @__PURE__ */ i("button", { class: t?.roleId === h.id && t.source === "role" ? "is-on" : "", onClick: () => m(h.id), children: [
         /* @__PURE__ */ i("strong", { children: h.title }),
         /* @__PURE__ */ i("small", { children: h.proof_note })
       ] }, h.id)) }),
       /* @__PURE__ */ i("label", { class: "imw-select", children: [
         /* @__PURE__ */ i("span", { children: "More roles" }),
-        /* @__PURE__ */ i("select", { onChange: (h) => f(h.target.value), value: t?.source === "role" ? t.roleId : "", children: [
+        /* @__PURE__ */ i("select", { onChange: (h) => m(h.target.value), value: t?.source === "role" ? t.roleId : "", children: [
           /* @__PURE__ */ i("option", { value: "", children: "Choose a role…" }),
-          b.map(([h, x]) => /* @__PURE__ */ i("optgroup", { label: x, children: e.roles.filter((C) => C.tier === h && !C.priority).map((C) => /* @__PURE__ */ i("option", { value: C.id, children: C.title }, C.id)) }, h))
+          _.map(([h, x]) => /* @__PURE__ */ i("optgroup", { label: x, children: e.roles.filter((C) => C.tier === h && !C.priority).map((C) => /* @__PURE__ */ i("option", { value: C.id, children: C.title }, C.id)) }, h))
         ] })
       ] })
     ] }) : /* @__PURE__ */ i("div", { class: "imw-jd", children: [
@@ -2497,14 +2552,14 @@ function cr() {
         {
           id: "imw-jd",
           rows: 8,
-          value: m,
+          value: f,
           maxLength: 12e3,
           placeholder: "Paste the full job description, including requirements and nice-to-haves.",
           onInput: (h) => g(h.target.value)
         }
       ),
       /* @__PURE__ */ i("div", { class: "imw-row", children: [
-        /* @__PURE__ */ i("button", { class: "imw-btn is-primary", onClick: v, disabled: m.trim().length < 40, children: "Analyze coverage" }),
+        /* @__PURE__ */ i("button", { class: "imw-btn is-primary", onClick: v, disabled: f.trim().length < 40, children: "Analyze coverage" }),
         /* @__PURE__ */ i("span", { class: "imw-help", children: s === "ready" ? "Parsed in your browser, then refined by the AI parser. The text is not stored." : "Parsed in your browser. Nothing is sent anywhere." })
       ] })
     ] }),
@@ -2513,7 +2568,7 @@ function cr() {
         /* @__PURE__ */ i("div", { children: [
           /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: [
             "Evidence coverage",
-            d ? " · refining with AI…" : ""
+            c ? " · refining with AI…" : ""
           ] }),
           /* @__PURE__ */ i("h3", { children: t.title }),
           t.source === "jd" && t.closestRole && /* @__PURE__ */ i("p", { class: "imw-help", children: [
@@ -2526,138 +2581,138 @@ function cr() {
           /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => l("brief"), children: "10-minute brief" })
         ] })
       ] }),
-      /* @__PURE__ */ i(bt, { counts: t.counts }),
+      /* @__PURE__ */ i(kt, { counts: t.counts }),
       t.notes.map((h) => /* @__PURE__ */ i("p", { class: "imw-note", children: h }, h)),
-      /* @__PURE__ */ i(pn, { analysis: t, max: 18 }),
-      /* @__PURE__ */ i(sr, { analysis: t }),
+      /* @__PURE__ */ i(gn, { analysis: t, max: 18 }),
+      /* @__PURE__ */ i(Er, { analysis: t }),
       /* @__PURE__ */ i("div", { class: "imw-actions", children: [
         /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => o(t.roleId ? `Challenge the evidence for ${t.title}` : "Challenge this evidence"), children: "Challenge this evidence" }),
         /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => l("map", t.roleId), children: "View on the evidence map" }),
-        /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => k("link"), children: w === "link" ? "Link copied" : "Copy shareable link" }),
-        /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => k("md"), children: w === "md" ? "Summary copied" : "Copy summary" }),
+        /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => k("link"), children: y === "link" ? "Link copied" : "Copy shareable link" }),
+        /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => k("md"), children: y === "md" ? "Summary copied" : "Copy summary" }),
         /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => l("export"), children: "Download PDF" })
       ] })
     ] })
   ] });
 }
-function dr() {
-  const { kb: e, modeArg: t, setInspect: n, inspect: r, ask: s, noteEntity: a } = M(), o = e.architectures, [l, p] = E(o.find((h) => h.entity === t)?.id ?? o[0].id), c = o.find((h) => h.id === l), [m, g] = E("why");
+function jr() {
+  const { kb: e, modeArg: t, setInspect: n, inspect: r, ask: s, noteEntity: a } = M(), o = e.architectures, [l, u] = q(o.find((h) => h.entity === t)?.id ?? o[0].id), d = o.find((h) => h.id === l), [f, g] = q("why");
   z(() => {
     const h = o.find((x) => x.entity === t);
-    h && p(h.id);
+    h && u(h.id);
   }, [t]), z(() => {
-    a(c.entity);
-  }, [c.entity]);
-  const d = e.entity.get(c.entity), y = e.statableByEntity.get(c.entity) ?? [], w = e.decisions.filter((h) => h.entity === c.entity), u = e.failures.filter((h) => h.entity === c.entity), f = e.attacks.filter((h) => h.entity === c.entity), v = y.filter((h) => h.tags.some((x) => ["eval_design", "llm_eval", "regression_testing", "metrics", "testing", "model_comparison"].includes(x))), k = y.flatMap((h) => h.code ?? []), _ = r?.kind === "node" && r.arch === c.id ? r.node : void 0, b = [
-    ["why", "Why this design?", w.length],
-    ["failures", "Failure cases", u.length + y.filter((h) => h.kind === "limitation").length],
-    ["break", "Try to break it", f.length],
+    a(d.entity);
+  }, [d.entity]);
+  const c = e.entity.get(d.entity), w = e.statableByEntity.get(d.entity) ?? [], y = e.decisions.filter((h) => h.entity === d.entity), p = e.failures.filter((h) => h.entity === d.entity), m = e.attacks.filter((h) => h.entity === d.entity), v = w.filter((h) => h.tags.some((x) => ["eval_design", "llm_eval", "regression_testing", "metrics", "testing", "model_comparison"].includes(x))), k = w.flatMap((h) => h.code ?? []), b = r?.kind === "node" && r.arch === d.id ? r.node : void 0, _ = [
+    ["why", "Why this design?", y.length],
+    ["failures", "Failure cases", p.length + w.filter((h) => h.kind === "limitation").length],
+    ["break", "Try to break it", m.length],
     ["evaluation", "Evaluation", v.length],
     ["code", "Code", k.length],
-    ["questions", "Interviewer questions", d.questions.length]
+    ["questions", "Interviewer questions", c.questions.length]
   ];
   return /* @__PURE__ */ i("div", { class: "imw-view", children: [
     /* @__PURE__ */ i("header", { class: "imw-view-head", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "X-Ray · system anatomy" }),
-      /* @__PURE__ */ i("h3", { "data-autofocus": !0, tabIndex: -1, children: c.title }),
+      /* @__PURE__ */ i("h3", { "data-autofocus": !0, tabIndex: -1, children: d.title }),
       /* @__PURE__ */ i("p", { class: "imw-help", children: [
-        c.note,
+        d.note,
         " Select a component to see its purpose, inputs and outputs, why it exists, and the evidence behind it."
       ] })
     ] }),
     /* @__PURE__ */ i("div", { class: "imw-seg is-scroll", role: "tablist", "aria-label": "System", children: o.map((h) => /* @__PURE__ */ i("button", { role: "tab", "aria-selected": h.id === l, class: h.id === l ? "is-on" : "", onClick: () => {
-      p(h.id), n(null);
+      u(h.id), n(null);
     }, children: e.entity.get(h.entity)?.short }, h.id)) }),
-    /* @__PURE__ */ i(fn, { arch: c, selected: _, onSelect: (h) => n({ kind: "node", arch: c.id, node: h }) }),
-    /* @__PURE__ */ i("div", { class: "imw-subtabs", role: "tablist", "aria-label": "Inspect", children: b.filter(([, , h]) => h > 0).map(([h, x, C]) => /* @__PURE__ */ i("button", { role: "tab", "aria-selected": m === h, class: m === h ? "is-on" : "", onClick: () => g(h), children: [
+    /* @__PURE__ */ i(yn, { arch: d, selected: b, onSelect: (h) => n({ kind: "node", arch: d.id, node: h }) }),
+    /* @__PURE__ */ i("div", { class: "imw-subtabs", role: "tablist", "aria-label": "Inspect", children: _.filter(([, , h]) => h > 0).map(([h, x, C]) => /* @__PURE__ */ i("button", { role: "tab", "aria-selected": f === h, class: f === h ? "is-on" : "", onClick: () => g(h), children: [
       x,
       " ",
       /* @__PURE__ */ i("small", { children: C })
     ] }, h)) }),
     /* @__PURE__ */ i("div", { class: "imw-tabpanel", role: "tabpanel", children: [
-      m === "why" && /* @__PURE__ */ i("div", { class: "imw-stack", children: w.map((h) => /* @__PURE__ */ i(oi, { id: h.id }, h.id)) }),
-      m === "failures" && /* @__PURE__ */ i("div", { class: "imw-stack", children: [
-        u.map((h, x) => /* @__PURE__ */ i(ai, { id: h.id, open: x === 0 }, h.id)),
-        /* @__PURE__ */ i(ne, { ids: y.filter((h) => h.kind === "limitation").map((h) => h.id), title: "Stated limitations" })
+      f === "why" && /* @__PURE__ */ i("div", { class: "imw-stack", children: y.map((h) => /* @__PURE__ */ i(ci, { id: h.id }, h.id)) }),
+      f === "failures" && /* @__PURE__ */ i("div", { class: "imw-stack", children: [
+        p.map((h, x) => /* @__PURE__ */ i(li, { id: h.id, open: x === 0 }, h.id)),
+        /* @__PURE__ */ i(ne, { ids: w.filter((h) => h.kind === "limitation").map((h) => h.id), title: "Stated limitations" })
       ] }),
-      m === "break" && /* @__PURE__ */ i("div", { class: "imw-attack-grid", children: f.map((h) => /* @__PURE__ */ i(yn, { id: h.id }, h.id)) }),
-      m === "evaluation" && /* @__PURE__ */ i("div", { class: "imw-stack", children: [
+      f === "break" && /* @__PURE__ */ i("div", { class: "imw-attack-grid", children: m.map((h) => /* @__PURE__ */ i(_n, { id: h.id }, h.id)) }),
+      f === "evaluation" && /* @__PURE__ */ i("div", { class: "imw-stack", children: [
         /* @__PURE__ */ i(ne, { ids: v.map((h) => h.id) }),
-        c.entity === "cliniq" && /* @__PURE__ */ i(mn, {}),
-        c.entity === "voice" && /* @__PURE__ */ i(ri, {})
+        d.entity === "cliniq" && /* @__PURE__ */ i(wn, {}),
+        d.entity === "voice" && /* @__PURE__ */ i(oi, {})
       ] }),
-      m === "code" && /* @__PURE__ */ i(De, { refs: k, max: 30 }),
-      m === "questions" && /* @__PURE__ */ i("div", { class: "imw-stack", children: [
+      f === "code" && /* @__PURE__ */ i(We, { refs: k, max: 30 }),
+      f === "questions" && /* @__PURE__ */ i("div", { class: "imw-stack", children: [
         /* @__PURE__ */ i("p", { class: "imw-help", children: "Questions a skeptical interviewer could press on. Select one to see what the evidence says." }),
-        d.questions.map((h) => /* @__PURE__ */ i("button", { class: "imw-question", onClick: () => s(h.includes(d.short) ? h : `${h} (${d.short})`), children: h }, h))
+        c.questions.map((h) => /* @__PURE__ */ i("button", { class: "imw-question", onClick: () => s(h.includes(c.short) ? h : `${h} (${c.short})`), children: h }, h))
       ] })
     ] })
   ] });
 }
-const hr = 1e3, ur = 720, Y = 500, te = 360, Ut = 170, Vt = 305, pr = /* @__PURE__ */ new Set(["project", "research", "experience", "leadership"]);
-function mr(e, t) {
-  const n = e.groups, r = e.entities.filter((u) => pr.has(u.kind)), s = new Map(e.skills.map((u) => [u.id, u.group])), a = /* @__PURE__ */ new Map();
-  for (const u of e.claims.filter(F)) {
-    const f = a.get(u.entity) ?? /* @__PURE__ */ new Map();
-    new Set(u.tags.map((v) => s.get(v)).filter(Boolean)).forEach((v) => f.set(v, (f.get(v) ?? 0) + 1)), a.set(u.entity, f);
+const Tr = 1e3, Rr = 720, J = 500, te = 360, Vt = 170, Gt = 305, Lr = /* @__PURE__ */ new Set(["project", "research", "experience", "leadership"]);
+function Pr(e, t) {
+  const n = e.groups, r = e.entities.filter((p) => Lr.has(p.kind)), s = new Map(e.skills.map((p) => [p.id, p.group])), a = /* @__PURE__ */ new Map();
+  for (const p of e.claims.filter(F)) {
+    const m = a.get(p.entity) ?? /* @__PURE__ */ new Map();
+    new Set(p.tags.map((v) => s.get(v)).filter(Boolean)).forEach((v) => m.set(v, (m.get(v) ?? 0) + 1)), a.set(p.entity, m);
   }
-  const o = new Map(n.map((u, f) => [u.id, -Math.PI / 2 + f / n.length * Math.PI * 2])), l = new Set(t?.requirements.filter((u) => u.category === "direct" || u.category === "related").map((u) => u.id) ?? []), p = new Map(n.map((u) => {
-    if (!t) return [u.id, 1];
-    const f = e.skills.filter((v) => v.group === u.id);
-    return [u.id, f.filter((v) => l.has(v.id)).length / Math.max(1, Math.min(4, f.length))];
-  })), c = Math.max(1, ...t?.entities.map((u) => u.score) ?? [1]), m = new Map(r.map((u) => [u.id, t ? (t.entities.find((f) => f.id === u.id)?.score ?? 0) / c : 1])), g = /* @__PURE__ */ new Map();
-  for (const u of n) {
-    const f = Math.min(1, p.get(u.id)), v = t ? Ut * (f > 0 ? 1 - 0.16 * f : 1.1) : Ut, k = o.get(u.id);
-    g.set(u.id, { x: Y + v * Math.cos(k), y: te + v * Math.sin(k), o: t ? f > 0 ? 1 : 0.16 : 1 });
+  const o = new Map(n.map((p, m) => [p.id, -Math.PI / 2 + m / n.length * Math.PI * 2])), l = new Set(t?.requirements.filter((p) => p.category === "direct" || p.category === "related").map((p) => p.id) ?? []), u = new Map(n.map((p) => {
+    if (!t) return [p.id, 1];
+    const m = e.skills.filter((v) => v.group === p.id);
+    return [p.id, m.filter((v) => l.has(v.id)).length / Math.max(1, Math.min(4, m.length))];
+  })), d = Math.max(1, ...t?.entities.map((p) => p.score) ?? [1]), f = new Map(r.map((p) => [p.id, t ? (t.entities.find((m) => m.id === p.id)?.score ?? 0) / d : 1])), g = /* @__PURE__ */ new Map();
+  for (const p of n) {
+    const m = Math.min(1, u.get(p.id)), v = t ? Vt * (m > 0 ? 1 - 0.16 * m : 1.1) : Vt, k = o.get(p.id);
+    g.set(p.id, { x: J + v * Math.cos(k), y: te + v * Math.sin(k), o: t ? m > 0 ? 1 : 0.16 : 1 });
   }
-  const d = r.map((u) => {
-    const f = a.get(u.id) ?? /* @__PURE__ */ new Map();
+  const c = r.map((p) => {
+    const m = a.get(p.id) ?? /* @__PURE__ */ new Map();
     let v = 0, k = 0;
-    return f.forEach((_, b) => {
-      const h = o.get(b);
-      v += _ * Math.cos(h), k += _ * Math.sin(h);
-    }), { id: u.id, a: Math.atan2(k, v) };
-  }).sort((u, f) => u.a - f.a), y = Math.PI * 2 / d.length * 0.8;
-  for (let u = 0; u < 8; u++)
-    for (let f = 0; f < d.length; f++) {
-      const v = d[f], k = d[(f + 1) % d.length];
-      let _ = k.a - v.a;
-      if (f === d.length - 1 && (_ += Math.PI * 2), _ < y) {
-        const b = (y - _) / 2;
-        v.a -= b, k.a += b;
+    return m.forEach((b, _) => {
+      const h = o.get(_);
+      v += b * Math.cos(h), k += b * Math.sin(h);
+    }), { id: p.id, a: Math.atan2(k, v) };
+  }).sort((p, m) => p.a - m.a), w = Math.PI * 2 / c.length * 0.8;
+  for (let p = 0; p < 8; p++)
+    for (let m = 0; m < c.length; m++) {
+      const v = c[m], k = c[(m + 1) % c.length];
+      let b = k.a - v.a;
+      if (m === c.length - 1 && (b += Math.PI * 2), b < w) {
+        const _ = (w - b) / 2;
+        v.a -= _, k.a += _;
       }
     }
-  const w = /* @__PURE__ */ new Map();
-  for (const u of d) {
-    const f = m.get(u.id), v = t ? Vt * (f > 0 ? 1 - 0.2 * f : 1.06) : Vt;
-    w.set(u.id, { x: Y + v * Math.cos(u.a), y: te + v * Math.sin(u.a), o: t ? f > 0 ? 0.35 + 0.65 * f : 0.14 : 1 });
+  const y = /* @__PURE__ */ new Map();
+  for (const p of c) {
+    const m = f.get(p.id), v = t ? Gt * (m > 0 ? 1 - 0.2 * m : 1.06) : Gt;
+    y.set(p.id, { x: J + v * Math.cos(p.a), y: te + v * Math.sin(p.a), o: t ? m > 0 ? 0.35 + 0.65 * m : 0.14 : 1 });
   }
-  return { groups: n, ents: r, weight: a, gPos: g, ePos: w };
+  return { groups: n, ents: r, weight: a, gPos: g, ePos: y };
 }
-const fr = (e) => e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2;
-function gr() {
-  const { kb: e, modeArg: t, coverage: n, setInspect: r, go: s } = M(), [a, o] = E(t && e.role.has(t) ? t : ""), [l, p] = E(null), c = he(() => a === "__current" ? n : a ? Ce(e, a) : null, [a, e, n]), m = he(() => mr(e, c), [e, c]), [g, d] = E(() => new Map([...m.gPos, ...m.ePos].map(([b]) => [b, { x: Y, y: te, o: 0 }]))), y = ye(g);
+const Fr = (e) => e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2;
+function Dr() {
+  const { kb: e, modeArg: t, coverage: n, setInspect: r, go: s } = M(), [a, o] = q(t && e.role.has(t) ? t : ""), [l, u] = q(null), d = ue(() => a === "__current" ? n : a ? Ce(e, a) : null, [a, e, n]), f = ue(() => Pr(e, d), [e, d]), [g, c] = q(() => new Map([...f.gPos, ...f.ePos].map(([_]) => [_, { x: J, y: te, o: 0 }]))), w = ye(g);
   z(() => {
-    const b = new Map([...m.gPos, ...m.ePos]);
-    if (qe()) {
-      y.current = b, d(b);
+    const _ = new Map([...f.gPos, ...f.ePos]);
+    if (Ee()) {
+      w.current = _, c(_);
       return;
     }
-    const h = y.current, x = performance.now(), C = 850;
-    let q = 0;
+    const h = w.current, x = performance.now(), C = 850;
+    let E = 0;
     const A = (H) => {
-      const K = fr(Math.min(1, (H - x) / C)), re = /* @__PURE__ */ new Map();
-      b.forEach((pe, J) => {
-        const me = h.get(J) ?? { x: Y, y: te, o: 0 };
-        re.set(J, { x: me.x + (pe.x - me.x) * K, y: me.y + (pe.y - me.y) * K, o: me.o + (pe.o - me.o) * K });
-      }), y.current = re, d(re), K < 1 && (q = requestAnimationFrame(A));
+      const K = Fr(Math.min(1, (H - x) / C)), re = /* @__PURE__ */ new Map();
+      _.forEach((pe, Y) => {
+        const me = h.get(Y) ?? { x: J, y: te, o: 0 };
+        re.set(Y, { x: me.x + (pe.x - me.x) * K, y: me.y + (pe.y - me.y) * K, o: me.o + (pe.o - me.o) * K });
+      }), w.current = re, c(re), K < 1 && (E = requestAnimationFrame(A));
     };
-    return q = requestAnimationFrame(A), () => cancelAnimationFrame(q);
-  }, [m]);
-  const w = (b) => g.get(b) ?? { x: Y, y: te, o: 0 }, u = Math.max(1, ...[...m.weight.values()].flatMap((b) => [...b.values()])), f = (b) => e.claims.filter((h) => F(h) && h.tags.some((x) => e.skill.get(x)?.group === b)).length, v = (b) => e.statableByEntity.get(b)?.length ?? 0, k = l ? e.skills.filter((b) => b.group === l).map((b, h, x) => {
-    const C = w(l), q = Math.atan2(C.y - te, C.x - Y), A = Math.min(Math.PI * 0.9, x.length * 0.22), H = q - A / 2 + A * (h + 0.5) / x.length;
-    return { s: b, cov: le(e, b.id), x: C.x + 92 * Math.cos(H), y: C.y + 92 * Math.sin(H) };
-  }) : [], _ = e.roles.filter((b) => b.priority).sort((b, h) => b.priority - h.priority);
+    return E = requestAnimationFrame(A), () => cancelAnimationFrame(E);
+  }, [f]);
+  const y = (_) => g.get(_) ?? { x: J, y: te, o: 0 }, p = Math.max(1, ...[...f.weight.values()].flatMap((_) => [..._.values()])), m = (_) => e.claims.filter((h) => F(h) && h.tags.some((x) => e.skill.get(x)?.group === _)).length, v = (_) => e.statableByEntity.get(_)?.length ?? 0, k = l ? e.skills.filter((_) => _.group === l).map((_, h, x) => {
+    const C = y(l), E = Math.atan2(C.y - te, C.x - J), A = Math.min(Math.PI * 0.9, x.length * 0.22), H = E - A / 2 + A * (h + 0.5) / x.length;
+    return { s: _, cov: ce(e, _.id), x: C.x + 92 * Math.cos(H), y: C.y + 92 * Math.sin(H) };
+  }) : [], b = e.roles.filter((_) => _.priority).sort((_, h) => _.priority - h.priority);
   return /* @__PURE__ */ i("div", { class: "imw-view is-map", children: [
     /* @__PURE__ */ i("header", { class: "imw-view-head", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Explore my engineering" }),
@@ -2667,99 +2722,99 @@ function gr() {
     /* @__PURE__ */ i("div", { class: "imw-row imw-map-controls", children: [
       /* @__PURE__ */ i("label", { class: "imw-select", children: [
         /* @__PURE__ */ i("span", { children: "Role lens" }),
-        /* @__PURE__ */ i("select", { value: a, onChange: (b) => {
-          o(b.target.value), p(null);
+        /* @__PURE__ */ i("select", { value: a, onChange: (_) => {
+          o(_.target.value), u(null);
         }, children: [
           /* @__PURE__ */ i("option", { value: "", children: "No lens: everything" }),
           n && /* @__PURE__ */ i("option", { value: "__current", children: [
             "Current analysis: ",
             n.title
           ] }),
-          /* @__PURE__ */ i("optgroup", { label: "Priority roles", children: _.map((b) => /* @__PURE__ */ i("option", { value: b.id, children: b.title }, b.id)) }),
-          /* @__PURE__ */ i("optgroup", { label: "Other roles", children: e.roles.filter((b) => !b.priority).map((b) => /* @__PURE__ */ i("option", { value: b.id, children: b.title }, b.id)) })
+          /* @__PURE__ */ i("optgroup", { label: "Priority roles", children: b.map((_) => /* @__PURE__ */ i("option", { value: _.id, children: _.title }, _.id)) }),
+          /* @__PURE__ */ i("optgroup", { label: "Other roles", children: e.roles.filter((_) => !_.priority).map((_) => /* @__PURE__ */ i("option", { value: _.id, children: _.title }, _.id)) })
         ] })
       ] }),
-      c && /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => {
+      d && /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => {
         s("role");
       }, children: "Open coverage analysis →" })
     ] }),
-    /* @__PURE__ */ i("div", { class: "imw-constellation", children: /* @__PURE__ */ i("svg", { viewBox: `0 0 ${hr} ${ur}`, role: "group", "aria-label": "Evidence map of capability areas and projects", children: [
-      /* @__PURE__ */ i("circle", { cx: Y, cy: te, r: Ut, class: "imw-orbit" }),
-      /* @__PURE__ */ i("circle", { cx: Y, cy: te, r: Vt, class: "imw-orbit" }),
-      m.groups.map((b) => {
-        const h = w(b.id);
-        return /* @__PURE__ */ i("line", { x1: Y, y1: te, x2: h.x, y2: h.y, class: "imw-spoke", style: { opacity: h.o * 0.5 } }, `c-${b.id}`);
+    /* @__PURE__ */ i("div", { class: "imw-constellation", children: /* @__PURE__ */ i("svg", { viewBox: `0 0 ${Tr} ${Rr}`, role: "group", "aria-label": "Evidence map of capability areas and projects", children: [
+      /* @__PURE__ */ i("circle", { cx: J, cy: te, r: Vt, class: "imw-orbit" }),
+      /* @__PURE__ */ i("circle", { cx: J, cy: te, r: Gt, class: "imw-orbit" }),
+      f.groups.map((_) => {
+        const h = y(_.id);
+        return /* @__PURE__ */ i("line", { x1: J, y1: te, x2: h.x, y2: h.y, class: "imw-spoke", style: { opacity: h.o * 0.5 } }, `c-${_.id}`);
       }),
-      m.ents.flatMap((b) => [...(m.weight.get(b.id) ?? /* @__PURE__ */ new Map()).entries()].map(([h, x]) => {
-        const C = w(h), q = w(b.id), A = l ? l === h : !0;
-        return /* @__PURE__ */ i("line", { x1: C.x, y1: C.y, x2: q.x, y2: q.y, class: "imw-web", style: { strokeWidth: 0.6 + 2.2 * x / u, opacity: Math.min(C.o, q.o) * (A ? 0.55 : 0.08) } }, `${b.id}-${h}`);
+      f.ents.flatMap((_) => [...(f.weight.get(_.id) ?? /* @__PURE__ */ new Map()).entries()].map(([h, x]) => {
+        const C = y(h), E = y(_.id), A = l ? l === h : !0;
+        return /* @__PURE__ */ i("line", { x1: C.x, y1: C.y, x2: E.x, y2: E.y, class: "imw-web", style: { strokeWidth: 0.6 + 2.2 * x / p, opacity: Math.min(C.o, E.o) * (A ? 0.55 : 0.08) } }, `${_.id}-${h}`);
       })),
       /* @__PURE__ */ i("g", { class: "imw-core", children: [
-        /* @__PURE__ */ i("circle", { cx: Y, cy: te, r: 34 }),
-        /* @__PURE__ */ i("text", { x: Y, y: te - 2, "text-anchor": "middle", children: "Rahul" }),
-        /* @__PURE__ */ i("text", { x: Y, y: te + 14, "text-anchor": "middle", class: "imw-core-sub", children: "Vajja" })
+        /* @__PURE__ */ i("circle", { cx: J, cy: te, r: 34 }),
+        /* @__PURE__ */ i("text", { x: J, y: te - 2, "text-anchor": "middle", children: "Rahul" }),
+        /* @__PURE__ */ i("text", { x: J, y: te + 14, "text-anchor": "middle", class: "imw-core-sub", children: "Vajja" })
       ] }),
-      m.groups.map((b) => {
-        const h = w(b.id), x = f(b.id), C = 6 + Math.sqrt(x) * 1.6, q = h.x < Y - 5;
+      f.groups.map((_) => {
+        const h = y(_.id), x = m(_.id), C = 6 + Math.sqrt(x) * 1.6, E = h.x < J - 5;
         return /* @__PURE__ */ i(
           "g",
           {
-            class: `imw-gnode${l === b.id ? " is-on" : ""}`,
+            class: `imw-gnode${l === _.id ? " is-on" : ""}`,
             style: { opacity: h.o },
             tabIndex: 0,
             role: "button",
-            "aria-label": `${b.label}: ${x} verified claims`,
+            "aria-label": `${_.label}: ${x} verified claims`,
             onClick: () => {
-              p(l === b.id ? null : b.id), r({ kind: "group", id: b.id });
+              u(l === _.id ? null : _.id), r({ kind: "group", id: _.id });
             },
             onKeyDown: (A) => {
-              (A.key === "Enter" || A.key === " ") && (A.preventDefault(), p(l === b.id ? null : b.id), r({ kind: "group", id: b.id }));
+              (A.key === "Enter" || A.key === " ") && (A.preventDefault(), u(l === _.id ? null : _.id), r({ kind: "group", id: _.id }));
             },
             children: [
               /* @__PURE__ */ i("circle", { cx: h.x, cy: h.y, r: C + 10, class: "imw-hit" }),
               /* @__PURE__ */ i("circle", { cx: h.x, cy: h.y, r: C }),
-              /* @__PURE__ */ i("text", { x: h.x + (q ? -C - 7 : C + 7), y: h.y + 4, "text-anchor": q ? "end" : "start", children: b.label })
+              /* @__PURE__ */ i("text", { x: h.x + (E ? -C - 7 : C + 7), y: h.y + 4, "text-anchor": E ? "end" : "start", children: _.label })
             ]
           },
-          b.id
+          _.id
         );
       }),
-      k.map(({ s: b, cov: h, x, y: C }) => /* @__PURE__ */ i(
+      k.map(({ s: _, cov: h, x, y: C }) => /* @__PURE__ */ i(
         "g",
         {
-          class: `imw-sat ${Ee[h.category]}`,
+          class: `imw-sat ${qe[h.category]}`,
           tabIndex: 0,
           role: "button",
-          "aria-label": `${b.name}: ${h.category}`,
+          "aria-label": `${_.name}: ${h.category}`,
           onClick: () => r({ kind: "req", req: h }),
-          onKeyDown: (q) => (q.key === "Enter" || q.key === " ") && (q.preventDefault(), r({ kind: "req", req: h })),
+          onKeyDown: (E) => (E.key === "Enter" || E.key === " ") && (E.preventDefault(), r({ kind: "req", req: h })),
           children: [
-            /* @__PURE__ */ i("line", { x1: w(l).x, y1: w(l).y, x2: x, y2: C }),
+            /* @__PURE__ */ i("line", { x1: y(l).x, y1: y(l).y, x2: x, y2: C }),
             /* @__PURE__ */ i("circle", { cx: x, cy: C, r: 4 }),
-            /* @__PURE__ */ i("text", { x, y: C - 8, "text-anchor": "middle", children: b.name.length > 22 ? b.name.slice(0, 21) + "…" : b.name })
+            /* @__PURE__ */ i("text", { x, y: C - 8, "text-anchor": "middle", children: _.name.length > 22 ? _.name.slice(0, 21) + "…" : _.name })
           ]
         },
-        b.id
+        _.id
       )),
-      m.ents.map((b) => {
-        const h = w(b.id), x = v(b.id), C = 7 + Math.sqrt(x) * 1.4, q = h.x < Y - 5;
+      f.ents.map((_) => {
+        const h = y(_.id), x = v(_.id), C = 7 + Math.sqrt(x) * 1.4, E = h.x < J - 5;
         return /* @__PURE__ */ i(
           "g",
           {
-            class: `imw-enode is-${b.kind}`,
+            class: `imw-enode is-${_.kind}`,
             style: { opacity: h.o },
             tabIndex: 0,
             role: "button",
-            "aria-label": `${b.name}: ${x} verified claims`,
-            onClick: () => r({ kind: "entity", id: b.id }),
-            onKeyDown: (A) => (A.key === "Enter" || A.key === " ") && (A.preventDefault(), r({ kind: "entity", id: b.id })),
+            "aria-label": `${_.name}: ${x} verified claims`,
+            onClick: () => r({ kind: "entity", id: _.id }),
+            onKeyDown: (A) => (A.key === "Enter" || A.key === " ") && (A.preventDefault(), r({ kind: "entity", id: _.id })),
             children: [
               /* @__PURE__ */ i("circle", { cx: h.x, cy: h.y, r: C + 10, class: "imw-hit" }),
-              /* @__PURE__ */ i("rect", { x: h.x - C, y: h.y - C, width: C * 2, height: C * 2, rx: b.kind === "experience" ? C : 3 }),
-              /* @__PURE__ */ i("text", { x: h.x + (q ? -C - 8 : C + 8), y: h.y + 4, "text-anchor": q ? "end" : "start", children: b.short })
+              /* @__PURE__ */ i("rect", { x: h.x - C, y: h.y - C, width: C * 2, height: C * 2, rx: _.kind === "experience" ? C : 3 }),
+              /* @__PURE__ */ i("text", { x: h.x + (E ? -C - 8 : C + 8), y: h.y + 4, "text-anchor": E ? "end" : "start", children: _.short })
             ]
           },
-          b.id
+          _.id
         );
       })
     ] }) }),
@@ -2780,43 +2835,43 @@ function gr() {
     ] })
   ] });
 }
-function wr() {
-  const { kb: e, coverage: t, modeArg: n, setCoverage: r, go: s } = M(), [a, o] = E(n && e.role.has(n) ? n : t?.roleId ?? "applied_ai");
+function Wr() {
+  const { kb: e, coverage: t, modeArg: n, setCoverage: r, go: s } = M(), [a, o] = q(n && e.role.has(n) ? n : t?.roleId ?? "applied_ai");
   z(() => {
     n && e.role.has(n) && o(n);
   }, [n]);
-  const l = t?.source === "jd" && !n, p = he(() => l && t ? t : Ce(e, a), [e, a, l, t]);
+  const l = t?.source === "jd" && !n, u = ue(() => l && t ? t : Ce(e, a), [e, a, l, t]);
   z(() => {
-    G("brief_generated", { role: p.roleId ?? "jd" });
-  }, [p]);
-  const c = p.entities.filter((h) => h.id !== "imw" && e.entity.get(h.id)?.kind !== "education").slice(0, 3).map((h) => e.entity.get(h.id)), m = c.map((h) => h.id), g = e.decisions.filter((h) => m.includes(h.entity)).slice(0, 3), d = e.failures.filter((h) => m.includes(h.entity)).slice(0, 2), y = e.claims.find((h) => F(h) && h.kind === "limitation" && m.includes(h.entity)), w = p.requirements.filter((h) => h.category === "missing").slice(0, 2), u = m.flatMap((h) => (e.statableByEntity.get(h) ?? []).flatMap((x) => x.code ?? [])).filter((h) => h.lines).slice(0, 4), f = e.claims.find((h) => F(h) && h.kind === "metric" && ["cliniq", "sssd", "qml"].includes(h.entity) && (m.includes(h.entity) || h.entity === "cliniq")), v = c.flatMap((h) => h.questions.slice(0, 2).map((x) => ({ e: h.short, q: x }))), k = () => [
-    `# 10-minute technical brief: ${p.title}`,
+    G("brief_generated", { role: u.roleId ?? "jd" });
+  }, [u]);
+  const d = u.entities.filter((h) => h.id !== "imw" && e.entity.get(h.id)?.kind !== "education").slice(0, 3).map((h) => e.entity.get(h.id)), f = d.map((h) => h.id), g = e.decisions.filter((h) => f.includes(h.entity)).slice(0, 3), c = e.failures.filter((h) => f.includes(h.entity)).slice(0, 2), w = e.claims.find((h) => F(h) && h.kind === "limitation" && f.includes(h.entity)), y = u.requirements.filter((h) => h.category === "missing").slice(0, 2), p = f.flatMap((h) => (e.statableByEntity.get(h) ?? []).flatMap((x) => x.code ?? [])).filter((h) => h.lines).slice(0, 4), m = e.claims.find((h) => F(h) && h.kind === "metric" && ["cliniq", "sssd", "qml"].includes(h.entity) && (f.includes(h.entity) || h.entity === "cliniq")), v = d.flatMap((h) => h.questions.slice(0, 2).map((x) => ({ e: h.short, q: x }))), k = () => [
+    `# 10-minute technical brief: ${u.title}`,
     `Candidate: ${e.subject.name}. Evidence-only; no fit score.`,
     "",
     "## Strongest relevant systems",
-    ...c.map((h) => `- **${h.name}**: ${h.summaries.engineer ?? h.tagline}`),
+    ...d.map((h) => `- **${h.name}**: ${h.summaries.engineer ?? h.tagline}`),
     "",
     "## Decisions worth questioning",
     ...g.map((h) => `- ${h.title}. Tradeoff: ${h.tradeoff}`),
     "",
     "## Failure cases",
-    ...d.map((h) => `- ${h.title}: ${h.fix}`),
+    ...c.map((h) => `- ${h.title}: ${h.fix}`),
     "",
     "## Limitations and gaps",
-    ...y ? [`- ${y.text}`] : [],
-    ...w.map((h) => `- ${h.label}: ${h.statement}`),
+    ...w ? [`- ${w.text}`] : [],
+    ...y.map((h) => `- ${h.label}: ${h.statement}`),
     "",
     "## Code to open",
-    ...u.map((h) => `- ${h.label}: ${h.url}`),
+    ...p.map((h) => `- ${h.label}: ${h.url}`),
     "",
     "## Suggested questions",
     ...v.map((h) => `- (${h.e}) ${h.q}`)
   ].join(`
-`), [_, b] = E(!1);
+`), [b, _] = q(!1);
   return /* @__PURE__ */ i("div", { class: "imw-view imw-brief", children: [
     /* @__PURE__ */ i("header", { class: "imw-view-head", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Technical interview brief · 10 minutes" }),
-      /* @__PURE__ */ i("h3", { "data-autofocus": !0, tabIndex: -1, children: p.title }),
+      /* @__PURE__ */ i("h3", { "data-autofocus": !0, tabIndex: -1, children: u.title }),
       /* @__PURE__ */ i("div", { class: "imw-row", children: [
         !l && /* @__PURE__ */ i("label", { class: "imw-select", children: [
           /* @__PURE__ */ i("span", { children: "Role" }),
@@ -2824,21 +2879,21 @@ function wr() {
         ] }),
         /* @__PURE__ */ i("button", { class: "imw-btn", onClick: async () => {
           try {
-            await navigator.clipboard.writeText(k()), b(!0), setTimeout(() => b(!1), 2e3);
+            await navigator.clipboard.writeText(k()), _(!0), setTimeout(() => _(!1), 2e3);
           } catch {
           }
-        }, children: _ ? "Copied" : "Copy as Markdown" }),
+        }, children: b ? "Copied" : "Copy as Markdown" }),
         /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => {
-          r(p), s("export");
+          r(u), s("export");
         }, children: "Download PDF" })
       ] }),
-      /* @__PURE__ */ i(bt, { counts: p.counts, compact: !0 })
+      /* @__PURE__ */ i(kt, { counts: u.counts, compact: !0 })
     ] }),
     /* @__PURE__ */ i("ol", { class: "imw-agenda", children: [
       /* @__PURE__ */ i("li", { children: [
         /* @__PURE__ */ i("span", { class: "imw-time", children: "0–2 min" }),
         /* @__PURE__ */ i("h4", { children: "Strongest relevant systems" }),
-        c.map((h) => /* @__PURE__ */ i("p", { children: [
+        d.map((h) => /* @__PURE__ */ i("p", { children: [
           /* @__PURE__ */ i("strong", { children: [
             h.name,
             "."
@@ -2850,31 +2905,31 @@ function wr() {
       /* @__PURE__ */ i("li", { children: [
         /* @__PURE__ */ i("span", { class: "imw-time", children: "2–5 min" }),
         /* @__PURE__ */ i("h4", { children: "Decisions worth questioning" }),
-        /* @__PURE__ */ i("div", { class: "imw-stack", children: g.map((h) => /* @__PURE__ */ i(oi, { id: h.id }, h.id)) })
+        /* @__PURE__ */ i("div", { class: "imw-stack", children: g.map((h) => /* @__PURE__ */ i(ci, { id: h.id }, h.id)) })
       ] }),
       /* @__PURE__ */ i("li", { children: [
         /* @__PURE__ */ i("span", { class: "imw-time", children: "5–7 min" }),
         /* @__PURE__ */ i("h4", { children: "Failure cases" }),
-        /* @__PURE__ */ i("div", { class: "imw-stack", children: d.map((h) => /* @__PURE__ */ i(ai, { id: h.id }, h.id)) })
+        /* @__PURE__ */ i("div", { class: "imw-stack", children: c.map((h) => /* @__PURE__ */ i(li, { id: h.id }, h.id)) })
       ] }),
       /* @__PURE__ */ i("li", { children: [
         /* @__PURE__ */ i("span", { class: "imw-time", children: "7–8 min" }),
         /* @__PURE__ */ i("h4", { children: "Limitations and gaps" }),
-        y && /* @__PURE__ */ i(ne, { ids: [y.id], compact: !0 }),
-        w.map((h) => /* @__PURE__ */ i("p", { class: "imw-note", children: [
+        w && /* @__PURE__ */ i(ne, { ids: [w.id], compact: !0 }),
+        y.map((h) => /* @__PURE__ */ i("p", { class: "imw-note", children: [
           h.label,
           ": ",
           h.statement
         ] }, h.id)),
-        f && /* @__PURE__ */ i(oe, { children: [
+        m && /* @__PURE__ */ i(oe, { children: [
           /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "One research result" }),
-          /* @__PURE__ */ i(ne, { ids: [f.id], compact: !0 })
+          /* @__PURE__ */ i(ne, { ids: [m.id], compact: !0 })
         ] })
       ] }),
       /* @__PURE__ */ i("li", { children: [
         /* @__PURE__ */ i("span", { class: "imw-time", children: "8–10 min" }),
         /* @__PURE__ */ i("h4", { children: "Code to open" }),
-        /* @__PURE__ */ i(De, { refs: u })
+        /* @__PURE__ */ i(We, { refs: p })
       ] }),
       /* @__PURE__ */ i("li", { children: [
         /* @__PURE__ */ i("span", { class: "imw-time", children: "Questions" }),
@@ -2891,7 +2946,7 @@ function wr() {
     ] })
   ] });
 }
-const Rt = "rahul-vajja", yr = [
+const Lt = "rahul-vajja", Hr = [
   ["search_evidence", "Search verified claims by topic"],
   ["get_skill_evidence", "Direct, related or not demonstrated, with the proof"],
   ["compare_job_description", "Map a job description to evidence, with no score"],
@@ -2903,24 +2958,24 @@ const Rt = "rahul-vajja", yr = [
   ["get_code_reference", "Exact files and lines, pinned to a commit"],
   ["get_known_gaps", "What is not demonstrated, and what is held back"],
   ["list_projects", "Projects and roles with ids"]
-], vr = [
+], Nr = [
   "Using the rahul-vajja tools, compare Rahul against this job description and cite claim ids: …",
   "Does Rahul have AI evaluation experience? Show the evidence and the code.",
   "What would you challenge in the Drug Interaction Agent architecture?"
 ];
-function _r() {
-  const e = `${cn()}/mcp`, t = [
-    { id: "claude-code", label: "Claude Code", how: "Run in a terminal:", code: `claude mcp add --transport http ${Rt} ${e}` },
+function Or() {
+  const e = `${un()}/mcp`, t = [
+    { id: "claude-code", label: "Claude Code", how: "Run in a terminal:", code: `claude mcp add --transport http ${Lt} ${e}` },
     { id: "claude", label: "Claude", how: "In Claude (web or desktop): Settings → Connectors → Add custom connector, then paste this URL:", code: e },
-    { id: "cursor", label: "Cursor", how: "Add to ~/.cursor/mcp.json:", code: JSON.stringify({ mcpServers: { [Rt]: { url: e } } }, null, 2) },
-    { id: "vscode", label: "VS Code", how: "Add to .vscode/mcp.json:", code: JSON.stringify({ servers: { [Rt]: { type: "http", url: e } } }, null, 2) },
+    { id: "cursor", label: "Cursor", how: "Add to ~/.cursor/mcp.json:", code: JSON.stringify({ mcpServers: { [Lt]: { url: e } } }, null, 2) },
+    { id: "vscode", label: "VS Code", how: "Add to .vscode/mcp.json:", code: JSON.stringify({ servers: { [Lt]: { type: "http", url: e } } }, null, 2) },
     { id: "other", label: "Other", how: "Any MCP client that supports Streamable HTTP:", code: e }
-  ], [n, r] = E(t[0].id), [s, a] = E(""), [o, l] = E({ state: "idle" }), p = t.find((g) => g.id === n), c = async (g, d) => {
+  ], [n, r] = q(t[0].id), [s, a] = q(""), [o, l] = q({ state: "idle" }), u = t.find((g) => g.id === n), d = async (g, c) => {
     try {
-      await navigator.clipboard.writeText(g), a(d), setTimeout(() => a(""), 1800);
+      await navigator.clipboard.writeText(g), a(c), setTimeout(() => a(""), 1800);
     } catch {
     }
-    G("contact_clicked_from_ai", { mcp_copy: d });
+    G("contact_clicked_from_ai", { mcp_copy: c });
   };
   return /* @__PURE__ */ i("div", { class: "imw-view imw-connect", children: [
     /* @__PURE__ */ i("header", { class: "imw-view-head", children: [
@@ -2930,21 +2985,21 @@ function _r() {
     ] }),
     /* @__PURE__ */ i("div", { class: "imw-endpoint", children: [
       /* @__PURE__ */ i("code", { children: e }),
-      /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => c(e, "url"), children: s === "url" ? "Copied" : "Copy URL" }),
+      /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => d(e, "url"), children: s === "url" ? "Copied" : "Copy URL" }),
       /* @__PURE__ */ i("button", { class: "imw-btn", onClick: async () => {
         l({ state: "running" });
         const g = performance.now();
         try {
-          const d = new AbortController(), y = setTimeout(() => d.abort(), 45e3), w = await fetch(e, {
+          const c = new AbortController(), w = setTimeout(() => c.abort(), 45e3), y = await fetch(e, {
             method: "POST",
-            signal: d.signal,
+            signal: c.signal,
             headers: { "Content-Type": "application/json", Accept: "application/json, text/event-stream" },
             body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list", params: {} })
           });
-          clearTimeout(y);
-          const f = (await w.json())?.result?.tools?.length;
-          if (!w.ok || !f) throw new Error(`HTTP ${w.status}`);
-          l({ state: "ok", text: `${f} tools available · ${Math.round(performance.now() - g)} ms` });
+          clearTimeout(w);
+          const m = (await y.json())?.result?.tools?.length;
+          if (!y.ok || !m) throw new Error(`HTTP ${y.status}`);
+          l({ state: "ok", text: `${m} tools available · ${Math.round(performance.now() - g)} ms` });
         } catch {
           l({ state: "fail", text: "The server did not answer. It may be waking up; try again in a minute." });
         }
@@ -2955,20 +3010,20 @@ function _r() {
       ] })
     ] }),
     /* @__PURE__ */ i("div", { class: "imw-seg is-scroll", role: "tablist", "aria-label": "Client", children: t.map((g) => /* @__PURE__ */ i("button", { role: "tab", "aria-selected": n === g.id, class: n === g.id ? "is-on" : "", onClick: () => r(g.id), children: g.label }, g.id)) }),
-    /* @__PURE__ */ i("p", { class: "imw-help", children: p.how }),
+    /* @__PURE__ */ i("p", { class: "imw-help", children: u.how }),
     /* @__PURE__ */ i("div", { class: "imw-snippet", children: [
-      /* @__PURE__ */ i("pre", { children: /* @__PURE__ */ i("code", { children: p.code }) }),
-      /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => c(p.code, p.id), children: s === p.id ? "Copied" : "Copy" })
+      /* @__PURE__ */ i("pre", { children: /* @__PURE__ */ i("code", { children: u.code }) }),
+      /* @__PURE__ */ i("button", { class: "imw-btn", onClick: () => d(u.code, u.id), children: s === u.id ? "Copied" : "Copy" })
     ] }),
     /* @__PURE__ */ i("section", { class: "imw-lab-section", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Then try" }),
-      /* @__PURE__ */ i("ul", { class: "imw-bullets", children: vr.map((g) => /* @__PURE__ */ i("li", { children: g }, g)) })
+      /* @__PURE__ */ i("ul", { class: "imw-bullets", children: Nr.map((g) => /* @__PURE__ */ i("li", { children: g }, g)) })
     ] }),
     /* @__PURE__ */ i("section", { class: "imw-lab-section", children: [
       /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Tools · all read-only" }),
-      /* @__PURE__ */ i("ul", { class: "imw-tools", children: yr.map(([g, d]) => /* @__PURE__ */ i("li", { children: [
+      /* @__PURE__ */ i("ul", { class: "imw-tools", children: Hr.map(([g, c]) => /* @__PURE__ */ i("li", { children: [
         /* @__PURE__ */ i("code", { children: g }),
-        /* @__PURE__ */ i("span", { children: d })
+        /* @__PURE__ */ i("span", { children: c })
       ] }, g)) }),
       /* @__PURE__ */ i("p", { class: "imw-help", children: [
         "Also available: a ",
@@ -2982,7 +3037,7 @@ function _r() {
     ] })
   ] });
 }
-const kt = {
+const xt = {
   recruiter: {
     label: "Recruiter",
     projects: 4,
@@ -3039,63 +3094,65 @@ const kt = {
   projects: "Projects and experience in detail",
   questions: "Suggested interview questions",
   gaps: "Growth areas"
-}, vn = /* @__PURE__ */ new Set(["project", "research", "experience"]), br = { backend: "Backend", data: "Data engineering", domain: "Domains", mlops: "MLOps & deployment", vision: "Computer vision", voice: "Voice AI" }, kr = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
-function Li(e) {
+}, kn = /* @__PURE__ */ new Set(["project", "research", "experience"]), Br = { backend: "Backend", data: "Data engineering", domain: "Domains", mlops: "MLOps & deployment", vision: "Computer vision", voice: "Voice AI" }, zr = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+function Di(e) {
   if (/present/i.test(e)) return 1e6;
-  const t = [...e.matchAll(/\b(19|20)\d{2}\b/g)].map((r) => +r[0]), n = [...e.toLowerCase().matchAll(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/g)].map((r) => kr.indexOf(r[1]));
+  const t = [...e.matchAll(/\b(19|20)\d{2}\b/g)].map((r) => +r[0]), n = [...e.toLowerCase().matchAll(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/g)].map((r) => zr.indexOf(r[1]));
   return (t.length ? Math.max(...t) : 0) * 12 + (n.length ? n[n.length - 1] : 0);
 }
-const Je = (e) => [...new Set(e)], _n = (e, t) => e.summaries[t] ?? e.summaries.engineer ?? e.tagline;
-function xr(e) {
+const Ye = (e) => [...new Set(e)], xn = (e, t) => e.summaries[t] ?? e.summaries.engineer ?? e.tagline;
+function Ur(e) {
   return e.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
 }
-function bn(e, t, n = /* @__PURE__ */ new Date()) {
+function $n(e, t, n = /* @__PURE__ */ new Date()) {
   const r = e.subject.name.replace(/[^A-Za-z0-9]+/g, "-"), s = `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}-${String(n.getDate()).padStart(2, "0")}`;
   return `${r}-evidence-dossier-${t}-${s}.pdf`;
 }
-const $r = (e, t) => `${e.subject.name} · Evidence dossier · ${kt[t].label} perspective · ${(e.subject.links.site ?? "").replace(/^https?:\/\/|\/$/g, "")}`;
-function Cr(e, t) {
+const Vr = (e, t) => `${e.subject.name} · Evidence dossier · ${xt[t].label} perspective · ${(e.subject.links.site ?? "").replace(/^https?:\/\/|\/$/g, "")}`;
+function Gr(e, t) {
   const n = t.turns.flatMap((s) => s.a?.entities.slice(0, 3) ?? []), r = t.analyses.flatMap((s) => s.entities.slice(0, 3).map((a) => a.id));
-  return Je([...t.seen, ...n, ...r]).filter((s) => vn.has(e.entity.get(s)?.kind ?? ""));
+  return Ye([...t.seen, ...n, ...r]).filter((s) => kn.has(e.entity.get(s)?.kind ?? ""));
 }
-function kn(e, t, n) {
-  const r = kt[n], s = Cr(e, t);
-  return s.length ? { ids: s.slice(0, r.projects), defaulted: !1 } : { ids: (e.roles.find((o) => o.priority === 1) ?? e.roles[0]).focus_entities.filter((o) => vn.has(e.entity.get(o)?.kind ?? "")).slice(0, r.projects), defaulted: !0 };
+function Cn(e, t, n) {
+  const r = xt[n], s = Gr(e, t);
+  return s.length ? { ids: s.slice(0, r.projects), defaulted: !1 } : { ids: (e.roles.find((o) => o.priority === 1) ?? e.roles[0]).focus_entities.filter((o) => kn.has(e.entity.get(o)?.kind ?? "")).slice(0, r.projects), defaulted: !0 };
 }
-function xn(e, t, n) {
+function En(e, t, n) {
   if (!F(t)) return null;
   const r = t.strength === "public_artifact" ? "artifact" : "self", s = (t.code ?? []).slice(0, n.code).map((o) => ({
     label: `${o.label} (${o.path}${o.lines ? `, lines ${o.lines[0]}–${o.lines[1]}` : ""})`,
     url: o.url
   }));
   if (!s.length) {
-    const o = t.sources.map((l) => e.sources.find((p) => p.id === l)).find((l) => l?.public && l.url);
+    const o = t.sources.map((l) => e.sources.find((u) => u.id === l)).find((l) => l?.public && l.url);
     o?.url && s.push({ label: o.title, url: o.url });
   }
   const a = r === "artifact" ? "Verified · public artifact" : "Verified · self-reported";
   return { t: "claim", text: t.text, tone: r, meta: `${ee(e, t.entity)} · ${a}`, links: s };
 }
-const $n = (e, t, n) => Je(t).map((r) => e.claim.get(r)).filter(F).map((r) => xn(e, r, n));
-function qr(e, t, n) {
+const qn = (e, t, n) => Ye(t).map((r) => e.claim.get(r)).filter(F).map((r) => En(e, r, n));
+function Qr(e, t, n) {
   const r = (s) => (s.strength === "public_artifact" ? 0 : 2) + (s.kind === "metric" ? 0 : 1);
   return (e.statableByEntity.get(t) ?? []).filter((s) => s.kind !== "limitation").sort((s, a) => r(s) - r(a)).slice(0, n);
 }
-function Er(e, t, n) {
+function Kr(e, t, n) {
   if (t.category === "direct" || t.category === "related") {
-    const s = t.entities.slice(0, 3).map((l) => ee(e, l)).join(", "), a = t.category === "related" && t.via ? `Related through ${e.skill.get(t.via)?.name ?? t.via}. ` : "", o = t.claims.map((l) => e.claim.get(l)).find((l) => F(l) && !n.has(l.id));
-    return o && n.add(o.id), `${a}${s ? `Evidence: ${s}.` : ""}${o ? ` For example: ${o.text}` : ""}`.trim();
+    const s = t.entities.slice(0, 3).map((u) => ee(e, u)).join(", "), a = t.category === "related" && t.via ? `Related through ${e.skill.get(t.via)?.name ?? t.via}. ` : "", o = t.claims.map((u) => e.claim.get(u)).find((u) => F(u) && !n.has(u.id));
+    o && n.add(o.id);
+    const l = !t.via && t.statement ? `${t.statement} ` : "";
+    return `${a}${l}${s ? `Evidence: ${s}.` : ""}${o ? ` For example: ${o.text}` : ""}`.trim();
   }
   const r = t.entities.length ? ` Closest evidence: ${t.entities.slice(0, 3).map((s) => ee(e, s)).join(", ")}.` : "";
   return `${t.statement ?? ""}${r}`.trim();
 }
-function Cn(e, t, n = 99) {
+function Sn(e, t, n = 99) {
   const r = [{ t: "counts", counts: t.counts }], s = /* @__PURE__ */ new Set();
   for (const a of ["direct", "related", "verification", "missing"])
-    t.requirements.filter((o) => o.category === a).slice(0, n).forEach((o) => r.push({ t: "req", category: a, label: o.label, detail: Er(e, o, s) }));
-  return Je(t.notes).forEach((a) => r.push({ t: "note", text: a })), r;
+    t.requirements.filter((o) => o.category === a).slice(0, n).forEach((o) => r.push({ t: "req", category: a, label: o.label, detail: Kr(e, o, s) }));
+  return Ye(t.notes).forEach((a) => r.push({ t: "note", text: a })), r;
 }
-const Sr = (e, t) => e.title === t.title && e.source === t.source && e.requirements.map((n) => n.id).join() === t.requirements.map((n) => n.id).join();
-function Ar(e, t) {
+const Yr = (e, t) => e.title === t.title && e.source === t.source && e.requirements.map((n) => n.id).join() === t.requirements.map((n) => n.id).join();
+function Jr(e, t) {
   const { kb: n, persona: r, lens: s } = e;
   switch (t.type) {
     case "p":
@@ -3107,16 +3164,16 @@ function Ar(e, t) {
     case "note":
       return [{ t: "note", text: t.text }];
     case "claims": {
-      const a = t.collapsed ? t.ids.filter((l) => !e.shown.has(n.claim.get(l)?.text ?? "")) : t.ids, o = $n(n, a, s);
+      const a = t.collapsed ? t.ids.filter((l) => !e.shown.has(n.claim.get(l)?.text ?? "")) : t.ids, o = qn(n, a, s);
       return o.length ? [...t.title ? [{ t: "h3", text: t.title }] : [], ...o] : [];
     }
     case "entity": {
       const a = n.entity.get(t.id);
-      return a ? [{ t: "p", text: `${a.name}: ${_n(a, r)}` }] : [];
+      return a ? [{ t: "p", text: `${a.name}: ${xn(a, r)}` }] : [];
     }
     case "coverage": {
       const a = { t: "h3", text: `Evidence coverage: ${t.analysis.title}` };
-      return e.detailed.some((o) => Sr(o, t.analysis)) ? [a, { t: "counts", counts: t.analysis.counts }, { t: "p", text: `The full requirement-by-requirement breakdown is in "${xe.roles}".`, muted: !0 }] : [a, ...Cn(n, t.analysis, 6)];
+      return e.detailed.some((o) => Yr(o, t.analysis)) ? [a, { t: "counts", counts: t.analysis.counts }, { t: "p", text: `The full requirement-by-requirement breakdown is in "${xe.roles}".`, muted: !0 }] : [a, ...Sn(n, t.analysis, 6)];
     }
     case "xray": {
       const a = n.architectures.find((o) => o.id === t.arch);
@@ -3148,49 +3205,49 @@ function Ar(e, t) {
       return [];
   }
 }
-function Ir(e, t) {
+function Xr(e, t) {
   const { kb: n, lens: r } = e, s = [], a = /* @__PURE__ */ new Set();
   e.shown.clear();
-  for (const c of t.blocks) c.type === "points" && c.items.forEach((m) => e.shown.add(m.text));
-  for (const c of t.blocks)
-    for (const m of Ar(e, c)) {
-      if (m.t === "note") {
-        if (a.has(m.text)) continue;
-        a.add(m.text);
+  for (const d of t.blocks) d.type === "points" && d.items.forEach((f) => e.shown.add(f.text));
+  for (const d of t.blocks)
+    for (const f of Jr(e, d)) {
+      if (f.t === "note") {
+        if (a.has(f.text)) continue;
+        a.add(f.text);
       }
-      s.push(m);
+      s.push(f);
     }
-  const o = new Set(t.blocks.flatMap((c) => c.type === "claims" ? c.ids : c.type === "points" ? c.items.flatMap((m) => m.cites) : [])), l = ni(t).filter((c) => !o.has(c)), p = $n(n, l, r).slice(0, 8);
-  return p.length && s.push({ t: "h3", text: "Evidence cited" }, ...p), s;
+  const o = new Set(t.blocks.flatMap((d) => d.type === "claims" ? d.ids : d.type === "points" ? d.items.flatMap((f) => f.cites) : [])), l = ri(t).filter((d) => !o.has(d)), u = qn(n, l, r).slice(0, 8);
+  return u.length && s.push({ t: "h3", text: "Evidence cited" }, ...u), s;
 }
-function Mr(e, t, n, r) {
+function Zr(e, t, n, r) {
   const s = e.entity.get(t);
   if (!s) return [];
   const a = [
     { t: "h2", text: s.name, meta: [s.role, s.dates].filter(Boolean).join(" · ") },
-    { t: "p", text: _n(s, n) }
+    { t: "p", text: xn(s, n) }
   ];
   s.ownership && a.push({ t: "kv", items: [["Ownership", s.ownership]] });
-  const o = qr(e, t, r.claims).map((m) => xn(e, m, r));
+  const o = Qr(e, t, r.claims).map((f) => En(e, f, r));
   o.length && a.push({ t: "h3", text: "Verified evidence" }, ...o);
-  const l = (e.statableByEntity.get(t) ?? []).filter((m) => m.kind === "limitation").slice(0, 2);
-  l.length && a.push({ t: "h3", text: "Stated limitations" }, { t: "bullets", items: l.map((m) => m.text) }), e.decisions.filter((m) => m.entity === t).slice(0, r.decisions).forEach((m) => a.push({ t: "h3", text: `Decision: ${m.title}` }, { t: "kv", items: [["Choice", m.choice], ["Tradeoff", m.tradeoff]] })), e.failures.filter((m) => m.entity === t).slice(0, r.failures).forEach((m) => a.push({ t: "h3", text: `Failure case: ${m.title}` }, { t: "kv", items: [["Problem", m.problem], ["Fix", m.fix], ["Prevention", m.prevention]] }));
-  const p = r.arch ? e.archByEntity.get(t) : void 0;
-  p && a.push({ t: "h3", text: "Architecture" }, { t: "bullets", items: p.nodes.slice(0, 8).map((m) => `${m.label}: ${m.detail.purpose}`) });
-  const c = s.links.filter((m) => /^https?:/.test(m.url));
-  return c.length && a.push({ t: "links", items: c.map((m) => ({ label: m.label, url: m.url })) }), a;
+  const l = (e.statableByEntity.get(t) ?? []).filter((f) => f.kind === "limitation").slice(0, 2);
+  l.length && a.push({ t: "h3", text: "Stated limitations" }, { t: "bullets", items: l.map((f) => f.text) }), e.decisions.filter((f) => f.entity === t).slice(0, r.decisions).forEach((f) => a.push({ t: "h3", text: `Decision: ${f.title}` }, { t: "kv", items: [["Choice", f.choice], ["Tradeoff", f.tradeoff]] })), e.failures.filter((f) => f.entity === t).slice(0, r.failures).forEach((f) => a.push({ t: "h3", text: `Failure case: ${f.title}` }, { t: "kv", items: [["Problem", f.problem], ["Fix", f.fix], ["Prevention", f.prevention]] }));
+  const u = r.arch ? e.archByEntity.get(t) : void 0;
+  u && a.push({ t: "h3", text: "Architecture" }, { t: "bullets", items: u.nodes.slice(0, 8).map((f) => `${f.label}: ${f.detail.purpose}`) });
+  const d = s.links.filter((f) => /^https?:/.test(f.url));
+  return d.length && a.push({ t: "links", items: d.map((f) => ({ label: f.label, url: f.url })) }), a;
 }
-function jr(e) {
+function ea(e) {
   const t = /* @__PURE__ */ new Map();
   for (const n of e.skills) {
     if (!(e.statableBySkill.get(n.id) ?? []).some((a) => a.strength === "public_artifact")) continue;
-    const s = e.groups.find((a) => a.id === n.group)?.label ?? br[n.group] ?? n.group;
+    const s = e.groups.find((a) => a.id === n.group)?.label ?? Br[n.group] ?? n.group;
     (t.get(s) ?? t.set(s, []).get(s)).push(n.name);
   }
   return [...t.entries()];
 }
-function Tr(e, t, n) {
-  const r = kt[n.persona], s = n.date ?? /* @__PURE__ */ new Date(), { subject: a } = e, o = t.turns.filter((u) => u.a), l = [], p = [
+function ta(e, t, n) {
+  const r = xt[n.persona], s = n.date ?? /* @__PURE__ */ new Date(), { subject: a } = e, o = t.turns.filter((p) => p.a), l = [], u = [
     { label: a.email, url: `mailto:${a.email}` },
     ...a.links.linkedin ? [{ label: "LinkedIn", url: a.links.linkedin }] : [],
     ...a.links.github ? [{ label: "GitHub", url: a.links.github }] : [],
@@ -3200,49 +3257,49 @@ function Tr(e, t, n) {
     t: "cover",
     name: a.name,
     headline: a.headline,
-    contacts: p,
-    line: `Evidence dossier · ${r.label} perspective · ${xr(s)}`
+    contacts: u,
+    line: `Evidence dossier · ${r.label} perspective · ${Ur(s)}`
   }), l.push({ t: "p", text: r.intro });
-  const c = [
+  const d = [
     o.length ? `${o.length} question${o.length === 1 ? "" : "s"} answered` : "",
     t.analyses.length ? `${t.analyses.length} role analys${t.analyses.length === 1 ? "is" : "es"}` : ""
   ].filter(Boolean).join(" · ");
-  l.push({ t: "note", text: `How to read this: "Verified · public artifact" means you can open the code, data, recording or paper behind it. "Verified · self-reported" is Rahul's description of work that is not public, such as employer systems. Nothing here is a fit score. ${c ? `Session: ${c}.` : ""}`.trim() }), l.push({ t: "h1", text: "At a glance" }), l.push({ t: "p", text: a.level_note, muted: !0 });
-  const m = e.entities.filter((u) => u.kind === "experience").sort((u, f) => Li(f.dates) - Li(u.dates));
-  m.length && (l.push({ t: "h3", text: "Experience" }), l.push({ t: "table", head: ["Where", "Role", "Dates"], rows: m.map((u) => [u.name, u.role ?? "", u.dates]) }));
+  l.push({ t: "note", text: `How to read this: "Verified · public artifact" means you can open the code, data, recording or paper behind it. "Verified · self-reported" is Rahul's description of work that is not public, such as employer systems. Nothing here is a fit score. ${d ? `Session: ${d}.` : ""}`.trim() }), l.push({ t: "h1", text: "At a glance" }), l.push({ t: "p", text: a.level_note, muted: !0 });
+  const f = e.entities.filter((p) => p.kind === "experience").sort((p, m) => Di(m.dates) - Di(p.dates));
+  f.length && (l.push({ t: "h3", text: "Experience" }), l.push({ t: "table", head: ["Where", "Role", "Dates"], rows: f.map((p) => [p.name, p.role ?? "", p.dates]) }));
   const g = [
-    ...e.entities.filter((u) => u.kind === "education").map((u) => ["Education", [u.name, u.role].filter(Boolean).join(": ")]),
-    ...e.entities.filter((u) => u.kind === "leadership").map((u) => ["Leadership", `${u.role ? `${u.role}, ` : ""}${u.name} (${u.dates})`])
+    ...e.entities.filter((p) => p.kind === "education").map((p) => ["Education", [p.name, p.role].filter(Boolean).join(": ")]),
+    ...e.entities.filter((p) => p.kind === "leadership").map((p) => ["Leadership", `${p.role ? `${p.role}, ` : ""}${p.name} (${p.dates})`])
   ];
   g.length && l.push({ t: "kv", items: g });
-  const d = jr(e);
-  d.length && (l.push({ t: "h3", text: "Skills with public evidence" }), l.push({ t: "kv", items: d.map(([u, f]) => [u, f.join(", ")]) }));
-  const y = { kb: e, persona: n.persona, lens: r, detailed: n.sections.roles ? t.analyses : [], shown: /* @__PURE__ */ new Set() };
-  if (n.sections.qa && o.length && (l.push({ t: "h1", text: xe.qa, lead: "Each answer was generated from the evidence database and checked before it was shown." }), o.forEach((u, f) => {
-    l.push({ t: "h2", text: `Q${f + 1}. ${u.q}`, meta: u.a.engine === "model" ? "Written by Claude, validated against the evidence" : "Answered by the evidence engine" }), l.push(...Ir(y, u.a));
+  const c = ea(e);
+  c.length && (l.push({ t: "h3", text: "Skills with public evidence" }), l.push({ t: "kv", items: c.map(([p, m]) => [p, m.join(", ")]) }));
+  const w = { kb: e, persona: n.persona, lens: r, detailed: n.sections.roles ? t.analyses : [], shown: /* @__PURE__ */ new Set() };
+  if (n.sections.qa && o.length && (l.push({ t: "h1", text: xe.qa, lead: "Each answer was generated from the evidence database and checked before it was shown." }), o.forEach((p, m) => {
+    l.push({ t: "h2", text: `Q${m + 1}. ${p.q}`, meta: p.a.engine === "model" ? "Written by Claude, validated against the evidence" : "Answered by the evidence engine" }), l.push(...Xr(w, p.a));
   })), n.sections.roles && t.analyses.length) {
     l.push({ t: "h1", text: xe.roles, lead: "Each requirement is classified by the evidence behind it. No score is computed." });
-    for (const u of t.analyses)
-      l.push({ t: "h2", text: u.title, meta: u.source === "jd" ? `Job description you provided${u.closestRole ? ` · closest target role: ${u.closestRole}` : ""}` : "Target role" }), l.push(...Cn(e, u));
+    for (const p of t.analyses)
+      l.push({ t: "h2", text: p.title, meta: p.source === "jd" ? `Job description you provided${p.closestRole ? ` · closest target role: ${p.closestRole}` : ""}` : "Target role" }), l.push(...Sn(e, p));
   }
-  const w = kn(e, t, n.persona);
-  if (n.sections.projects && w.ids.length && (l.push({ t: "h1", text: xe.projects, lead: w.defaulted ? "You did not open specific projects, so these are the strongest for an applied AI role." : "The work you explored, in the order you explored it." }), w.ids.forEach((u) => l.push(...Mr(e, u, n.persona, r)))), n.sections.questions) {
-    const u = w.ids.flatMap((k) => (e.entity.get(k)?.questions ?? []).slice(0, 2).map((_) => `${ee(e, k)}: ${_}`)), f = t.analyses.flatMap((k) => k.requirements.filter((_) => _.category === "missing" || _.category === "verification").slice(0, 2).map((_) => `${_.label}: what is the closest thing you have done, and how would you close the gap?`)), v = Je([...u, ...f]);
+  const y = Cn(e, t, n.persona);
+  if (n.sections.projects && y.ids.length && (l.push({ t: "h1", text: xe.projects, lead: y.defaulted ? "You did not open specific projects, so these are the strongest for an applied AI role." : "The work you explored, in the order you explored it." }), y.ids.forEach((p) => l.push(...Zr(e, p, n.persona, r)))), n.sections.questions) {
+    const p = y.ids.flatMap((k) => (e.entity.get(k)?.questions ?? []).slice(0, 2).map((b) => `${ee(e, k)}: ${b}`)), m = t.analyses.flatMap((k) => k.requirements.filter((b) => b.category === "missing" || b.category === "verification").slice(0, 2).map((b) => `${b.label}: what is the closest thing you have done, and how would you close the gap?`)), v = Ye([...p, ...m]);
     v.length && (l.push({ t: "h1", text: xe.questions, lead: "Questions that test the evidence above rather than repeat it." }), l.push({ t: "bullets", items: v }));
   }
   if (n.sections.gaps) {
     l.push({ t: "h1", text: xe.gaps });
-    const u = Je(t.analyses.flatMap((k) => k.requirements.filter((_) => _.category === "missing").map((_) => `${_.label}: ${_.statement ?? "Not demonstrated in the evidence."}`))), f = u.length ? u : e.gaps.filter((k) => !k.verify).slice(0, 6).map((k) => `${k.name}: ${k.statement}`);
-    l.push({ t: "h3", text: u.length ? "Not yet shown for the roles you checked" : "Not yet part of his work" }, { t: "bullets", items: f });
+    const p = Ye(t.analyses.flatMap((k) => k.requirements.filter((b) => b.category === "missing").map((b) => `${b.label}: ${b.statement ?? "Not demonstrated in the evidence."}`))), m = p.length ? p : e.gaps.filter((k) => !k.verify).slice(0, 6).map((k) => `${k.name}: ${k.statement}`);
+    l.push({ t: "h3", text: p.length ? "Not yet shown for the roles you checked" : "Not yet part of his work" }, { t: "bullets", items: m });
     const v = Fe(e, "learning");
     v?.takeaway && l.push({ t: "h3", text: "How he closes gaps" }, { t: "p", text: v.takeaway.text.replace(/^For your team: /, "") });
   }
   return l.push({ t: "h1", text: "About this document", keep: 150 }), l.push({ t: "p", text: `Generated in your browser by Interview My Work on ${a.links.site ?? "the portfolio"} from evidence version ${e.version}. Nothing you typed was uploaded to create it. Every claim links to its source, and the live workspace shows the full evidence trail for each one.`, muted: !0 }), l.push({ t: "links", items: [
     ...a.links.site ? [{ label: "Open Interview My Work", url: `${a.links.site.replace(/\/$/, "")}/#imw=ask` }] : [],
     { label: `Email ${a.first}`, url: `mailto:${a.email}` }
-  ] }), { title: `${a.name}: evidence dossier (${r.label})`, nodes: l, filename: bn(e, n.persona, s) };
+  ] }), { title: `${a.name}: evidence dossier (${r.label})`, nodes: l, filename: $n(e, n.persona, s) };
 }
-const Ue = [20, 24, 31], Z = [90, 99, 110], Pi = [222, 227, 232], ge = [22, 117, 94], Rr = [242, 246, 245], lt = { direct: ge, related: [40, 104, 184], verification: [150, 98, 16], missing: [118, 124, 133] }, Lr = { direct: "DIRECT", related: "RELATED", verification: "TO VERIFY", missing: "NOT SHOWN" }, Pr = { direct: "direct evidence", related: "related evidence", verification: "verification required", missing: "not demonstrated" }, Fr = { artifact: ge, self: lt.related }, Gt = 612, Re = 792, L = 56, Lt = 64, Fi = 64, B = Gt - L * 2, Wr = "€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ", Wi = {
+const Ue = [20, 24, 31], Z = [90, 99, 110], Wi = [222, 227, 232], ge = [22, 117, 94], ia = [242, 246, 245], ct = { direct: ge, related: [40, 104, 184], verification: [150, 98, 16], missing: [118, 124, 133] }, na = { direct: "DIRECT", related: "RELATED", verification: "TO VERIFY", missing: "NOT SHOWN" }, sa = { direct: "direct evidence", related: "related evidence", verification: "verification required", missing: "not demonstrated" }, ra = { artifact: ge, self: ct.related }, Qt = 612, Re = 792, L = 56, Pt = 64, Hi = 64, O = Qt - L * 2, aa = "€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ", Ni = {
   "→": "->",
   "←": "<-",
   "⇒": "=>",
@@ -3274,12 +3331,12 @@ const Ue = [20, 24, 31], Z = [90, 99, 110], Pi = [222, 227, 232], ge = [22, 117,
 function Se(e) {
   let t = "";
   for (const n of e) {
-    if (n in Wi) {
-      t += Wi[n];
+    if (n in Ni) {
+      t += Ni[n];
       continue;
     }
     const r = n.codePointAt(0);
-    if (r === 10 || r >= 32 && r <= 126 || r >= 161 && r <= 255 || Wr.includes(n)) {
+    if (r === 10 || r >= 32 && r <= 126 || r >= 161 && r <= 255 || aa.includes(n)) {
       t += n;
       continue;
     }
@@ -3288,45 +3345,45 @@ function Se(e) {
   }
   return t.replace(/ {2,}/g, " ");
 }
-class Dr {
+class oa {
   constructor(t) {
-    ui(this, "y", Lt);
+    mi(this, "y", Pt);
     this.d = t;
   }
   font(t, n = "normal", r = Ue) {
     this.d.setFont("helvetica", n), this.d.setFontSize(t), this.d.setTextColor(...r);
   }
   need(t) {
-    this.y + t > Re - Fi && (this.d.addPage(), this.y = Lt);
+    this.y + t > Re - Hi && (this.d.addPage(), this.y = Pt);
   }
   split(t, n) {
     return this.d.splitTextToSize(Se(t), n);
   }
   write(t, n = {}) {
-    const { size: r = 10, style: s = "normal", color: a = Ue, x: o = L, width: l = B, lh: p = 1.42, after: c = 0 } = n;
+    const { size: r = 10, style: s = "normal", color: a = Ue, x: o = L, width: l = O, lh: u = 1.42, after: d = 0 } = n;
     this.font(r, s, a);
-    const m = r * p;
+    const f = r * u;
     for (const g of this.split(t, l))
-      this.need(m), this.d.text(g, o, this.y, { baseline: "top" }), this.y += m;
-    this.y += c;
+      this.need(f), this.d.text(g, o, this.y, { baseline: "top" }), this.y += f;
+    this.y += d;
   }
-  links(t, { size: n = 8.5, x: r = L, width: s = B } = {}) {
+  links(t, { size: n = 8.5, x: r = L, width: s = O } = {}) {
     this.font(n, "normal", ge);
     const a = n * 1.55, o = 14;
     let l = r;
     this.need(a);
-    for (const p of t) {
-      const c = Se(p.label);
-      let m = c;
-      for (; this.d.getTextWidth(m) > s && m.length > 8; ) m = m.slice(0, -3);
-      m !== c && (m = `${m.trimEnd()}…`);
-      const g = this.d.getTextWidth(m);
-      l > r && l + g > r + s && (this.y += a, this.need(a), l = r), this.d.text(m, l, this.y, { baseline: "top" }), this.d.link(l, this.y - 1, g, n + 2, { url: p.url }), this.d.setDrawColor(...ge), this.d.setLineWidth(0.4), this.d.line(l, this.y + n + 0.5, l + g, this.y + n + 0.5), l += g + o;
+    for (const u of t) {
+      const d = Se(u.label);
+      let f = d;
+      for (; this.d.getTextWidth(f) > s && f.length > 8; ) f = f.slice(0, -3);
+      f !== d && (f = `${f.trimEnd()}…`);
+      const g = this.d.getTextWidth(f);
+      l > r && l + g > r + s && (this.y += a, this.need(a), l = r), this.d.text(f, l, this.y, { baseline: "top" }), this.d.link(l, this.y - 1, g, n + 2, { url: u.url }), this.d.setDrawColor(...ge), this.d.setLineWidth(0.4), this.d.line(l, this.y + n + 0.5, l + g, this.y + n + 0.5), l += g + o;
     }
     this.y += a;
   }
-  rule(t = Pi, n = 0.6) {
-    this.d.setDrawColor(...t), this.d.setLineWidth(n), this.d.line(L, this.y, L + B, this.y);
+  rule(t = Wi, n = 0.6) {
+    this.d.setDrawColor(...t), this.d.setLineWidth(n), this.d.line(L, this.y, L + O, this.y);
   }
   node(t) {
     const n = this.d;
@@ -3349,32 +3406,32 @@ class Dr {
         return;
       case "note": {
         this.font(9);
-        const s = this.split(t.text, B - 24).length * 9 * 1.42 + 14;
-        s < Re - Lt - Fi && this.need(s);
+        const s = this.split(t.text, O - 24).length * 9 * 1.42 + 14;
+        s < Re - Pt - Hi && this.need(s);
         const a = this.y;
-        n.setFillColor(...Rr), n.rect(L, a, B, s, "F"), n.setFillColor(...ge), n.rect(L, a, 2, s, "F"), this.y = a + 7, this.write(t.text, { size: 9, color: Z, x: L + 14, width: B - 24 }), this.y = Math.max(this.y, a + s) + 8;
+        n.setFillColor(...ia), n.rect(L, a, O, s, "F"), n.setFillColor(...ge), n.rect(L, a, 2, s, "F"), this.y = a + 7, this.write(t.text, { size: 9, color: Z, x: L + 14, width: O - 24 }), this.y = Math.max(this.y, a + s) + 8;
         return;
       }
       case "kv": {
         for (const [s, a] of t.items) {
           this.need(14), this.font(8, "bold", Z);
           const o = this.split(s.toUpperCase(), 106), l = this.y;
-          o.forEach((p, c) => n.text(p, L, l + 1.5 + c * 11, { baseline: "top" })), this.write(a, { size: 9.5, x: L + 118, width: B - 118 }), this.y > l && (this.y = Math.max(this.y, l + o.length * 11 + 2)), this.y += 4;
+          o.forEach((u, d) => n.text(u, L, l + 1.5 + d * 11, { baseline: "top" })), this.write(a, { size: 9.5, x: L + 118, width: O - 118 }), this.y > l && (this.y = Math.max(this.y, l + o.length * 11 + 2)), this.y += 4;
         }
         this.y += 2;
         return;
       }
       case "bullets":
         for (const r of t.items)
-          this.need(14), this.font(9.5, "normal", ge), n.text("•", L + 2, this.y, { baseline: "top" }), this.write(r, { size: 9.5, x: L + 14, width: B - 14, after: 3 });
+          this.need(14), this.font(9.5, "normal", ge), n.text("•", L + 2, this.y, { baseline: "top" }), this.write(r, { size: 9.5, x: L + 14, width: O - 14, after: 3 });
         this.y += 3;
         return;
       case "claim": {
-        this.need(30), n.setFillColor(...Fr[t.tone]), n.circle(L + 4, this.y + 5.5, 2.6, "F"), this.write(t.text, { size: 9.5, x: L + 14, width: B - 14, after: 1 }), this.write(t.meta, { size: 8, color: Z, x: L + 14, width: B - 14 }), t.links.length && this.links(t.links, { size: 8, x: L + 14, width: B - 14 }), this.y += 5;
+        this.need(30), n.setFillColor(...ra[t.tone]), n.circle(L + 4, this.y + 5.5, 2.6, "F"), this.write(t.text, { size: 9.5, x: L + 14, width: O - 14, after: 1 }), this.write(t.meta, { size: 8, color: Z, x: L + 14, width: O - 14 }), t.links.length && this.links(t.links, { size: 8, x: L + 14, width: O - 14 }), this.y += 5;
         return;
       }
       case "req": {
-        this.need(26), this.font(7, "bold", lt[t.category]), n.text(Lr[t.category], L, this.y + 2, { baseline: "top" }), this.write(t.label, { size: 9.5, style: "bold", x: L + 70, width: B - 70, after: 1 }), t.detail && this.write(t.detail, { size: 8.5, color: Z, x: L + 70, width: B - 70 }), this.y += 5;
+        this.need(26), this.font(7, "bold", ct[t.category]), n.text(na[t.category], L, this.y + 2, { baseline: "top" }), this.write(t.label, { size: 9.5, style: "bold", x: L + 70, width: O - 70, after: 1 }), t.detail && this.write(t.detail, { size: 8.5, color: Z, x: L + 70, width: O - 70 }), this.y += 5;
         return;
       }
       case "counts": {
@@ -3383,13 +3440,13 @@ class Dr {
         this.need(34);
         let a = L;
         for (const o of r) {
-          const l = B * t.counts[o] / s;
-          n.setFillColor(...lt[o]), n.rect(a, this.y, Math.max(l - 1.5, 1), 6, "F"), a += l;
+          const l = O * t.counts[o] / s;
+          n.setFillColor(...ct[o]), n.rect(a, this.y, Math.max(l - 1.5, 1), 6, "F"), a += l;
         }
         this.y += 12, a = L, this.font(8.5, "normal", Z);
         for (const o of r) {
-          const l = `${t.counts[o]} ${Pr[o]}`;
-          n.setFillColor(...lt[o]), n.rect(a, this.y + 1.5, 6, 6, "F"), n.text(l, a + 10, this.y, { baseline: "top" }), a += n.getTextWidth(l) + 26;
+          const l = `${t.counts[o]} ${sa[o]}`;
+          n.setFillColor(...ct[o]), n.rect(a, this.y + 1.5, 6, 6, "F"), n.text(l, a + 10, this.y, { baseline: "top" }), a += n.getTextWidth(l) + 26;
         }
         this.y += 18;
         return;
@@ -3397,25 +3454,25 @@ class Dr {
       case "table": {
         const r = t.head.length;
         this.font(9);
-        const s = t.head.map((c, m) => Math.max(n.getTextWidth(Se(c)), ...t.rows.map((g) => n.getTextWidth(Se(g[m] ?? "")))) + 12);
+        const s = t.head.map((d, f) => Math.max(n.getTextWidth(Se(d)), ...t.rows.map((g) => n.getTextWidth(Se(g[f] ?? "")))) + 12);
         let a;
-        if (s.reduce((c, m) => c + m, 0) <= B)
-          a = [...s], a[r - 1] += B - s.reduce((c, m) => c + m, 0);
+        if (s.reduce((d, f) => d + f, 0) <= O)
+          a = [...s], a[r - 1] += O - s.reduce((d, f) => d + f, 0);
         else {
-          const c = Math.min(s[0], 140);
-          a = [c, ...Array(r - 1).fill((B - c) / (r - 1))];
+          const d = Math.min(s[0], 140);
+          a = [d, ...Array(r - 1).fill((O - d) / (r - 1))];
         }
-        const o = a.map((c, m) => L + a.slice(0, m).reduce((g, d) => g + d, 0)), l = (c, m) => {
-          this.font(m ? 7.5 : 9, "bold", m ? Z : Ue);
-          const g = c.map((y, w) => this.split(m ? y.toUpperCase() : y, a[w] - 10)), d = (m ? 7.5 : 9) * 1.38;
-          return { wrapped: g, lh: d, h: Math.max(...g.map((y) => y.length)) * d + 8 };
-        }, p = (c, m) => {
-          const { wrapped: g, lh: d, h: y } = l(c, m);
-          this.need(m && t.rows.length ? y + l(t.rows[0], !1).h : y), g.forEach((w, u) => {
-            this.font(m ? 7.5 : 9, m || u === 0 ? "bold" : "normal", m ? Z : Ue), w.forEach((f, v) => n.text(f, o[u], this.y + 4 + v * d, { baseline: "top" }));
-          }), this.y += y, this.rule();
+        const o = a.map((d, f) => L + a.slice(0, f).reduce((g, c) => g + c, 0)), l = (d, f) => {
+          this.font(f ? 7.5 : 9, "bold", f ? Z : Ue);
+          const g = d.map((w, y) => this.split(f ? w.toUpperCase() : w, a[y] - 10)), c = (f ? 7.5 : 9) * 1.38;
+          return { wrapped: g, lh: c, h: Math.max(...g.map((w) => w.length)) * c + 8 };
+        }, u = (d, f) => {
+          const { wrapped: g, lh: c, h: w } = l(d, f);
+          this.need(f && t.rows.length ? w + l(t.rows[0], !1).h : w), g.forEach((y, p) => {
+            this.font(f ? 7.5 : 9, f || p === 0 ? "bold" : "normal", f ? Z : Ue), y.forEach((m, v) => n.text(m, o[p], this.y + 4 + v * c, { baseline: "top" }));
+          }), this.y += w, this.rule();
         };
-        p(t.head, !0), t.rows.forEach((c) => p(c, !1)), this.y += 8;
+        u(t.head, !0), t.rows.forEach((d) => u(d, !1)), this.y += 8;
         return;
       }
       case "links":
@@ -3426,50 +3483,50 @@ class Dr {
   finish(t) {
     const n = this.d, r = n.getNumberOfPages();
     for (let s = 1; s <= r; s++)
-      n.setPage(s), this.font(7.5, "normal", Z), n.text(Se(t), L, Re - 38, { baseline: "top" }), n.text(`Page ${s} of ${r}`, Gt - L, Re - 38, { baseline: "top", align: "right" }), n.setDrawColor(...Pi), n.setLineWidth(0.6), n.line(L, Re - 46, Gt - L, Re - 46);
+      n.setPage(s), this.font(7.5, "normal", Z), n.text(Se(t), L, Re - 38, { baseline: "top" }), n.text(`Page ${s} of ${r}`, Qt - L, Re - 38, { baseline: "top", align: "right" }), n.setDrawColor(...Wi), n.setLineWidth(0.6), n.line(L, Re - 46, Qt - L, Re - 46);
   }
 }
-async function Hr(e, t) {
+async function la(e, t) {
   const { jsPDF: n } = await import("./chunks/jspdf.es.min-0Bk908vi.js"), r = new n({ unit: "pt", format: "letter", compress: !0 });
   r.setProperties({ title: Se(t.title), subject: "Evidence dossier", author: Se(t.author), creator: "Interview My Work" });
-  const s = new Dr(r);
+  const s = new oa(r);
   for (const a of e) s.node(a);
   return s.finish(t.footer), r;
 }
-function Nr(e, t) {
+function ca(e, t) {
   const n = URL.createObjectURL(e), r = document.createElement("a");
   r.href = n, r.download = t, r.rel = "noopener", document.body.append(r), r.click(), r.remove(), setTimeout(() => URL.revokeObjectURL(n), 6e4);
 }
-function Br() {
-  const { kb: e, persona: t, session: n, go: r } = M(), [s, a] = E(t);
+function da() {
+  const { kb: e, persona: t, session: n, go: r } = M(), [s, a] = q(t);
   z(() => a(t), [t]);
-  const o = n.turns.filter((f) => f.a), l = he(() => kn(e, n, s), [e, n, s]), [p, c] = E({ qa: !0, roles: !0, projects: !0, questions: !0, gaps: !0 }), [m, g] = E({ kind: "idle" });
+  const o = n.turns.filter((m) => m.a), l = ue(() => Cn(e, n, s), [e, n, s]), [u, d] = q({ qa: !0, roles: !0, projects: !0, questions: !0, gaps: !0 }), [f, g] = q({ kind: "idle" });
   z(() => {
     import("./chunks/jspdf.es.min-0Bk908vi.js").catch(() => {
     });
   }, []);
-  const d = {
+  const c = {
     qa: {
       text: `${o.length} question${o.length === 1 ? "" : "s"} with answers and the evidence each one cited`,
       empty: "Ask a question first and it will be included here.",
-      items: o.map((f) => f.q)
+      items: o.map((m) => m.q)
     },
     roles: {
       text: `${n.analyses.length} analys${n.analyses.length === 1 ? "is" : "es"}, requirement by requirement`,
       empty: "Evaluate a role or paste a job description to include it here.",
-      items: n.analyses.map((f) => f.title)
+      items: n.analyses.map((m) => m.title)
     },
     projects: {
       text: l.defaulted ? "You have not opened a project yet, so this includes the strongest work for an applied AI role:" : "The work you explored, with verified evidence, limitations and links:",
-      items: l.ids.map((f) => ee(e, f))
+      items: l.ids.map((m) => ee(e, m))
     },
     questions: { text: "Questions that test the evidence rather than repeat it, including your gaps" },
     gaps: { text: "What he hasn't done yet, and how he closes gaps" }
-  }, y = (f) => f === "qa" ? o.length > 0 : f === "roles" ? n.analyses.length > 0 : !0, w = bn(e, s), u = async () => {
+  }, w = (m) => m === "qa" ? o.length > 0 : m === "roles" ? n.analyses.length > 0 : !0, y = $n(e, s), p = async () => {
     g({ kind: "busy" });
     try {
-      const f = Tr(e, n, { persona: s, sections: p }), v = await Hr(f.nodes, { title: f.title, author: e.subject.name, footer: $r(e, s) });
-      Nr(v.output("blob"), f.filename), G("dossier_downloaded", { persona: s, questions: o.length, analyses: n.analyses.length }), g({ kind: "done", file: f.filename });
+      const m = ta(e, n, { persona: s, sections: u }), v = await la(m.nodes, { title: m.title, author: e.subject.name, footer: Vr(e, s) });
+      ca(v.output("blob"), m.filename), G("dossier_downloaded", { persona: s, questions: o.length, analyses: n.analyses.length }), g({ kind: "done", file: m.filename });
     } catch {
       g({ kind: "error" });
     }
@@ -3481,8 +3538,8 @@ function Br() {
       /* @__PURE__ */ i("p", { class: "imw-lead", children: "A PDF of what you explored here, written for your perspective: your questions with their answers and sources, the roles you checked, and the projects you opened. Every claim keeps its evidence label and link." })
     ] }),
     /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Written for" }),
-    /* @__PURE__ */ i("div", { class: "imw-personas is-inline", role: "radiogroup", "aria-label": "Perspective", children: e.personas.map((f) => /* @__PURE__ */ i("button", { role: "radio", "aria-checked": s === f.id, class: s === f.id ? "is-on" : "", onClick: () => a(f.id), children: f.label }, f.id)) }),
-    /* @__PURE__ */ i("p", { class: "imw-help imw-export-intro", children: kt[s].intro }),
+    /* @__PURE__ */ i("div", { class: "imw-personas is-inline", role: "radiogroup", "aria-label": "Perspective", children: e.personas.map((m) => /* @__PURE__ */ i("button", { role: "radio", "aria-checked": s === m.id, class: s === m.id ? "is-on" : "", onClick: () => a(m.id), children: m.label }, m.id)) }),
+    /* @__PURE__ */ i("p", { class: "imw-help imw-export-intro", children: xt[s].intro }),
     /* @__PURE__ */ i("div", { class: "imw-eyebrow", children: "Include" }),
     /* @__PURE__ */ i("ul", { class: "imw-export-list", children: [
       /* @__PURE__ */ i("li", { class: "is-fixed", children: [
@@ -3492,16 +3549,16 @@ function Br() {
           /* @__PURE__ */ i("small", { children: "Always included: roles and dates, education, and the skills that public work demonstrates." })
         ] })
       ] }),
-      Object.keys(xe).map((f) => {
-        const v = d[f], k = y(f) && p[f];
-        return /* @__PURE__ */ i("li", { class: y(f) ? "" : "is-empty", children: [
+      Object.keys(xe).map((m) => {
+        const v = c[m], k = w(m) && u[m];
+        return /* @__PURE__ */ i("li", { class: w(m) ? "" : "is-empty", children: [
           /* @__PURE__ */ i("label", { children: [
-            /* @__PURE__ */ i("input", { type: "checkbox", checked: k, disabled: !y(f), onChange: (_) => c({ ...p, [f]: _.target.checked }) }),
+            /* @__PURE__ */ i("input", { type: "checkbox", checked: k, disabled: !w(m), onChange: (b) => d({ ...u, [m]: b.target.checked }) }),
             /* @__PURE__ */ i("span", { children: [
-              /* @__PURE__ */ i("strong", { children: xe[f] }),
-              /* @__PURE__ */ i("small", { children: y(f) ? v.text : v.empty }),
-              y(f) && v.items && v.items.length > 0 && /* @__PURE__ */ i("span", { class: "imw-export-items", children: [
-                v.items.slice(0, 6).map((_) => /* @__PURE__ */ i("em", { children: _ }, _)),
+              /* @__PURE__ */ i("strong", { children: xe[m] }),
+              /* @__PURE__ */ i("small", { children: w(m) ? v.text : v.empty }),
+              w(m) && v.items && v.items.length > 0 && /* @__PURE__ */ i("span", { class: "imw-export-items", children: [
+                v.items.slice(0, 6).map((b) => /* @__PURE__ */ i("em", { children: b }, b)),
                 v.items.length > 6 && /* @__PURE__ */ i("em", { children: [
                   "+",
                   v.items.length - 6,
@@ -3510,22 +3567,22 @@ function Br() {
               ] })
             ] })
           ] }),
-          !y(f) && /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => r(f === "qa" ? "ask" : "role"), children: f === "qa" ? "Ask a question →" : "Evaluate a role →" })
-        ] }, f);
+          !w(m) && /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => r(m === "qa" ? "ask" : "role"), children: m === "qa" ? "Ask a question →" : "Evaluate a role →" })
+        ] }, m);
       })
     ] }),
     /* @__PURE__ */ i("div", { class: "imw-export-go", children: [
-      /* @__PURE__ */ i("button", { class: "imw-btn is-primary", onClick: u, disabled: m.kind === "busy", children: m.kind === "busy" ? "Building PDF…" : "Download PDF" }),
-      /* @__PURE__ */ i("span", { class: "imw-help", children: w })
+      /* @__PURE__ */ i("button", { class: "imw-btn is-primary", onClick: p, disabled: f.kind === "busy", children: f.kind === "busy" ? "Building PDF…" : "Download PDF" }),
+      /* @__PURE__ */ i("span", { class: "imw-help", children: y })
     ] }),
     /* @__PURE__ */ i("p", { class: "imw-help", role: "status", "aria-live": "polite", children: [
-      m.kind === "done" && `Downloaded ${m.file}. You can keep exploring and download again; the PDF always reflects the whole session.`,
-      m.kind === "error" && "The PDF could not be built. Check your connection and try again; the rest of the workspace still works.",
-      m.kind !== "done" && m.kind !== "error" && "Built in your browser. Nothing you typed or pasted is uploaded, and pasted job descriptions appear only as the requirements that were detected."
+      f.kind === "done" && `Downloaded ${f.file}. You can keep exploring and download again; the PDF always reflects the whole session.`,
+      f.kind === "error" && "The PDF could not be built. Check your connection and try again; the rest of the workspace still works.",
+      f.kind !== "done" && f.kind !== "error" && "Built in your browser. Nothing you typed or pasted is uploaded, and pasted job descriptions appear only as the requirements that were detected."
     ] })
   ] });
 }
-function Or() {
+function ha() {
   const e = M(), { inspect: t, setInspect: n } = e;
   return /* @__PURE__ */ i("div", { class: "imw-evidence", children: [
     /* @__PURE__ */ i("div", { class: "imw-evidence-head", children: [
@@ -3533,17 +3590,17 @@ function Or() {
       t && /* @__PURE__ */ i("button", { class: "imw-icon imw-evidence-close", onClick: () => n(null), "aria-label": "Close evidence", children: "✕" })
     ] }),
     /* @__PURE__ */ i("div", { class: "imw-evidence-body", "aria-live": "polite", children: [
-      !t && /* @__PURE__ */ i(zr, {}),
-      t?.kind === "claim" && /* @__PURE__ */ i(Ur, { id: t.id }),
-      t?.kind === "node" && /* @__PURE__ */ i(Vr, { arch: t.arch, node: t.node }),
-      t?.kind === "req" && /* @__PURE__ */ i(Gr, {}),
-      t?.kind === "entity" && /* @__PURE__ */ i(Qr, { id: t.id }),
-      t?.kind === "group" && /* @__PURE__ */ i(Kr, { id: t.id }),
-      t?.kind === "basis" && /* @__PURE__ */ i(Jr, {})
+      !t && /* @__PURE__ */ i(ua, {}),
+      t?.kind === "claim" && /* @__PURE__ */ i(pa, { id: t.id }),
+      t?.kind === "node" && /* @__PURE__ */ i(ma, { arch: t.arch, node: t.node }),
+      t?.kind === "req" && /* @__PURE__ */ i(fa, {}),
+      t?.kind === "entity" && /* @__PURE__ */ i(ga, { id: t.id }),
+      t?.kind === "group" && /* @__PURE__ */ i(wa, { id: t.id }),
+      t?.kind === "basis" && /* @__PURE__ */ i(ya, {})
     ] })
   ] });
 }
-function zr() {
+function ua() {
   const { kb: e } = M(), t = e.claims.reduce((n, r) => n + (F(r) ? r.code?.length ?? 0 : 0), 0);
   return /* @__PURE__ */ i("div", { class: "imw-intro", children: [
     /* @__PURE__ */ i("p", { children: "Select any claim, architecture component or requirement to inspect what supports it: sources, measured results and the exact code." }),
@@ -3568,15 +3625,15 @@ function zr() {
     /* @__PURE__ */ i("p", { class: "imw-help", children: "Evidence panels show sources and validation checks. They never show hidden model reasoning." })
   ] });
 }
-function Ur({ id: e }) {
+function pa({ id: e }) {
   const { kb: t, setInspect: n } = M(), r = t.claim.get(e);
   if (!r) return null;
-  const s = t.entity.get(r.entity), a = t.architectures.flatMap((l) => l.nodes.filter((p) => p.detail.claims.includes(e)).map((p) => ({ a: l, n: p }))), o = [...t.decisions, ...t.failures].filter((l) => l.claims.includes(e));
+  const s = t.entity.get(r.entity), a = t.architectures.flatMap((l) => l.nodes.filter((u) => u.detail.claims.includes(e)).map((u) => ({ a: l, n: u }))), o = [...t.decisions, ...t.failures].filter((l) => l.claims.includes(e));
   return /* @__PURE__ */ i("article", { class: "imw-card", children: [
-    /* @__PURE__ */ i("span", { class: `imw-st ${ft(r)}`, children: [
-      /* @__PURE__ */ i(Pe, { cls: ft(r) }),
+    /* @__PURE__ */ i("span", { class: `imw-st ${gt(r)}`, children: [
+      /* @__PURE__ */ i(Pe, { cls: gt(r) }),
       " ",
-      un(r)
+      fn(r)
     ] }),
     /* @__PURE__ */ i("p", { class: "imw-card-claim", children: r.text }),
     r.note && /* @__PURE__ */ i("p", { class: "imw-note is-warn", children: r.note }),
@@ -3592,27 +3649,27 @@ function Ur({ id: e }) {
     ] }),
     /* @__PURE__ */ i($e, { children: "Sources" }),
     /* @__PURE__ */ i("ul", { class: "imw-sources", children: r.sources.map((l) => {
-      const p = t.sources.find((c) => c.id === l);
-      return /* @__PURE__ */ i("li", { children: p.url && p.public ? /* @__PURE__ */ i("a", { href: p.url, target: "_blank", rel: "noopener", children: [
-        p.title,
+      const u = t.sources.find((d) => d.id === l);
+      return /* @__PURE__ */ i("li", { children: u.url && u.public ? /* @__PURE__ */ i("a", { href: u.url, target: "_blank", rel: "noopener", children: [
+        u.title,
         " ↗"
       ] }) : /* @__PURE__ */ i("span", { children: [
-        p.title,
+        u.title,
         " ",
         /* @__PURE__ */ i("em", { children: "(private cross-check)" })
       ] }) }, l);
     }) }),
     r.code?.length ? /* @__PURE__ */ i(oe, { children: [
       /* @__PURE__ */ i($e, { children: "Show me the code" }),
-      /* @__PURE__ */ i(De, { refs: r.code })
+      /* @__PURE__ */ i(We, { refs: r.code })
     ] }) : null,
     a.length ? /* @__PURE__ */ i(oe, { children: [
       /* @__PURE__ */ i($e, { children: "Appears in" }),
-      /* @__PURE__ */ i("ul", { class: "imw-sources", children: a.map(({ a: l, n: p }) => /* @__PURE__ */ i("li", { children: /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => n({ kind: "node", arch: l.id, node: p.id }), children: [
+      /* @__PURE__ */ i("ul", { class: "imw-sources", children: a.map(({ a: l, n: u }) => /* @__PURE__ */ i("li", { children: /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => n({ kind: "node", arch: l.id, node: u.id }), children: [
         l.title,
         " → ",
-        p.label
-      ] }) }, l.id + p.id)) })
+        u.label
+      ] }) }, l.id + u.id)) })
     ] }) : null,
     o.length ? /* @__PURE__ */ i("p", { class: "imw-help", children: [
       "Also referenced by: ",
@@ -3620,7 +3677,7 @@ function Ur({ id: e }) {
     ] }) : null
   ] });
 }
-function Vr({ arch: e, node: t }) {
+function ma({ arch: e, node: t }) {
   const { kb: n } = M(), r = n.architectures.find((o) => o.id === e), s = r?.nodes.find((o) => o.id === t);
   if (!r || !s) return null;
   const a = s.detail.claims.flatMap((o) => n.claim.get(o)?.code ?? []);
@@ -3652,16 +3709,16 @@ function Vr({ arch: e, node: t }) {
     /* @__PURE__ */ i(ne, { ids: s.detail.claims, title: "Supporting claims", compact: !0 }),
     a.length ? /* @__PURE__ */ i(oe, { children: [
       /* @__PURE__ */ i($e, { children: "Code" }),
-      /* @__PURE__ */ i(De, { refs: a, max: 3 })
+      /* @__PURE__ */ i(We, { refs: a, max: 3 })
     ] }) : null
   ] });
 }
-function Gr() {
+function fa() {
   const { kb: e, inspect: t } = M();
   if (t?.kind !== "req") return null;
   const n = t.req, r = n.via ? e.skill.get(n.via)?.name : void 0, s = (n.pending ?? []).map((a) => e.claim.get(a)).filter(Boolean);
   return /* @__PURE__ */ i("article", { class: "imw-card", children: [
-    /* @__PURE__ */ i("span", { class: `imw-cat ${Ee[n.category]}`, children: ie[n.category] }),
+    /* @__PURE__ */ i("span", { class: `imw-cat ${qe[n.category]}`, children: ie[n.category] }),
     /* @__PURE__ */ i("h3", { class: "imw-card-title", children: n.label }),
     n.priority && /* @__PURE__ */ i("p", { class: "imw-help", children: [
       "Listed as ",
@@ -3669,7 +3726,11 @@ function Gr() {
       " in the description."
     ] }),
     n.statement && /* @__PURE__ */ i("p", { children: n.statement }),
-    n.category === "direct" && n.strength === "self_reported" && /* @__PURE__ */ i("p", { class: "imw-note", children: "Supported by self-reported employment experience; no public artifact." }),
+    n.category === "direct" && n.strength === "self_reported" && /* @__PURE__ */ i("p", { class: "imw-note", children: [
+      "Supported by self-reported ",
+      n.id.startsWith("degree:") ? "education history" : "employment experience",
+      "; no public artifact."
+    ] }),
     r && n.category === "related" && /* @__PURE__ */ i("p", { class: "imw-help", children: [
       "Related through: ",
       r
@@ -3683,7 +3744,7 @@ function Gr() {
     ] }) : null
   ] });
 }
-function Qr({ id: e }) {
+function ga({ id: e }) {
   const { kb: t, persona: n } = M(), r = t.entity.get(e);
   if (!r) return null;
   const s = (t.statableByEntity.get(e) ?? []).filter((a) => a.kind !== "limitation").slice(0, 5).map((a) => a.id);
@@ -3701,28 +3762,28 @@ function Qr({ id: e }) {
       r.ownership
     ] }),
     /* @__PURE__ */ i("div", { class: "imw-actions", children: [
-      t.archByEntity.has(e) && /* @__PURE__ */ i(ot, { a: { kind: "mode", label: "X-Ray", target: "xray", arg: e } }),
-      /* @__PURE__ */ i(ot, { a: { kind: "anchor", label: "Jump to section", target: r.anchor } }),
-      r.links.slice(0, 2).map((a) => /* @__PURE__ */ i(ot, { a: { kind: "url", label: a.label, target: a.url } }, a.url))
+      t.archByEntity.has(e) && /* @__PURE__ */ i(lt, { a: { kind: "mode", label: "X-Ray", target: "xray", arg: e } }),
+      /* @__PURE__ */ i(lt, { a: { kind: "anchor", label: "Jump to section", target: r.anchor } }),
+      r.links.slice(0, 2).map((a) => /* @__PURE__ */ i(lt, { a: { kind: "url", label: a.label, target: a.url } }, a.url))
     ] }),
     /* @__PURE__ */ i(ne, { ids: s, title: "Key evidence", compact: !0 })
   ] });
 }
-function Kr({ id: e }) {
+function wa({ id: e }) {
   const { kb: t, setInspect: n } = M(), r = t.groups.find((a) => a.id === e);
   if (!r) return null;
-  const s = t.skills.filter((a) => a.group === e).map((a) => ({ s: a, cov: le(t, a.id) }));
+  const s = t.skills.filter((a) => a.group === e).map((a) => ({ s: a, cov: ce(t, a.id) }));
   return /* @__PURE__ */ i("article", { class: "imw-card", children: [
     /* @__PURE__ */ i("span", { class: "imw-eyebrow", children: "Capability area" }),
     /* @__PURE__ */ i("h3", { class: "imw-card-title", children: r.label }),
     /* @__PURE__ */ i("ul", { class: "imw-reqs", children: s.map(({ s: a, cov: o }) => /* @__PURE__ */ i("li", { children: /* @__PURE__ */ i("button", { class: "imw-req-btn", onClick: () => n({ kind: "req", req: o }), children: [
-      /* @__PURE__ */ i("i", { class: `imw-cat-dot ${Ee[o.category]}`, "aria-hidden": "true" }),
+      /* @__PURE__ */ i("i", { class: `imw-cat-dot ${qe[o.category]}`, "aria-hidden": "true" }),
       /* @__PURE__ */ i("span", { children: a.name }),
       /* @__PURE__ */ i("small", { children: o.entities.slice(0, 3).map((l) => t.entity.get(l)?.short).join(" · ") || ie[o.category] })
     ] }) }, a.id)) })
   ] });
 }
-function Jr() {
+function ya() {
   const { inspect: e } = M();
   return e?.kind !== "basis" ? null : /* @__PURE__ */ i("article", { class: "imw-card", children: [
     /* @__PURE__ */ i("span", { class: "imw-eyebrow", children: "Why this answer?" }),
@@ -3736,14 +3797,14 @@ function Jr() {
     /* @__PURE__ */ i("p", { class: "imw-help", children: "This panel lists sources and checks only. It never shows hidden model reasoning." })
   ] });
 }
-function Yr() {
-  const { kb: e, persona: t, setPersona: n, coverage: r, setCoverage: s, toggleLens: a, lensOn: o, go: l } = M(), p = e.personas.find((c) => c.id === t);
+function va() {
+  const { kb: e, persona: t, setPersona: n, coverage: r, setCoverage: s, toggleLens: a, lensOn: o, go: l } = M(), u = e.personas.find((d) => d.id === t);
   return /* @__PURE__ */ i("div", { class: "imw-rail", children: [
     /* @__PURE__ */ i("section", { children: [
       /* @__PURE__ */ i($e, { children: "Answer depth" }),
-      /* @__PURE__ */ i("div", { class: "imw-personas", role: "radiogroup", "aria-label": "Who is asking", children: e.personas.map((c) => /* @__PURE__ */ i("button", { role: "radio", "aria-checked": t === c.id, class: t === c.id ? "is-on" : "", onClick: () => n(c.id), children: c.label }, c.id)) }),
+      /* @__PURE__ */ i("div", { class: "imw-personas", role: "radiogroup", "aria-label": "Who is asking", children: e.personas.map((d) => /* @__PURE__ */ i("button", { role: "radio", "aria-checked": t === d.id, class: t === d.id ? "is-on" : "", onClick: () => n(d.id), children: d.label }, d.id)) }),
       /* @__PURE__ */ i("p", { class: "imw-help", children: [
-        p.focus,
+        u.focus,
         " Persona changes depth, never the facts."
       ] })
     ] }),
@@ -3755,7 +3816,7 @@ function Yr() {
           "Closest target profile: ",
           r.closestRole
         ] }),
-        /* @__PURE__ */ i(bt, { counts: r.counts, compact: !0 }),
+        /* @__PURE__ */ i(kt, { counts: r.counts, compact: !0 }),
         /* @__PURE__ */ i("div", { class: "imw-row", children: [
           /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => l("role"), children: "Open analysis" }),
           /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => a(!o), children: o ? "Restore portfolio" : "Show on portfolio" }),
@@ -3794,10 +3855,10 @@ function Yr() {
       /* @__PURE__ */ i($e, { children: "How this works" }),
       /* @__PURE__ */ i("p", { class: "imw-help", children: [
         "Answers come from ",
-        e.claims.filter((c) => c.status === "verified").length,
+        e.claims.filter((d) => d.status === "verified").length,
         " verified claims with sources and pinned code links.",
         " ",
-        e.claims.filter((c) => c.status !== "verified").length,
+        e.claims.filter((d) => d.status !== "verified").length,
         " statements from other sources are held back until verified."
       ] }),
       /* @__PURE__ */ i("button", { class: "imw-mini-link", onClick: () => l("xray", "imw"), children: "X-Ray this system →" }),
@@ -3805,7 +3866,7 @@ function Yr() {
     ] })
   ] });
 }
-const Di = [
+const Oi = [
   { id: "ask", label: "Ask", hint: "Questions answered from verified evidence" },
   { id: "role", label: "Role fit", hint: "Evidence coverage for a role or job description" },
   { id: "xray", label: "X-Ray", hint: "Explore each system component by component" },
@@ -3813,99 +3874,99 @@ const Di = [
   { id: "lab", label: "Proof lab", hint: "Replays, break-it tests and live numbers" },
   { id: "brief", label: "Brief", hint: "A 10-minute technical interview brief" },
   { id: "connect", label: "Connect your AI", hint: "Use this evidence from Claude, Cursor or VS Code over MCP" }
-], Xr = /* @__PURE__ */ new Set(["retrieval", "no_evidence", "topic", "entity", "focused", "skill", "personally", "scale", "challenge", "level", "overview", "shipped", "beyond_wrappers", "evaluation", "strongest"]), Zr = /* @__PURE__ */ new Set(["entity", "claims", "xray", "chart", "trace", "decisions", "failures"]);
-function ea({ kb: e, initial: t, register: n }) {
-  const [r, s] = E(!0), [a, o] = E("ask"), [l, p] = E(), [c, m] = E("recruiter"), [g, d] = E(null), [y, w] = E(null), [u, f] = E([]), [v, k] = E([]), [_, b] = E([]), [h, x] = E("checking"), [C, q] = E(!1), A = ye(null), H = ye(null), K = ye(!1), re = ve(($, I) => {
-    if (w($), !$) return;
-    const X = (U) => `${U.source}|${U.title}|${U.requirements.map((ce) => ce.id).join()}`;
-    f((U) => {
-      const ce = U.findIndex((D) => D === I || $.source === "role" && D.source === "role" && D.roleId === $.roleId || X(D) === X($));
-      return ce >= 0 ? U.map((D, Be) => Be === ce ? $ : D) : [...U, $];
+], ba = /* @__PURE__ */ new Set(["retrieval", "no_evidence", "topic", "entity", "focused", "skill", "personally", "scale", "challenge", "level", "overview", "shipped", "beyond_wrappers", "evaluation", "strongest"]), _a = /* @__PURE__ */ new Set(["entity", "claims", "xray", "chart", "trace", "decisions", "failures"]);
+function ka({ kb: e, initial: t, register: n }) {
+  const [r, s] = q(!0), [a, o] = q("ask"), [l, u] = q(), [d, f] = q("recruiter"), [g, c] = q(null), [w, y] = q(null), [p, m] = q([]), [v, k] = q([]), [b, _] = q([]), [h, x] = q("checking"), [C, E] = q(!1), A = ye(null), H = ye(null), K = ye(!1), re = ve(($, I) => {
+    if (y($), !$) return;
+    const X = (U) => `${U.source}|${U.title}|${U.requirements.map((de) => de.id).join()}`;
+    m((U) => {
+      const de = U.findIndex((W) => W === I || $.source === "role" && W.source === "role" && W.roleId === $.roleId || X(W) === X($));
+      return de >= 0 ? U.map((W, Oe) => Oe === de ? $ : W) : [...U, $];
     });
   }, []), pe = ve(($) => {
     $ && k((I) => I.includes($) ? I : [...I, $]);
-  }, []), J = ve(($, I) => {
-    o($), p(I), $ === "xray" && G("xray_opened", { project: I ?? "dia" }), A.current?.querySelector(".imw-main")?.scrollTo({ top: 0 });
+  }, []), Y = ve(($, I) => {
+    o($), u(I), $ === "xray" && G("xray_opened", { project: I ?? "dia" }), A.current?.querySelector(".imw-main")?.scrollTo({ top: 0 });
   }, []), me = ve(($) => {
     H.current = $.trigger ?? document.activeElement, s(!0);
-    const I = Di.find((X) => X.id === $.mode)?.id ?? "ask";
-    $.mode === "transform" && $.arg ? J("role", $.arg) : J(I, $.arg), G("interview_my_work_opened", { mode: I });
-  }, [J]);
+    const I = Oi.find((X) => X.id === $.mode)?.id ?? "ask";
+    $.mode === "transform" && $.arg ? Y("role", $.arg) : Y(I, $.arg), G("interview_my_work_opened", { mode: I });
+  }, [Y]);
   z(() => {
     n(me), me(t);
   }, []), z(() => {
-    r && !K.current && (K.current = !0, Hs(x));
+    r && !K.current && (K.current = !0, lr(x));
   }, [r]), z(() => {
     const $ = document.querySelector(".wrap"), I = document.querySelector(".imw-fab");
     r ? (document.documentElement.classList.add("imw-open"), $?.setAttribute("inert", ""), I?.setAttribute("inert", ""), requestAnimationFrame(() => A.current?.querySelector("[data-autofocus]")?.focus() ?? A.current?.focus())) : (document.documentElement.classList.remove("imw-open"), $?.removeAttribute("inert"), I?.removeAttribute("inert"), H.current?.focus?.());
   }, [r]);
-  const He = ve(() => s(!1), []), qn = ($) => {
+  const He = ve(() => s(!1), []), An = ($) => {
     if ($.key === "Escape") {
-      $.preventDefault(), g && matchMedia("(max-width: 1100px)").matches ? d(null) : He();
+      $.preventDefault(), g && matchMedia("(max-width: 1100px)").matches ? c(null) : He();
       return;
     }
     if ($.key !== "Tab" || !A.current) return;
-    const I = [...A.current.querySelectorAll('a[href],button:not([disabled]),textarea,input,select,[tabindex]:not([tabindex="-1"])')].filter((ce) => ce.offsetParent !== null);
+    const I = [...A.current.querySelectorAll('a[href],button:not([disabled]),textarea,input,select,[tabindex]:not([tabindex="-1"])')].filter((de) => de.offsetParent !== null);
     if (!I.length) return;
     const X = I[0], U = I[I.length - 1];
     $.shiftKey && document.activeElement === X ? ($.preventDefault(), U.focus()) : !$.shiftKey && document.activeElement === U && ($.preventDefault(), X.focus());
-  }, li = ve(($) => {
-    s(!1), G("project_opened_from_ai", { anchor: $ }), Os($, () => s(!0));
-  }, []), ci = ve(($, I) => {
-    const X = $ ?? !C, U = I ?? y;
-    X && U ? (I && re(I), Bs(e, U, { reopen: () => {
-      s(!0), J("role");
-    }, restore: () => q(!1) }), q(!0), s(!1), G("portfolio_lens_applied", { source: U.source })) : (zt(), q(!1));
-  }, [C, y, e, J, re]), di = ve(async ($) => {
+  }, di = ve(($) => {
+    s(!1), G("project_opened_from_ai", { anchor: $ }), hr($, () => s(!0));
+  }, []), hi = ve(($, I) => {
+    const X = $ ?? !C, U = I ?? w;
+    X && U ? (I && re(I), dr(e, U, { reopen: () => {
+      s(!0), Y("role");
+    }, restore: () => E(!1) }), E(!0), s(!1), G("portfolio_lens_applied", { source: U.source })) : (Ut(), E(!1));
+  }, [C, w, e, Y, re]), ui = ve(async ($) => {
     const I = $.trim();
     if (!I) return;
-    J("ask");
-    const X = Date.now(), U = [..._].reverse().find((j) => j.a?.entities.length)?.a?.entities, ce = [..._].reverse().find((j) => j.a), D = _s(e, I, { persona: c, roleId: y?.roleId, lastEntities: U, lastTopic: ce?.a?.topic, lastQuestion: ce?.q, lastIntent: ce?.a?.intent }), Be = ei(I);
-    if (D.intent === "jd" || D.intent === "role") {
-      const j = D.blocks.find((de) => de.type === "coverage");
-      j && j.type === "coverage" && re(j.analysis), Be && G("jd_analyzed", { requirements: j && j.type === "coverage" ? j.analysis.requirements.length : 0 });
+    Y("ask");
+    const X = Date.now(), U = [...b].reverse().find((j) => j.a?.entities.length)?.a?.entities, de = [...b].reverse().find((j) => j.a), W = Os(e, I, { persona: d, roleId: w?.roleId, lastEntities: U, lastTopic: de?.a?.topic, lastQuestion: de?.q, lastIntent: de?.a?.intent }), Oe = ii(I);
+    if (W.intent === "jd" || W.intent === "role") {
+      const j = W.blocks.find((he) => he.type === "coverage");
+      j && j.type === "coverage" && re(j.analysis), Oe && G("jd_analyzed", { requirements: j && j.type === "coverage" ? j.analysis.requirements.length : 0 });
     }
-    const xt = h === "ready" && Xr.has(D.intent);
-    if (b((j) => [...j, { id: X, q: Be ? "Job description (pasted)" : I, a: xt ? void 0 : D, pending: xt }]), Be && h === "ready" && dn(I).then((j) => {
+    const $t = h === "ready" && ba.has(W.intent);
+    if (_((j) => [...j, { id: X, q: Oe ? "Job description (pasted)" : I, a: $t ? void 0 : W, pending: $t }]), Oe && h === "ready" && pn(I).then((j) => {
       if (!j.length) return;
-      const de = ut(e, I, j), fe = D.blocks.find((Ct) => Ct.type === "coverage");
-      re(de, fe && fe.type === "coverage" ? fe.analysis : void 0), b((Ct) => Ct.map((je) => je.id === X && je.a ? { ...je, a: { ...je.a, blocks: je.a.blocks.map((qt) => qt.type === "coverage" ? { ...qt, analysis: de } : qt), refined: !0 } } : je));
+      const he = pt(e, I, j), fe = W.blocks.find((Et) => Et.type === "coverage");
+      re(he, fe && fe.type === "coverage" ? fe.analysis : void 0), _((Et) => Et.map((je) => je.id === X && je.a ? { ...je, a: { ...je.a, blocks: je.a.blocks.map((qt) => qt.type === "coverage" ? { ...qt, analysis: he } : qt), refined: !0 } } : je));
     }).catch(() => {
-    }), !xt) return;
-    const Sn = _.filter((j) => j.a).slice(-3).map((j) => ({ q: j.q, cites: j.a.basis?.retrieved?.slice(0, 8) ?? [] }));
-    let $t;
+    }), !$t) return;
+    const Mn = b.filter((j) => j.a).slice(-3).map((j) => ({ q: j.q, cites: j.a.basis?.retrieved?.slice(0, 8) ?? [] }));
+    let Ct;
     try {
-      const j = await Ns(e, I, c, Sn, y?.roleId, D.topic), de = D.blocks.filter((fe) => Zr.has(fe.type)).map((fe) => fe.type === "claims" ? { ...fe, title: "Sources", collapsed: !0 } : fe);
-      $t = { ...j, blocks: [...j.blocks, ...de], actions: D.actions, followups: j.followups.length ? j.followups : D.followups, entities: [.../* @__PURE__ */ new Set([...j.entities, ...D.entities])], topic: D.topic };
+      const j = await cr(e, I, d, Mn, w?.roleId, W.topic), he = W.blocks.filter((fe) => _a.has(fe.type)).map((fe) => fe.type === "claims" ? { ...fe, title: "Sources", collapsed: !0 } : fe);
+      Ct = { ...j, blocks: [...j.blocks, ...he], actions: W.actions, followups: j.followups.length ? j.followups : W.followups, entities: [.../* @__PURE__ */ new Set([...j.entities, ...W.entities])], topic: W.topic };
     } catch (j) {
-      $t = D, (j.status ?? 0) >= 500 && x("offline");
+      Ct = W, (j.status ?? 0) >= 500 && x("offline");
     }
-    b((j) => j.map((de) => de.id === X ? { ...de, a: $t, pending: !1 } : de));
-  }, [e, c, y, h, _, J, re]), hi = he(() => ({ turns: _, analyses: u, seen: v }), [_, u, v]), Ne = _.filter(($) => $.a).length + u.length, En = he(() => ({
+    _((j) => j.map((he) => he.id === X ? { ...he, a: Ct, pending: !1 } : he));
+  }, [e, d, w, h, b, Y, re]), pi = ue(() => ({ turns: b, analyses: p, seen: v }), [b, p, v]), Ne = b.filter(($) => $.a).length + p.length, In = ue(() => ({
     kb: e,
-    persona: c,
-    setPersona: m,
+    persona: d,
+    setPersona: f,
     mode: a,
-    go: J,
+    go: Y,
     modeArg: l,
     inspect: g,
     setInspect: ($) => {
-      d($), $ && (G("evidence_opened", { kind: $.kind }), $.kind === "entity" ? pe($.id) : $.kind === "claim" ? pe(e.claim.get($.id)?.entity) : $.kind === "node" && pe(e.architectures.find((I) => I.id === $.arch)?.entity));
+      c($), $ && (G("evidence_opened", { kind: $.kind }), $.kind === "entity" ? pe($.id) : $.kind === "claim" ? pe(e.claim.get($.id)?.entity) : $.kind === "node" && pe(e.architectures.find((I) => I.id === $.arch)?.entity));
     },
-    coverage: y,
+    coverage: w,
     setCoverage: re,
-    session: hi,
+    session: pi,
     noteEntity: pe,
-    ask: di,
+    ask: ui,
     api: h,
-    jump: li,
+    jump: di,
     lensOn: C,
-    toggleLens: ci,
+    toggleLens: hi,
     close: He
-  }), [e, c, a, J, l, g, y, re, hi, pe, di, h, li, C, ci, He]);
-  return /* @__PURE__ */ i(hn.Provider, { value: En, children: /* @__PURE__ */ i("div", { class: "imw", hidden: !r, children: [
+  }), [e, d, a, Y, l, g, w, re, pi, pe, ui, h, di, C, hi, He]);
+  return /* @__PURE__ */ i(mn.Provider, { value: In, children: /* @__PURE__ */ i("div", { class: "imw", hidden: !r, children: [
     /* @__PURE__ */ i("div", { class: "imw-backdrop", onClick: He }),
-    /* @__PURE__ */ i("div", { class: "imw-dialog", ref: A, role: "dialog", "aria-modal": "true", "aria-labelledby": "imw-title", tabIndex: -1, onKeyDown: qn, children: [
+    /* @__PURE__ */ i("div", { class: "imw-dialog", ref: A, role: "dialog", "aria-modal": "true", "aria-labelledby": "imw-title", tabIndex: -1, onKeyDown: An, children: [
       /* @__PURE__ */ i("header", { class: "imw-top", children: [
         /* @__PURE__ */ i("div", { class: "imw-brand", children: [
           /* @__PURE__ */ i("span", { class: "imw-mark", "aria-hidden": "true", children: "✦" }),
@@ -3918,14 +3979,14 @@ function ea({ kb: e, initial: t, register: n }) {
             ] })
           ] })
         ] }),
-        /* @__PURE__ */ i("div", { class: "imw-tabs", role: "tablist", "aria-label": "Workspace views", children: Di.map(($) => /* @__PURE__ */ i("button", { role: "tab", "aria-selected": a === $.id, class: a === $.id ? "is-on" : "", title: $.hint, onClick: () => J($.id), children: $.label }, $.id)) }),
+        /* @__PURE__ */ i("div", { class: "imw-tabs", role: "tablist", "aria-label": "Workspace views", children: Oi.map(($) => /* @__PURE__ */ i("button", { role: "tab", "aria-selected": a === $.id, class: a === $.id ? "is-on" : "", title: $.hint, onClick: () => Y($.id), children: $.label }, $.id)) }),
         /* @__PURE__ */ i("div", { class: "imw-top-right", children: [
-          /* @__PURE__ */ i(ta, { status: h }),
+          /* @__PURE__ */ i(xa, { status: h }),
           /* @__PURE__ */ i(
             "button",
             {
               class: `imw-dl${a === "export" ? " is-on" : ""}`,
-              onClick: () => J("export"),
+              onClick: () => Y("export"),
               title: "Download what you explored as a PDF",
               "aria-label": Ne ? `Download PDF (${Ne} item${Ne === 1 ? "" : "s"} explored)` : "Download PDF",
               children: [
@@ -3935,28 +3996,28 @@ function ea({ kb: e, initial: t, register: n }) {
               ]
             }
           ),
-          /* @__PURE__ */ i("select", { class: "imw-persona-mobile", "aria-label": "Answer depth", value: c, onChange: ($) => m($.target.value), children: e.personas.map(($) => /* @__PURE__ */ i("option", { value: $.id, children: $.label }, $.id)) }),
+          /* @__PURE__ */ i("select", { class: "imw-persona-mobile", "aria-label": "Answer depth", value: d, onChange: ($) => f($.target.value), children: e.personas.map(($) => /* @__PURE__ */ i("option", { value: $.id, children: $.label }, $.id)) }),
           /* @__PURE__ */ i("button", { class: "imw-icon", onClick: He, "aria-label": "Close Interview My Work", children: "✕" })
         ] })
       ] }),
       /* @__PURE__ */ i("div", { class: "imw-body", children: [
-        /* @__PURE__ */ i("aside", { class: "imw-left", "aria-label": "Context", children: /* @__PURE__ */ i(Yr, {}) }),
+        /* @__PURE__ */ i("aside", { class: "imw-left", "aria-label": "Context", children: /* @__PURE__ */ i(va, {}) }),
         /* @__PURE__ */ i("main", { class: "imw-main", id: "imw-main", children: [
-          a === "ask" && /* @__PURE__ */ i(ar, { turns: _ }),
-          a === "role" && /* @__PURE__ */ i(cr, {}),
-          a === "xray" && /* @__PURE__ */ i(dr, {}),
-          a === "map" && /* @__PURE__ */ i(gr, {}),
-          a === "lab" && /* @__PURE__ */ i(er, {}),
-          a === "brief" && /* @__PURE__ */ i(wr, {}),
-          a === "connect" && /* @__PURE__ */ i(_r, {}),
-          a === "export" && /* @__PURE__ */ i(Br, {})
+          a === "ask" && /* @__PURE__ */ i(Sr, { turns: b }),
+          a === "role" && /* @__PURE__ */ i(Mr, {}),
+          a === "xray" && /* @__PURE__ */ i(jr, {}),
+          a === "map" && /* @__PURE__ */ i(Dr, {}),
+          a === "lab" && /* @__PURE__ */ i(kr, {}),
+          a === "brief" && /* @__PURE__ */ i(Wr, {}),
+          a === "connect" && /* @__PURE__ */ i(Or, {}),
+          a === "export" && /* @__PURE__ */ i(da, {})
         ] }),
-        /* @__PURE__ */ i("aside", { class: `imw-right${g ? " has-item" : ""}`, "aria-label": "Evidence", children: /* @__PURE__ */ i(Or, {}) })
+        /* @__PURE__ */ i("aside", { class: `imw-right${g ? " has-item" : ""}`, "aria-label": "Evidence", children: /* @__PURE__ */ i(ha, {}) })
       ] })
     ] })
   ] }) });
 }
-function ta({ status: e }) {
+function xa({ status: e }) {
   const t = {
     checking: "Connecting",
     waking: "AI waking up · evidence ready",
@@ -3973,18 +4034,18 @@ function ta({ status: e }) {
     t[e]
   ] });
 }
-let Pt = null, it = null, Ft = null;
-async function na(e = {}) {
-  Pt ?? (Pt = Yn(gn("evidence.json")).catch((n) => {
-    throw Pt = null, n;
+let Ft = null, nt = null, Dt = null;
+async function Ca(e = {}) {
+  Ft ?? (Ft = es(vn("evidence.json")).catch((n) => {
+    throw Ft = null, n;
   }));
-  const t = await Pt;
-  if (Ft) {
-    Ft(e);
+  const t = await Ft;
+  if (Dt) {
+    Dt(e);
     return;
   }
-  it = document.createElement("div"), it.id = "imw-host", document.body.appendChild(it), Wn(/* @__PURE__ */ i(ea, { kb: t, initial: e, register: (n) => Ft = n }), it);
+  nt = document.createElement("div"), nt.id = "imw-host", document.body.appendChild(nt), Nn(/* @__PURE__ */ i(ka, { kb: t, initial: e, register: (n) => Dt = n }), nt);
 }
 export {
-  na as open
+  Ca as open
 };

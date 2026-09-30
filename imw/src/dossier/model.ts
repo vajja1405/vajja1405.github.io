@@ -153,7 +153,9 @@ function reqDetail(kb: KB, r: CoverageAnalysis['requirements'][number], used: Se
     // Each example is used once per analysis, so a long list does not repeat the same proof.
     const example = r.claims.map((id) => kb.claim.get(id)).find((c) => isStatable(c) && !used.has(c.id));
     if (example) used.add(example.id);
-    return `${via}${where ? `Evidence: ${where}.` : ''}${example ? ` For example: ${example.text}` : ''}`.trim();
+    // Without a related skill, the statement is the explanation (a degree held, years of experience, a partial gap).
+    const why = !r.via && r.statement ? `${r.statement} ` : '';
+    return `${via}${why}${where ? `Evidence: ${where}.` : ''}${example ? ` For example: ${example.text}` : ''}`.trim();
   }
   const closest = r.entities.length ? ` Closest evidence: ${r.entities.slice(0, 3).map((id) => entityName(kb, id)).join(', ')}.` : '';
   return `${r.statement ?? ''}${closest}`.trim();

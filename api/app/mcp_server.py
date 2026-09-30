@@ -13,7 +13,8 @@ from pydantic import Field
 from mcp.server.mcpserver import MCPServer
 from mcp.types import ToolAnnotations
 
-from .coverage import CATEGORY_LABEL, analyze_jd, cover_concept, find_role, role_analysis, summarize
+from .coverage import CATEGORY_LABEL, analyze_jd, cover_concept, cover_phrase, find_role, role_analysis, summarize
+from .quals import LOGISTICS_NOTE
 from .kb import KB, find_entities, load_kb, normalize, statable
 
 SITE = "https://vajja1405.github.io/"
@@ -91,7 +92,7 @@ def _coverage_view(kb: KB, analysis: dict) -> dict[str, Any]:
             out["listed_as"] = r["priority"]
         if r.get("strength") == "self_reported":
             out["note"] = "Supported only by self-reported employment experience."
-        if r.get("statement") and r["category"] != "direct":
+        if r.get("statement"):  # direct rows carry one only for degrees and years of experience
             out["explanation"] = r["statement"]
         if r["entities"]:
             out["evidence_from"] = [kb.entities[e]["name"] for e in r["entities"][:4] if e in kb.entities]
@@ -172,17 +173,16 @@ def evaluate_requirements(
 ) -> dict[str, Any]:
     """Classify requirement phrases you already extracted against Rahul's evidence (direct, related, verification, missing)."""
     kb = _kb()
-    reqs, seen = [], set()
+    reqs, seen, logistics = [], set(), False
     for phrase in requirements:
-        phrase = phrase.strip()[:120]
-        hits = kb.concepts(phrase)
-        covs = [cover_concept(kb, cid, near=term if kind == "near" else None, priority="required") for cid, kind, term in hits] \
-            if hits else [cover_concept(kb, phrase, priority="required")]
+        covs, logi = cover_phrase(kb, phrase.strip()[:120])
+        logistics = logistics or logi
         for c in covs:
             if c["id"] not in seen:
                 seen.add(c["id"])
                 reqs.append(c)
-    return _coverage_view(kb, summarize(kb, role_title or "Requirements", reqs, source="requirements"))
+    notes = [LOGISTICS_NOTE] if logistics else []
+    return _coverage_view(kb, summarize(kb, role_title or "Requirements", reqs, source="requirements", notes=notes))
 
 
 @mcp.tool(title="Evidence for a target role", annotations=READ_ONLY)

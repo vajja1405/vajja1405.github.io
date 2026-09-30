@@ -66,9 +66,19 @@ export interface Topic {
   failures?: string[]; entities: string[]; followups: string[]; actions?: Action[];
 }
 
+/** Degrees and years of experience, checked against job-description qualifications (engine/quals.ts). */
+export interface Credentials {
+  degrees: { level: 'bachelor' | 'master' | 'phd' | 'mba'; claim: string; short: string }[];
+  fields: string;
+  experience: { years: number; claims: string[]; summary: string };
+}
+
 export interface Bundle {
   version: string;
-  subject: { name: string; first: string; headline: string; email: string; links: Record<string, string>; level_note: string };
+  subject: {
+    name: string; first: string; headline: string; email: string; links: Record<string, string>; level_note: string;
+    credentials?: Credentials;
+  };
   repos: Record<string, { name: string; sha: string }>;
   sources: Source[]; personas: { id: PersonaId; label: string; focus: string }[];
   entities: Entity[]; groups: Group[]; skills: Skill[]; gaps: Gap[]; claims: Claim[];

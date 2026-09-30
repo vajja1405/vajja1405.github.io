@@ -310,7 +310,11 @@
         "entity extraction",
         "named entity recognition",
         "ner",
-        "transformers"
+        "transformers",
+        "unstructured data",
+        "unstructured text",
+        "free text",
+        "free-text"
       ],
       "related": [
         "embeddings",
@@ -454,7 +458,11 @@
         "supervised learning",
         "classification",
         "regression models",
-        "predictive modeling"
+        "predictive modeling",
+        "predictive",
+        "predictive model",
+        "predictive models",
+        "predictive analytics"
       ],
       "near": [
         "xgboost",
@@ -847,6 +855,36 @@
       ]
     },
     {
+      "id": "code_quality",
+      "name": "Production-quality, reproducible code",
+      "group": "backend",
+      "aliases": [
+        "scalable code",
+        "repeatable code",
+        "reusable code",
+        "maintainable code",
+        "clean code",
+        "modular code",
+        "well-tested code",
+        "production-quality code",
+        "production quality code",
+        "production-grade code",
+        "reproducible code",
+        "code quality",
+        "code review",
+        "code reviews",
+        "coding standards",
+        "software engineering best practices",
+        "engineering best practices",
+        "version control",
+        "git"
+      ],
+      "related": [
+        "testing",
+        "ci_cd"
+      ]
+    },
+    {
       "id": "rate_limiting",
       "name": "Rate limiting & cost controls",
       "group": "backend",
@@ -910,11 +948,22 @@
       "near": [
         "bigquery",
         "redshift",
-        "databricks",
         "synapse"
       ],
       "related": [
         "sql",
+        "etl"
+      ]
+    },
+    {
+      "id": "databricks",
+      "name": "Databricks",
+      "group": "data",
+      "aliases": [
+        "databricks"
+      ],
+      "related": [
+        "pyspark",
         "etl"
       ]
     },
@@ -943,7 +992,12 @@
         "pipelines",
         "ingestion",
         "data ingestion",
-        "data processing"
+        "data processing",
+        "preprocessing",
+        "pre-processing",
+        "data preprocessing",
+        "data preparation",
+        "data wrangling"
       ],
       "related": [
         "data_quality",
@@ -961,7 +1015,9 @@
         "data audits",
         "deduplication",
         "entity resolution",
-        "data integrity"
+        "data integrity",
+        "data cleaning",
+        "data cleansing"
       ],
       "related": [
         "etl"
@@ -1036,7 +1092,17 @@
         "serving",
         "inference api",
         "ship",
-        "shipped"
+        "shipped",
+        "ai/ml solution",
+        "ai/ml solutions",
+        "ml solution",
+        "ml solutions",
+        "ai solution",
+        "ai solutions",
+        "machine learning solutions",
+        "ai/ml development",
+        "end-to-end ml",
+        "end-to-end machine learning"
       ],
       "related": [
         "docker",
@@ -1293,6 +1359,28 @@
       ],
       "related": [
         "product_judgment"
+      ]
+    },
+    {
+      "id": "documentation",
+      "name": "Technical documentation & write-ups",
+      "group": "domain",
+      "aliases": [
+        "technical documentation",
+        "documentation",
+        "technical writing",
+        "documenting",
+        "write-ups",
+        "write-up",
+        "technical reports",
+        "design docs",
+        "design documents",
+        "model cards",
+        "runbooks"
+      ],
+      "related": [
+        "stakeholder",
+        "research_methods"
       ]
     },
     {
@@ -1683,7 +1771,7 @@
     },
     {
       "id": "distributed_systems",
-      "name": "Distributed systems, on-call, auth design",
+      "name": "Distributed systems & authentication design",
       "aliases": [
         "distributed systems",
         "high availability",
@@ -1842,8 +1930,10 @@
       "related": [
         "classical_ml"
       ],
-      "statement": "Needs verification. The résumé attributes a recommendation-accuracy gain to TIFIN, but the portfolio describes those models as intent classification, entity extraction and retrieval ranking.",
-      "verify": true
+      "statement": "TIFIN's domain-specific PyTorch models improved recommendation accuracy (self-reported). A standalone recommender system, with candidate generation, ranking and online evaluation, is not in the public work.",
+      "partial": [
+        "tifin.gains"
+      ]
     }
   ]
 }

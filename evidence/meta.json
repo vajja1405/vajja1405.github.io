@@ -10,7 +10,31 @@
       "github": "https://github.com/vajja1405",
       "linkedin": "https://www.linkedin.com/in/rahulvajja/"
     },
-    "level_note": "Early-career individual contributor with production experience: a current AI Engineer role at Citizen Health, AI/ML Engineer at TIFIN, Data Scientist at Athena and a data-analyst internship at Smartinternz. It does not include several years of senior engineering ownership."
+    "level_note": "Early-career individual contributor with production experience: a current AI Engineer role at Citizen Health, AI/ML Engineer at TIFIN, Data Scientist at Athena and a data-analyst internship at Smartinternz. It does not include several years of senior engineering ownership.",
+    "credentials": {
+      "degrees": [
+        {
+          "level": "master",
+          "claim": "edu.ms",
+          "short": "an M.S. in Computer Science with an AI emphasis (UMKC, 2026)"
+        },
+        {
+          "level": "bachelor",
+          "claim": "edu.bs",
+          "short": "a B.S. in Computer Science (UMKC, 2025)"
+        }
+      ],
+      "fields": "Computer Science",
+      "experience": {
+        "years": 2,
+        "claims": [
+          "citizen.role",
+          "tifin.role",
+          "athena.role"
+        ],
+        "summary": "Data Scientist at Athena (May 2024 – Feb 2025), AI/ML Engineer at TIFIN (Mar 2025 – May 2026) and AI Engineer at Citizen Health (Jul 2026 – present)"
+      }
+    }
   },
   "repos": {
     "dia": {

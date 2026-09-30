@@ -3,6 +3,7 @@ import type { KB } from './kb';
 import { findConcepts } from './retrieve';
 import { coverConcept, summarize } from './coverage';
 import { normalize } from './text';
+import { LOGISTICS, LOGISTICS_NOTE, qualifications } from './quals';
 
 type Section = 'required' | 'preferred' | 'mentioned' | 'skip';
 
@@ -27,6 +28,8 @@ function headingOf(line: string): Section | null {
 
 export interface JDParse {
   concepts: { id: string; near?: string; priority: Section; count: number }[];
+  /** Content lines with their section, checked for degree and years-of-experience requirements. */
+  quals: { text: string; priority: Section }[];
   years?: number;
   seniority?: string;
   closestRole?: string;
@@ -36,6 +39,7 @@ export function parseJD(kb: KB, text: string): JDParse {
   const lines = text.split(/\r?\n/);
   let section: Section = 'mentioned';
   const found = new Map<string, { id: string; near?: string; priority: Section; count: number }>();
+  const quals: JDParse['quals'] = [];
   const rank: Record<Section, number> = { required: 3, preferred: 2, mentioned: 1, skip: 0 };
 
   for (const raw of lines) {
@@ -44,6 +48,7 @@ export function parseJD(kb: KB, text: string): JDParse {
     if (h) { section = h; continue; }
     if (section === 'skip') continue;
     const lineSection: Section = HEAD_PREF.test(normalize(raw)) ? 'preferred' : section;
+    quals.push({ text: raw, priority: lineSection });
     for (const c of findConcepts(kb, raw)) {
       const key = c.near ? `near:${c.term.toLowerCase()}` : c.id;
       const cur = found.get(key);
@@ -69,6 +74,7 @@ export function parseJD(kb: KB, text: string): JDParse {
 
   return {
     concepts: [...found.values()],
+    quals,
     years: years.length ? Math.max(...years) : undefined,
     seniority: sen?.[1],
     closestRole: best >= 0.25 ? closestRole : undefined,
@@ -88,22 +94,21 @@ export function analyzeJD(kb: KB, text: string, extraPhrases: string[] = []): Co
     seen.add(cov.id);
     reqs.push(cov);
   }
+  const push = (cov: RequirementCoverage) => { if (!seen.has(cov.id)) { seen.add(cov.id); reqs.push(cov); } };
+  // Free text outside a requirements section needs extra context before a degree or a year count counts.
+  for (const q of parsed.quals) qualifications(kb, q.text, q.priority === 'skip' ? 'mentioned' : q.priority, q.priority === 'mentioned').forEach(push);
+  let logistics = false;
   for (const phrase of extraPhrases) {
-    const hits = findConcepts(kb, phrase);
-    if (hits.length) {
-      for (const h of hits) {
-        const cov = coverConcept(kb, h.id, { near: h.near ? h.term.toLowerCase() : undefined, priority: 'required' });
-        if (!seen.has(cov.id)) { seen.add(cov.id); reqs.push(cov); }
-      }
-    } else if (phrase.trim().length > 2) {
-      const cov = coverConcept(kb, phrase.trim(), { priority: 'required' });
-      if (!seen.has(cov.id)) { seen.add(cov.id); reqs.push(cov); }
-    }
+    const r = coverPhrase(kb, phrase, HEAD_PREF.test(normalize(phrase)) ? 'preferred' : 'required');
+    r.covs.forEach(push);
+    logistics ||= r.logistics;
   }
 
   const notes: string[] = [];
-  if (parsed.years && parsed.years >= 3) notes.push(`The description asks for ${parsed.years}+ years. ${kb.subject.level_note}`);
+  const asked = Math.max(0, ...reqs.filter((r) => r.id.startsWith('years:')).map((r) => Number(r.id.slice(6))));
+  if (asked > (kb.subject.credentials?.experience.years ?? 2)) notes.push(`The description asks for ${asked}+ years. ${kb.subject.level_note}`);
   else if (parsed.seniority) notes.push(`The description uses the word "${parsed.seniority}". ${kb.subject.level_note}`);
+  if (logistics) notes.push(LOGISTICS_NOTE);
   if (!reqs.length) notes.push('No recognizable technical requirements were found. Try pasting the requirements section.');
 
   return summarize(kb, 'Your job description', reqs, {
@@ -111,6 +116,19 @@ export function analyzeJD(kb: KB, text: string, extraPhrases: string[] = []): Co
     closestRole: parsed.closestRole ? kb.role.get(parsed.closestRole)?.title : undefined,
     roleId: parsed.closestRole,
   });
+}
+
+/**
+ * One requirement phrase (from the API parser or an MCP client): degrees and years first, then skills and gaps.
+ * A work-arrangement phrase with nothing else in it is dropped rather than reported as a missing skill.
+ */
+export function coverPhrase(kb: KB, phrase: string, priority: 'required' | 'preferred' = 'required'): { covs: RequirementCoverage[]; logistics: boolean } {
+  const p = phrase.trim().slice(0, 160);
+  const covs = qualifications(kb, p, priority);
+  for (const h of findConcepts(kb, p)) covs.push(coverConcept(kb, h.id, { near: h.near ? h.term.toLowerCase() : undefined, priority }));
+  if (covs.length) return { covs, logistics: false };
+  if (LOGISTICS.test(p)) return { covs: [], logistics: true };
+  return { covs: p.length > 2 ? [coverConcept(kb, p, { priority })] : [], logistics: false };
 }
 
 export const looksLikeJD = (s: string) =>

@@ -9,6 +9,7 @@ from __future__ import annotations
 import re
 
 from .kb import KB, normalize, statable
+from .quals import LOGISTICS, LOGISTICS_NOTE, qualifications
 
 CATEGORY_LABEL = {
     "direct": "Direct evidence",
@@ -36,8 +37,12 @@ def _uniq(xs):
     return list(dict.fromkeys(xs))
 
 
+_ACRONYMS = {"ai", "bi", "ml", "aws", "gcp", "sql", "api", "asr", "tts", "sse", "ec2", "s3", "hl7", "cda", "k6", "gpu", "etl"}
+
+
 def _title(s: str) -> str:
-    return re.sub(r"\b[a-z]", lambda m: m.group().upper(), s)
+    """"power bi" -> "Power BI", "hl7 v2" -> "HL7 v2"."""
+    return re.sub(r"\b[a-z][a-z0-9]*", lambda m: m.group().upper() if m.group() in _ACRONYMS else m.group()[0].upper() + m.group()[1:], s)
 
 
 def cover_concept(kb: KB, cid: str, near: str | None = None, priority: str | None = None) -> dict:
@@ -145,7 +150,7 @@ def _heading(line: str) -> str | None:
 
 
 def analyze_jd(kb: KB, text: str, extra_phrases: list[str] | None = None) -> dict:
-    section, found = "mentioned", {}
+    section, found, lines = "mentioned", {}, []
     for raw in text.splitlines():
         if not raw.strip():
             continue
@@ -156,6 +161,7 @@ def analyze_jd(kb: KB, text: str, extra_phrases: list[str] | None = None) -> dic
         if section == "skip":
             continue
         line_sec = "preferred" if HEAD_PREF.search(normalize(raw)) else section
+        lines.append((raw, line_sec))
         for cid, kind, term in kb.concepts(raw):
             key = f"near:{term}" if kind == "near" else cid
             cur = found.get(key)
@@ -167,7 +173,6 @@ def analyze_jd(kb: KB, text: str, extra_phrases: list[str] | None = None) -> dic
                 found[key] = {"id": cid, "near": term if kind == "near" else None, "priority": line_sec, "count": 1}
 
     t = normalize(text)
-    years = [int(y) for y in re.findall(r"(\d{1,2})\s*\+?\s*(?:-\s*\d{1,2}\s*)?(?:years|yrs)", t) if 0 < int(y) < 30]
     sen = re.search(r"\b(senior|staff|principal|lead|head of|director|manager)\b", t)
     skills = {c["id"] for c in found.values() if not c["near"] and c["id"] in kb.skills}
     closest, best = None, 0.0
@@ -179,32 +184,49 @@ def analyze_jd(kb: KB, text: str, extra_phrases: list[str] | None = None) -> dic
 
     order = {"required": 0, "preferred": 1, "mentioned": 2}
     reqs, seen = [], set()
-    for c in sorted(found.values(), key=lambda c: (order[c["priority"]], -c["count"]))[:26]:
-        cov = cover_concept(kb, c["id"], near=c["near"], priority=c["priority"])
+
+    def push(cov: dict) -> None:
         if cov["id"] not in seen:
             seen.add(cov["id"])
             reqs.append(cov)
+
+    for c in sorted(found.values(), key=lambda c: (order[c["priority"]], -c["count"]))[:26]:
+        push(cover_concept(kb, c["id"], near=c["near"], priority=c["priority"]))
+
+    # Free text outside a requirements section needs extra context before a degree or a year count counts.
+    for raw, sec in lines:
+        for cov in qualifications(kb, raw, "mentioned" if sec == "skip" else sec, strict=sec == "mentioned"):
+            push(cov)
+    logistics = False
     for phrase in extra_phrases or []:
-        hits = kb.concepts(phrase)
-        if hits:
-            for cid, kind, term in hits:
-                cov = cover_concept(kb, cid, near=term if kind == "near" else None, priority="required")
-                if cov["id"] not in seen:
-                    seen.add(cov["id"])
-                    reqs.append(cov)
-        elif len(phrase.strip()) > 2:
-            cov = cover_concept(kb, phrase.strip(), priority="required")
-            if cov["id"] not in seen:
-                seen.add(cov["id"])
-                reqs.append(cov)
+        covs, logi = cover_phrase(kb, phrase, "preferred" if HEAD_PREF.search(normalize(phrase)) else "required")
+        for cov in covs:
+            push(cov)
+        logistics = logistics or logi
 
     notes = []
     level = kb.raw["subject"]["level_note"]
-    if years and max(years) >= 3:
-        notes.append(f"The description asks for {max(years)}+ years. {level}")
+    asked = max([int(r["id"][6:]) for r in reqs if r["id"].startswith("years:")], default=0)
+    if asked > (kb.raw["subject"].get("credentials") or {}).get("experience", {}).get("years", 2):
+        notes.append(f"The description asks for {asked}+ years. {level}")
     elif sen:
         notes.append(f'The description uses the word "{sen.group(1)}". {level}')
+    if logistics:
+        notes.append(LOGISTICS_NOTE)
     if not reqs:
         notes.append("No recognizable technical requirements were found. Try passing the requirements section.")
     return summarize(kb, "Job description", reqs, source="jd", notes=notes,
                      closestRole=closest["title"] if closest else None, roleId=closest["id"] if closest else None)
+
+
+def cover_phrase(kb: KB, phrase: str, priority: str = "required") -> tuple[list[dict], bool]:
+    """One requirement phrase (from the API parser or an MCP client): degrees and years first, then skills and gaps.
+    A work-arrangement phrase with nothing else in it is dropped rather than reported as a missing skill."""
+    p = phrase.strip()[:160]
+    covs = qualifications(kb, p, priority)
+    covs += [cover_concept(kb, cid, near=term if kind == "near" else None, priority=priority) for cid, kind, term in kb.concepts(p)]
+    if covs:
+        return covs, False
+    if LOGISTICS.search(p):
+        return [], True
+    return ([cover_concept(kb, p, priority=priority)] if len(p) > 2 else []), False

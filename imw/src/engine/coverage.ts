@@ -105,4 +105,6 @@ export const CATEGORY_LABEL: Record<Category, string> = {
 };
 
 const uniq = <T,>(xs: T[]) => [...new Set(xs)];
-const titleCase = (s: string) => s.replace(/\b[a-z]/g, (c) => c.toUpperCase());
+const ACRONYMS = new Set(['ai', 'bi', 'ml', 'aws', 'gcp', 'sql', 'api', 'asr', 'tts', 'sse', 'ec2', 's3', 'hl7', 'cda', 'k6', 'gpu', 'etl']);
+// "power bi" -> "Power BI", "hl7 v2" -> "HL7 v2".
+const titleCase = (s: string) => s.replace(/\b[a-z][a-z0-9]*/g, (w) => (ACRONYMS.has(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)));

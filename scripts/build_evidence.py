@@ -238,6 +238,14 @@ def build() -> tuple[dict, list[str]]:
             if not claim_status.get(cid):
                 errors.append(f"gap {g['id']}: partial evidence {cid} is missing or not statable")
 
+    creds = meta["subject"].get("credentials", {})
+    for d in creds.get("degrees", []):
+        if d.get("level") not in ("bachelor", "master", "phd", "mba") or not claim_status.get(d.get("claim")):
+            errors.append(f"subject credentials: degree {d.get('claim')} needs a known level and a statable claim")
+    for cid in creds.get("experience", {}).get("claims", []):
+        if not claim_status.get(cid):
+            errors.append(f"subject credentials: experience claim {cid} is missing or not statable")
+
     for cf in conflicts:
         check_claims(f"conflict {cf['id']}", cf.get("claims"))
         if not isinstance(cf.get("open"), bool):
