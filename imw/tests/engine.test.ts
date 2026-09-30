@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { buildKB, isStatable } from '../src/engine/kb';
-import { answer, answerText, citedIds } from '../src/engine/answer';
+import { answer, answerText, citedIds, jdBlocks } from '../src/engine/answer';
 import { analyzeJD, coverPhrase, looksLikeJD } from '../src/engine/jd';
 import { coverConcept, roleAnalysis } from '../src/engine/coverage';
 import { HYPE } from '../src/engine/guard';
@@ -484,6 +484,16 @@ Work arrangement
     expect(coverPhrase(kb, 'Proficiency in MS Office and Excel').covs.some((r) => r.id.startsWith('degree:'))).toBe(false);
     expect(coverPhrase(kb, 'hybrid search with BM25 and embeddings').covs.map((r) => r.id)).toContain('semantic_search');
     expect(coverPhrase(kb, 'Must be willing to relocate to Detroit')).toEqual({ covs: [], logistics: true });
+  });
+
+  it('matches the phrases the live AI parser split out, and summarizes the refined analysis', () => {
+    const a = analyzeJD(kb, JD, [...PHRASES, 'prescriptive modeling', 'warranty claims data', 'quality issue management']);
+    expect(covered(a, 'prescriptive')).toMatchObject({ category: 'direct' });
+    expect(covered(a, 'prescriptive')!.claims).toContain('tifin.gains');
+    const lead = jdBlocks(a)[0];
+    expect(lead.type === 'p' && lead.text).toMatch(/^Of the \d+ requirements in this description, \d+ have direct evidence/);
+    expect(lead.type === 'p' && lead.text).toMatch(/Not currently demonstrated: .*warranty claims data/);
+    expect(covered(a, 'term:warranty claims data')!.statement).toBe('Not shown in his projects or roles so far.');
   });
 
   it('names the distributed-systems gap without on-call, which he does', () => {

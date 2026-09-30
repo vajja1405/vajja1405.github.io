@@ -1,7 +1,7 @@
 // The offline evidence engine. Deterministic: every sentence is either a verified claim,
 // a fixed framing sentence, or a gap statement. It never ranks the candidate or scores fit.
 
-import type { Action, Answer, Block, Claim, Entity, PersonaId } from './types';
+import type { Action, Answer, Block, Claim, CoverageAnalysis, Entity, PersonaId } from './types';
 import { isStatable, conceptName, entityName, type KB } from './kb';
 import { findConcepts, findEntities, retrieve } from './retrieve';
 import { coverConcept, roleAnalysis, CATEGORY_LABEL } from './coverage';
@@ -370,15 +370,23 @@ function falsePremise(kb: KB, q: string, raw: string, entities: string[], concep
   return null;
 }
 
-function jdAnswer(kb: KB, text: string): Answer {
-  const analysis = analyzeJD(kb, text);
-  const c = analysis.counts;
-  const blocks: Block[] = [
-    { type: 'p', text: `I found ${analysis.requirements.length} requirements. ${c.direct} have direct evidence, ${c.related} related evidence, ${c.verification} need verification, and ${c.missing} are not currently demonstrated.` },
-    { type: 'coverage', analysis },
+/** Summary, coverage and notes for a job description; also rebuilt when the AI parser refines the requirements. */
+export function jdBlocks(analysis: CoverageAnalysis): Block[] {
+  const c = analysis.counts, n = analysis.requirements.length;
+  const has = (k: number, one: string, many: string) => `${k} ${k === 1 ? one : many}`;
+  const missing = analysis.requirements.filter((r) => r.category === 'missing').map((r) => r.label);
+  const parts = [
+    `Of the ${has(n, 'requirement', 'requirements')} in this description, ${has(c.direct, 'has', 'have')} direct evidence${c.related ? ` and ${has(c.related, 'has', 'have')} related evidence` : ''}.`,
+    c.verification ? `${has(c.verification, 'needs', 'need')} verification.` : '',
+    missing.length ? `Not currently demonstrated: ${missing.join('; ')}.` : 'Nothing in it is marked as not demonstrated.',
   ];
-  analysis.notes.forEach((n) => blocks.push({ type: 'note', tone: 'warn', text: n }));
-  return mk('jd', blocks, {
+  const blocks: Block[] = [{ type: 'p', lead: true, text: parts.filter(Boolean).join(' ') }, { type: 'coverage', analysis }];
+  analysis.notes.forEach((note) => blocks.push({ type: 'note', tone: 'warn', text: note }));
+  return blocks;
+}
+
+function jdAnswer(kb: KB, text: string): Answer {
+  return mk('jd', jdBlocks(analyzeJD(kb, text)), {
     actions: [{ kind: 'mode', label: 'Show this on the portfolio', target: 'transform' }, { kind: 'mode', label: 'Technical brief for this role', target: 'brief' }],
     followups: ['What is the strongest evidence for this role?', 'Challenge this evidence', 'What is not demonstrated yet?'],
   });

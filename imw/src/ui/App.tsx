@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import type { KB } from '../engine/kb';
 import type { Answer, CoverageAnalysis, PersonaId } from '../engine/types';
-import { answer } from '../engine/answer';
+import { answer, jdBlocks } from '../engine/answer';
 import { analyzeJD, looksLikeJD } from '../engine/jd';
 import { askModel, parseJDRemote, probe, type ApiStatus } from '../api';
 import { Ctx, type Inspect, type Mode, type Workspace } from '../context';
@@ -166,7 +166,7 @@ export function App({ kb, initial, register }: { kb: KB; initial: OpenOptions; r
         const refined = analyzeJD(kb, q, phrases);
         const first = local.blocks.find((b) => b.type === 'coverage');
         recordCoverage(refined, first && first.type === 'coverage' ? first.analysis : undefined);
-        setTurns((ts) => ts.map((t) => t.id === id && t.a ? { ...t, a: { ...t.a, blocks: t.a.blocks.map((b) => b.type === 'coverage' ? { ...b, analysis: refined } : b), refined: true } as Answer & { refined: boolean } } : t));
+        setTurns((ts) => ts.map((t) => t.id === id && t.a ? { ...t, a: { ...t.a, blocks: jdBlocks(refined), refined: true } as Answer & { refined: boolean } } : t));
       }).catch(() => { /* deterministic parse already shown */ });
     }
     if (!useModel) return;

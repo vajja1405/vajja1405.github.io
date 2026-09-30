@@ -59,7 +59,7 @@ def cover_concept(kb: KB, cid: str, near: str | None = None, priority: str | Non
     skill = kb.skills.get(cid)
     if not skill:
         return {"id": f"term:{cid}", "label": cid, "category": "missing", "priority": priority, "claims": [], "entities": [],
-                "statement": "The evidence database has nothing that addresses this requirement."}
+                "statement": "Not shown in his projects or roles so far."}
     direct = _statable_by_skill(kb, cid)
     pending = _pending_by_skill(kb, cid)
     if near:

@@ -1419,7 +1419,8 @@
     "tags": [
       "product_judgment",
       "eval_design",
-      "cost_modeling"
+      "cost_modeling",
+      "prescriptive"
     ],
     "sources": [
       "site",
@@ -2060,7 +2061,8 @@
     "tags": [
       "metrics",
       "deep_learning",
-      "fintech"
+      "fintech",
+      "prescriptive"
     ],
     "sources": [
       "resume_v2",
@@ -2966,7 +2968,8 @@
       "healthcare",
       "safety_testing",
       "eval_design",
-      "health_interop"
+      "health_interop",
+      "prescriptive"
     ],
     "sources": [
       "cliniq_prior_auth"

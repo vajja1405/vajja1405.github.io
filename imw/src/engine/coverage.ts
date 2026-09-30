@@ -25,7 +25,7 @@ export function coverConcept(kb: KB, id: string, opts: { near?: string; priority
   const skill = kb.skill.get(id);
   if (!skill) {
     return { id: `term:${id}`, label: id, term: id, category: 'missing', priority: opts.priority, claims: [], entities: [],
-      statement: 'The evidence database has nothing that addresses this requirement.' };
+      statement: 'Not shown in his projects or roles so far.' };
   }
   const direct = kb.statableBySkill.get(id) ?? [];
   const pending = (kb.pendingBySkill.get(id) ?? []).map((c) => c.id);

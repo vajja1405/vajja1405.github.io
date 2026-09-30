@@ -582,6 +582,28 @@
       ]
     },
     {
+      "id": "prescriptive",
+      "name": "Prescriptive & decision-support modeling",
+      "group": "ml",
+      "aliases": [
+        "prescriptive",
+        "prescriptive modeling",
+        "prescriptive modelling",
+        "prescriptive models",
+        "prescriptive analytics",
+        "decision modeling",
+        "decision models",
+        "what-if analysis",
+        "scenario modeling",
+        "scenario planning",
+        "next best action"
+      ],
+      "related": [
+        "classical_ml",
+        "product_judgment"
+      ]
+    },
+    {
       "id": "computer_vision",
       "name": "Computer vision",
       "group": "vision",

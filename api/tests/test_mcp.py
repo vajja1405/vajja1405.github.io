@@ -141,12 +141,13 @@ def test_qualifications_match_the_browser_engine():
         "Bachelor's degree in quantitative field", "2 years of experience as a Data Scientist", "predictive and prescriptive modeling",
         "preprocessing structured and unstructured data", "technical documentation", "AI/ML solution development",
         "quality issue management and warranty data domain knowledge", "Master's or PhD degree (preferred)",
-        "scalable, repeatable code", "hybrid onsite 3 days per week", "Databricks", "Power BI"])
+        "scalable, repeatable code", "hybrid onsite 3 days per week", "Databricks", "Power BI", "prescriptive modeling"])
     assert cat(out, "Bachelor's degree in quantitative field") == "Direct evidence"
     assert cat(out, "2 years of experience as a Data Scientist") == "Direct evidence"
     assert cat(out, "Master's or PhD") == "Direct evidence"
     for name in ["Classical ML (scikit-learn)", "ETL / data pipelines", "NLP & text classification", "Technical documentation & write-ups",
-                 "Deploying AI applications & models", "Production-quality, reproducible code", "Databricks"]:
+                 "Deploying AI applications & models", "Production-quality, reproducible code", "Databricks",
+                 "Prescriptive & decision-support modeling"]:
         assert cat(out, name) == "Direct evidence", name
     assert cat(out, "Power BI") == "Related evidence"
     missing = [r["requirement"] for r in out["requirements"] if r["category"] == "Not currently demonstrated"]
