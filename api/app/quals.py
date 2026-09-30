@@ -55,7 +55,9 @@ LOGISTICS_NOTE = ("Work-arrangement items (location, schedule, travel, authoriza
 
 
 def _clean(s: str) -> str:
-    return re.sub(r"\s+", " ", re.sub(r"[–—]", "-", re.sub(r"[’‘`]", "'", s))).strip()
+    """Also drops a leading list marker ("- ", "• ", "1. "), which would otherwise end up in requirement labels."""
+    s = re.sub(r"\s+", " ", re.sub(r"[–—]", "-", re.sub(r"[’‘`]", "'", s))).strip()
+    return re.sub(r"^(?:[-*•·▪◦]|\d+[.)])\s+", "", s)
 
 
 def _join_or(xs: list[str]) -> str:
@@ -162,8 +164,8 @@ def _grad_coverage(kb: KB, s: str, priority: str | None, today: date) -> dict | 
     fits = [d for d in eligible if not win or win[0] <= at(d) <= win[1]]
     text = re.split(r"[;]|\.\s", s)[0][:90].strip()
     label = text[:1].upper() + text[1:]
-    key = "-".join(str(x) if x != float("inf") else "Infinity" for x in win) if win else "any"
-    base = {"id": f"grad:{key}:{lowest}", "label": label, "priority": priority, "entities": ["education"], "strength": "self_reported"}
+    # One graduation-timing row per degree level: the job text and the AI parser often phrase the same requirement twice.
+    base = {"id": f"grad:{lowest}", "label": label, "priority": priority, "entities": ["education"], "strength": "self_reported"}
     if fits:
         d = fits[-1]
         name = re.sub(r" \(UMKC, \d{4}\)$", "", d["short"])

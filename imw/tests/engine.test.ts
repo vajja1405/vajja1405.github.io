@@ -555,6 +555,15 @@ describe('requirement corpus: no false gaps', () => {
     expect(coverPhrase(kb, 'A/B testing and experimentation', 'required', TODAY).covs[0]).toMatchObject({ category: 'related' });
   });
 
+  it('shows one graduation row, labeled without list markers', () => {
+    const jd = `Qualifications\n- Degree completed within the past 12 months (May 2025–August 2026 preferred)\n- Python and SQL`;
+    const a = analyzeJD(kb, jd, ['Recent graduate (degree within past 12 months)'], TODAY);
+    const grads = a.requirements.filter((r) => r.id.startsWith('grad:'));
+    expect(grads).toHaveLength(1);
+    expect(grads[0].label).toBe('Degree completed within the past 12 months (May 2025-August 2026 preferred)');
+    expect(grads[0].category).toBe('direct');
+  });
+
   it('lists phrases it cannot match instead of calling them gaps', () => {
     const r = coverPhrase(kb, 'Warranty data domain knowledge', 'required', TODAY);
     expect(r).toEqual({ covs: [], logistics: false, unmatched: 'Warranty data domain knowledge' });

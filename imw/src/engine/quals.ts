@@ -40,7 +40,8 @@ export const UNASSESSED_NOTE = (phrases: string[]) =>
   `Not assessed: ${phrases.join('; ')}. These didn't match anything in the evidence database, so they are neither confirmed nor ruled out. Ask Rahul about them.`;
 export const LOGISTICS_NOTE = 'Work-arrangement items (location, schedule, travel, authorization) are not skills, so they are left out of this comparison. Ask Rahul about them directly.';
 
-const clean = (s: string) => s.replace(/[’‘`]/g, "'").replace(/[–—]/g, '-').replace(/\s+/g, ' ').trim();
+// Also drops a leading list marker ("- ", "• ", "1. "), which would otherwise end up in requirement labels.
+const clean = (s: string) => s.replace(/[’‘`]/g, "'").replace(/[–—]/g, '-').replace(/\s+/g, ' ').trim().replace(/^(?:[-*•·▪◦]|\d+[.)])\s+/, '');
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const uniq = <T,>(xs: T[]) => [...new Set(xs)];
 
@@ -131,7 +132,8 @@ function gradCoverage(kb: KB, s: string, priority: Priority, today: Date): Requi
   const at = (d: { date: string }) => monthIndex(Number(d.date.slice(0, 4)), Number(d.date.slice(5, 7)));
   const fits = eligible.filter((d) => !win || (at(d) >= win[0] && at(d) <= win[1]));
   const label = cap(s.split(/[;]|\.\s/)[0].slice(0, 90).trim());
-  const base = { id: `grad:${win ? win.join('-') : 'any'}:${min}`, label, priority, entities: ['education'], strength: 'self_reported' as const };
+  // One graduation-timing row per degree level: the job text and the AI parser often phrase the same requirement twice.
+  const base = { id: `grad:${min}`, label, priority, entities: ['education'], strength: 'self_reported' as const };
   if (fits.length) {
     const d = fits[fits.length - 1];
     const when = win ? `, within the window asked for` : '';
