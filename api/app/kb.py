@@ -118,7 +118,10 @@ def find_entities(text: str) -> set[str]:
 
 
 def alias_regex(term: str) -> re.Pattern:
-    return re.compile(rf"(?<![a-z0-9]){re.escape(normalize(term))}(?![a-z0-9+#])")
+    # Terms of four or more letters also match their plural ("release gates"); short ones would turn "go" into "goes".
+    t = normalize(term)
+    plural = "s?" if len(t) >= 4 and re.search(r"[a-rt-z]$", t) else ""
+    return re.compile(rf"(?<![a-z0-9]){re.escape(t)}{plural}(?![a-z0-9+#])")
 
 
 @lru_cache(maxsize=1)

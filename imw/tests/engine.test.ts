@@ -496,6 +496,12 @@ Work arrangement
     expect(covered(a, 'term:warranty claims data')!.statement).toBe('Not shown in his projects or roles so far.');
   });
 
+  it('matches plural phrasings of known skills', () => {
+    expect(coverPhrase(kb, 'release gates for AI features').covs.map((r) => [r.id, r.category])).toContainEqual(['regression_testing', 'direct']);
+    expect(coverPhrase(kb, 'knowledge graphs, dashboards and data pipelines').covs.map((r) => r.id)).toEqual(expect.arrayContaining(['dashboards', 'etl']));
+    expect(coverPhrase(kb, 'what goes into a good hire').covs.every((r) => r.id.startsWith('term:'))).toBe(true);
+  });
+
   it('names the distributed-systems gap without on-call, which he does', () => {
     expect(kb.gap.get('distributed_systems')!.name).not.toMatch(/on-call/i);
   });

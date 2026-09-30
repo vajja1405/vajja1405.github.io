@@ -24,8 +24,10 @@ export const isStatable = (c: Claim | undefined): c is StatableClaim => !!c && c
 const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 export function aliasRegex(term: string): RegExp {
-  // Word-ish boundaries that also work for terms like "c++", "ci/cd", "a/b testing".
-  return new RegExp(`(?<![a-z0-9])${escape(term)}(?![a-z0-9+#])`, 'g');
+  // Word-ish boundaries that also work for terms like "c++", "ci/cd", "a/b testing". Terms of four or more letters
+  // also match their plural, so "release gates" finds "release gate" (short ones would turn "go" into "goes").
+  const plural = term.length >= 4 && /[a-rt-z]$/.test(term) ? 's?' : '';
+  return new RegExp(`(?<![a-z0-9])${escape(term)}${plural}(?![a-z0-9+#])`, 'g');
 }
 
 export function buildKB(bundle: Bundle): KB {

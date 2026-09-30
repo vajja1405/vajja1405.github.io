@@ -424,7 +424,8 @@ function Yn(e) {
 }
 const F = (e) => !!e && e.status === "verified" && e.public_safe, Jn = (e) => e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 function Xn(e) {
-  return new RegExp(`(?<![a-z0-9])${Jn(e)}(?![a-z0-9+#])`, "g");
+  const t = e.length >= 4 && /[a-rt-z]$/.test(e) ? "s?" : "";
+  return new RegExp(`(?<![a-z0-9])${Jn(e)}${t}(?![a-z0-9+#])`, "g");
 }
 function Zn(e) {
   const t = e;

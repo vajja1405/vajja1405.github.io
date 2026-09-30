@@ -158,6 +158,11 @@ def test_qualifications_match_the_browser_engine():
     assert "Data Scientist at Athena" in years["explanation"] and years["claim_ids"] == ["citizen.role", "tifin.role", "athena.role"]
 
 
+def test_plural_phrasings_match_known_skills():
+    out = srv.evaluate_requirements(["release gates for AI features"])
+    assert cat(out, "Regression testing & release gates") == "Direct evidence"
+
+
 def test_qualifications_stay_honest():
     out = srv.evaluate_requirements(["PhD in Machine Learning", "5+ years of professional experience", "3+ years building ML systems",
                                      "Bachelor's degree in Nursing", "Proficiency in MS Office"])
