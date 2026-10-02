@@ -9,6 +9,7 @@ import { analyzeJD } from '../src/engine/jd';
 import { roleAnalysis } from '../src/engine/coverage';
 import { buildDossier, dossierText, footerFor, projectsFor, recency, type Options, type Session } from '../src/dossier/model';
 import { pdfText, renderPdf } from '../src/dossier/pdf';
+import { helloPayload } from '../src/hello';
 import type { Bundle, PersonaId } from '../src/engine/types';
 
 const root = (p: string) => fileURLToPath(new URL(`../../${p}`, import.meta.url));
@@ -104,5 +105,19 @@ describe('pdf rendering', () => {
     const d = buildDossier(kb, { turns: [], analyses: [], seen: [] }, { persona: 'recruiter', sections: all });
     const doc = await renderPdf(d.nodes, { title: d.title, author: kb.subject.name, footer: 'test' });
     expect(doc.getNumberOfPages()).toBeGreaterThanOrEqual(2);
+  });
+});
+
+describe('"let Rahul know you stopped by" note', () => {
+  const fields = { name: '  Jane   Doe ', company: 'Acme', role: 'Recruiter', email: 'not-an-email', message: 'Hiring for applied AI.', botcheck: false };
+  it('sends only what the visitor typed plus coarse context, never the pasted job description', () => {
+    const p = helloPayload('key', fields, { persona: 'recruiter', where: 'jd', coverage: analyzeJD(kb, JD) });
+    const text = JSON.stringify(p);
+    expect(text).not.toContain('BLUEHERON');
+    expect(text).not.toContain('secret project');
+    expect(p.subject).toBe('Portfolio visitor: Jane Doe, Acme');
+    expect(p.coverage).toMatch(/^\d+ direct, \d+ related, \d+ to verify, \d+ not demonstrated/);
+    expect('email' in p).toBe(false); // malformed reply address is dropped
+    expect(helloPayload('key', { ...fields, email: 'jane@acme.com' }, { persona: 'recruiter', where: 'pdf' }).email).toBe('jane@acme.com');
   });
 });

@@ -5,6 +5,7 @@ import { track } from '../analytics';
 import { entityName } from '../engine/kb';
 import { buildDossier, filename, footerFor, LENSES, projectsFor, SECTION_LABEL, type SectionId } from '../dossier/model';
 import { renderPdf, saveBlob } from '../dossier/pdf';
+import { HelloCard } from './Hello';
 
 type Status = { kind: 'idle' } | { kind: 'busy' } | { kind: 'done'; file: string } | { kind: 'error' };
 
@@ -111,6 +112,7 @@ export function ExportView() {
         {status.kind === 'error' && 'The PDF could not be built. Check your connection and try again; the rest of the workspace still works.'}
         {status.kind !== 'done' && status.kind !== 'error' && 'Built in your browser. Nothing you typed or pasted is uploaded, and pasted job descriptions appear only as the requirements that were detected.'}
       </p>
+      {status.kind === 'done' && <HelloCard where="pdf" />}
     </div>
   );
 }

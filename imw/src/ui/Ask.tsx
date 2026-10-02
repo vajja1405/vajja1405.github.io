@@ -5,6 +5,7 @@ import { looksLikeJD } from '../engine/jd';
 import { isStatable } from '../engine/kb';
 import { track } from '../analytics';
 import { AnswerView } from './Blocks';
+import { HelloCard } from './Hello';
 
 export interface Turn { id: number; q: string; a?: Answer; pending?: boolean }
 
@@ -85,6 +86,7 @@ export function AskView({ turns }: { turns: Turn[] }) {
             {t.a && <AnswerView a={t.a} />}
           </section>
         ))}
+        {last?.a?.intent === 'jd' && !last.pending && <HelloCard where="jd" />}
         {turns.some((t) => t.a) && !last?.pending && (
           <p class="imw-keep">
             Want to keep this? <button class="imw-mini-link" onClick={() => go('export')}>Download your questions and answers as a PDF →</button>

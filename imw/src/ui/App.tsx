@@ -40,7 +40,8 @@ export function App({ kb, initial, register }: { kb: KB; initial: OpenOptions; r
   const [visible, setVisible] = useState(true);
   const [mode, setMode] = useState<Mode>('ask');
   const [modeArg, setModeArg] = useState<string | undefined>();
-  const [persona, setPersona] = useState<PersonaId>('recruiter');
+  const [persona, setPersonaState] = useState<PersonaId>('recruiter');
+  const setPersona = useCallback((p: PersonaId) => { setPersonaState(p); track('persona_selected', { persona: p }); }, []);
   const [inspect, setInspect] = useState<Inspect>(null);
   const [coverage, setCoverage] = useState<CoverageAnalysis | null>(null);
   const [analyses, setAnalyses] = useState<CoverageAnalysis[]>([]);
@@ -201,7 +202,7 @@ export function App({ kb, initial, register }: { kb: KB; initial: OpenOptions; r
       else if (i.kind === 'node') noteEntity(kb.architectures.find((a) => a.id === i.arch)?.entity);
     },
     coverage, setCoverage: recordCoverage, session, noteEntity, ask, api, jump, lensOn, toggleLens, close,
-  }), [kb, persona, mode, go, modeArg, inspect, coverage, recordCoverage, session, noteEntity, ask, api, jump, lensOn, toggleLens, close]);
+  }), [kb, persona, setPersona, mode, go, modeArg, inspect, coverage, recordCoverage, session, noteEntity, ask, api, jump, lensOn, toggleLens, close]);
 
   return (
     <Ctx.Provider value={ws}>
