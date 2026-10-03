@@ -96,7 +96,7 @@
         { "id": "embedding", "label": "Embedding", "tp": 300, "fp": 295, "fn": 0, "tn": 5 },
         { "id": "llm_rag", "label": "LLM + RAG", "tp": 120, "fp": 8, "fn": 180, "tn": 292 }
       ],
-      "caveat": "Proxy labels derived from keywords in condition and drug-name fields; not clinician-adjudicated.",
+      "caveat": "Proxy labels derived from keywords in condition and drug-name fields; not clinician-adjudicated. This benchmark was scored before the September 29 label correction (24% of proxy positives were wrong) and was not rerun.",
       "source": "cliniq_results"
     },
     "voice_scorecard": {

@@ -1216,7 +1216,7 @@
     "status": "verified",
     "strength": "public_artifact",
     "public_safe": true,
-    "text": "On a balanced 600-review sample (300 proxy positives, 300 proxy negatives): rules scored P 0.861 / R 0.847 / F1 0.854; the embedding detector P 0.504 / R 1.000 / F1 0.670; LLM+RAG P 0.938 / R 0.400 / F1 0.561.",
+    "text": "Original benchmark on a balanced 600-review sample (300 proxy positives, 300 negatives), scored on the pre-correction proxy labels and not rerun: rules P 0.861 / R 0.847 / F1 0.854; embedding P 0.504 / R 1.000 / F1 0.670; LLM+RAG P 0.938 / R 0.400 / F1 0.561.",
     "tags": [
       "model_comparison",
       "metrics",
@@ -1232,7 +1232,7 @@
     ],
     "metrics": [
       {
-        "label": "Rules F1",
+        "label": "Rules F1 (pre-correction labels)",
         "value": "0.854"
       },
       {
@@ -1240,7 +1240,7 @@
         "value": "1.000"
       },
       {
-        "label": "LLM+RAG precision",
+        "label": "LLM+RAG precision (pre-correction labels)",
         "value": "0.938"
       }
     ],

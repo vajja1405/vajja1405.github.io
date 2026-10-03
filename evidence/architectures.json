@@ -473,14 +473,14 @@
       {
         "id": "rules",
         "label": "Rules detector",
-        "sub": "F1 0.854",
+        "sub": "F1 0.854 (old labels)",
         "col": 2,
         "row": 0,
         "detail": {
           "purpose": "Keyword/vocabulary baseline.",
           "input": "Review text",
           "output": "Flag",
-          "observed": "P 0.861 · R 0.847 · F1 0.854 (best F1).",
+          "observed": "P 0.861 · R 0.847 · F1 0.854, the best F1 in the original benchmark (scored on the proxy labels before the Sep 29 correction). On corrected labels, rules score F1 0.794 on review text vs 0.914 for fine-tuned DistilBERT.",
           "why": "A simple baseline to beat.",
           "claims": [
             "cliniq.comparison"
@@ -513,7 +513,7 @@
           "purpose": "LLM judgement over pgvector-retrieved context.",
           "input": "Review + retrieved guidance",
           "output": "Flag + rationale",
-          "observed": "Precision 0.938 · recall 0.400.",
+          "observed": "Precision 0.938 · recall 0.400 (original benchmark, pre-correction labels; not rerun).",
           "claims": [
             "cliniq.claude",
             "cliniq.comparison"

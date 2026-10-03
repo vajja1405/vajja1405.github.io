@@ -310,7 +310,7 @@
       "title": "The 'perfect recall' model flagged almost everything",
       "problem": "The embedding detector (cosine ≥ 0.32) reached recall 1.000 but flagged 595 of 600 reviews: 295 false positives out of 300 negatives.",
       "detection": "Evaluated on the same balanced sample and metrics as the rules and LLM+RAG methods.",
-      "diagnosis": "Perfect recall with near-total flagging is useless as a triage workflow. LLM+RAG showed the opposite tradeoff: precision 0.938 but recall 0.400.",
+      "diagnosis": "Perfect recall with near-total flagging is useless as a triage workflow. LLM+RAG showed the opposite tradeoff: precision 0.938 but recall 0.400 (original benchmark, scored on the pre-correction proxy labels).",
       "fix": "Reported the rules baseline as the strongest F1, and built a workload planner so the alert volume and missed signals behind each tradeoff are explicit.",
       "prevention": "Metrics are recomputed from saved confusion counts, and undefined precision is never reported as zero.",
       "measurement": "Embedding TP 300 / FP 295 / FN 0 / TN 5.",

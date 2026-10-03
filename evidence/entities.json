@@ -111,7 +111,7 @@
     "summaries": {
       "recruiter": "A research prototype that placed 4th at the NSF NRT Research-A-Thon 2026. It compares three ways of detecting substance-use signals in 52,184 public drug reviews: keyword rules, embeddings and LLM+RAG.",
       "engineer": "An 11-table PostgreSQL schema with a pgvector IVFFlat index over 384-dim MiniLM embeddings, Claude Haiku for the LLM+RAG detector, UMAP + HDBSCAN clustering, and a Streamlit dashboard. Metrics are recomputed from saved confusion counts, and there are 9 offline tests.",
-      "manager": "The simple rules baseline won on F1 (0.854), and the project reports that openly instead of promoting the most sophisticated method. An earlier revenue figure was later corrected into an explicit hypothetical funnel.",
+      "manager": "In the original benchmark the simple rules baseline won on F1 (0.854), and the project reported that openly instead of promoting the most sophisticated method. A labeling pilot later exposed a proxy-label bug (24% of positives were wrong); on the corrected labels a fine-tuned DistilBERT beats the rules (F1 0.914 vs 0.794). An earlier revenue figure was later corrected into an explicit hypothetical funnel.",
       "founder": "The practical output is a review-workload planner. Given an alert method, prevalence and review time, it estimates alerts, missed signals and reviewer hours, which is the decision an analyst actually faces.",
       "researcher": "600-review balanced comparison against keyword-derived proxy labels (not clinician-adjudicated). Rules: P .861 / R .847 / F1 .854. Embedding: R 1.000 but 295 false positives. LLM+RAG: P .938 / R .400. The 600-case run was not repeated."
     },

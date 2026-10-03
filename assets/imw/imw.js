@@ -1889,7 +1889,7 @@ function Cn() {
       m.label
     ] }, m.key)) }),
     /* @__PURE__ */ i("figcaption", { class: "imw-help", children: [
-      "Rules have the best F1 (0.854). The embedding detector reaches recall 1.000 by flagging 595 of 600 reviews. ",
+      "In the original benchmark (proxy labels before the Sep 29 correction), rules have the best F1 (0.854). The embedding detector reaches recall 1.000 by flagging 595 of 600 reviews. ",
       t.caveat
     ] })
   ] });

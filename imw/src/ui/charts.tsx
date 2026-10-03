@@ -142,7 +142,7 @@ export function CliniqChart() {
         </div>
       )}
       <ul class="imw-legend-row">{SERIES.map((s) => <li key={s.key}><i class={`imw-swatch ${s.cls}`} aria-hidden="true" />{s.label}</li>)}</ul>
-      <figcaption class="imw-help">Rules have the best F1 (0.854). The embedding detector reaches recall 1.000 by flagging 595 of 600 reviews. {ds.caveat}</figcaption>
+      <figcaption class="imw-help">In the original benchmark (proxy labels before the Sep 29 correction), rules have the best F1 (0.854). The embedding detector reaches recall 1.000 by flagging 595 of 600 reviews. {ds.caveat}</figcaption>
     </figure>
   );
 }
