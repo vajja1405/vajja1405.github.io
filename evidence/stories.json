@@ -419,7 +419,7 @@
     {
       "id": "f.cliniq.meth",
       "entity": "cliniq",
-      "title": "A substring match mislabeled a quarter of the positives",
+      "title": "A substring match produced a quarter of the positive labels",
       "problem": "ClinIQ's proxy label treated any review containing \"meth\" as substance-use related, so reviews of methylphenidate, sulfamethoxazole and similar drugs were counted as positives.",
       "detection": "A small human labeling pilot disagreed with the proxy label far more often than expected, and reading the disagreements showed the pattern.",
       "diagnosis": "\"meth\" was matched as a substring rather than a whole word: 803 of 3,316 proxy-positive reviews (24%) were positive only because of it.",

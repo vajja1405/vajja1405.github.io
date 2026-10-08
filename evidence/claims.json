@@ -3207,7 +3207,7 @@
     ],
     "metrics": [
       {
-        "label": "Proxy positives mislabeled",
+        "label": "Proxy positives from the substring alone",
         "value": "803 / 3,316"
       },
       {
